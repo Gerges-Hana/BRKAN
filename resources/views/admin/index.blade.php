@@ -1,4 +1,7 @@
 @extends('admin.master')
+<!-- @section('css')
+
+@endsection -->
 @section('content')
 <div class="app-content content">
   <div class="content-wrapper">
@@ -686,3 +689,7 @@
     </div>
   </div>
 </div>@endsection
+<!-- @section('script')
+
+
+@endsection -->

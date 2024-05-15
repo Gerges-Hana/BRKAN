@@ -35,4 +35,10 @@
   <!-- BEGIN Custom CSS-->
   <link rel="stylesheet" type="text/css" href="../../../assets/css/style-rtl.css">
   <!-- END Custom CSS-->
+
+  <!-- BEGIN Page Level CSS-->
+<link rel="stylesheet" type="text/css" href="../../../app-assets/css-rtl/core/menu/menu-types/vertical-menu-modern.css">
+  <link rel="stylesheet" type="text/css" href="../../../app-assets/css-rtl/core/colors/palette-gradient.css">
+  <!-- END Page Level CSS-->
+  @yield('css')
 </head>

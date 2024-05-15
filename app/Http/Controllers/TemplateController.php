@@ -12,4 +12,7 @@ class TemplateController extends Controller
     public function orders(){
         return view('admin.orders.index');
     }
+    public function reports(){
+        return view('admin.reports.index');
+    }
 }

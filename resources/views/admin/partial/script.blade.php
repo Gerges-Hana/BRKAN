@@ -21,4 +21,22 @@
   <script src="../../../app-assets/vendors/js/tables/jsgrid/griddata.js" type="text/javascript"></script>
   <!-- END PAGE VENDOR JS-->
  <script src="../../../app-assets/js/scripts/pages/dashboard-sales.js" type="text/javascript"></script>
+ @yield('script');
  <!-- END PAGE LEVEL JS-->
+ <!-- BEGIN PAGE VENDOR JS-->
+<script src="../../../app-assets/vendors/js/tables/datatable/datatables.min.js" type="text/javascript"></script>
+  <script src="../../../app-assets/vendors/js/tables/datatable/dataTables.buttons.min.js"
+  type="text/javascript"></script>
+  <script src="../../../app-assets/vendors/js/tables/datatable/buttons.bootstrap4.min.js"
+  type="text/javascript"></script>
+  <script src="../../../app-assets/vendors/js/tables/jszip.min.js" type="text/javascript"></script>
+  <script src="../../../app-assets/vendors/js/tables/pdfmake.min.js" type="text/javascript"></script>
+  <script src="../../../app-assets/vendors/js/tables/vfs_fonts.js" type="text/javascript"></script>
+  <script src="../../../app-assets/vendors/js/tables/buttons.html5.min.js" type="text/javascript"></script>
+  <script src="../../../app-assets/vendors/js/tables/buttons.print.min.js" type="text/javascript"></script>
+  <script src="../../../app-assets/vendors/js/tables/buttons.colVis.min.js" type="text/javascript"></script>
+  <!-- END PAGE VENDOR JS-->
+    <!-- BEGIN PAGE LEVEL JS-->
+    <script src="../../../app-assets/js/scripts/tables/datatables-extensions/datatable-button/datatable-html5.js"
+  type="text/javascript"></script>
+  <!-- END PAGE LEVEL JS-->

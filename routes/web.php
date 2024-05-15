@@ -22,4 +22,5 @@ Auth::routes();
 // Route:: get ('/{page}',[TemplateController::class,'index']);
 Route:: get ('/home',[TemplateController::class,'home']);
 Route:: get ('/orders',[TemplateController::class,'orders']);
+Route:: get ('/reports',[TemplateController::class,'reports']);
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
