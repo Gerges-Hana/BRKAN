@@ -9,4 +9,7 @@ class TemplateController extends Controller
     public function home(){
         return view('admin.index');
     }
+    public function orders(){
+        return view('admin.orders.index');
+    }
 }

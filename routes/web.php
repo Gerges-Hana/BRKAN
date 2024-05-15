@@ -20,5 +20,6 @@ Route::get('/', function () {
 
 Auth::routes();
 // Route:: get ('/{page}',[TemplateController::class,'index']);
-Route:: get ('/xera',[TemplateController::class,'home']);
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route:: get ('/home',[TemplateController::class,'home']);
+Route:: get ('/orders',[TemplateController::class,'orders']);
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

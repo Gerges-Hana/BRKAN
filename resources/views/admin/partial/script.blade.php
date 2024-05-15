@@ -15,5 +15,10 @@
  <script src="../../../app-assets/js/scripts/customizer.js" type="text/javascript"></script>
  <!-- END MODERN JS-->
  <!-- BEGIN PAGE LEVEL JS-->
+ <script src="../../../app-assets/js/scripts/tables/jsgrid/jsgrid.js" type="text/javascript"></script>
+  <!-- BEGIN PAGE VENDOR JS-->
+  <script src="../../../app-assets/vendors/js/tables/jsgrid/jsgrid.min.js" type="text/javascript"></script>
+  <script src="../../../app-assets/vendors/js/tables/jsgrid/griddata.js" type="text/javascript"></script>
+  <!-- END PAGE VENDOR JS-->
  <script src="../../../app-assets/js/scripts/pages/dashboard-sales.js" type="text/javascript"></script>
  <!-- END PAGE LEVEL JS-->

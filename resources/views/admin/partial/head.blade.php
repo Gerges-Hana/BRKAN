@@ -27,6 +27,10 @@
   <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/charts/morris.css">
   <link rel="stylesheet" type="text/css" href="../../../app-assets/fonts/simple-line-icons/style.css">
   <link rel="stylesheet" type="text/css" href="../../../app-assets/css-rtl/core/colors/palette-gradient.css">
+  
+  <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/tables/jsgrid/jsgrid-theme.min.css">
+  <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/tables/jsgrid/jsgrid.min.css">
+  <!-- END VENDOR CSS-->
   <!-- END Page Level CSS-->
   <!-- BEGIN Custom CSS-->
   <link rel="stylesheet" type="text/css" href="../../../assets/css/style-rtl.css">
