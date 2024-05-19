@@ -19,8 +19,12 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Auth::routes();
+
+
+Route::middleware(['auth'])->group(function () {
 // Route:: get ('/{page}',[TemplateController::class,'index']);
 Route::get('/', [TemplateController::class, 'home']);
 Route::get('/orders', [TemplateController::class, 'orders']);
 Route::get('/reports', [TemplateController::class, 'reports']);
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+  
+});
