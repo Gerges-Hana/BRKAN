@@ -12,7 +12,7 @@
                 </li>
                 {{--Logo & Company name--}}
                 <li class="nav-item mr-auto">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="{{url('/')}}">
                         <img class="brand-logo" alt="modern admin logo" src="../../../app-assets/images/logo/logo.png">
                         <h3 class="brand-text">لوحة التحكم</h3>
                     </a>

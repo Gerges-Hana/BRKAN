@@ -14,7 +14,7 @@
                 </a>
             </li>
             <li class="nav-item {{ (request()->is('reports')) ? 'active' : '' }}">
-                <a href="#"><i class="la  icon-layers"></i>
+                <a href="/reports"><i class="la  icon-layers"></i>
                     <span class="menu-title" data-i18n="">التقارير </span>
                 </a>
             </li>
