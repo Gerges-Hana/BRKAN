@@ -5,7 +5,7 @@
 
         </span>
         <span class="float-md-right d-block d-md-inline-blockd-none d-lg-block">
-            X-ERA <i class="ft-heart pink"></i>
+            X-ERAddd <i class="ft-heart pink"></i>
         </span>
     </p>
 </footer>
