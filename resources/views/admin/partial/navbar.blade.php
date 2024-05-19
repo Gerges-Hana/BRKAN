@@ -1,5 +1,4 @@
-<nav
-    class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-dark navbar-shadow">
+<nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-dark navbar-shadow">
     <div class="navbar-wrapper">
         {{--Main header--}}
         <div class="navbar-header">
@@ -70,7 +69,12 @@
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="#"><i class="ft-user"></i> صفحتى الشخصية</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#"><i class="ft-power"></i> تسجيل الخروج</a>
+
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <a class="dropdown-item" href="{{ route('logout') }}"><i class="ft-power"></i> تسجيل الخروج</a>
+                            </form>
+
                         </div>
                     </li>
                     {{--Notifications--}}
@@ -90,15 +94,13 @@
                             <li class="scrollable-container media-list w-100">
                                 <a href="javascript:void(0)">
                                     <div class="media">
-                                        <div class="media-left align-self-center"><i
-                                                class="ft-plus-square icon-bg-circle bg-cyan"></i></div>
+                                        <div class="media-left align-self-center"><i class="ft-plus-square icon-bg-circle bg-cyan"></i></div>
                                         <div class="media-body">
                                             <h6 class="media-heading">You have new order!</h6>
                                             <p class="notification-text font-small-3 text-muted">Lorem ipsum dolor sit
                                                 amet, consectetuer elit.</p>
                                             <small>
-                                                <time class="media-meta text-muted"
-                                                      datetime="2015-06-11T18:29:20+08:00">30 minutes ago
+                                                <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">30 minutes ago
                                                 </time>
                                             </small>
                                         </div>
@@ -106,15 +108,13 @@
                                 </a>
                                 <a href="javascript:void(0)">
                                     <div class="media">
-                                        <div class="media-left align-self-center"><i
-                                                class="ft-download-cloud icon-bg-circle bg-red bg-darken-1"></i></div>
+                                        <div class="media-left align-self-center"><i class="ft-download-cloud icon-bg-circle bg-red bg-darken-1"></i></div>
                                         <div class="media-body">
                                             <h6 class="media-heading red darken-1">99% Server load</h6>
                                             <p class="notification-text font-small-3 text-muted">Aliquam tincidunt
                                                 mauris eu risus.</p>
                                             <small>
-                                                <time class="media-meta text-muted"
-                                                      datetime="2015-06-11T18:29:20+08:00">Five hour ago
+                                                <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Five hour ago
                                                 </time>
                                             </small>
                                         </div>
@@ -122,16 +122,14 @@
                                 </a>
                                 <a href="javascript:void(0)">
                                     <div class="media">
-                                        <div class="media-left align-self-center"><i
-                                                class="ft-alert-triangle icon-bg-circle bg-yellow bg-darken-3"></i>
+                                        <div class="media-left align-self-center"><i class="ft-alert-triangle icon-bg-circle bg-yellow bg-darken-3"></i>
                                         </div>
                                         <div class="media-body">
                                             <h6 class="media-heading yellow darken-3">Warning notifixation</h6>
                                             <p class="notification-text font-small-3 text-muted">Vestibulum auctor
                                                 dapibus neque.</p>
                                             <small>
-                                                <time class="media-meta text-muted"
-                                                      datetime="2015-06-11T18:29:20+08:00">Today
+                                                <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Today
                                                 </time>
                                             </small>
                                         </div>
@@ -139,13 +137,11 @@
                                 </a>
                                 <a href="javascript:void(0)">
                                     <div class="media">
-                                        <div class="media-left align-self-center"><i
-                                                class="ft-check-circle icon-bg-circle bg-cyan"></i></div>
+                                        <div class="media-left align-self-center"><i class="ft-check-circle icon-bg-circle bg-cyan"></i></div>
                                         <div class="media-body">
                                             <h6 class="media-heading">Complete the task</h6>
                                             <small>
-                                                <time class="media-meta text-muted"
-                                                      datetime="2015-06-11T18:29:20+08:00">Last week
+                                                <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Last week
                                                 </time>
                                             </small>
                                         </div>
@@ -153,13 +149,11 @@
                                 </a>
                                 <a href="javascript:void(0)">
                                     <div class="media">
-                                        <div class="media-left align-self-center"><i
-                                                class="ft-file icon-bg-circle bg-teal"></i></div>
+                                        <div class="media-left align-self-center"><i class="ft-file icon-bg-circle bg-teal"></i></div>
                                         <div class="media-body">
                                             <h6 class="media-heading">Generate monthly report</h6>
                                             <small>
-                                                <time class="media-meta text-muted"
-                                                      datetime="2015-06-11T18:29:20+08:00">Last month
+                                                <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Last month
                                                 </time>
                                             </small>
                                         </div>
@@ -178,4 +172,3 @@
         </div>
     </div>
 </nav>
-
