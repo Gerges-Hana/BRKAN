@@ -37,20 +37,20 @@
                 {{--Left Navbar--}}
                 <ul class="nav navbar-nav mr-auto float-left">
                     {{--Maximize screen--}}
-                    <li class="nav-item d-none d-md-block">
+                    <!-- <li class="nav-item d-none d-md-block">
                         <a class="nav-link nav-link-expand" href="#">
                             <i class="ficon ft-maximize"></i>
                         </a>
-                    </li>
+                    </li> -->
                     {{--Search--}}
-                    <li class="nav-item nav-search">
+                    <!-- <li class="nav-item nav-search">
                         <a class="nav-link nav-link-search" href="#">
                             <i class="ficon ft-search"></i>
                         </a>
                         <div class="search-input">
                             <input class="input" type="text" placeholder="Explore Modern...">
                         </div>
-                    </li>
+                    </li> -->
                 </ul>
                 {{--Right Navbar--}}
                 <ul class="nav navbar-nav float-right">
