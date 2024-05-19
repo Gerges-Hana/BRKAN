@@ -43,5 +43,11 @@
     <!-- END Page Level CSS-->
     <link rel="stylesheet" href="{{asset('/assets/css/custom-style.css')}}">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
+
+
+
+
+
+
     @yield('css')
 </head>

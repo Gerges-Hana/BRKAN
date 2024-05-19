@@ -31,7 +31,7 @@ fields: [
     { name: "Age", type: "number", width: 50 },
     { name: "Address", type: "text", width: 200 },
     { name: "Country", type: "select", items: db.countries, valueField: "Id", textField: "Name" },
-    { name: "Married", type: "checkbox", title: "Is Married", sorting: false },
+    { name: "Married", type: "checkbox", title: "vvvvvvvvvv", sorting: false },
     { type: "control" }
 ]
 });
@@ -96,7 +96,7 @@ $("#sorting-table").jsGrid({
         { name: "Age", type: "number", width: 50 },
         { name: "Address", type: "text", width: 200 },
         { name: "Country", type: "select", items: db.countries, valueField: "Id", textField: "Name" },
-        { name: "Married", type: "checkbox", title: "Is Married" }
+        { name: "Married", type: "checkbox", title: "vvvvvvvvvv" }
     ]
 });
 
@@ -128,7 +128,7 @@ $("#validation").jsGrid({
         { name: "Address", type: "text", width: 200, validate: { validator: "rangeLength", param: [10, 250] } },
         { name: "Country", type: "select", items: db.countries, valueField: "Id", textField: "Name",
             validate: { message: "Country should be specified", validator: function(value) { return value > 0; } } },
-        { name: "Married", type: "checkbox", title: "Is Married", sorting: false },
+        { name: "Married", type: "checkbox", title: "vvvvvvvvvv", sorting: false },
         { type: "control" }
     ]
 });
@@ -162,7 +162,7 @@ $("#loading").jsGrid({
         { name: "Age", type: "number", width: 50 },
         { name: "Address", type: "text", width: 200 },
         { name: "Country", type: "select", items: db.countries, valueField: "Id", textField: "Name" },
-        { name: "Married", type: "checkbox", title: "Is Married" }
+        { name: "Married", type: "checkbox", title: "vvvvvvvvvv" }
     ]
 });
 
@@ -195,7 +195,7 @@ $("#customView").jsGrid({
         { name: "Age", type: "number", width: 50 },
         { name: "Address", type: "text", width: 200 },
         { name: "Country", type: "select", items: db.countries, valueField: "Id", textField: "Name" },
-        { name: "Married", type: "checkbox", title: "Is Married", sorting: false },
+        { name: "Married", type: "checkbox", title: "vvvvvvvvvv", sorting: false },
         { type: "control", modeSwitchButton: false, editButton: false }
     ]
 });
@@ -301,7 +301,7 @@ $("#external").jsGrid({
         { name: "Age", type: "number", width: 50 },
         { name: "Address", type: "text", width: 200 },
         { name: "Country", type: "select", items: db.countries, valueField: "Id", textField: "Name" },
-        { name: "Married", type: "checkbox", title: "Is Married" }
+        { name: "Married", type: "checkbox", title: "vvvvvvvvvv" }
     ]
 });
 

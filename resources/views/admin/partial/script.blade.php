@@ -42,3 +42,25 @@
 <script src="{{asset('/app-assets/js/scripts/tables/datatables-extensions/datatable-button/datatable-html5.js')}}"
         type="text/javascript"></script>
 <!-- END PAGE LEVEL JS-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- BEGIN PAGE LEVEL JS-->
+  <script src="../../../app-assets/js/scripts/charts/chartjs/pie-doughnut/pie.js" type="text/javascript"></script>
+  <script src="../../../app-assets/js/scripts/charts/chartjs/pie-doughnut/pie-simple.js"
+  type="text/javascript"></script>
+  <script src="../../../app-assets/js/scripts/charts/chartjs/pie-doughnut/doughnut.js"
+  type="text/javascript"></script>
+  <script src="../../../app-assets/js/scripts/charts/chartjs/pie-doughnut/doughnut-simple.js"
+  type="text/javascript"></script>
+  <!-- END PAGE LEVEL JS-->
