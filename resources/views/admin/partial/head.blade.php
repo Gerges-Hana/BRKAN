@@ -10,14 +10,9 @@
         rel="stylesheet">
     <link href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css"
           rel="stylesheet">
-    <!-- BEGIN VENDOR CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('/app-assets/css-rtl/vendors.css')}}">
-    <!-- END VENDOR CSS-->
-    <!-- BEGIN MODERN CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('/app-assets/css-rtl/app.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('/app-assets/css-rtl/custom-rtl.css')}}">
-    <!-- END MODERN CSS-->
-    <!-- BEGIN Page Level CSS-->
     <link rel="stylesheet" type="text/css"
           href="{{asset('/app-assets/css-rtl/core/menu/menu-types/vertical-menu-modern.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('/app-assets/css-rtl/core/colors/palette-gradient.css')}}">
@@ -26,28 +21,17 @@
     <link rel="stylesheet" type="text/css" href="{{asset('/app-assets/vendors/css/charts/morris.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('/app-assets/fonts/simple-line-icons/style.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('/app-assets/css-rtl/core/colors/palette-gradient.css')}}">
-
     <link rel="stylesheet" type="text/css"
           href="{{asset('/app-assets/vendors/css/tables/jsgrid/jsgrid-theme.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('/app-assets/vendors/css/tables/jsgrid/jsgrid.min.css')}}">
-    <!-- END VENDOR CSS-->
-    <!-- END Page Level CSS-->
-    <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('/assets/css/style-rtl.css')}}">
-    <!-- END Custom CSS-->
-
-    <!-- BEGIN Page Level CSS-->
     <link rel="stylesheet" type="text/css"
           href="{{asset('/app-assets/css-rtl/core/menu/menu-types/vertical-menu-modern.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('/app-assets/css-rtl/core/colors/palette-gradient.css')}}">
-    <!-- END Page Level CSS-->
-    <link rel="stylesheet" href="{{asset('/assets/css/custom-style.css')}}">
+    <!-- Custom CSS-->
+    <link rel="stylesheet" href="{{asset('/assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('/assets/css/style-rtl.css')}}">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
-
-
-
-
-
 
     @yield('css')
 </head>
