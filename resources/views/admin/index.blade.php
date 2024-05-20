@@ -10,7 +10,7 @@
 @endsection
 
 @section('content-body')
-    <!-- Minimal statistics section start -->
+    <!-- Start minimal statistics section -->
     <section id="minimal-statistics">
         <div class="row">
             <div class="col-xl-3 col-lg-6 col-12">
@@ -83,8 +83,9 @@
             </div>
         </div>
     </section>
-    <!-- // Minimal statistics section end -->
-    <!-- Pie charts section start -->
+    <!-- End minimal statistics section -->
+
+    <!-- Start Pie charts section -->
     <section id="chartjs-pie-charts">
         <div class="row">
             <!-- Simple Pie Chart -->
@@ -98,7 +99,6 @@
                                 <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
                                 <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
                                 <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                                <li><a data-action="close"><i class="ft-x"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -120,7 +120,6 @@
                                 <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
                                 <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
                                 <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
-                                <li><a data-action="close"><i class="ft-x"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -134,7 +133,7 @@
         </div>
 
     </section>
-    <!-- // Pie charts section end -->
+    <!-- End Pie charts section -->
 @endsection
 
 @section('page-script-files')
