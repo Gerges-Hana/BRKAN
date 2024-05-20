@@ -2,17 +2,16 @@
 <html class="loading" lang="en" data-textdirection="rtl">
 
 {{--head section--}}
-@include('admin.partial.head')
+@include('admin.layout.head')
 
 {{--Start body--}}
-<body class="vertical-layout vertical-menu-modern 2-columns   menu-expanded fixed-navbar" data-open="click"
-      data-menu="vertical-menu-modern" data-col="2-columns">
+<body class="vertical-layout vertical-menu-modern 2-columns   menu-expanded fixed-navbar" data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
 
 {{--navbar section--}}
-@include('admin.partial.navbar')
+@include('admin.layout.navbar')
 
 {{--sidebar section--}}
-@include('admin.partial.sidebar')
+@include('admin.layout.sidebar')
 
 {{--content section--}}
 <div class="app-content content mt-0 pt-0">
@@ -27,10 +26,10 @@
 </div>
 
 {{--footer section--}}
-@include('admin.partial.footer')
+@include('admin.layout.footer')
 
 {{--scripts section--}}
-@include('admin.partial.script')
+@include('admin.layout.script')
 
 {{--End body--}}
 </body>

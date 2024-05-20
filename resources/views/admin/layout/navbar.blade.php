@@ -12,7 +12,7 @@
                 {{--Logo & Company name--}}
                 <li class="nav-item mr-auto">
                     <a class="navbar-brand" href="{{url('/')}}">
-                        <img class="brand-logo" alt="modern admin logo" src="../../../app-assets/images/logo/logo.png">
+                        <img class="brand-logo" alt="modern admin logo" src="{{asset('/app-assets/images/logo/logo.png')}}">
                         <h3 class="brand-text">لوحة التحكم</h3>
                     </a>
                 </li>
@@ -61,7 +61,7 @@
                                 <span class="user-name text-bold-700">خالد</span>
                             </span>
                             <span class="avatar avatar-online">
-                                <img src="../../../app-assets/images/portrait/small/avatar-s-19.png" alt="avatar">
+                                <img src="{{asset('/app-assets/images/portrait/small/avatar-s-19.png')}}" alt="avatar">
                                 <i></i>
                             </span>
                         </a>
@@ -69,12 +69,14 @@
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="#"><i class="ft-user"></i> صفحتى الشخصية</a>
                             <div class="dropdown-divider"></div>
-
-                            <form action="{{ route('logout') }}" method="POST">
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                <i class="ft-power"></i> تسجيل الخروج
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
-                                <a class="dropdown-item" href="{{ route('logout') }}"><i class="ft-power"></i> تسجيل الخروج</a>
                             </form>
-
                         </div>
                     </li>
                     {{--Notifications--}}
@@ -85,22 +87,24 @@
                         <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
                             <li class="dropdown-menu-header">
                                 <h6 class="dropdown-header m-0">
-                                    <span class="grey darken-2">Notifications</span>
+                                    <span class="grey darken-2">الاشعارات</span>
                                 </h6>
                                 <span class="notification-tag badge badge-default badge-danger float-right m-0">
-                                    5 New
+                                    5 جديدة
                                 </span>
                             </li>
                             <li class="scrollable-container media-list w-100">
                                 <a href="javascript:void(0)">
                                     <div class="media">
-                                        <div class="media-left align-self-center"><i class="ft-plus-square icon-bg-circle bg-cyan"></i></div>
+                                        <div class="media-left align-self-center"><i
+                                                class="ft-plus-square icon-bg-circle bg-cyan"></i></div>
                                         <div class="media-body">
                                             <h6 class="media-heading">You have new order!</h6>
                                             <p class="notification-text font-small-3 text-muted">Lorem ipsum dolor sit
                                                 amet, consectetuer elit.</p>
                                             <small>
-                                                <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">30 minutes ago
+                                                <time class="media-meta text-muted"
+                                                      datetime="2015-06-11T18:29:20+08:00">30 minutes ago
                                                 </time>
                                             </small>
                                         </div>
@@ -108,52 +112,15 @@
                                 </a>
                                 <a href="javascript:void(0)">
                                     <div class="media">
-                                        <div class="media-left align-self-center"><i class="ft-download-cloud icon-bg-circle bg-red bg-darken-1"></i></div>
+                                        <div class="media-left align-self-center"><i
+                                                class="ft-download-cloud icon-bg-circle bg-red bg-darken-1"></i></div>
                                         <div class="media-body">
                                             <h6 class="media-heading red darken-1">99% Server load</h6>
                                             <p class="notification-text font-small-3 text-muted">Aliquam tincidunt
                                                 mauris eu risus.</p>
                                             <small>
-                                                <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Five hour ago
-                                                </time>
-                                            </small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="javascript:void(0)">
-                                    <div class="media">
-                                        <div class="media-left align-self-center"><i class="ft-alert-triangle icon-bg-circle bg-yellow bg-darken-3"></i>
-                                        </div>
-                                        <div class="media-body">
-                                            <h6 class="media-heading yellow darken-3">Warning notifixation</h6>
-                                            <p class="notification-text font-small-3 text-muted">Vestibulum auctor
-                                                dapibus neque.</p>
-                                            <small>
-                                                <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Today
-                                                </time>
-                                            </small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="javascript:void(0)">
-                                    <div class="media">
-                                        <div class="media-left align-self-center"><i class="ft-check-circle icon-bg-circle bg-cyan"></i></div>
-                                        <div class="media-body">
-                                            <h6 class="media-heading">Complete the task</h6>
-                                            <small>
-                                                <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Last week
-                                                </time>
-                                            </small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="javascript:void(0)">
-                                    <div class="media">
-                                        <div class="media-left align-self-center"><i class="ft-file icon-bg-circle bg-teal"></i></div>
-                                        <div class="media-body">
-                                            <h6 class="media-heading">Generate monthly report</h6>
-                                            <small>
-                                                <time class="media-meta text-muted" datetime="2015-06-11T18:29:20+08:00">Last month
+                                                <time class="media-meta text-muted"
+                                                      datetime="2015-06-11T18:29:20+08:00">Five hour ago
                                                 </time>
                                             </small>
                                         </div>
@@ -162,7 +129,7 @@
                             </li>
                             <li class="dropdown-menu-footer">
                                 <a class="dropdown-item text-muted text-center" href="javascript:void(0)">
-                                    Read all notifications
+                                    عرض كل الاشعارات
                                 </a>
                             </li>
                         </ul>

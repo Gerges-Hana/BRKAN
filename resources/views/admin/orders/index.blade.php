@@ -1,4 +1,13 @@
-@extends('admin.master')
+@extends('admin.layout.master')
+
+@section('tap-title')
+    الطلبيات
+@endsection
+
+@section('page-style-files')
+    <link rel="stylesheet" type="text/css" href="{{asset('/app-assets/vendors/css/tables/jsgrid/jsgrid-theme.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('/app-assets/vendors/css/tables/jsgrid/jsgrid.min.css')}}">
+@endsection
 
 @section('content-header')
     <div class="content-header-left col-md-6 col-12 mb-1">
@@ -43,4 +52,20 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('page-script-files')
+    <script src="{{asset('/app-assets/js/scripts/tables/jsgrid/jsgrid.js')}}" type="text/javascript"></script>
+    <script src="{{asset('/app-assets/vendors/js/tables/jsgrid/jsgrid.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('/app-assets/vendors/js/tables/jsgrid/griddata.js')}}" type="text/javascript"></script>
+    <script src="{{asset('/app-assets/vendors/js/tables/datatable/datatables.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('/app-assets/vendors/js/tables/datatable/dataTables.buttons.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('/app-assets/vendors/js/tables/datatable/buttons.bootstrap4.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('/app-assets/vendors/js/tables/jszip.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('/app-assets/vendors/js/tables/pdfmake.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('/app-assets/vendors/js/tables/vfs_fonts.js')}}" type="text/javascript"></script>
+    <script src="{{asset('/app-assets/vendors/js/tables/buttons.html5.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('/app-assets/vendors/js/tables/buttons.print.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('/app-assets/vendors/js/tables/buttons.colVis.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('/app-assets/js/scripts/tables/datatables-extensions/datatable-button/datatable-html5.js')}}" type="text/javascript"></script>
 @endsection
