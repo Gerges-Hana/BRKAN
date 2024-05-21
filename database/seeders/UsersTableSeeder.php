@@ -17,8 +17,10 @@ class UsersTableSeeder extends Seeder
 
         DB::table('users')->insert([
             'name' => 'Admin',
-            'email' => 'admin@gmail.com',
-            'email_verified_at' => now(),
+            'username' => 'Admin',
+            'is_active' => true,
+            // 'email' => 'admin@gmail.com',
+            // 'email_verified_at' => now(),
             'password' => Hash::make('123456789'),
             // 'remember_token' => str()::random(10),
             'created_at' => now(),
