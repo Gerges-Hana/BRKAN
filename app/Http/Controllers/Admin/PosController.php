@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Pos;
 use App\Http\Requests\StorePosRequest;
 use App\Http\Requests\UpdatePosRequest;
+use App\Models\Po;
 
 class PosController extends Controller
 {
@@ -35,7 +35,7 @@ class PosController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pos $pos)
+    public function show(Po $pos)
     {
         //
     }
@@ -43,7 +43,7 @@ class PosController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pos $pos)
+    public function edit(Po $pos)
     {
         //
     }
@@ -51,7 +51,7 @@ class PosController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePosRequest $request, Pos $pos)
+    public function update(UpdatePosRequest $request, Po $pos)
     {
         //
     }
@@ -59,7 +59,7 @@ class PosController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pos $pos)
+    public function destroy(Po $pos)
     {
         //
     }

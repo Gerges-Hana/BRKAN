@@ -5,7 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Po_status_updates>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Po_statusUpdate>
  */
 class PoStatusUpdatesFactory extends Factory
 {

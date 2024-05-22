@@ -14,18 +14,15 @@ class UsersTableSeeder extends Seeder
      */
     public function run(): void
     {
-
-        DB::table('users')->insert([
-            'name' => 'Admin',
-            'username' => 'Admin',
-            'is_active' => true,
-            // 'email' => 'admin@gmail.com',
-            // 'email_verified_at' => now(),
-            'password' => Hash::make('123456789'),
-            // 'remember_token' => str()::random(10),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-
+        if (DB::table('users')->count() == 0) {
+            DB::table('users')->insert([
+                'name' => 'Admin',
+                'username' => 'Admin',
+                'is_active' => true,
+                'password' => Hash::make('123456789'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }

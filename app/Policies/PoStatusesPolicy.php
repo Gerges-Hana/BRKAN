@@ -2,7 +2,7 @@
 
 namespace App\Policies;
 
-use App\Models\Po_statuses;
+use App\Models\Po_status;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
@@ -19,7 +19,7 @@ class PoStatusesPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Po_statuses $poStatuses): bool
+    public function view(User $user, Po_status $poStatuses): bool
     {
         //
     }
@@ -35,7 +35,7 @@ class PoStatusesPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Po_statuses $poStatuses): bool
+    public function update(User $user, Po_status $poStatuses): bool
     {
         //
     }
@@ -43,7 +43,7 @@ class PoStatusesPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Po_statuses $poStatuses): bool
+    public function delete(User $user, Po_status $poStatuses): bool
     {
         //
     }
@@ -51,7 +51,7 @@ class PoStatusesPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Po_statuses $poStatuses): bool
+    public function restore(User $user, Po_status $poStatuses): bool
     {
         //
     }
@@ -59,7 +59,7 @@ class PoStatusesPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Po_statuses $poStatuses): bool
+    public function forceDelete(User $user, Po_status $poStatuses): bool
     {
         //
     }

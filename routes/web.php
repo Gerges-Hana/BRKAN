@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\TemplateController;
+use App\Http\Controllers\Admin\TemplateController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,11 +20,9 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-
 Route::middleware(['auth'])->group(function () {
-// Route:: get ('/{page}',[TemplateController::class,'index']);
-Route::get('/', [TemplateController::class, 'home']);
-Route::get('/orders', [TemplateController::class, 'orders']);
-Route::get('/reports', [TemplateController::class, 'reports']);
-  
+//    Route:: get('/{page}', [TemplateController::class, 'index']);
+    Route::get('/', [TemplateController::class, 'home']);
+    Route::get('/orders', [TemplateController::class, 'orders']);
+    Route::get('/reports', [TemplateController::class, 'reports']);
 });

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Po_status_updates;
-use App\Http\Requests\StorePo_status_updatesRequest;
-use App\Http\Requests\UpdatePo_status_updatesRequest;
+use App\Http\Requests\StorePo_updatesRequest;
+use App\Http\Requests\UpdatePo_updatesRequest;
+use App\Models\Po_update;
 
-class PoStatusUpdatesController extends Controller
+class PoUpdatesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class PoStatusUpdatesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePo_status_updatesRequest $request)
+    public function store(StorePo_updatesRequest $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class PoStatusUpdatesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Po_status_updates $po_status_updates)
+    public function show(Po_update $po_updates)
     {
         //
     }
@@ -43,7 +43,7 @@ class PoStatusUpdatesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Po_status_updates $po_status_updates)
+    public function edit(Po_update $po_updates)
     {
         //
     }
@@ -51,7 +51,7 @@ class PoStatusUpdatesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePo_status_updatesRequest $request, Po_status_updates $po_status_updates)
+    public function update(UpdatePo_updatesRequest $request, Po_update $po_updates)
     {
         //
     }
@@ -59,7 +59,7 @@ class PoStatusUpdatesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Po_status_updates $po_status_updates)
+    public function destroy(Po_update $po_updates)
     {
         //
     }

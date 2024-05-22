@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Po_statuses;
-use App\Http\Requests\StorePo_statusesRequest;
-use App\Http\Requests\UpdatePo_statusesRequest;
+use App\Http\Requests\StoreAdminsRequest;
+use App\Http\Requests\UpdateAdminsRequest;
+use App\Models\Admins;
 
-class PoStatusesController extends Controller
+class AdminsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,7 @@ class PoStatusesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePo_statusesRequest $request)
+    public function store(StoreAdminsRequest $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class PoStatusesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Po_statuses $po_statuses)
+    public function show(Admins $admins)
     {
         //
     }
@@ -43,7 +43,7 @@ class PoStatusesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Po_statuses $po_statuses)
+    public function edit(Admins $admins)
     {
         //
     }
@@ -51,7 +51,7 @@ class PoStatusesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePo_statusesRequest $request, Po_statuses $po_statuses)
+    public function update(UpdateAdminsRequest $request, Admins $admins)
     {
         //
     }
@@ -59,7 +59,7 @@ class PoStatusesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Po_statuses $po_statuses)
+    public function destroy(Admins $admins)
     {
         //
     }
