@@ -21,7 +21,7 @@
                         <div class="card-body">
                             <form class="form-horizontal" method="POST" action="{{ route('login') }}" novalidate>
                                 @csrf
-                                <fieldset class="form-group position-relative has-icon-left">
+                                <!-- <fieldset class="form-group position-relative has-icon-left">
                                     <input type="text" class="form-control input-lg  @error('email') is-invalid @enderror" id="user-name" placeholder="البريد الالكتروني "
                                            name="email" value="{{ old('email') }}" required autocomplete="email" autofocus tabindex="1"
                                            data-validation-required-message="الرجاء ادخال البريد الالكتروني.">
@@ -34,7 +34,27 @@
                                         <i class="ft-user"></i>
                                     </div>
                                     <div class="help-block font-small-3"></div>
+                                </fieldset> -->
+
+
+
+                                <fieldset class="form-group position-relative has-icon-left">
+                                    <input type="text" class="form-control input-lg  @error('username') is-invalid @enderror" id="user-name" placeholder="الرجاء ادخال الاسم "
+                                           name="username" value="{{ old('username') }}" required autocomplete="username" autofocus tabindex="1"
+                                           data-validation-required-message="الرجاء ادخال  الاسم او اللقب.">
+                                    @error('username')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                    <div class="form-control-position">
+                                        <i class="ft-user"></i>
+                                    </div>
+                                    <div class="help-block font-small-3"></div>
                                 </fieldset>
+
+
+
                                 <fieldset class="form-group position-relative has-icon-left">
                                     <input type="password" class="form-control input-lg @error('password') is-invalid @enderror" id="password" placeholder="الرقم السري " tabindex="2"
                                            required data-validation-required-message="الرجاء ادخال الرقم السري ." name="password" autocomplete="current-password">
