@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\TemplateController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,3 +30,7 @@ Route::get('/orders', [TemplateController::class, 'orders']);
 Route::get('/reports', [TemplateController::class, 'reports']);
   
 });
+
+Route::resource('roles', RoleController::class);
+Route::resource('users', UserController::class);
+

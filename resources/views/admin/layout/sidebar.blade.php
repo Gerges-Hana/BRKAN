@@ -21,6 +21,20 @@
                     <span class="menu-title" data-i18n="">التقارير </span>
                 </a>
             </li>
+            {{--Roles--}}
+            <li class="nav-item {{ (request()->is('roles')) ? 'active' : '' }}">
+                <a href="/roles">
+                    <i class="la  ft-unlock"></i>
+                    <!-- <i class="la  icon-permission"></i> -->
+                    <span class="menu-title" data-i18n="">القواعد </span>
+                </a>
+            </li>
+            {{--Users--}}
+            <li class="nav-item {{ (request()->is('users')) ? 'active' : '' }}">
+                <a href="/users"><i class="la  icon-users"></i>
+                    <span class="menu-title" data-i18n="">المستخدمين </span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

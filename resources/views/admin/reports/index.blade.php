@@ -40,6 +40,7 @@
                             </ul>
                         </div>
                     </div>
+                    
                     <div class="card-content collapse show">
                         <div class="card-body card-dashboard">
                             <table class="table table-striped table-bordered dataex-html5-export">
