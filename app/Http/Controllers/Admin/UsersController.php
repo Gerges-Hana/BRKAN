@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\StorePo_updatesRequest;
-use App\Http\Requests\UpdatePo_updatesRequest;
-use App\Models\Po_update;
+use App\Models\User;
+use Illuminate\Http\Client\Request;
 
-class PoUpdatesController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +26,7 @@ class PoUpdatesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePo_updatesRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -35,7 +34,7 @@ class PoUpdatesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Po_update $po_updates)
+    public function show(User $user)
     {
         //
     }
@@ -43,7 +42,7 @@ class PoUpdatesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Po_update $po_updates)
+    public function edit(User $user)
     {
         //
     }
@@ -51,7 +50,7 @@ class PoUpdatesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePo_updatesRequest $request, Po_update $po_updates)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -59,7 +58,7 @@ class PoUpdatesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Po_update $po_updates)
+    public function destroy(User $user)
     {
         //
     }

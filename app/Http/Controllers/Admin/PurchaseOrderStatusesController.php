@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\StoreAdminsRequest;
-use App\Http\Requests\UpdateAdminsRequest;
-use App\Models\Admins;
+use App\Models\PurchaseOrderStatus;
+use Illuminate\Http\Client\Request;
 
-class AdminsController extends Controller
+class PurchaseOrderStatusesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +26,7 @@ class AdminsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreAdminsRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -35,7 +34,7 @@ class AdminsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Admins $admins)
+    public function show(PurchaseOrderStatus $po_statuses)
     {
         //
     }
@@ -43,7 +42,7 @@ class AdminsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Admins $admins)
+    public function edit(PurchaseOrderStatus $po_statuses)
     {
         //
     }
@@ -51,7 +50,7 @@ class AdminsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAdminsRequest $request, Admins $admins)
+    public function update(Request $request, PurchaseOrderStatus $po_statuses)
     {
         //
     }
@@ -59,7 +58,7 @@ class AdminsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Admins $admins)
+    public function destroy(PurchaseOrderStatus $po_statuses)
     {
         //
     }

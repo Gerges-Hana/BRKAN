@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class PoStatusesSeeder extends Seeder
+class PurchaseOrderStatusesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -21,8 +21,8 @@ class PoStatusesSeeder extends Seeder
             ['name' => 'غادر', 'is_active' => true],
         ];
 
-        if (DB::table('po_statuses')->count() == 0) {
-            DB::table('po_statuses')->insert($statuses);
+        if (DB::table('purchase_order_statuses')->count() == 0) {
+            DB::table('purchase_order_statuses')->insert($statuses);
         }
     }
 }

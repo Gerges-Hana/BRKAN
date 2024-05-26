@@ -10,7 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('pos', function (Blueprint $table) {
+        Schema::create('purchase_orders', function (Blueprint $table) {
             $table->id();
             $table->string('po_number');
             $table->string('invoice_number')->nullable();
@@ -26,7 +26,7 @@ return new class extends Migration {
             $table->timestamps();
             $table->unsignedBigInteger('status_id')->nullable();
             $table->unsignedBigInteger('last_update_user_id')->nullable();
-            $table->foreign('status_id')->references('id')->on('po_statuses')->onDelete('set null');
+            $table->foreign('status_id')->references('id')->on('purchase_order_statuses')->onDelete('set null');
             $table->foreign('last_update_user_id')->references('id')->on('users')->onDelete('set null');
         });
     }
@@ -36,11 +36,11 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('pos', function (Blueprint $table) {
+        Schema::table('purchase_orders', function (Blueprint $table) {
             $table->dropForeign(['status_id']);
             $table->dropForeign(['last_update_user_id']);
         });
 
-        Schema::dropIfExists('pos');
+        Schema::dropIfExists('purchase_orders');
     }
 };

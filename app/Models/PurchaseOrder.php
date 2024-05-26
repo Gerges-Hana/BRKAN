@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PoUpdate extends Model
+class PurchaseOrder extends Model
 {
     use HasFactory;
 
-    protected $table = 'po_updates';
+    protected $table = 'purchase_orders';
     protected $guarded = ['id'];
 }

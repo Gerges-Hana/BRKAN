@@ -10,17 +10,17 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('po_updates', function (Blueprint $table) {
+        Schema::create('purchase_order_updates', function (Blueprint $table) {
             $table->id();
-            $table->integer('po_id');
+            $table->integer('purchase_order_id');
             $table->integer('user_id');
             $table->integer('status_id');
             $table->timestamp('entrance_time')->nullable();
             $table->timestamp('unloading_time')->nullable();
             $table->timestamp('leave_time')->nullable();
-            $table->foreign('po_id')->references('id')->on('pos')->onDelete('cascade');
+            $table->foreign('purchase_order_id')->references('id')->on('purchase_orders')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('status_id')->references('id')->on('po_status_updates')->onDelete('cascade');
+            $table->foreign('status_id')->references('id')->on('purchase_order_status_updates')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,12 +30,12 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::table('po_updates', function (Blueprint $table) {
-            $table->dropForeign(['po_id']);
+        Schema::table('purchase_order_updates', function (Blueprint $table) {
+            $table->dropForeign(['purchase_order_id']);
             $table->dropForeign(['user_id']);
             $table->dropForeign(['status_id']);
         });
 
-        Schema::dropIfExists('po_updates');
+        Schema::dropIfExists('purchase_order_updates');
     }
 };
