@@ -12,17 +12,17 @@ return new class extends Migration {
     {
         Schema::create('purchase_orders', function (Blueprint $table) {
             $table->id();
-            $table->string('po_number');
+            $table->string('purchase_order_number');
             $table->string('invoice_number')->nullable();
             $table->string('driver_name')->nullable();
             $table->string('rep_name')->nullable();
             $table->string('driver_phone')->nullable();
             $table->string('rep_phone')->nullable();
             $table->date('arrival_date')->nullable();
-            $table->timestamp('arrival_time')->nullable();
-            $table->timestamp('entrance_time')->nullable();
-            $table->timestamp('unloading_time')->nullable();
-            $table->timestamp('leave_time')->nullable();
+            $table->timestamp('arrived_at')->nullable();
+            $table->timestamp('entered_at')->nullable();
+            $table->timestamp('unloaded_at')->nullable();
+            $table->timestamp('left_at')->nullable();
             $table->timestamps();
             $table->unsignedBigInteger('status_id')->nullable();
             $table->unsignedBigInteger('last_update_user_id')->nullable();
