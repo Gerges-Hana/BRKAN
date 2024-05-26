@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Pos;
-use App\Http\Requests\StorePosRequest;
-use App\Http\Requests\UpdatePosRequest;
+use App\Models\PurchaseOrderStatus;
+use Illuminate\Http\Client\Request;
 
-class PosController extends Controller
+class PurchaseOrderStatusesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +26,7 @@ class PosController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePosRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -35,7 +34,7 @@ class PosController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pos $pos)
+    public function show(PurchaseOrderStatus $po_statuses)
     {
         //
     }
@@ -43,7 +42,7 @@ class PosController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pos $pos)
+    public function edit(PurchaseOrderStatus $po_statuses)
     {
         //
     }
@@ -51,7 +50,7 @@ class PosController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePosRequest $request, Pos $pos)
+    public function update(Request $request, PurchaseOrderStatus $po_statuses)
     {
         //
     }
@@ -59,7 +58,7 @@ class PosController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pos $pos)
+    public function destroy(PurchaseOrderStatus $po_statuses)
     {
         //
     }

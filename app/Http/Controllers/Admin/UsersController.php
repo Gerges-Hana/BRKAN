@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Po_statuses;
-use App\Http\Requests\StorePo_statusesRequest;
-use App\Http\Requests\UpdatePo_statusesRequest;
+use App\Models\User;
+use Illuminate\Http\Client\Request;
 
-class PoStatusesController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +26,7 @@ class PoStatusesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePo_statusesRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -35,7 +34,7 @@ class PoStatusesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Po_statuses $po_statuses)
+    public function show(User $user)
     {
         //
     }
@@ -43,7 +42,7 @@ class PoStatusesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Po_statuses $po_statuses)
+    public function edit(User $user)
     {
         //
     }
@@ -51,7 +50,7 @@ class PoStatusesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePo_statusesRequest $request, Po_statuses $po_statuses)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -59,7 +58,7 @@ class PoStatusesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Po_statuses $po_statuses)
+    public function destroy(User $user)
     {
         //
     }

@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class PosSeeder extends Seeder
+class PurchaseOrderUpdatesSeeder extends Seeder
 {
     /**
      * Run the database seeds.

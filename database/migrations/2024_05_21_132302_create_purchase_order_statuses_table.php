@@ -4,17 +4,16 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('po_statuses', function (Blueprint $table) {
+        Schema::create('purchase_order_statuses', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); 
-            $table->boolean('is_active')->default(true); 
+            $table->string('name');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('po_statuses');
+        Schema::dropIfExists('purchase_order_statuses');
     }
 };
