@@ -77,7 +77,9 @@ return [
             'query' => [
                 // ExampleQuery::class,
                 'PurchaseOrder' => \App\GraphQL\Query\PurchaseOrder\PurchaseOrderQuery::class,
-                'PurchaseOrders' => \App\GraphQL\Query\PurchaseOrder\PurchaseOrdersQuery::class
+                'PurchaseOrders' => \App\GraphQL\Query\PurchaseOrder\PurchaseOrdersQuery::class,
+                'PurchaseOrderStatus' => \App\GraphQL\Query\PurchaseOrderStatus\PurchaseOrderStatusQuery::class,
+                'PurchaseOrderStatuses' => \App\GraphQL\Query\PurchaseOrderStatus\PurchaseOrderStatusesQuery::class
             ],
             'mutation' => [
                 // ExampleMutation::class,

@@ -10,7 +10,7 @@ use Rebing\GraphQL\Support\Type as GraphQLType;
 class PurchaseOrderType extends GraphQLType
 {
     protected $attributes = [
-        'name' => 'PurchaseOrderType',
+        'name' => 'PurchaseOrder',
         'description' => 'Purchase Order',
         'model' => PurchaseOrder::class
     ];
@@ -18,6 +18,10 @@ class PurchaseOrderType extends GraphQLType
     public function fields(): array
     {
         return [
+            'id' => [
+                'type' => Type::int(),
+                'description' => 'The id of the purchase order'
+            ],
             'purchase_order_number' => [
                 'type' => Type::string(),
                 'description' => 'The number of the purchase order'
@@ -65,19 +69,14 @@ class PurchaseOrderType extends GraphQLType
             'created_at' => [
                 'type' => Type::string(),
                 'description' => 'The date the purchase order was created',
-//                'resolve' => function ($model) {
-//                    return $model->created_at ?: '';
-//                }
             ],
             'updated_at' => [
                 'type' => Type::string(),
                 'description' => 'The date the purchase order was last updated',
-//                'resolve' => function ($model) {
-//                    return $model->updated_at ?: '';
-//                }
             ],
             'status' => [
                 'type' => GraphQL::type('PurchaseOrderStatus'),
+                'description' => 'The status of the purchase order',
             ]
         ];
     }
