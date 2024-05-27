@@ -6,7 +6,9 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-
+use App\Models\User;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 class UsersTableSeeder extends Seeder
 {
     /**
@@ -14,15 +16,28 @@ class UsersTableSeeder extends Seeder
      */
     public function run(): void
     {
-        if (DB::table('users')->count() == 0) {
-            DB::table('users')->insert([
-                'name' => 'Admin',
-                'username' => 'Admin',
-                'is_active' => true,
-                'password' => Hash::make('123456789'),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
-        }
+
+
+
+        $user = User::create([
+            'name' => 'Admin',
+            'username' => 'Admin',
+            'is_active' => true,
+            'password' => Hash::make('123456789'),
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        $role = Role::create(['name' => 'Admin']);
+         
+        $permissions = Permission::pluck('id','id')->all();
+       
+        $role->syncPermissions($permissions);
+         
+        $user->assignRole([$role->id]);
+
     }
+
+
+
 }
