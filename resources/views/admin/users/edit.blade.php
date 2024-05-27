@@ -53,54 +53,7 @@
 
 
                 {!! Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id]]) !!}
-                <!-- <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Name:</strong>
-            {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>username:</strong>
-            {!! Form::text('username', null, array('placeholder' => 'username','class' => 'form-control')) !!}
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Password:</strong>
-            {!! Form::password('password', array('placeholder' => 'Password','class' => 'form-control')) !!}
-        </div>
-    </div>
-
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Confirm Password:</strong>
-            {!! Form::password('confirm-password', array('placeholder' => 'Confirm Password','class' => 'form-control')) !!}
-        </div>
-    </div>
-
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>is_active:</strong>
-            {!! Form::select('is_active',[false => 'غير مفعل', true => 'مفعل'], $user->is_active, ['class' => 'form-control']) !!}
-
-        </div>
-    </div>
-
-
-    <div class="col-xs-12 col-sm-12 col-md-12">
-        <div class="form-group">
-            <strong>Role:</strong>
-            {!! Form::select('roles[]', $roles,$userRole, array('class' => 'form-control','multiple')) !!}
-        </div>
-    </div>
-    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-</div> -->
-
-
+            
                 <div class="row">
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         <div class="form-group col-12 d-flex ">
@@ -110,8 +63,8 @@
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         <div class="form-group col-12 d-flex">
-                            <strong class="col-2">اللقب:</strong>
-                            {!! Form::text('username', null, array('placeholder' => 'ادخال اللقب','class' => 'form-control col-8')) !!}
+                            <strong class="col-2">اسم المستخدم:</strong>
+                            {!! Form::text('username', null, array('placeholder' => 'ادخال اسم المستخدم','class' => 'form-control col-8')) !!}
                         </div>
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6">

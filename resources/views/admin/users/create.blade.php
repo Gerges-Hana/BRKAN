@@ -60,8 +60,8 @@
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         <div class="form-group col-12 d-flex">
-                            <strong class="col-2">اللقب:</strong>
-                            {!! Form::text('username', null, array('placeholder' => 'ادخال اللقب','class' => 'form-control col-8')) !!}
+                            <strong class="col-2">اسم المستخدم:</strong>
+                            {!! Form::text('username', null, array('placeholder' => 'ادخال اسم المستخدم','class' => 'form-control col-8')) !!}
                         </div>
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6">

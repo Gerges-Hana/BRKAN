@@ -54,7 +54,7 @@
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group col-12">
-                                <strong class="col-4">اللقب:</strong>
+                                <strong class="col-4">اسم المستخدم:</strong>
                                 <strong class="col-8">{{ $user->username }}</strong>
 
                             </div>

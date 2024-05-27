@@ -49,12 +49,12 @@
 
                 <table class="table table-bordered">
                     <tr>
-                        <th>No</th>
-                        <th>Name</th>
-                        <th>username</th>
-                        <th>is_active</th>
-                        <th>Roles</th>
-                        <th width="280px">Action</th>
+                        <th>عدد</th>
+                        <th>الاسم</th>
+                        <th>اسم المستخدم</th>
+                        <th>الحاله</th>
+                        <th>الادوار</th>
+                        <th width="280px" class="text-center">العمليات</th>
                     </tr>
                     @foreach ($data as $key => $user)
                     <tr>
@@ -77,11 +77,11 @@
                             @endforeach
                             @endif
                         </td>
-                        <td>
-                            <a class="btn btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
-                            <a class="btn btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
+                        <td class="d-flex justify-content-between">
+                            <a class="btn btn-outline-primary " href="{{ route('users.show',$user->id) }}">عرض</a>
+                            <a class="btn btn-outline-warning " href="{{ route('users.edit',$user->id) }}">تعديل</a>
                             {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
-                            {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                            {!! Form::submit('حذف', ['class' => 'btn btn-outline-danger ']) !!}
                             {!! Form::close() !!}
                         </td>
                     </tr>

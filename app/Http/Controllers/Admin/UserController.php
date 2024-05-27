@@ -1,9 +1,8 @@
 <?php
     
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
     
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use DB;
@@ -13,6 +12,8 @@ use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB as FacadesDB;
 use Illuminate\Support\Facades\Hash as FacadesHash;
+use Spatie\Permission\Models\Permission;
+
 
 class UserController extends Controller
 {

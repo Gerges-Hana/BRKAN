@@ -50,20 +50,22 @@
                         <th width="280px">الحاله</th>
                     </tr>
                     @foreach ($roles as $key => $role)
-                    <tr>
+                    <tr class="d-flex justify-content-between">
                         <td>{{ ++$i }}</td>
                         <td>{{ $role->name }}</td>
                         <td>
-                            <a class="btn btn-info" href="{{ route('roles.show',$role->id) }}">عرض</a>
+                            <a class="btn btn-outline-primary " href="{{ route('roles.show',$role->id) }}">عرض</a>
                             @can('role-edit')
-                            <a class="btn btn-primary" href="{{ route('roles.edit',$role->id) }}">تعديل</a>
+                            <a class="btn btn-outline-warning " href="{{ route('roles.edit',$role->id) }}">تعديل</a>
                             @endcan
                             @can('role-delete')
                             {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) !!}
-                            {!! Form::submit('مسح', ['class' => 'btn btn-danger']) !!}
+                            {!! Form::submit('حذف', ['class' => 'btn btn-outline-danger']) !!}
                             {!! Form::close() !!}
                             @endcan
                         </td>
+
+                        
                     </tr>
                     @endforeach
                 </table>
