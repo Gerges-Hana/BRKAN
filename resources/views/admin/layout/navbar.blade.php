@@ -58,7 +58,7 @@
                         {{--Hello Admin--}}
                         <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                             <span class="mr-1">مرحبا,
-                                <span class="user-name text-bold-700">{{auth()->user()->name}}</span>
+                                <span class="user-name text-bold-700">{{auth()->user()?->name}}</span>
                             </span>
                             <span class="avatar avatar-online">
                                 <img src="{{asset('/app-assets/images/portrait/small/avatar-s-19.png')}}" alt="avatar">

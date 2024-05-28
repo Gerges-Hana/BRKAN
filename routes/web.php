@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\RoleController;
+use App\Http\Controllers\Admin\SearchController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\TemplateController;
 use Illuminate\Support\Facades\Route;
@@ -19,3 +20,14 @@ Route::middleware(['auth'])->group(function () {
 Route::resource('roles', RoleController::class);
 Route::resource('users', UserController::class);
 
+Route::post('/users-data', [UserController::class, 'getUserData'])->name('users.data');
+
+
+
+
+Route::controller(SearchController::class)->group(function(){
+    Route::get('demo-search', 'index');
+    Route::get('autocomplete', 'autocomplete')->name('autocomplete');
+    Route::post('/search-result', 'searchResult')->name('search.result');
+
+});

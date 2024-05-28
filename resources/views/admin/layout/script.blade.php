@@ -3,7 +3,7 @@
 <!-- BEGIN VENDOR JS-->
 
 <!-- BEGIN PAGE VENDOR JS-->
-@yield('page-script-files');
+@yield('page-script-files')
 <!-- END PAGE VENDOR JS-->
 
 <!-- BEGIN MODERN JS-->
@@ -14,4 +14,4 @@
 
 <!-- Custom JS-->
 <script src="{{asset('/assets/js/scripts.js')}}" type="text/javascript"></script>
-@yield('scripts');
+@yield('scripts')
