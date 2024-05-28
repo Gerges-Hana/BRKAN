@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+
 class UsersTableSeeder extends Seeder
 {
     /**
@@ -16,28 +17,24 @@ class UsersTableSeeder extends Seeder
      */
     public function run(): void
     {
+        if (DB::table('users')->count() == 0) {
+            $user = User::query()->create([
+                'name' => 'Admin',
+                'username' => 'Admin',
+                'is_active' => true,
+                'password' => Hash::make('123456789'),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+            $role = Role::create(['name' => 'Admin']);
 
+            $permissions = Permission::query()->pluck('id', 'id')->all();
 
+            $role->syncPermissions($permissions);
 
-        $user = User::create([
-            'name' => 'Admin',
-            'username' => 'Admin',
-            'is_active' => true,
-            'password' => Hash::make('123456789'),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-
-        $role = Role::create(['name' => 'Admin']);
-         
-        $permissions = Permission::pluck('id','id')->all();
-       
-        $role->syncPermissions($permissions);
-         
-        $user->assignRole([$role->id]);
-
+            $user->assignRole([$role->id]);
+        }
     }
-
 
 
 }
