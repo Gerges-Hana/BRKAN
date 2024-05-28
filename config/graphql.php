@@ -83,6 +83,7 @@ return [
             ],
             'mutation' => [
                 // ExampleMutation::class,
+                'CreatePurchaseOrder' => \App\GraphQL\Mutations\PurchaseOrder\CreatePurchaseOrderMutation::class
             ],
             // The types only available in this schema
             'types' => [
