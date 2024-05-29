@@ -17,6 +17,10 @@ class PurchaseOrderStatusType extends GraphQLType
     public function fields(): array
     {
         return [
+            'id' => [
+                'type' => Type::int(),
+                'description' => 'The id of the purchase order status'
+            ],
             'name' => [
                 'type' => Type::string(),
                 'description' => 'The name of the purchase order status'
@@ -28,16 +32,10 @@ class PurchaseOrderStatusType extends GraphQLType
             'created_at' => [
                 'type' => Type::string(),
                 'description' => 'The date the purchase order status was created',
-//                'resolve' => function ($model) {
-//                    return $model->created_at ?: '';
-//                }
             ],
             'updated_at' => [
                 'type' => Type::string(),
                 'description' => 'The date the purchase order status was last updated',
-//                'resolve' => function ($model) {
-//                    return $model->updated_at ?: '';
-//                }
             ],
         ];
     }

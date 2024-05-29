@@ -17,7 +17,7 @@ class PurchaseOrderQuery extends Query
 
     public function type(): Type
     {
-        return GraphQL::type('PurchaseOrderType');
+        return GraphQL::type('PurchaseOrder');
     }
 
     public function args(): array

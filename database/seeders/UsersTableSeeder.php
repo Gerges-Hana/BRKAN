@@ -1,7 +1,5 @@
 <?php
-
 namespace Database\Seeders;
-
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -13,7 +11,7 @@ class UsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     */ 
+     */
     public function run()
     {
         $adminRole = Role::firstOrCreate(['name' => 'Admin']);
@@ -31,7 +29,6 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => now(),
             ]
         );
-
         $admin->assignRole([$adminRole->id]);
         User::factory()->count(50)->create()->each(function ($user) use ($adminRole, $editorRole, $viewerRole) {
             $roles = [$adminRole, $editorRole, $viewerRole];
@@ -39,6 +36,4 @@ class UsersTableSeeder extends Seeder
             $user->assignRole($randomRole);
         });
     }
-
-
 }

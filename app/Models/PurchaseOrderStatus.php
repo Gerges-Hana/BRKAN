@@ -11,4 +11,9 @@ class PurchaseOrderStatus extends Model
 
     protected $table = 'purchase_order_statuses';
     protected $guarded = ['id'];
+
+    public function purchaseOrders()
+    {
+        return $this->hasMany(PurchaseOrder::class);
+    }
 }
