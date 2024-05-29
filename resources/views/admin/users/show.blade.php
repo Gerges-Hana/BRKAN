@@ -43,7 +43,8 @@
 
 
                 <div class="">
-                    <div class="row py-2">
+                <hr>
+                    <div class="row py-0">
 
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group col-12">
@@ -60,8 +61,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row py-2">
-
+                    <hr>
+                    <div class="row py-0">
+                      
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group col-12">
                                 <strong class="col-4">الحاله:</strong>
@@ -70,7 +72,7 @@
                             </div>
                         </div>
 
-
+                        
                         <div class="col-xs-6 col-sm-6 col-md-6">
                             <div class="form-group col-12">
                                 <strong>الادوار:</strong>
@@ -81,7 +83,9 @@
                                 @endif
                             </div>
                         </div>
+                       
                     </div>
+                    <hr>
                 </div>
 
             </div>

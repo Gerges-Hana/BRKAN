@@ -1,7 +1,5 @@
 <?php
-
 namespace Database\Seeders;
-
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -9,32 +7,33 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
-
 class UsersTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run()
     {
-        if (DB::table('users')->count() == 0) {
-            $user = User::query()->create([
+        $adminRole = Role::firstOrCreate(['name' => 'Admin']);
+        $editorRole = Role::firstOrCreate(['name' => 'Editor']);
+        $viewerRole = Role::firstOrCreate(['name' => 'Viewer']);
+        $permissions = Permission::pluck('id', 'id')->all();
+        $adminRole->syncPermissions($permissions);
+        $admin = User::firstOrCreate(
+            ['username' => 'Admin'],
+            [
                 'name' => 'Admin',
-                'username' => 'Admin',
                 'is_active' => true,
                 'password' => Hash::make('123456789'),
                 'created_at' => now(),
                 'updated_at' => now(),
-            ]);
-            $role = Role::create(['name' => 'Admin']);
-
-            $permissions = Permission::query()->pluck('id', 'id')->all();
-
-            $role->syncPermissions($permissions);
-
-            $user->assignRole([$role->id]);
-        }
+            ]
+        );
+        $admin->assignRole([$adminRole->id]);
+        User::factory()->count(50)->create()->each(function ($user) use ($adminRole, $editorRole, $viewerRole) {
+            $roles = [$adminRole, $editorRole, $viewerRole];
+            $randomRole = $roles[array_rand($roles)];
+            $user->assignRole($randomRole);
+        });
     }
-
-
 }
