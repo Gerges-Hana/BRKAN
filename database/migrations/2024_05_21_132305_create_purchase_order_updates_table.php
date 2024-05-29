@@ -15,12 +15,14 @@ return new class extends Migration {
             $table->integer('purchase_order_id');
             $table->integer('user_id');
             $table->integer('status_id');
+            $table->timestamp('canceled_at')->nullable();
+            $table->timestamp('arrived_at')->nullable();
             $table->timestamp('entered_at')->nullable();
             $table->timestamp('unloaded_at')->nullable();
             $table->timestamp('left_at')->nullable();
-            $table->foreign('purchase_order_id')->references('id')->on('purchase_orders')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('status_id')->references('id')->on('purchase_order_status_updates')->onDelete('cascade');
+            $table->foreign('purchase_order_id')->references('id')->on('purchase_orders')->onDelete('set null');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('status_id')->references('id')->on('purchase_order_status_updates')->onDelete('set null');
             $table->timestamps();
         });
     }
