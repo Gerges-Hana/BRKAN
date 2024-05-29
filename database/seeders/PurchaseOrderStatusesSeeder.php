@@ -14,11 +14,12 @@ class PurchaseOrderStatusesSeeder extends Seeder
     public function run(): void
     {
         $statuses = [
-            ['name' => 'تم الإرسال', 'is_active' => true],
-            ['name' => 'تم الإلغاء', 'is_active' => true],
-            ['name' => 'وصل', 'is_active' => true],
-            ['name' => 'تم التفريغ', 'is_active' => true],
-            ['name' => 'غادر', 'is_active' => true],
+            ['id' => 1, 'name' => 'تم الإرسال', 'is_active' => true],
+            ['id' => 2, 'name' => 'تم الإلغاء', 'is_active' => true],
+            ['id' => 3, 'name' => 'تم الوصول', 'is_active' => true],
+            ['id' => 4, 'name' => 'تم الدخول', 'is_active' => true],
+            ['id' => 5, 'name' => 'تم التفريغ', 'is_active' => true],
+            ['id' => 6, 'name' => 'تم المغادرة', 'is_active' => true],
         ];
 
         if (DB::table('purchase_order_statuses')->count() == 0) {

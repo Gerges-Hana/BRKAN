@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('status_id');
             $table->string('name');
+            $table->boolean('is_active')->nullable();
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('status_id')->references('id')->on('purchase_order_statuses')->onDelete('cascade');
