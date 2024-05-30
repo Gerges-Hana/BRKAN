@@ -16,7 +16,7 @@ class CreatePurchaseOrderMutation extends Mutation
 
     public function type(): Type
     {
-        return GraphQL::type('PurchaseOrder');
+        return GraphQL::type('PurchaseOrderResponse');
     }
 
     public function args(): array
