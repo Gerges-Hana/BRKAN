@@ -27,6 +27,10 @@ class PurchaseOrderQuery extends Query
                 'name' => 'id',
                 'type' => Type::int()
             ],
+            'device_unique_key' => [
+                'name' => 'device_unique_key',
+                'type' => Type::string(),
+            ],
             'purchase_order_number' => [
                 'name' => 'purchase_order_number',
                 'type' => Type::string(),
@@ -59,8 +63,8 @@ class PurchaseOrderQuery extends Query
                 'name' => 'arrived_at',
                 'type' => Type::string(),
             ],
-            'entrance_time' => [
-                'name' => 'entrance_time',
+            'entered_at' => [
+                'name' => 'entered_at',
                 'type' => Type::string(),
             ],
             'unloaded_at' => [
@@ -87,6 +91,9 @@ class PurchaseOrderQuery extends Query
 
         if (isset($args['id'])) {
             return $query->find($args['id']);
+        }
+        if (isset($args['device_unique_key'])) {
+            return $query->find($args['device_unique_key']);
         }
         if (isset($args['purchase_order_number'])) {
             return $query->where('purchase_order_number', '=', $args['purchase_order_number'])->first();

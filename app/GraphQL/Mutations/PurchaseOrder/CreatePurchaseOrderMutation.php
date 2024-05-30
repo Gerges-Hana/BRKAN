@@ -22,6 +22,9 @@ class CreatePurchaseOrderMutation extends Mutation
     public function args(): array
     {
         return [
+            'device_unique_key' => [
+                'type' => Type::nonNull(Type::string()),
+            ],
             'purchase_order_number' => [
                 'type' => Type::nonNull(Type::string()),
             ],

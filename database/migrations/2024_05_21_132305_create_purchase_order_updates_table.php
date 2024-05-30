@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->timestamp('left_at')->nullable();
             $table->foreign('purchase_order_id')->references('id')->on('purchase_orders')->onDelete('set null');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
-            $table->foreign('status_id')->references('id')->on('purchase_order_status_updates')->onDelete('set null');
+            $table->foreign('status_id')->references('id')->on('purchase_order_statuses')->onDelete('set null');
             $table->timestamps();
         });
     }

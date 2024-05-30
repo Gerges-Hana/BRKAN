@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('purchase_orders', function (Blueprint $table) {
             $table->id();
-            $table->string('purchase_order_unique_key');
+            $table->string('device_unique_key');
             $table->string('purchase_order_number');
             $table->string('invoice_number')->nullable();
             $table->string('driver_name')->nullable();
