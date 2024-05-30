@@ -49,13 +49,48 @@ class CreatePurchaseOrderMutation extends Mutation
         ];
     }
 
-    public function resolve($root, $args): PurchaseOrder
+    public function resolve($root, $args): array
     {
+        $currentNotCanceledPurchaseOrder = PurchaseOrder::query()
+            ->where('purchase_order_number', '=', $args['purchase_order_number'])
+            ->where('status_id', '!=', 2) // Not Canceled
+            ->first();
+        if ($currentNotCanceledPurchaseOrder) {
+            if ($currentNotCanceledPurchaseOrder->device_unique_key == $args['device_unique_key']) {
+                return [
+                    'success' => false,
+                    'message' => 'Order already created before',
+                    'purchaseOrder' => $currentNotCanceledPurchaseOrder,
+                ];
+            } else {
+                return [
+                    'success' => false,
+                    'message' => 'Order already created before by another driver',
+                    'purchaseOrder' => null,
+                ];
+            }
+        }
+
+        //Create new purchase order
         $purchaseOrder = new PurchaseOrder();
         $purchaseOrder->fill($args);
         $purchaseOrder->arrival_date = Carbon::createFromTimestamp($args['arrival_date'])->format('Y-m-d');
         $purchaseOrder->status_id = 1;
         $purchaseOrder->save();
-        return $purchaseOrder;
+        $createdPurchaseOrder = $purchaseOrder->refresh();
+
+        if ($createdPurchaseOrder) {
+            return [
+                'success' => true,
+                'message' => "Purchase order created successfully",
+                'purchaseOrder' => $createdPurchaseOrder,
+            ];
+        } else {
+            return [
+                'success' => false,
+                'message' => "Failed to create purchase order, Please try again later!",
+                'purchaseOrder' => null,
+            ];
+        }
     }
 }
