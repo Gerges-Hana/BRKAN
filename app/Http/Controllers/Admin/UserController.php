@@ -19,35 +19,10 @@ class UserController extends Controller
 {
 
 
-    // public function index(Request $request)
-    // {
-    //     if ($request->ajax()) {
-    //         return $this->getUserData();
-    //     }
-
-    //     return view('admin.users.index');
-    // }
-
-    // protected function getUserData()
-    // {
-    //     $data = User::latest()->get();
-    //     return DataTables::of($data)
-    //         ->addIndexColumn()
-    //         ->addColumn('is_active', function ($row) {
-    //             return $row->is_active ? 'مفعل' : 'غير مفعل';
-    //         })
-    //         ->addColumn('roles', function ($row) {
-    //             return $row->getRoleNames()->toArray();
-    //         })
-    //         ->make(true);
-    // }
 
     public function index(Request $request)
     {
-        // if ($request->ajax()) {
-        //     return $this->getUserData($request);
-        // }
-    
+       
         return view('admin.users.index');
     }
     
@@ -80,14 +55,6 @@ class UserController extends Controller
         ->make(true);
 }
 
-
-    public function index2(Request $request): View
-    {
-        $data = User::latest()->paginate(5);
-
-        return view('admin.users.index', compact('data'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
-    }
 
     public function create(): View
     {

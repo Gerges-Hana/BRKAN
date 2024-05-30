@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\PurchaseOrdersController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SearchController;
 use App\Http\Controllers\Admin\UserController;
@@ -19,8 +20,10 @@ Route::middleware(['auth'])->group(function () {
 
 Route::resource('roles', RoleController::class);
 Route::resource('users', UserController::class);
+Route::resource('orders', PurchaseOrdersController::class);
 
 Route::post('/users-data', [UserController::class, 'getUserData'])->name('users.data');
+Route::post('/orders-data', [PurchaseOrdersController::class, 'getOrdersData'])->name('orders.data');
 
 
 
