@@ -73,53 +73,8 @@
                         </div>
                     </div>
                 </div>
-                <!-- =================================================================  -->
+                
                 <!-- =========================== edit modal ======================================  -->
-                <!-- Modal for Editing Order -->
-                <!-- <div class="modal fade" id="editOrderModal" tabindex="-1" role="dialog" aria-labelledby="editOrderModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="editOrderModalLabel">تعديل الطلب</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <form id="editOrderForm">
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <label for="arrival_date">تاريخ الوصول</label>
-                                        <input type="datetime-local" class="form-control" id="arrival_date" name="arrival_date">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="canceled_at">تاريخ الإلغاء</label>
-                                        <input type="datetime-local" class="form-control" id="canceled_at" name="canceled_at">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="arrived_at">تاريخ الوصول</label>
-                                        <input type="datetime-local" class="form-control" id="arrived_at" name="arrived_at">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="entered_at">تاريخ الإدخال</label>
-                                        <input type="datetime-local" class="form-control" id="entered_at" name="entered_at">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="unloaded_at">تاريخ التفريغ</label>
-                                        <input type="datetime-local" class="form-control" id="unloaded_at" name="unloaded_at">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="left_at">تاريخ المغادرة</label>
-                                        <input type="datetime-local" class="form-control" id="left_at" name="left_at">
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
-                                    <button type="submit" class="btn btn-primary">حفظ التعديلات</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div> -->
                 <!-- Modal for Editing Order -->
                 <div class="modal fade" id="editOrderModal" tabindex="-1" role="dialog" aria-labelledby="editOrderModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -297,6 +252,8 @@
                         var btn = '<div class="d-flex justify-content-between">';
                         btn += '<button class="btn btn-outline-primary d-flex justify-content-between align-items-center mx-1 view-order" data-id="' + row.id + '" data-toggle="tooltip" title="عرض"><i class="la la-eye"></i></button>';
                         btn += '<a class="btn btn-outline-warning d-flex justify-content-between align-items-center mx-1 edit-order" href="#" data-id="' + row.id + '" data-toggle="tooltip" title="تعديل"><i class="la la-edit"></i></a>';
+                        // btn += '<a class="btn btn-outline-info d-flex justify-content-between align-items-center mx-1 " href="/orders-history/'+ row.id +'"  data-toggle="tooltip" title="تفاصيل"><i class="la ft-file-plus"></i></a>';
+                        btn += '<a class="btn btn-outline-info d-flex justify-content-between align-items-center mx-1 " href="/orders-history/'+ row.id +'"  data-toggle="tooltip" title="تفاصيل"><i class="la ft-file-plus"></i></a>';
 
                         btn += '<form method="POST" action="/orders/' + row.id + '" style="display:inline" onsubmit="return confirm(\'هل أنت متأكد أنك تريد حذف هذا الطلب؟\');">';
                         btn += '@csrf';

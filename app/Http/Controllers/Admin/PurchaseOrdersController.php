@@ -160,4 +160,16 @@ class PurchaseOrdersController extends Controller
         return redirect()->route('orders.index')
             ->with('success', 'تم حذف الطلبيه بنجاح ');
     }
+
+    public function HistoryOfPurchaseOrdersC($id){
+        // return $id;
+        $order = PurchaseOrder::find($id);
+
+        if (!$order) {
+            return redirect()->back()->with('error', 'الطلبية غير موجودة');
+        }
+
+        return view('admin.orders.history', compact('order'));
+    }
+
 }

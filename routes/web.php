@@ -24,6 +24,9 @@ Route::resource('orders', PurchaseOrdersController::class);
 
 Route::post('/users-data', [UserController::class, 'getUserData'])->name('users.data');
 Route::post('/orders-data', [PurchaseOrdersController::class, 'getOrdersData'])->name('orders.data');
+// Route::post('/orders-history/{id}', [PurchaseOrdersController::class, 'HistoryOfPurchaseOrdersC'])->name('orders.history');
+// Route::get('/orders-history/{id}', [PurchaseOrdersController::class, 'HistoryOfPurchaseOrdersC'])->name('orders.history.get');
+Route::get('/orders-history/{id}', [PurchaseOrdersController::class, 'HistoryOfPurchaseOrdersC'])->name('orders.history');
 
 
 
