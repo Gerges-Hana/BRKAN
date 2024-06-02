@@ -3,6 +3,7 @@
 namespace App\GraphQL\Mutations\PurchaseOrder;
 
 use App\Models\PurchaseOrder;
+use App\Models\PurchaseOrderUpdate;
 use Carbon\Carbon;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Mutation;
@@ -76,8 +77,15 @@ class CreatePurchaseOrderMutation extends Mutation
         $purchaseOrder->fill($args);
         $purchaseOrder->arrival_date = Carbon::createFromTimestamp($args['arrival_date'])->format('Y-m-d');
         $purchaseOrder->status_id = 1;
+        $purchaseOrder->published_at = Carbon::now()->format('Y-m-d H:i:s');
         $purchaseOrder->save();
         $createdPurchaseOrder = $purchaseOrder->refresh();
+
+        $purchaseOrderUpdate = new PurchaseOrderUpdate();
+        $purchaseOrderUpdate->purchase_order_id = $createdPurchaseOrder->id;
+        $purchaseOrderUpdate->status_id = 1;
+        $purchaseOrderUpdate->published_at = Carbon::now()->format('Y-m-d H:i:s');
+        $purchaseOrderUpdate->save();
 
         if ($createdPurchaseOrder) {
             return [

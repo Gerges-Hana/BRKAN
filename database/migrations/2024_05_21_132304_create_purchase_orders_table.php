@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->string('driver_phone')->nullable();
             $table->string('rep_phone')->nullable();
             $table->date('arrival_date')->nullable();
+            $table->timestamp('published_at')->nullable();
             $table->timestamp('canceled_at')->nullable();
             $table->timestamp('arrived_at')->nullable();
             $table->timestamp('entered_at')->nullable();

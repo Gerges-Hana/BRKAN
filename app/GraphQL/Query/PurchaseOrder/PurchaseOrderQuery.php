@@ -27,10 +27,6 @@ class PurchaseOrderQuery extends Query
                 'name' => 'id',
                 'type' => Type::int()
             ],
-            'device_unique_key' => [
-                'name' => 'device_unique_key',
-                'type' => Type::string(),
-            ],
             'purchase_order_number' => [
                 'name' => 'purchase_order_number',
                 'type' => Type::string(),
@@ -38,46 +34,6 @@ class PurchaseOrderQuery extends Query
             'invoice_number' => [
                 'name' => 'invoice_number',
                 'type' => Type::string(),
-            ],
-            'driver_name' => [
-                'name' => 'driver_name',
-                'type' => Type::string(),
-            ],
-            'rep_name' => [
-                'name' => 'rep_name',
-                'type' => Type::string(),
-            ],
-            'driver_phone' => [
-                'name' => 'driver_phone',
-                'type' => Type::string(),
-            ],
-            'rep_phone' => [
-                'name' => 'rep_phone',
-                'type' => Type::string(),
-            ],
-            'arrival_date' => [
-                'name' => 'arrival_date',
-                'type' => Type::string(),
-            ],
-            'arrived_at' => [
-                'name' => 'arrived_at',
-                'type' => Type::string(),
-            ],
-            'entered_at' => [
-                'name' => 'entered_at',
-                'type' => Type::string(),
-            ],
-            'unloaded_at' => [
-                'name' => 'unloaded_at',
-                'type' => Type::string(),
-            ],
-            'left_at' => [
-                'name' => 'left_at',
-                'type' => Type::string(),
-            ],
-            'status_id' => [
-                'name' => 'status_id',
-                'type' => Type::int(),
             ],
         ];
     }
@@ -93,7 +49,7 @@ class PurchaseOrderQuery extends Query
             return $query->find($args['id']);
         }
         if (isset($args['device_unique_key'])) {
-            return $query->find($args['device_unique_key']);
+            return $query->where('device_unique_key', '=', $args['device_unique_key']);
         }
         if (isset($args['purchase_order_number'])) {
             return $query->where('purchase_order_number', '=', $args['purchase_order_number'])->first();

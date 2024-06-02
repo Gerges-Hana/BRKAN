@@ -9,10 +9,10 @@ use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Mutation;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 
-class CancelPurchaseOrderMutation extends Mutation
+class VerifyPurchaseOrderMutation extends Mutation
 {
     protected $attributes = [
-        'name' => 'CancelPurchaseOrder',
+        'name' => 'VerifyPurchaseOrder',
     ];
 
     public function type(): Type
@@ -23,21 +23,17 @@ class CancelPurchaseOrderMutation extends Mutation
     public function args(): array
     {
         return [
-            'device_unique_key' => [
+            'purchase_order_number' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'The unique key for the driver device'
+                'description' => 'The number of the purchase order'
             ],
         ];
     }
 
     public function resolve($root, $args): array
     {
-//        $purchaseOrder = PurchaseOrder::query()
-//            ->where('device_unique_key', '=', $args['device_unique_key'])
-//            ->first();
-
         $purchaseOrder = PurchaseOrder::query()
-            ->where('device_unique_key', '=', $args['device_unique_key'])
+            ->where('purchase_order_number', '=', $args['purchase_order_number'])
             ->whereNull('canceled_at')
             ->where('status_id', '=', 1)
             ->first();
@@ -50,44 +46,44 @@ class CancelPurchaseOrderMutation extends Mutation
             ];
         }
 
-//        if ($purchaseOrder->arrived_at && $purchaseOrder->status_id != 2) {
-//            return [
-//                'success' => false,
-//                'message' => 'This purchase order cannot be canceled',
-//                'purchaseOrder' => $purchaseOrder,
-//            ];
-//        }
-
         if ($purchaseOrder->canceled_at && $purchaseOrder->status_id == 2) {
             return [
                 'success' => false,
-                'message' => 'Purchased order already canceled',
+                'message' => 'This purchase order was canceled and cannot be verified',
+                'purchaseOrder' => $purchaseOrder,
+            ];
+        }
+
+        if ($purchaseOrder->arrived_at) {
+            return [
+                'success' => false,
+                'message' => 'This purchase order already verified before',
                 'purchaseOrder' => $purchaseOrder,
             ];
         }
 
         $updatedPurchaseOrder = $purchaseOrder->update([
-            'status_id' => 2,
-            'canceled_at' => Carbon::now()->format('Y-m-d H:i:s')
+            'status_id' => 3,
+            'arrived_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
         $purchaseOrder->refresh();
 
         if ($updatedPurchaseOrder) {
             $purchaseOrderUpdate = new PurchaseOrderUpdate();
             $purchaseOrderUpdate->purchase_order_id = $purchaseOrder->id;
-            $purchaseOrderUpdate->status_id = 2;
-            $purchaseOrderUpdate->canceled_at = Carbon::now()->format('Y-m-d H:i:s');
+            $purchaseOrderUpdate->status_id = 3;
+            $purchaseOrderUpdate->arrived_at = Carbon::now()->format('Y-m-d H:i:s');
             $purchaseOrderUpdate->save();
 
             return [
                 'success' => true,
-                'message' => 'Cancelled successfully',
+                'message' => 'Verified successfully',
                 'purchaseOrder' => $purchaseOrder,
             ];
         } else {
             return [
                 'success' => false,
-                'message' => 'Failed to cancel the purchase order',
+                'message' => 'Failed to verify the purchase order',
                 'purchaseOrder' => $purchaseOrder,
             ];
         }

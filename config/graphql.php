@@ -85,7 +85,8 @@ return [
             'mutation' => [
                 // ExampleMutation::class,
                 'CreatePurchaseOrder' => \App\GraphQL\Mutations\PurchaseOrder\CreatePurchaseOrderMutation::class,
-                'CancelPurchaseOrder' => \App\GraphQL\Mutations\PurchaseOrder\CancelPurchaseOrderMutation::class
+                'CancelPurchaseOrder' => \App\GraphQL\Mutations\PurchaseOrder\CancelPurchaseOrderMutation::class,
+                'VerifyPurchaseOrder' => \App\GraphQL\Mutations\PurchaseOrder\VerifyPurchaseOrderMutation::class,
             ],
             // The types only available in this schema
             'types' => [

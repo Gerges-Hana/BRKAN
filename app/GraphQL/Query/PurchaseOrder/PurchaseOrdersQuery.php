@@ -55,6 +55,14 @@ class PurchaseOrdersQuery extends Query
                 'name' => 'arrival_date',
                 'type' => Type::string(),
             ],
+            'published_at' => [
+                'name' => 'published_at',
+                'type' => Type::string(),
+            ],
+            'canceled_at' => [
+                'name' => 'canceled_at',
+                'type' => Type::string(),
+            ],
             'arrived_at' => [
                 'name' => 'arrived_at',
                 'type' => Type::string(),

@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->integer('purchase_order_id');
             $table->integer('user_id')->nullable();
             $table->integer('status_id')->nullable();
+            $table->timestamp('published_at')->nullable();
             $table->timestamp('canceled_at')->nullable();
             $table->timestamp('arrived_at')->nullable();
             $table->timestamp('entered_at')->nullable();
