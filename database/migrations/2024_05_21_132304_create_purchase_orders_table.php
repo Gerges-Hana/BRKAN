@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('purchase_orders', function (Blueprint $table) {
             $table->id();
-            $table->string('purchase_order_unique_key');
+            $table->string('device_unique_key');
             $table->string('purchase_order_number');
             $table->string('invoice_number')->nullable();
             $table->string('driver_name')->nullable();
@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->string('driver_phone')->nullable();
             $table->string('rep_phone')->nullable();
             $table->date('arrival_date')->nullable();
+            $table->timestamp('published_at')->nullable();
             $table->timestamp('canceled_at')->nullable();
             $table->timestamp('arrived_at')->nullable();
             $table->timestamp('entered_at')->nullable();

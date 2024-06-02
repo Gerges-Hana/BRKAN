@@ -23,6 +23,10 @@ class PurchaseOrdersQuery extends Query
     public function args(): array
     {
         return [
+            'device_unique_key' => [
+                'name' => 'device_unique_key',
+                'type' => Type::string(),
+            ],
             'purchase_order_number' => [
                 'name' => 'purchase_order_number',
                 'type' => Type::string(),
@@ -51,12 +55,20 @@ class PurchaseOrdersQuery extends Query
                 'name' => 'arrival_date',
                 'type' => Type::string(),
             ],
+            'published_at' => [
+                'name' => 'published_at',
+                'type' => Type::string(),
+            ],
+            'canceled_at' => [
+                'name' => 'canceled_at',
+                'type' => Type::string(),
+            ],
             'arrived_at' => [
                 'name' => 'arrived_at',
                 'type' => Type::string(),
             ],
-            'entrance_time' => [
-                'name' => 'entrance_time',
+            'entered_at' => [
+                'name' => 'entered_at',
                 'type' => Type::string(),
             ],
             'unloaded_at' => [
@@ -81,6 +93,9 @@ class PurchaseOrdersQuery extends Query
         $with = $fields->getRelations();
         $query = PurchaseOrder::query()->select($select)->with($with);
 
+        if (isset($args['device_unique_key'])) {
+            $query->whereRaw('LOWER(device_unique_key) LIKE ?', ['%' . strtolower($args['device_unique_key']) . '%']);
+        }
         if (isset($args['purchase_order_number'])) {
             $query->whereRaw('LOWER(purchase_order_number) LIKE ?', ['%' . strtolower($args['purchase_order_number']) . '%']);
         }
@@ -105,8 +120,8 @@ class PurchaseOrdersQuery extends Query
         if (isset($args['arrived_at'])) {
             $query->whereRaw('LOWER(arrived_at) LIKE ?', ['%' . strtolower($args['arrived_at']) . '%']);
         }
-        if (isset($args['entrance_time'])) {
-            $query->whereRaw('LOWER(entrance_time) LIKE ?', ['%' . strtolower($args['entrance_time']) . '%']);
+        if (isset($args['entered_at'])) {
+            $query->whereRaw('LOWER(entered_at) LIKE ?', ['%' . strtolower($args['entered_at']) . '%']);
         }
         if (isset($args['unloaded_at'])) {
             $query->whereRaw('LOWER(unloaded_at) LIKE ?', ['%' . strtolower($args['unloaded_at']) . '%']);

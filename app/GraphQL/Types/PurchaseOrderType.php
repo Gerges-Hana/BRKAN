@@ -22,7 +22,7 @@ class PurchaseOrderType extends GraphQLType
                 'type' => Type::int(),
                 'description' => 'The id of the purchase order'
             ],
-            'purchase_order_unique_key' => [
+            'device_unique_key' => [
                 'type' => Type::string(),
                 'description' => 'The unique key for the driver device'
             ],
@@ -54,11 +54,19 @@ class PurchaseOrderType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'The arrival date of the purchase order which entered by the driver'
             ],
+            'published_at' => [
+                'type' => Type::string(),
+                'description' => 'The creation time of the purchase order which set when the driver submit the PO'
+            ],
+            'canceled_at' => [
+                'type' => Type::string(),
+                'description' => 'The cancellation time of the purchase order which set when the driver cancel the PO'
+            ],
             'arrived_at' => [
                 'type' => Type::string(),
                 'description' => 'The arrival time of the purchase order which set when the security verify the PO'
             ],
-            'entrance_time' => [
+            'entered_at' => [
                 'type' => Type::string(),
                 'description' => 'The entrance time of the purchase order which entered by the admin'
             ],
