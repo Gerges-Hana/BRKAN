@@ -73,18 +73,19 @@ class CreatePurchaseOrderMutation extends Mutation
         }
 
         //Create new purchase order
+        $published_at = Carbon::now()->format('Y-m-d H:i:s');
         $purchaseOrder = new PurchaseOrder();
         $purchaseOrder->fill($args);
         $purchaseOrder->arrival_date = Carbon::createFromTimestamp($args['arrival_date'])->format('Y-m-d');
         $purchaseOrder->status_id = 1;
-        $purchaseOrder->published_at = Carbon::now()->format('Y-m-d H:i:s');
+        $purchaseOrder->published_at = $published_at;
         $purchaseOrder->save();
         $createdPurchaseOrder = $purchaseOrder->refresh();
 
         $purchaseOrderUpdate = new PurchaseOrderUpdate();
         $purchaseOrderUpdate->purchase_order_id = $createdPurchaseOrder->id;
         $purchaseOrderUpdate->status_id = 1;
-        $purchaseOrderUpdate->published_at = Carbon::now()->format('Y-m-d H:i:s');
+        $purchaseOrderUpdate->created_at = $published_at;
         $purchaseOrderUpdate->save();
 
         if ($createdPurchaseOrder) {
