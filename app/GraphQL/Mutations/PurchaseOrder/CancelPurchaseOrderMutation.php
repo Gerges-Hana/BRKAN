@@ -66,9 +66,10 @@ class CancelPurchaseOrderMutation extends Mutation
             ];
         }
 
+        $canceled_at = Carbon::now()->format('Y-m-d H:i:s');
         $updatedPurchaseOrder = $purchaseOrder->update([
             'status_id' => 2,
-            'canceled_at' => Carbon::now()->format('Y-m-d H:i:s')
+            'canceled_at' => $canceled_at
         ]);
         $purchaseOrder->refresh();
 
@@ -76,7 +77,7 @@ class CancelPurchaseOrderMutation extends Mutation
             $purchaseOrderUpdate = new PurchaseOrderUpdate();
             $purchaseOrderUpdate->purchase_order_id = $purchaseOrder->id;
             $purchaseOrderUpdate->status_id = 2;
-            $purchaseOrderUpdate->canceled_at = Carbon::now()->format('Y-m-d H:i:s');
+            $purchaseOrderUpdate->created_at = $canceled_at;
             $purchaseOrderUpdate->save();
 
             return [

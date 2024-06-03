@@ -62,9 +62,10 @@ class VerifyPurchaseOrderMutation extends Mutation
             ];
         }
 
+        $arrived_at = Carbon::now()->format('Y-m-d H:i:s');
         $updatedPurchaseOrder = $purchaseOrder->update([
             'status_id' => 3,
-            'arrived_at' => Carbon::now()->format('Y-m-d H:i:s')
+            'arrived_at' => $arrived_at
         ]);
         $purchaseOrder->refresh();
 
@@ -72,7 +73,7 @@ class VerifyPurchaseOrderMutation extends Mutation
             $purchaseOrderUpdate = new PurchaseOrderUpdate();
             $purchaseOrderUpdate->purchase_order_id = $purchaseOrder->id;
             $purchaseOrderUpdate->status_id = 3;
-            $purchaseOrderUpdate->arrived_at = Carbon::now()->format('Y-m-d H:i:s');
+            $purchaseOrderUpdate->created_at = $arrived_at;
             $purchaseOrderUpdate->save();
 
             return [
