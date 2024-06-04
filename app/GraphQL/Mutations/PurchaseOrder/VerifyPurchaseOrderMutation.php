@@ -34,7 +34,6 @@ class VerifyPurchaseOrderMutation extends Mutation
     {
         $purchaseOrder = PurchaseOrder::query()
             ->where('purchase_order_number', '=', $args['purchase_order_number'])
-            ->whereNull('canceled_at')
             ->where('status_id', '=', 1)
             ->first();
 
@@ -46,7 +45,7 @@ class VerifyPurchaseOrderMutation extends Mutation
             ];
         }
 
-        if ($purchaseOrder->canceled_at && $purchaseOrder->status_id == 2) {
+        if ($purchaseOrder->status_id == 2) {
             return [
                 'success' => false,
                 'message' => 'This purchase order was canceled and cannot be verified',
@@ -54,7 +53,7 @@ class VerifyPurchaseOrderMutation extends Mutation
             ];
         }
 
-        if ($purchaseOrder->arrived_at) {
+        if ($purchaseOrder->status_id == 3) {
             return [
                 'success' => false,
                 'message' => 'This purchase order already verified before',
@@ -62,10 +61,10 @@ class VerifyPurchaseOrderMutation extends Mutation
             ];
         }
 
-        $arrived_at = Carbon::now()->format('Y-m-d H:i:s');
+        $datetime = Carbon::now()->format('Y-m-d H:i:s');
         $updatedPurchaseOrder = $purchaseOrder->update([
             'status_id' => 3,
-            'arrived_at' => $arrived_at
+            'updated_at' => $datetime
         ]);
         $purchaseOrder->refresh();
 
@@ -73,7 +72,7 @@ class VerifyPurchaseOrderMutation extends Mutation
             $purchaseOrderUpdate = new PurchaseOrderUpdate();
             $purchaseOrderUpdate->purchase_order_id = $purchaseOrder->id;
             $purchaseOrderUpdate->status_id = 3;
-            $purchaseOrderUpdate->created_at = $arrived_at;
+            $purchaseOrderUpdate->created_at = $datetime;
             $purchaseOrderUpdate->save();
 
             return [

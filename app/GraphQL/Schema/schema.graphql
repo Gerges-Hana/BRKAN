@@ -18,12 +18,6 @@ type PurchaseOrder {
     driver_phone: String!
     rep_phone: String!
     arrival_date: String!
-    published_at: String
-    canceled_at: String
-    arrived_at: String
-    entered_at: String
-    unloaded_at: String
-    left_at: String
     created_at: String!
     updated_at: String!
     status: PurchaseOrderStatus
@@ -53,12 +47,6 @@ type Query {
         driver_phone: String,
         rep_phone: String,
         arrival_date: String,
-        published_at: String,
-        canceled_at: String,
-        arrived_at: String,
-        entered_at: String,
-        unloaded_at: String,
-        left_at: String,
         status_id: Int
     ): [PurchaseOrder]
 

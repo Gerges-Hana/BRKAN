@@ -54,30 +54,6 @@ class PurchaseOrderType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'The arrival date of the purchase order which entered by the driver'
             ],
-            'published_at' => [
-                'type' => Type::string(),
-                'description' => 'The creation time of the purchase order which set when the driver submit the PO'
-            ],
-            'canceled_at' => [
-                'type' => Type::string(),
-                'description' => 'The cancellation time of the purchase order which set when the driver cancel the PO'
-            ],
-            'arrived_at' => [
-                'type' => Type::string(),
-                'description' => 'The arrival time of the purchase order which set when the security verify the PO'
-            ],
-            'entered_at' => [
-                'type' => Type::string(),
-                'description' => 'The entrance time of the purchase order which entered by the admin'
-            ],
-            'unloaded_at' => [
-                'type' => Type::string(),
-                'description' => 'The unloading time of the purchase order which entered by the admin'
-            ],
-            'left_at' => [
-                'type' => Type::string(),
-                'description' => 'The leaving time of the purchase order which entered by the admin'
-            ],
             'created_at' => [
                 'type' => Type::string(),
                 'description' => 'The date the purchase order was created',
