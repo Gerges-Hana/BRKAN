@@ -9,7 +9,8 @@ return [
 
         // The controller/method to use in GraphQL request.
         // Also supported array syntax: `[\Rebing\GraphQL\GraphQLController::class, 'query']`
-        'controller' => Rebing\GraphQL\GraphQLController::class . '@query',
+        // 'controller' => Rebing\GraphQL\GraphQLController::class . '@query',
+        'controller' => \App\Http\Controllers\GraphQLController::class . '@query',
 
         // Any middleware for the graphql route group
         // This middleware will apply to all schemas
@@ -83,11 +84,14 @@ return [
             ],
             'mutation' => [
                 // ExampleMutation::class,
-                'CreatePurchaseOrder' => \App\GraphQL\Mutations\PurchaseOrder\CreatePurchaseOrderMutation::class
+                'CreatePurchaseOrder' => \App\GraphQL\Mutations\PurchaseOrder\CreatePurchaseOrderMutation::class,
+                'CancelPurchaseOrder' => \App\GraphQL\Mutations\PurchaseOrder\CancelPurchaseOrderMutation::class,
+                'VerifyPurchaseOrder' => \App\GraphQL\Mutations\PurchaseOrder\VerifyPurchaseOrderMutation::class,
             ],
             // The types only available in this schema
             'types' => [
                 // ExampleType::class,
+                'PurchaseOrderResponse' => \App\GraphQL\Types\PurchaseOrderResponseType::class
             ],
 
             // Laravel HTTP middleware
