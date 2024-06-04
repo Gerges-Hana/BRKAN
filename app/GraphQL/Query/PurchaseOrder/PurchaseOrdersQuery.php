@@ -55,30 +55,6 @@ class PurchaseOrdersQuery extends Query
                 'name' => 'arrival_date',
                 'type' => Type::string(),
             ],
-            'published_at' => [
-                'name' => 'published_at',
-                'type' => Type::string(),
-            ],
-            'canceled_at' => [
-                'name' => 'canceled_at',
-                'type' => Type::string(),
-            ],
-            'arrived_at' => [
-                'name' => 'arrived_at',
-                'type' => Type::string(),
-            ],
-            'entered_at' => [
-                'name' => 'entered_at',
-                'type' => Type::string(),
-            ],
-            'unloaded_at' => [
-                'name' => 'unloaded_at',
-                'type' => Type::string(),
-            ],
-            'left_at' => [
-                'name' => 'left_at',
-                'type' => Type::string(),
-            ],
             'status_id' => [
                 'name' => 'status_id',
                 'type' => Type::int(),
@@ -116,18 +92,6 @@ class PurchaseOrdersQuery extends Query
         }
         if (isset($args['arrival_date'])) {
             $query->whereRaw('LOWER(arrival_date) LIKE ?', ['%' . strtolower($args['arrival_date']) . '%']);
-        }
-        if (isset($args['arrived_at'])) {
-            $query->whereRaw('LOWER(arrived_at) LIKE ?', ['%' . strtolower($args['arrived_at']) . '%']);
-        }
-        if (isset($args['entered_at'])) {
-            $query->whereRaw('LOWER(entered_at) LIKE ?', ['%' . strtolower($args['entered_at']) . '%']);
-        }
-        if (isset($args['unloaded_at'])) {
-            $query->whereRaw('LOWER(unloaded_at) LIKE ?', ['%' . strtolower($args['unloaded_at']) . '%']);
-        }
-        if (isset($args['left_at'])) {
-            $query->whereRaw('LOWER(left_at) LIKE ?', ['%' . strtolower($args['left_at']) . '%']);
         }
         if (isset($args['status_id'])) {
             $query->where('status_id', '=', $args['status_id']);

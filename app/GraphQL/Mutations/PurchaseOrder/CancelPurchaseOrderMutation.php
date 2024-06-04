@@ -38,7 +38,6 @@ class CancelPurchaseOrderMutation extends Mutation
 
         $purchaseOrder = PurchaseOrder::query()
             ->where('device_unique_key', '=', $args['device_unique_key'])
-            ->whereNull('canceled_at')
             ->where('status_id', '=', 1)
             ->first();
 
@@ -50,15 +49,7 @@ class CancelPurchaseOrderMutation extends Mutation
             ];
         }
 
-//        if ($purchaseOrder->arrived_at && $purchaseOrder->status_id != 2) {
-//            return [
-//                'success' => false,
-//                'message' => 'This purchase order cannot be canceled',
-//                'purchaseOrder' => $purchaseOrder,
-//            ];
-//        }
-
-        if ($purchaseOrder->canceled_at && $purchaseOrder->status_id == 2) {
+        if ($purchaseOrder->status_id == 2) {
             return [
                 'success' => false,
                 'message' => 'Purchased order already canceled',
@@ -66,10 +57,10 @@ class CancelPurchaseOrderMutation extends Mutation
             ];
         }
 
-        $canceled_at = Carbon::now()->format('Y-m-d H:i:s');
+        $datetime = Carbon::now()->format('Y-m-d H:i:s');
         $updatedPurchaseOrder = $purchaseOrder->update([
             'status_id' => 2,
-            'canceled_at' => $canceled_at
+            'updated_at' => $datetime
         ]);
         $purchaseOrder->refresh();
 
@@ -77,7 +68,7 @@ class CancelPurchaseOrderMutation extends Mutation
             $purchaseOrderUpdate = new PurchaseOrderUpdate();
             $purchaseOrderUpdate->purchase_order_id = $purchaseOrder->id;
             $purchaseOrderUpdate->status_id = 2;
-            $purchaseOrderUpdate->created_at = $canceled_at;
+            $purchaseOrderUpdate->created_at = $datetime;
             $purchaseOrderUpdate->save();
 
             return [
