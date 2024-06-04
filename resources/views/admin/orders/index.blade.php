@@ -73,7 +73,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- =========================== edit modal ======================================  -->
                 <!-- Modal for Editing Order -->
                 <div class="modal fade" id="editOrderModal" tabindex="-1" role="dialog" aria-labelledby="editOrderModalLabel" aria-hidden="true">
@@ -253,7 +253,7 @@
                         btn += '<button class="btn btn-outline-primary d-flex justify-content-between align-items-center mx-1 view-order" data-id="' + row.id + '" data-toggle="tooltip" title="عرض"><i class="la la-eye"></i></button>';
                         btn += '<a class="btn btn-outline-warning d-flex justify-content-between align-items-center mx-1 edit-order" href="#" data-id="' + row.id + '" data-toggle="tooltip" title="تعديل"><i class="la la-edit"></i></a>';
                         // btn += '<a class="btn btn-outline-info d-flex justify-content-between align-items-center mx-1 " href="/orders-history/'+ row.id +'"  data-toggle="tooltip" title="تفاصيل"><i class="la ft-file-plus"></i></a>';
-                        btn += '<a class="btn btn-outline-info d-flex justify-content-between align-items-center mx-1 " href="/orders-history/'+ row.id +'"  data-toggle="tooltip" title="تفاصيل"><i class="la ft-file-plus"></i></a>';
+                        btn += '<a class="btn btn-outline-info d-flex justify-content-between align-items-center mx-1 " href="/orders-history/' + row.id + '"  data-toggle="tooltip" title="تفاصيل"><i class="la ft-file-plus"></i></a>';
 
                         btn += '<form method="POST" action="/orders/' + row.id + '" style="display:inline" onsubmit="return confirm(\'هل أنت متأكد أنك تريد حذف هذا الطلب؟\');">';
                         btn += '@csrf';
@@ -350,7 +350,7 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(data) {
-                    console.log(data);
+                    // console.log(data);
 
                     // إعداد الحقول في النموذج بالقيم المسترجعة من قاعدة البيانات
                     $('#arrival_date').val(data.arrival_date ? moment(data.arrival_date).format('YYYY-MM-DDTHH:mm') : '');
@@ -375,22 +375,25 @@
         // إرسال النموذج لتحديث الطلب
         $('#editOrderForm').on('submit', function(event) {
             event.preventDefault();
-            var orderId = $(this).data('id');
-            var formData = $(this).serialize();
-
+            let orderId = $(this).data('id');
+            let formData = new FormData(this);
             $.ajax({
-                url: '/orders/' + orderId,
-                method: 'PUT',
-                data: formData,
+                url: '/orders/edit/' + orderId,
+                method: 'POST',
+                data:formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                enctype: 'multipart/form-data',
+                processData: false,
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(response) {
-                    alert('تم تحديث الطلب بنجاح');
+                    console.log(response);
+                    alert(response.message);
                     $('#editOrderModal').modal('hide');
-                    // location.reload(); // تحديث الصفحة لعرض التغييرات
                     table.draw();
-
                 },
                 error: function(response) {
                     alert('خطأ في تحديث الطلب');

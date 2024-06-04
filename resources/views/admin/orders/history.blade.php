@@ -11,14 +11,15 @@
 
 @section('content-header')
 <div class="content-header-left col-md-6 col-12 mb-1">
-    <h3 class="content-header-title">الطلبيات</h3>
+    <h3 class="content-header-title">تفاصيل الطلبيات</h3>
 </div>
 <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
     <div class="breadcrumb-wrapper col-12">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/orders">الرئيسية</a>
+            <li class="breadcrumb-item"><a href="/">الرئيسية</a>
+            <li class="breadcrumb-item"><a href="/orders">الطلبيات</a>
             </li>
-            <li class="breadcrumb-item active">تفاصيل الطلبيات
+            <li class="breadcrumb-item active">تفاصيل الطلبيه
             </li>
         </ol>
     </div>
@@ -31,13 +32,13 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">تفاصيل الطلبيات</h4>
+                    <!-- <h4 class="card-title">تفاصيل الطلبيات</h4> -->
                     <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                     <div class="heading-elements">
                         <ul class="list-inline mb-0">
-                            <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
-                            <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>
-                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                            <!-- <li><a data-action="collapse"><i class="ft-minus"></i></a></li> -->
+                            <!-- <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>-->
+                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li> 
                         </ul>
                     </div>
                 </div>
@@ -62,10 +63,10 @@
                             <div class="card-body">
                                 <ul class="nav nav-tabs nav-linetriangle nav-justified" id="tab-bottom-arrow-drag">
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="activeIcon22-tab1" data-toggle="tab" href="#activeIcon22" aria-controls="activeIcon22" aria-expanded="true"><i class="la la-check"></i>عرض الفاتوره </a>
+                                        <a class="nav-link active" id="activeIcon22-tab1" data-toggle="tab" href="#activeIcon22" aria-controls="activeIcon22" aria-expanded="true"><i class="la la-check"></i>عرض الطلبية </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="linkIcon22-tab1" data-toggle="tab" href="#linkIcon22" aria-controls="linkIcon22" aria-expanded="false"><i class="la la-link"></i> تفاصيل الفاتوره</a>
+                                        <a class="nav-link" id="linkIcon22-tab1" data-toggle="tab" href="#linkIcon22" aria-controls="linkIcon22" aria-expanded="false"><i class="la la-link"></i> تحديثات الطلبيه</a>
                                     </li>
 
                                 </ul>
@@ -125,12 +126,74 @@
 
                                     <div class="tab-pane" id="linkIcon22" role="tabpanel" aria-labelledby="linkIcon22-tab1" aria-expanded="false">
 
-                                        <p>Chocolate bar gummies sesame snaps. Liquorice cake sesame snaps
-                                            cotton candy cake sweet brownie. Cotton candy candy canes
-                                            brownie. Biscuit pudding sesame snaps pudding pudding sesame
-                                            snaps biscuit tiramisu.</p>
+                                        <table class="table table-bordered">
+                                            <tr>
+                                                <td><strong> # </strong></td>
+                                                <td><strong>رقم الطلبية</strong></td>
+                                                <td><strong>رقم الفاتورة</strong></td>
+                                                <td><strong>اسم المشرف </strong></td>
+                                                <td><strong> الوقت </strong></td>
+                                                <td><strong> الحاله </strong></td>
 
 
+                                            </tr>
+                                            <tr>
+                                                <?php $i = 0; ?>
+                                                @foreach ($orders as $order)
+                                                <?php
+                                                $status_name = 'غير معروف';
+                                                $status_color = 'black';
+                                                $time_background_color = 'white';
+
+                                                if ($order->status_id == 1) {
+                                                    $status_name = 'تم الإرسال';
+                                                    $status_color = 'green';
+                                                    $time_background_color = 'lightgreen';
+                                                } elseif ($order->status_id == 2) {
+                                                    $status_name = 'تم الإلغاء';
+                                                    $status_color = 'red';
+                                                    $time_background_color = 'lightcoral';
+                                                } elseif ($order->status_id == 3) {
+                                                    $status_name = 'تم الوصول';
+                                                    $status_color = 'blue';
+                                                    $time_background_color = 'lightblue';
+                                                } elseif ($order->status_id == 4) {
+                                                    $status_name = 'تم الدخول';
+                                                    $status_color = 'orange';
+                                                    $time_background_color = 'lightsalmon';
+                                                } elseif ($order->status_id == 5) {
+                                                    $status_name = 'تم التفريغ';
+                                                    $status_color = 'purple';
+                                                    $time_background_color = 'plum';
+                                                } elseif ($order->status_id == 6) {
+                                                    $status_name = 'تم المغادرة';
+                                                    $status_color = 'gray';
+                                                    $time_background_color = 'lightgray';
+                                                }
+
+                                                $created_at = $order->created_at;
+                                                $date = explode(' ', $created_at)[0];
+                                                $time = explode(' ', $created_at)[1];
+                                                ?>
+                                            <tr class="">
+                                                <td>{{ ++$i }}</td>
+                                                <td>{{ $order->purchaseOrder->purchase_order_number }}</td>
+                                                <td>{{ $order->purchaseOrder->invoice_number }}</td>
+                                                <td>{{ $order->user->name }}</td>
+
+
+                                                <td>
+                                                    <span>{{ $date }}</span>
+                                                    <span style="background-color: {{ $time_background_color }};border-radius: 5px; padding: 2px ;">{{ $time }}</span>
+                                                </td>
+                                                <td style="color: {{ $status_color }};">{{ $status_name }}</td>
+
+
+                                            </tr>
+                                            @endforeach
+
+                                            </tr>
+                                        </table>
                                     </div>
 
                                 </div>

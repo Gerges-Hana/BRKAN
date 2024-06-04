@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\PurchaseOrder;
+use App\Models\PurchaseOrderUpdate;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -82,25 +83,18 @@ class PurchaseOrdersController extends Controller
             ->make(true);
     }
     
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
+   
     public function show($id)
     {
         $order = PurchaseOrder::find($id);
@@ -123,18 +117,16 @@ class PurchaseOrdersController extends Controller
 
         return response()->json($order);
     }
-    
-    /**
-     * تحديث الطلب في قاعدة البيانات.
-     */
     public function update(Request $request, $id)
     {
+
+        // dd($request->all());
+        // return 'ggggggggggggg';
         $order = PurchaseOrder::find($id);
         if (!$order) {
             return response()->json(['message' => 'الطلب غير موجود'], 404);
         }
 
-        // التحقق من صحة البيانات المستلمة
         $validated = $request->validate([
             'arrival_date' => 'nullable|date',
             'canceled_at' => 'nullable|date',
@@ -144,32 +136,25 @@ class PurchaseOrdersController extends Controller
             'left_at' => 'nullable|date',
         ]);
 
-        // تحديث الطلب بالبيانات الجديدة
         $order->update($validated);
-
-        return response()->json(['message' => 'تم تحديث الطلب بنجاح']);
+        return response()->json(['message' => 'تم تحديث الطلبيه بنجاح', 'data' => $request->all()]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($id): RedirectResponse
     {
-        
         PurchaseOrder::find($id)->delete();
         return redirect()->route('orders.index')
             ->with('success', 'تم حذف الطلبيه بنجاح ');
     }
 
     public function HistoryOfPurchaseOrdersC($id){
-        // return $id;
         $order = PurchaseOrder::find($id);
-
+        $orders = PurchaseOrderUpdate::find($id)->get();
         if (!$order) {
             return redirect()->back()->with('error', 'الطلبية غير موجودة');
         }
 
-        return view('admin.orders.history', compact('order'));
+        return view('admin.orders.history', compact('order','orders'));
     }
 
 }
