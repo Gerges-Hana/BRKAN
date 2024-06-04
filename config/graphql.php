@@ -122,6 +122,11 @@ return [
         \App\GraphQL\Types\PurchaseOrderStatusType::class,
     ],
 
+    // Load schema from file
+    'schema' => [
+        'file' => base_path('graphql/schema.graphql'),
+    ],
+
     // This callable will be passed the Error object for each errors GraphQL catch.
     // The method should return an array representing the error.
     // Typically:
