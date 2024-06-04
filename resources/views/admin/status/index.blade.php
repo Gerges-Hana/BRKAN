@@ -1,7 +1,7 @@
 @extends('admin.layout.master')
 
 @section('tap-title')
-التقارير
+الحاله
 @endsection
 
 @section('page-style-files')
@@ -10,12 +10,12 @@
 
 @section('content-header')
 <div class="content-header-left col-md-6 col-12 mb-1">
-    <h3 class="content-header-title">القواعد </h3>
+    <h3 class="content-header-title">الحاله </h3>
 </div>
 <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
     <div class="breadcrumb-wrapper col-12">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/roles">قائمه القواعد</a></li>
+            <li class="breadcrumb-item"><a href="/statuse">قائمه حاله التوصيل </a></li>
         </ol>
     </div>
 </div>
@@ -28,12 +28,12 @@
                 <div class="row">
                     <div class="col-lg-12 margin-tb p-3">
                         <div class="pull-left">
-                            @can('role-create')
-                            <a class="btn btn-success" href="{{ route('roles.create') }}"> انشاء دور </a>
-                            @endcan
+
+                            <a class="btn btn-success" href="{{ route('status.create') }}"> انشاء حاله </a>
+
                         </div>
                         <div class="pull-right">
-                            <h2>اداره القواعد و الادوار </h2>
+                            <h2>اداره حاله التوصيل </h2>
                         </div>
 
                     </div>
@@ -48,28 +48,34 @@
                         <th>عدد</th>
                         <th>الاسم</th>
                         <th width="280px">الحاله</th>
+                        <th width="280px">الاعدادات</th>
                     </tr>
-                    @foreach ($roles as $key => $role)
+                    @php
+                    $i=0;
+                    @endphp
+                    @foreach ($statuses as $key => $status)
                     <tr class="">
                         <td>{{ ++$i }}</td>
-                        <td>{{ $role->name }}</td>
+                        <td>{{ $status->name }}</td>
+                        <td style="color: {{ $status->is_active ? 'green' : 'red' }}">
+                            {{ $status->is_active ? 'مفعله' : 'غير مفعله' }}
+                        </td>
                         <td>
-                            <a class="btn btn-outline-primary " href="{{ route('roles.show',$role->id) }}">عرض</a>
-                            @can('role-edit')
-                            <a class="btn btn-outline-warning " href="{{ route('roles.edit',$role->id) }}">تعديل</a>
-                            @endcan
-                            @can('role-delete')
-                            {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) !!}
+                            <a class="btn btn-outline-primary " href="{{ route('status.show',$status->id) }}">عرض</a>
+
+                            <a class="btn btn-outline-warning mx-1" href="{{ route('status.edit',$status->id) }}">تعديل</a>
+
+
+                            {!! Form::open(['method' => 'DELETE','route' => ['status.destroy', $status->id],'style'=>'display:inline']) !!}
                             {!! Form::submit('حذف', ['class' => 'btn btn-outline-danger']) !!}
                             {!! Form::close() !!}
-                            @endcan
+
                         </td>
 
-                        
+
                     </tr>
                     @endforeach
                 </table>
-                {!! $roles->render() !!}
             </div>
         </div>
     </div>

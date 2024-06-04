@@ -3,63 +3,77 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\PurchaseOrderStatus;
-use Illuminate\Http\Client\Request;
+use App\Requests\PurchaseOrderStatusRequest;
+use App\Services\PurchaseOrderStatusService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+
+
+
 
 class PurchaseOrderStatusesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    private $service;
+
+    public function __construct(PurchaseOrderStatusService $service)
+    {
+        $this->service = $service;
+    }
+
     public function index()
     {
-        //
-    }
+        $statuses = $this->service->getAllStatuses();
+        return view('admin.status.index', ['statuses' => $statuses]); 
+        }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function show($id)
+    {
+        $status = $this->service->getStatusById($id);
+        if ($status) {
+            return view('admin.status.show', ['status' => $status]); // حدد اسم View ومرر البيانات
+        } else {
+            return response()->json(['error' => 'Purchase order status not found'], 404);
+        }
+    }
     public function create()
     {
-        //
+        
+            return view('admin.status.create');      
+       
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'is_active' => 'nullable|boolean',
+        ]);
+    
+        $status = $this->service->createStatus($validatedData);     
+         if ($status) {
+            return redirect()->route('status')->with('success', 'تم إنشاء الحالة بنجاح');
+        } else {
+            return redirect()->back()->with('error', 'فشل في إنشاء حالة طلب الشراء');
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(PurchaseOrderStatus $po_statuses)
+    public function update(PurchaseOrderStatusRequest $request, $id)
     {
-        //
+        $status = $this->service->updateStatus($id, $request->validated());
+        if ($status) {
+            return response()->json($status);
+        } else {
+            return response()->json(['error' => 'Failed to update purchase order status'], 500);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(PurchaseOrderStatus $po_statuses)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, PurchaseOrderStatus $po_statuses)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(PurchaseOrderStatus $po_statuses)
-    {
-        //
+        $success = $this->service->deleteStatus($id);
+        if ($success) {
+            return response()->json(null, 204);
+        } else {
+            return response()->json(['error' => 'Failed to delete purchase order status'], 500);
+        }
     }
 }

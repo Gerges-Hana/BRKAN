@@ -13,6 +13,8 @@ return new class extends Migration {
         Schema::create('purchase_order_updates', function (Blueprint $table) {
             $table->id();
             $table->integer('purchase_order_id');
+            $table->integer('user_id');
+            $table->integer('status_id');
             $table->integer('user_id')->nullable();
             $table->integer('status_id')->nullable();
             $table->foreign('purchase_order_id')->references('id')->on('purchase_orders')->onDelete('set null');

@@ -16,4 +16,8 @@ class PurchaseOrderStatus extends Model
     {
         return $this->hasMany(PurchaseOrder::class);
     }
+    public function PurchaseOrderStatusUpdate()
+    {
+        return $this->hasMany(PurchaseOrderStatusUpdate::class);
+    }
 }

@@ -127,7 +127,7 @@
                 { data: 'action', name: 'action', orderable: false, searchable: false, render: function(data, type, row) {
                     var btn = '<td class="d-flex justify-content-between">';
                     btn += '<a class="btn btn-outline-primary mx-1" href="/users/' + row.id + '">عرض</a>';
-                    btn += '<a class="btn btn-outline-warning mx-1" href="/users/' + row.id + '/edit">تعديل</a>';
+                    btn += '<a class="btn btn-outline-warning mx-1" href="/users/' + row.id + '"/edit">تعديل</a>';
                     btn += '<form method="POST" action="/users/' + row.id + '" style="display:inline">';
                     btn += '@csrf';
                     btn += '@method("DELETE")';
