@@ -50,7 +50,7 @@ class PurchaseOrderStatusesController extends Controller
             return redirect()->back()->with('error', 'فشل في إنشاء حالة طلب الشراء');
         }
     }
-
+    
     public function edit($id)
     {
         $status = PurchaseOrderStatus::findOrFail($id);
