@@ -1,7 +1,7 @@
 <?php
-// app/Services/PurchaseOrderStatusService.php
 namespace App\Services;
 
+use App\Models\PurchaseOrderStatus;
 use App\Repositories\PurchaseOrderStatusRepository;
 
 class PurchaseOrderStatusService
@@ -25,7 +25,7 @@ class PurchaseOrderStatusService
 
     public function createStatus(array $data)
     {
-        return $this->repository->create($data);
+        return PurchaseOrderStatus::create($data);
     }
 
     public function updateStatus($id, array $data)

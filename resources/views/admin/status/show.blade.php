@@ -1,5 +1,4 @@
 @extends('admin.layout.master')
-
 @section('tap-title')
 الحاله
 @endsection
@@ -48,7 +47,6 @@
                             </strong>
                         </div>
                     </div>
-
                 </div>
                 <hr>
             </div>
