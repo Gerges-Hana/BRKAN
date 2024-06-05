@@ -35,6 +35,11 @@
                     <span class="menu-title" data-i18n="">المستخدمين </span>
                 </a>
             </li>
+            <li class="nav-item {{ (request()->is('status')) ? 'active' : '' }}">
+                <a href="/status"><i class="la icon-settings"></i>
+                    <span class="menu-title" data-i18n="">حالات التوصيل </span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

@@ -1,20 +1,18 @@
 @extends('admin.layout.master')
 
 @section('tap-title')
-القواعد
+الحاله
 @endsection
-
 @section('page-style-files')
-
 @endsection
 @section('content-header')
 <div class="content-header-left col-md-6 col-12 mb-1">
-    <h3 class="content-header-title">القواعد</h3>
+    <h3 class="content-header-title">الحاله</h3>
 </div>
 <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
     <div class="breadcrumb-wrapper col-12">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/roles">القواعد</a></li>
+            <li class="breadcrumb-item"><a href="/status">حاله التوصيل</a></li>
             <li class="breadcrumb-item active">تعديل</li>
         </ol>
     </div>
@@ -28,10 +26,10 @@
                 <div class="row">
                     <div class="col-lg-12 margin-tb">
                         <div class="pull-left">
-                            <h2> تعديل الدور</h2>
+                            <h2> تعديل الحاله</h2>
                         </div>
                         <div class="pull-right">
-                            <a class="btn btn-primary" href="{{ route('roles.index') }}"> الرجوع</a>
+                            <a class="btn btn-primary" href="{{ route('status.index') }}"> الرجوع</a>
                         </div>
                     </div>
                 </div>
@@ -45,42 +43,21 @@
                     </ul>
                 </div>
                 @endif
-                {!! Form::model($role, ['method' => 'PATCH','route' => ['roles.update', $role->id]]) !!}
+                {!! Form::model($status, ['method' => 'PATCH','route' => ['status.update', $status->id]]) !!}
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group d-flex">
                             <strong class="col-2">الاسم:</strong>
-                            {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control col-8')) !!}
+                            {!! Form::text('name', null, array('placeholder' => 'الاسم','class' => 'form-control col-8')) !!}
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="form-group">
-                            <strong class="col-2">المسؤوليات:</strong>
-                            <div class="container col-8">
-                                <div class="row">
-                                    @php
-                                    $count = 0;
-                                    @endphp
-                                    @foreach($permission as $value)
-                                    @if($count % 4 == 0)
-                                </div>
-                                <div class="row">
-                                    @endif
-                                    <div class="col-md-3">
-                                        <div class="form-check py-2">
-                                            <input type="checkbox" class="form-check-input" id="permission{{ $value->id }}" name="permission[]" value="{{ $value->id }}" {{ in_array($value->id, $rolePermissions) ? 'checked' : '' }}>
-                                            <label class="form-check-label" for="permission{{ $value->id }}">{{ $loop->iteration }}. {{ $value->name }}</label>
-                                        </div>
-                                    </div>
-                                    @php
-                                    $count++;
-                                    @endphp
-                                    @endforeach
-                                </div>
-                            </div>
-
+                        <div class="form-group d-flex">
+                            <strong class="col-2">الحاله:</strong>
+                            {!! Form::select('is_active', ['1' => 'مفعله', '0' => 'غير مفعله'], $status->is_active, ['class' => 'form-control col-8']) !!}
                         </div>
                     </div>
+
                     <div class="col-xs-12 col-sm-12 col-md-12 text-left">
                         <button type="submit" class="btn btn-primary">تعديل</button>
                     </div>

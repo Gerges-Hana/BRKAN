@@ -1,10 +1,8 @@
 @extends('admin.layout.master')
-
 @section('tap-title')
 الحاله
 @endsection
 @section('page-style-files')
-
 @endsection
 @section('content-header')
 <div class="content-header-left col-md-6 col-12 mb-1">
@@ -19,7 +17,6 @@
     </div>
 </div>
 @endsection
-
 @section('content-body')
 <section id="html5">
     <div class="row">
@@ -57,18 +54,15 @@
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group d-flex">
                             <strong class="col-2">الحاله:</strong>
-                            {!! Form::select('is_active', ['1' => 'مفعله', '' => 'غير مفعله'], null, ['class' => 'form-control col-8']) !!}
+                            {!! Form::select('is_active', ['1' => 'مفعله', '0' => 'غير مفعله'], null, ['class' => 'form-control col-8']) !!}
                         </div>
                     </div>
-
 
                     <div class="col-xs-12 col-sm-12 col-md-12 text-left">
                         <button type="submit" class="btn btn-primary">انشاء</button>
                     </div>
                 </div>
                 {!! Form::close() !!}
-
-
             </div>
         </div>
     </div>
