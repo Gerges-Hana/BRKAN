@@ -129,7 +129,6 @@
                         <!-- <div id="basicScenario"></div> -->
 
                         <form id="searchForm" class="d-flex mb-2 col-12 justify-content-between">
-                            <button type="submit" class="btn btn-primary align-self-end mb-2 col-2">ابحث</button>
 
                             <div class="form-group col-2">
                                 <label for="purchase_order_number">رقم الطلبيه</label>
@@ -151,6 +150,8 @@
                                 <label for="driver_phone">هاتف السائق</label>
                                 <input type="text" class="form-control" id="driver_phone" name="driver_phone">
                             </div>
+                            <button type="submit" class="btn btn-primary align-self-end mb-2 col-2">ابحث</button>
+
                         </form>
 
                         <table class="table table-bordered data-table">
