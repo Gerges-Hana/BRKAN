@@ -57,7 +57,7 @@ class PurchaseOrderStatusesController extends Controller
         }
     }
 
-    public function update(PurchaseOrderStatusRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $status = $this->service->updateStatus($id, $request->validated());
         if ($status) {

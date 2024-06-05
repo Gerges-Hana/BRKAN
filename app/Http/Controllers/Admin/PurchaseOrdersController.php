@@ -149,7 +149,7 @@ class PurchaseOrdersController extends Controller
 
     public function HistoryOfPurchaseOrdersC($id){
         $order = PurchaseOrder::find($id);
-        $orders = PurchaseOrderUpdate::find($id)->get();
+        $orders = PurchaseOrderUpdate::find($id)?->get();
         if (!$order) {
             return redirect()->back()->with('error', 'الطلبية غير موجودة');
         }
