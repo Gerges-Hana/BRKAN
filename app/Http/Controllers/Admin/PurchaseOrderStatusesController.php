@@ -7,10 +7,6 @@ use App\Requests\PurchaseOrderStatusRequest;
 use App\Services\PurchaseOrderStatusService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-
-
-
-
 class PurchaseOrderStatusesController extends Controller
 {
     private $service;
@@ -23,8 +19,8 @@ class PurchaseOrderStatusesController extends Controller
     public function index()
     {
         $statuses = $this->service->getAllStatuses();
-        return view('admin.status.index', ['statuses' => $statuses]); 
-        }
+        return view('admin.status.index', ['statuses' => $statuses]);
+    }
 
     public function show($id)
     {
@@ -37,9 +33,7 @@ class PurchaseOrderStatusesController extends Controller
     }
     public function create()
     {
-        
-            return view('admin.status.create');      
-       
+        return view('admin.status.create');
     }
 
     public function store(Request $request)
@@ -48,32 +42,38 @@ class PurchaseOrderStatusesController extends Controller
             'name' => 'required|string|max:255',
             'is_active' => 'nullable|boolean',
         ]);
-    
-        $status = $this->service->createStatus($validatedData);     
-         if ($status) {
-            return redirect()->route('status')->with('success', 'تم إنشاء الحالة بنجاح');
+
+        $status = $this->service->createStatus($validatedData);
+        if ($status) {
+            return redirect()->route('status.index')->with('success', 'تم إنشاء الحالة بنجاح');
         } else {
             return redirect()->back()->with('error', 'فشل في إنشاء حالة طلب الشراء');
         }
     }
+    
+    public function edit($id)
+    {
+        $status = PurchaseOrderStatus::findOrFail($id);
+        return view('admin.status.edit', ['status' => $status]);
+    }
 
     public function update(Request $request, $id)
     {
-        $status = $this->service->updateStatus($id, $request->validated());
+        $status = $this->service->updateStatus($id, $request->all());
+
         if ($status) {
-            return response()->json($status);
+            return redirect()->route('status.index')->with('success', 'تم تحديث الحالة بنجاح');
         } else {
-            return response()->json(['error' => 'Failed to update purchase order status'], 500);
+            return redirect()->back()->with('error', 'فشل في تحديث حالة طلب الشراء');
         }
     }
-
     public function destroy($id)
     {
         $success = $this->service->deleteStatus($id);
         if ($success) {
-            return response()->json(null, 204);
+            return redirect()->route('status.index')->with('success', 'تم حذف الحالة بنجاح');
         } else {
-            return response()->json(['error' => 'Failed to delete purchase order status'], 500);
+            return redirect()->back()->with('error', 'فشل في حذف حالة  ');
         }
     }
 }

@@ -1,13 +1,9 @@
 @extends('admin.layout.master')
-
 @section('tap-title')
 الحاله
 @endsection
-
 @section('page-style-files')
-
 @endsection
-
 @section('content-header')
 <div class="content-header-left col-md-6 col-12 mb-1">
     <h3 class="content-header-title">الحاله </h3>
@@ -28,14 +24,11 @@
                 <div class="row">
                     <div class="col-lg-12 margin-tb p-3">
                         <div class="pull-left">
-
                             <a class="btn btn-success" href="{{ route('status.create') }}"> انشاء حاله </a>
-
                         </div>
                         <div class="pull-right">
                             <h2>اداره حاله التوصيل </h2>
                         </div>
-
                     </div>
                 </div>
                 @if ($message = Session::get('success'))
@@ -62,17 +55,11 @@
                         </td>
                         <td>
                             <a class="btn btn-outline-primary " href="{{ route('status.show',$status->id) }}">عرض</a>
-
                             <a class="btn btn-outline-warning mx-1" href="{{ route('status.edit',$status->id) }}">تعديل</a>
-
-
                             {!! Form::open(['method' => 'DELETE','route' => ['status.destroy', $status->id],'style'=>'display:inline']) !!}
                             {!! Form::submit('حذف', ['class' => 'btn btn-outline-danger']) !!}
                             {!! Form::close() !!}
-
                         </td>
-
-
                     </tr>
                     @endforeach
                 </table>

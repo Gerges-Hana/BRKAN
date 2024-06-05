@@ -9,12 +9,10 @@ class PurchaseOrderStatusRepository
     {
         return PurchaseOrderStatus::all();
     }
-
     public function find($id)
     {
         return PurchaseOrderStatus::find($id);
     }
-
     public function create(array $data)
     {
         return PurchaseOrderStatus::create($data);

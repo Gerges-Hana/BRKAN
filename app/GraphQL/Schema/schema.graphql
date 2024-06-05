@@ -1,0 +1,85 @@
+# Define the PurchaseOrderStatus type
+type PurchaseOrderStatus {
+    id: Int!
+    name: String!
+    is_active: Boolean!
+    created_at: String!
+    updated_at: String!
+}
+
+# Define the PurchaseOrder type
+type PurchaseOrder {
+    id: Int!
+    device_unique_key: String!
+    purchase_order_number: String!
+    invoice_number: String!
+    driver_name: String!
+    rep_name: String!
+    driver_phone: String!
+    rep_phone: String!
+    arrival_date: String!
+    created_at: String!
+    updated_at: String!
+    status: PurchaseOrderStatus
+}
+
+# Define the PurchaseOrderResponse type
+type PurchaseOrderResponse {
+    success: Boolean!
+    message: String!
+    purchaseOrder: PurchaseOrder
+}
+
+# Define the Query type
+type Query {
+    PurchaseOrderQuery(
+        id: Int,
+        purchase_order_number: String,
+        invoice_number: String
+    ): PurchaseOrder
+
+    PurchaseOrdersQuery(
+        device_unique_key: String,
+        purchase_order_number: String,
+        invoice_number: String,
+        driver_name: String,
+        rep_name: String,
+        driver_phone: String,
+        rep_phone: String,
+        arrival_date: String,
+        status_id: Int
+    ): [PurchaseOrder]
+
+    PurchaseOrderStatusesQuery(
+        name: String,
+        is_active: Boolean
+    ): [PurchaseOrderStatus]
+
+    PurchaseOrderStatusQuery(
+        id: Int,
+        name: String,
+        is_active: Boolean
+    ): PurchaseOrderStatus
+}
+
+# Define the Mutation type
+type Mutation {
+    CreatePurchaseOrder(
+        device_unique_key: String!,
+        purchase_order_number: String!,
+        invoice_number: String!,
+        driver_name: String!,
+        rep_name: String,
+        driver_phone: String!,
+        rep_phone: String,
+        arrival_date: String!
+    ): PurchaseOrderResponse
+
+    CancelPurchaseOrder(
+        device_unique_key: String!
+    ): PurchaseOrderResponse
+
+    VerifyPurchaseOrder(
+        purchase_order_number: String!
+    ): PurchaseOrderResponse
+}
