@@ -94,7 +94,8 @@ return [
             'types' => [
                 // ExampleType::class,
                 'OracleOrderResponse' => \App\GraphQL\Types\OracleOrderResponseType::class,
-                'PurchaseOrderResponse' => \App\GraphQL\Types\PurchaseOrderResponseType::class
+                'PurchaseOrderResponse' => \App\GraphQL\Types\PurchaseOrderResponseType::class,
+                'PurchaseOrderStatusResponse' => \App\GraphQL\Types\PurchaseOrderStatusResponseType::class,
             ],
 
             // Laravel HTTP middleware

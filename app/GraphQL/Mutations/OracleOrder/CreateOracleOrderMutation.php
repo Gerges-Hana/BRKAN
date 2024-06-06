@@ -37,7 +37,7 @@ class CreateOracleOrderMutation extends Mutation
             return [
                 'success' => false,
                 'message' => "Oracle order already created before",
-                'oracleOrder' => $oracleOrder,
+                'oracle_order' => $oracleOrder,
             ];
         }
 
@@ -50,13 +50,13 @@ class CreateOracleOrderMutation extends Mutation
             return [
                 'success' => true,
                 'message' => "Oracle order created successfully",
-                'oracleOrder' => $createdOracleOrder,
+                'oracle_order' => $createdOracleOrder,
             ];
         } else {
             return [
                 'success' => false,
                 'message' => "Failed to create oracle order, Please try again later!",
-                'oracleOrder' => null,
+                'oracle_order' => null,
             ];
         }
     }

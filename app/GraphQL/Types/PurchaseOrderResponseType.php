@@ -24,8 +24,11 @@ class PurchaseOrderResponseType extends GraphQLType
                 'type' => Type::nonNull(Type::string()),
                 'description' => 'A message about the operation',
             ],
-            'purchaseOrder' => [
+            'purchase_order' => [
                 'type' => GraphQL::type('PurchaseOrder'),
+            ],
+            'purchase_orders' => [
+                'type' => Type::listOf(GraphQL::type('PurchaseOrder')),
             ],
         ];
     }

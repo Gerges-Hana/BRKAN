@@ -17,7 +17,7 @@ class PurchaseOrderQuery extends Query
 
     public function type(): Type
     {
-        return GraphQL::type('PurchaseOrder');
+        return GraphQL::type('PurchaseOrderResponse');
     }
 
     public function args(): array
@@ -43,21 +43,25 @@ class PurchaseOrderQuery extends Query
         $fields = $getSelectFields();
         $select = $fields->getSelect();
         $with = $fields->getRelations();
-        $query = PurchaseOrder::query()->select($select)->with($with);
+        $query = PurchaseOrder::query()/*->select($select)*/ ->with($with);
 
         if (isset($args['id'])) {
-            return $query->find($args['id']);
+            $query->find($args['id']);
         }
         if (isset($args['device_unique_key'])) {
-            return $query->where('device_unique_key', '=', $args['device_unique_key'])->first();
+            $query->where('device_unique_key', '=', $args['device_unique_key']);
         }
         if (isset($args['purchase_order_number'])) {
-            return $query->where('purchase_order_number', '=', $args['purchase_order_number'])->first();
+            $query->where('purchase_order_number', '=', $args['purchase_order_number']);
         }
         if (isset($args['invoice_number'])) {
-            return $query->where('invoice_number', '=', $args['invoice_number'])->first();
+            $query->where('invoice_number', '=', $args['invoice_number']);
         }
 
-        return null;
+        return [
+            'success' => true,
+            'message' => 'Purchase order details',
+            'purchase_order' => $query->first()
+        ];
     }
 }

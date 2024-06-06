@@ -41,7 +41,7 @@ class VerifyPurchaseOrderMutation extends Mutation
             return [
                 'success' => false,
                 'message' => 'Purchase order not found',
-                'purchaseOrder' => $purchaseOrder,
+                'purchase_order' => $purchaseOrder,
             ];
         }
 
@@ -49,7 +49,7 @@ class VerifyPurchaseOrderMutation extends Mutation
             return [
                 'success' => false,
                 'message' => 'This purchase order was canceled and cannot be verified',
-                'purchaseOrder' => $purchaseOrder,
+                'purchase_order' => $purchaseOrder,
             ];
         }
 
@@ -57,7 +57,7 @@ class VerifyPurchaseOrderMutation extends Mutation
             return [
                 'success' => false,
                 'message' => 'This purchase order already verified before',
-                'purchaseOrder' => $purchaseOrder,
+                'purchase_order' => $purchaseOrder,
             ];
         }
 
@@ -78,13 +78,13 @@ class VerifyPurchaseOrderMutation extends Mutation
             return [
                 'success' => true,
                 'message' => 'Verified successfully',
-                'purchaseOrder' => $purchaseOrder,
+                'purchase_order' => $purchaseOrder,
             ];
         } else {
             return [
                 'success' => false,
                 'message' => 'Failed to verify the purchase order',
-                'purchaseOrder' => $purchaseOrder,
+                'purchase_order' => $purchaseOrder,
             ];
         }
     }

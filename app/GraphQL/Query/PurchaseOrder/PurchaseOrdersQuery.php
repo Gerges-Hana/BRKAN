@@ -17,7 +17,8 @@ class PurchaseOrdersQuery extends Query
 
     public function type(): Type
     {
-        return Type::listOf(GraphQL::type('PurchaseOrder'));
+//        return Type::listOf(GraphQL::type('PurchaseOrder'));
+        return GraphQL::type('PurchaseOrderResponse');
     }
 
     public function args(): array
@@ -67,7 +68,7 @@ class PurchaseOrdersQuery extends Query
         $fields = $getSelectFields();
         $select = $fields->getSelect();
         $with = $fields->getRelations();
-        $query = PurchaseOrder::query()->select($select)->with($with);
+        $query = PurchaseOrder::query()/*->select($select)*/ ->with($with);
 
         if (isset($args['device_unique_key'])) {
             $query->whereRaw('LOWER(device_unique_key) LIKE ?', ['%' . strtolower($args['device_unique_key']) . '%']);
@@ -97,6 +98,10 @@ class PurchaseOrdersQuery extends Query
             $query->where('status_id', '=', $args['status_id']);
         }
 
-        return $query->get();
+        return [
+            'success' => true,
+            'message' => 'Purchase orders list',
+            'purchase_orders' => $query->get()
+        ];
     }
 }
