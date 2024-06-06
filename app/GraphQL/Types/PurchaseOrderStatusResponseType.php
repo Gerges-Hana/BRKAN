@@ -6,11 +6,11 @@ use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Type as GraphQLType;
 
-class PurchaseOrderResponseType extends GraphQLType
+class PurchaseOrderStatusResponseType extends GraphQLType
 {
     protected $attributes = [
-        'name' => 'PurchaseOrderResponse',
-        'description' => 'Purchase Order Response',
+        'name' => 'PurchaseOrderStatusResponse',
+        'description' => 'Purchase Order Status Response',
     ];
 
     public function fields(): array
@@ -24,11 +24,11 @@ class PurchaseOrderResponseType extends GraphQLType
                 'type' => Type::nonNull(Type::string()),
                 'description' => 'A message about the operation',
             ],
-            'purchase_order' => [
-                'type' => GraphQL::type('PurchaseOrder'),
+            'purchase_order_status' => [
+                'type' => GraphQL::type('PurchaseOrderStatus'),
             ],
-            'purchase_orders' => [
-                'type' => Type::listOf(GraphQL::type('PurchaseOrder')),
+            'purchase_order_statuses' => [
+                'type' => Type::listOf(GraphQL::type('PurchaseOrderStatus')),
             ],
         ];
     }

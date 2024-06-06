@@ -17,7 +17,7 @@ class PurchaseOrderStatusQuery extends Query
 
     public function type(): Type
     {
-        return GraphQL::type('PurchaseOrderStatus');
+        return GraphQL::type('PurchaseOrderStatusResponse');
     }
 
     public function args(): array
@@ -43,18 +43,22 @@ class PurchaseOrderStatusQuery extends Query
         $fields = $getSelectFields();
         $select = $fields->getSelect();
         $with = $fields->getRelations();
-        $query = PurchaseOrderStatus::query()->select($select)->with($with);
+        $query = PurchaseOrderStatus::query()/*->select($select)*/ ->with($with);
 
         if (isset($args['id'])) {
-            return $query->find($args['id']);
+            $query->find($args['id']);
         }
         if (isset($args['name'])) {
-            return $query->where('name', '=', $args['name'])->first();
+            $query->where('name', '=', $args['name']);
         }
         if (isset($args['is_active'])) {
-            return $query->where('is_active', '=', $args['is_active'])->first();
+            $query->where('is_active', '=', $args['is_active']);
         }
 
-        return null;
+        return [
+            'success' => true,
+            'message' => 'Purchase order status details',
+            'purchase_order_status' => $query->first()
+        ];
     }
 }

@@ -1,3 +1,19 @@
+# Define the OracleOrder type
+type OracleOrder {
+    id: Int!
+    purchase_order_number: String!
+    created_at: String!
+    updated_at: String!
+}
+
+# Define the OracleOrderResponse type
+type OracleOrderResponse {
+    success: Boolean!
+    message: String!
+    oracle_order: OracleOrder
+    oracle_orders: [OracleOrder]
+}
+
 # Define the PurchaseOrderStatus type
 type PurchaseOrderStatus {
     id: Int!
@@ -5,6 +21,14 @@ type PurchaseOrderStatus {
     is_active: Boolean!
     created_at: String!
     updated_at: String!
+}
+
+# Define the PurchaseOrderStatusResponse type
+type PurchaseOrderStatusResponse {
+    success: Boolean!
+    message: String!
+    purchase_order_status: PurchaseOrderStatus
+    purchase_order_statuses: [PurchaseOrderStatus]
 }
 
 # Define the PurchaseOrder type
@@ -27,17 +51,25 @@ type PurchaseOrder {
 type PurchaseOrderResponse {
     success: Boolean!
     message: String!
-    purchaseOrder: PurchaseOrder
+    purchase_order: PurchaseOrder
+    purchase_orders: [PurchaseOrder]
 }
 
 # Define the Query type
 type Query {
+    # Check existence of oracle order
+    OracleOrderQuery(
+        purchase_order_number: String,
+    ): OracleOrder
+
+    # Get details of a purchase order
     PurchaseOrderQuery(
         id: Int,
         purchase_order_number: String,
         invoice_number: String
     ): PurchaseOrder
 
+    # Get list of purchase orders
     PurchaseOrdersQuery(
         device_unique_key: String,
         purchase_order_number: String,
@@ -50,20 +82,28 @@ type Query {
         status_id: Int
     ): [PurchaseOrder]
 
-    PurchaseOrderStatusesQuery(
-        name: String,
-        is_active: Boolean
-    ): [PurchaseOrderStatus]
-
+    # Get details of a purchase order status
     PurchaseOrderStatusQuery(
         id: Int,
         name: String,
         is_active: Boolean
     ): PurchaseOrderStatus
+
+    # Get list of purchase order statuses
+    PurchaseOrderStatusesQuery(
+        name: String,
+        is_active: Boolean
+    ): [PurchaseOrderStatus]
 }
 
 # Define the Mutation type
 type Mutation {
+    # Create oracle order
+    CreateOracleOrder(
+        purchase_order_number: String!
+    ): OracleOrderResponse
+
+    # Create purchase order [Driver App]
     CreatePurchaseOrder(
         device_unique_key: String!,
         purchase_order_number: String!,
@@ -75,10 +115,12 @@ type Mutation {
         arrival_date: String!
     ): PurchaseOrderResponse
 
+    # Cancel purchase order [Driver App]
     CancelPurchaseOrder(
         device_unique_key: String!
     ): PurchaseOrderResponse
 
+    # Confirm arrival of purchase order [Security App]
     VerifyPurchaseOrder(
         purchase_order_number: String!
     ): PurchaseOrderResponse

@@ -17,7 +17,8 @@ class PurchaseOrderStatusesQuery extends Query
 
     public function type(): Type
     {
-        return Type::listOf(GraphQL::type('PurchaseOrderStatus'));
+//        return Type::listOf(GraphQL::type('PurchaseOrderStatus'));
+        return GraphQL::type('PurchaseOrderStatusResponse');
     }
 
     public function args(): array
@@ -39,7 +40,7 @@ class PurchaseOrderStatusesQuery extends Query
         $fields = $getSelectFields();
         $select = $fields->getSelect();
         $with = $fields->getRelations();
-        $query = PurchaseOrderStatus::query()->select($select)->with($with);
+        $query = PurchaseOrderStatus::query()/*->select($select)*/ ->with($with);
 
         if (isset($args['name'])) {
             $query->whereRaw('LOWER(name) LIKE ?', ['%' . strtolower($args['name']) . '%']);
@@ -48,6 +49,10 @@ class PurchaseOrderStatusesQuery extends Query
             $query->where('is_active', '=', $args['is_active']);
         }
 
-        return $query->get();
+        return [
+            'success' => true,
+            'message' => 'Purchase order statuses list',
+            'purchase_order_statuses' => $query->get()
+        ];
     }
 }

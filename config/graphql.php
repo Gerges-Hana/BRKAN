@@ -77,6 +77,7 @@ return [
         'default' => [
             'query' => [
                 // ExampleQuery::class,
+                'OracleOrder' => \App\GraphQL\Query\OracleOrder\OracleOrderQuery::class,
                 'PurchaseOrder' => \App\GraphQL\Query\PurchaseOrder\PurchaseOrderQuery::class,
                 'PurchaseOrders' => \App\GraphQL\Query\PurchaseOrder\PurchaseOrdersQuery::class,
                 'PurchaseOrderStatus' => \App\GraphQL\Query\PurchaseOrderStatus\PurchaseOrderStatusQuery::class,
@@ -84,6 +85,7 @@ return [
             ],
             'mutation' => [
                 // ExampleMutation::class,
+                'CreateOracleOrder' => \App\GraphQL\Mutations\OracleOrder\CreateOracleOrderMutation::class,
                 'CreatePurchaseOrder' => \App\GraphQL\Mutations\PurchaseOrder\CreatePurchaseOrderMutation::class,
                 'CancelPurchaseOrder' => \App\GraphQL\Mutations\PurchaseOrder\CancelPurchaseOrderMutation::class,
                 'VerifyPurchaseOrder' => \App\GraphQL\Mutations\PurchaseOrder\VerifyPurchaseOrderMutation::class,
@@ -91,7 +93,9 @@ return [
             // The types only available in this schema
             'types' => [
                 // ExampleType::class,
-                'PurchaseOrderResponse' => \App\GraphQL\Types\PurchaseOrderResponseType::class
+                'OracleOrderResponse' => \App\GraphQL\Types\OracleOrderResponseType::class,
+                'PurchaseOrderResponse' => \App\GraphQL\Types\PurchaseOrderResponseType::class,
+                'PurchaseOrderStatusResponse' => \App\GraphQL\Types\PurchaseOrderStatusResponseType::class,
             ],
 
             // Laravel HTTP middleware
@@ -118,6 +122,7 @@ return [
         // ExampleType::class,
         // ExampleRelationType::class,
         // \Rebing\GraphQL\Support\UploadType::class,
+        \App\GraphQL\Types\OracleOrderType::class,
         \App\GraphQL\Types\PurchaseOrderType::class,
         \App\GraphQL\Types\PurchaseOrderStatusType::class,
     ],

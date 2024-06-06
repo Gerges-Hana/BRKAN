@@ -45,7 +45,7 @@ class CancelPurchaseOrderMutation extends Mutation
             return [
                 'success' => false,
                 'message' => 'Purchase order not found',
-                'purchaseOrder' => $purchaseOrder,
+                'purchase_order' => $purchaseOrder,
             ];
         }
 
@@ -53,7 +53,7 @@ class CancelPurchaseOrderMutation extends Mutation
             return [
                 'success' => false,
                 'message' => 'Purchased order already canceled',
-                'purchaseOrder' => $purchaseOrder,
+                'purchase_order' => $purchaseOrder,
             ];
         }
 
@@ -74,13 +74,13 @@ class CancelPurchaseOrderMutation extends Mutation
             return [
                 'success' => true,
                 'message' => 'Cancelled successfully',
-                'purchaseOrder' => $purchaseOrder,
+                'purchase_order' => $purchaseOrder,
             ];
         } else {
             return [
                 'success' => false,
                 'message' => 'Failed to cancel the purchase order',
-                'purchaseOrder' => $purchaseOrder,
+                'purchase_order' => $purchaseOrder,
             ];
         }
     }

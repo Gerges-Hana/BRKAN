@@ -61,13 +61,13 @@ class CreatePurchaseOrderMutation extends Mutation
                 return [
                     'success' => false,
                     'message' => 'Order already created before',
-                    'purchaseOrder' => $currentNotCanceledPurchaseOrder,
+                    'purchase_order' => $currentNotCanceledPurchaseOrder,
                 ];
             } else {
                 return [
                     'success' => false,
                     'message' => 'Order already created before by another driver',
-                    'purchaseOrder' => null,
+                    'purchase_order' => null,
                 ];
             }
         }
@@ -92,13 +92,13 @@ class CreatePurchaseOrderMutation extends Mutation
             return [
                 'success' => true,
                 'message' => "Purchase order created successfully",
-                'purchaseOrder' => $createdPurchaseOrder,
+                'purchase_order' => $createdPurchaseOrder,
             ];
         } else {
             return [
                 'success' => false,
                 'message' => "Failed to create purchase order, Please try again later!",
-                'purchaseOrder' => null,
+                'purchase_order' => null,
             ];
         }
     }
