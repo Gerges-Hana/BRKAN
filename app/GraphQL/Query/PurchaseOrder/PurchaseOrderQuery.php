@@ -49,7 +49,7 @@ class PurchaseOrderQuery extends Query
             return $query->find($args['id']);
         }
         if (isset($args['device_unique_key'])) {
-            return $query->where('device_unique_key', '=', $args['device_unique_key']);
+            return $query->where('device_unique_key', '=', $args['device_unique_key'])->first();
         }
         if (isset($args['purchase_order_number'])) {
             return $query->where('purchase_order_number', '=', $args['purchase_order_number'])->first();
