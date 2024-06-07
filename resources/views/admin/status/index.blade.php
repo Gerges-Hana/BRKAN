@@ -1,17 +1,18 @@
 @extends('admin.layout.master')
 @section('tap-title')
-الحاله
+قائمه حاله التوصيل
 @endsection
 @section('page-style-files')
 @endsection
 @section('content-header')
 <div class="content-header-left col-md-6 col-12 mb-1">
-    <h3 class="content-header-title">الحاله </h3>
+    <h3 class="content-header-title">اداره حاله التوصيل </h3>
 </div>
 <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
     <div class="breadcrumb-wrapper col-12">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/statuse">قائمه حاله التوصيل </a></li>
+        <li class="breadcrumb-item"><a href="/">الرئيسية</a>
+            <li class="breadcrumb-item">قائمه حاله التوصيل</li>
         </ol>
     </div>
 </div>
@@ -23,12 +24,12 @@
             <div class="card">
                 <div class="row">
                     <div class="col-lg-12 margin-tb p-3">
-                        <div class="pull-left">
-                            <a class="btn btn-success" href="{{ route('status.create') }}"> انشاء حاله </a>
-                        </div>
                         <div class="pull-right">
-                            <h2>اداره حاله التوصيل </h2>
+                            <a class="btn btn-success" href="{{ route('status.create') }}"data-toggle="tooltip" title="انشاء حاله جديده">  + </a>
                         </div>
+                        <!-- <div class="pull-right">
+                            <h2>اداره حاله التوصيل </h2>
+                        </div> -->
                     </div>
                 </div>
                 @if ($message = Session::get('success'))
@@ -54,11 +55,16 @@
                             {{ $status->is_active ? 'مفعله' : 'غير مفعله' }}
                         </td>
                         <td>
-                            <a class="btn btn-outline-primary " href="{{ route('status.show',$status->id) }}">عرض</a>
-                            <a class="btn btn-outline-warning mx-1" href="{{ route('status.edit',$status->id) }}">تعديل</a>
-                            {!! Form::open(['method' => 'DELETE','route' => ['status.destroy', $status->id],'style'=>'display:inline']) !!}
+                            <a class="btn btn-sm btn-outline-primary " href="{{ route('status.show',$status->id) }}"><i data-toggle="tooltip" title="عرض" class="la la-eye"></i></a>
+                            <a class="btn  btn-sm btn-outline-warning mx-1" href="{{ route('status.edit',$status->id) }}"><i data-toggle="tooltip" title="تعديل" class="la la-edit"></i></a>
+                            <!-- {!! Form::open(['method' => 'DELETE','route' => ['status.destroy', $status->id],'style'=>'display:inline']) !!}
                             {!! Form::submit('حذف', ['class' => 'btn btn-outline-danger']) !!}
+                            {!! Form::close() !!} -->
+
+                            {!! Form::open(['method' => 'DELETE', 'route' => ['status.destroy', $status->id], 'style' => 'display:inline']) !!}
+                            <button type="submit" class="btn btn-sm btn-outline-danger" data-toggle="tooltip" title="حذف"><i class="la la-trash"></i></button>
                             {!! Form::close() !!}
+
                         </td>
                     </tr>
                     @endforeach

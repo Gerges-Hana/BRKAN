@@ -1,7 +1,7 @@
 @extends('admin.layout.master')
 
 @section('tap-title')
-المستخدمين
+ اضافه مستخدم جديد
 @endsection
 
 @section('page-style-files')
@@ -10,11 +10,12 @@
 
 @section('content-header')
 <div class="content-header-left col-md-6 col-12 mb-1">
-    <h3 class="content-header-title">المستخدمين</h3>
+    <h3 class="content-header-title">انشاء مستخدم جديد</h3>
 </div>
 <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
     <div class="breadcrumb-wrapper col-12">
         <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">الرئيسية</a></li>
             <li class="breadcrumb-item"><a href="/">المستخدمين</a></li>
             <li class="breadcrumb-item active">اضافه</li>
         </ol>
@@ -30,12 +31,10 @@
             <div class="card p-2 ">
                 <div class="row">
                     <div class="col-lg-12 margin-tb">
-                        <div class="pull-left">
+                        <!-- <div class="pull-left">
                             <h2>انشاء مستخدم جديد</h2>
-                        </div>
-                        <div class="pull-right">
-                            <a class="btn btn-primary" href="{{ route('users.index') }}"> الرجوع</a>
-                        </div>
+                        </div> -->
+                      
                     </div>
                 </div>
                 
@@ -91,7 +90,9 @@
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6 text-left">
                         <button type="submit" class="btn btn-primary">موافق</button>
+                        <a class="btn btn-primary" href="{{ route('users.index') }}"style="margin-left: 10px;"> الرجوع</a>
                     </div>
+                   
                 </div>
                 {!! Form::close() !!}
             </div>

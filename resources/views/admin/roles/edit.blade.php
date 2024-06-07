@@ -1,7 +1,7 @@
 @extends('admin.layout.master')
 
 @section('tap-title')
-القواعد
+تعديل القواعد
 @endsection
 
 @section('page-style-files')
@@ -9,11 +9,12 @@
 @endsection
 @section('content-header')
 <div class="content-header-left col-md-6 col-12 mb-1">
-    <h3 class="content-header-title">القواعد</h3>
+    <h3 class="content-header-title">تعديل الدور</h3>
 </div>
 <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
     <div class="breadcrumb-wrapper col-12">
         <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">الرئيسية</a></li>
             <li class="breadcrumb-item"><a href="/roles">القواعد</a></li>
             <li class="breadcrumb-item active">تعديل</li>
         </ol>
@@ -28,11 +29,11 @@
                 <div class="row">
                     <div class="col-lg-12 margin-tb">
                         <div class="pull-left">
-                            <h2> تعديل الدور</h2>
+                            <!-- <h2> تعديل الدور</h2> -->
                         </div>
-                        <div class="pull-right">
+                        <!-- <div class="pull-right">
                             <a class="btn btn-primary" href="{{ route('roles.index') }}"> الرجوع</a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 @if (count($errors) > 0)
@@ -82,7 +83,11 @@
                         </div>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 text-left">
-                        <button type="submit" class="btn btn-primary">تعديل</button>
+                        
+                        <a class="btn btn-secondary" href="{{ route('roles.index') }}"style="margin-right: 10px;"data-toggle="tooltip" title="  رجوع" > ></a>
+                        <div class="pull-right">
+                        <button type="submit" class="btn btn-primary"  >+</button>
+                        </div>
                     </div>
                 </div>
                 {!! Form::close() !!}

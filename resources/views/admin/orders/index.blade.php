@@ -1,7 +1,7 @@
 @extends('admin.layout.master')
 
 @section('tap-title')
-الطلبيات
+قائمة الطلبيات
 @endsection
 
 @section('page-style-files')
@@ -16,14 +16,14 @@
 
 @section('content-header')
 <div class="content-header-left col-md-6 col-12 mb-1">
-    <h3 class="content-header-title">الطلبيات</h3>
+    <h3 class="content-header-title">قائمة الطلبيات</h3>
 </div>
 <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
     <div class="breadcrumb-wrapper col-12">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">الرئيسية</a>
             </li>
-            <li class="breadcrumb-item active">الطلبيات
+            <li class="breadcrumb-item active">قائمة الطلبيات
             </li>
         </ol>
     </div>
@@ -36,7 +36,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">قائمة الطلبيات</h4>
+                    <!-- <h4 class="card-title">قائمة الطلبيات</h4> -->
                     <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                     <div class="heading-elements">
                         <ul class="list-inline mb-0">
@@ -87,7 +87,7 @@
                             </div>
                             <!-- <form id="editOrderForm">
                                 <div class="modal-body">
-                                    <!-- <div class="form-group">
+                                    <!- <div class="form-group">
                                         <label for="arrival_date">تاريخ الوصول</label>
                                         <input type="datetime-local" class="form-control datetime-field" id="arrival_date" name="arrival_date">
                                     </div> -->
@@ -181,7 +181,10 @@
                                 <label for="driver_phone">هاتف السائق</label>
                                 <input type="text" class="form-control" id="driver_phone" name="driver_phone">
                             </div>
-                            <button type="submit" class="btn btn-primary align-self-end mb-2 col-2">ابحث</button>
+                            <!-- <button type="submit" class="btn btn-primary align-self-end mb-2 col-2">ابحث</button> -->
+                            <button type="submit" class="btn btn-primary align-self-end mb-2" style="width: auto;">ابحث</button>
+                            
+
 
                         </form>
 
@@ -282,15 +285,15 @@
                     searchable: false,
                     render: function(data, type, row) {
                         var btn = '<div class="d-flex justify-content-between">';
-                        btn += '<button class="btn btn-outline-primary d-flex justify-content-between align-items-center mx-1 view-order" data-id="' + row.id + '" data-toggle="tooltip" title="عرض"><i class="la la-eye"></i></button>';
-                        btn += '<a class="btn btn-outline-warning d-flex justify-content-between align-items-center mx-1 edit-order" href="#" data-id="' + row.id + '" data-toggle="tooltip" title="تعديل"><i class="la la-edit"></i></a>';
+                        btn += '<button class="btn btn-sm btn-outline-primary d-flex justify-content-between align-items-center mx-1 view-order" data-id="' + row.id + '" data-toggle="tooltip" title="عرض"><i class="la la-eye"></i></button>';
+                        btn += '<a class="btn btn-sm  btn-outline-warning d-flex justify-content-between align-items-center mx-1 edit-order" href="#" data-id="' + row.id + '" data-toggle="tooltip" title="تعديل"><i class="la la-edit"></i></a>';
                         // btn += '<a class="btn btn-outline-info d-flex justify-content-between align-items-center mx-1 " href="/orders-history/'+ row.id +'"  data-toggle="tooltip" title="تفاصيل"><i class="la ft-file-plus"></i></a>';
-                        btn += '<a class="btn btn-outline-info d-flex justify-content-between align-items-center mx-1 " href="/orders-history/' + row.id + '"  data-toggle="tooltip" title="تفاصيل"><i class="la ft-file-plus"></i></a>';
+                        btn += '<a class="btn btn-sm btn-outline-info d-flex justify-content-between align-items-center mx-1 " href="/orders-history/' + row.id + '"  data-toggle="tooltip" title="تفاصيل"><i class="la ft-file-plus"></i></a>';
 
                         btn += '<form method="POST" action="/orders/' + row.id + '" style="display:inline" onsubmit="return confirm(\'هل أنت متأكد أنك تريد حذف هذا الطلب؟\');">';
                         btn += '@csrf';
                         btn += '@method("DELETE")';
-                        btn += '<button type="submit" class="btn btn-outline-danger d-flex justify-content-between align-items-center mx-1" data-toggle="tooltip" title="حذف"><i class="la la-trash"></i></button>';
+                        btn += '<button type="submit" class="btn btn-sm btn-outline-danger d-flex justify-content-between align-items-center mx-1" data-toggle="tooltip" title="حذف"><i class="la la-trash"></i></button>';
                         btn += '</form>';
                         btn += '</div>';
                         return btn;
