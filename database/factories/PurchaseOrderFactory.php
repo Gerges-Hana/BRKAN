@@ -22,7 +22,7 @@ class PurchaseOrderFactory extends Factory
             'rep_phone' => $this->faker->phoneNumber,
             'arrival_date' => $this->faker->dateTimeBetween('2024-06-01', '2024-12-31')->format('Y-m-d'),
             'status_id' => $this->faker->numberBetween(1, 6),
-            'last_update_user_id' => $this->faker->numberBetween(1, 50),
+            'last_update_user_id' => $this->faker->numberBetween(1, 10),
         ];
 
     }

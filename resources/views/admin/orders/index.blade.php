@@ -85,20 +85,22 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <!-- <form id="editOrderForm">
+
+
+                            <form id="editOrderForm">
                                 <div class="modal-body">
-                                    <!-- <div class="form-group">
-                                        <label for="arrival_date">تاريخ الوصول</label>
-                                        <input type="datetime-local" class="form-control datetime-field" id="arrival_date" name="arrival_date">
-                                    </div> -->
-                                    <!-- <div class="form-group">
-                                        <label for="canceled_at">تاريخ الإلغاء</label>
-                                        <input type="datetime-local" class="form-control datetime-field" id="canceled_at" name="canceled_at">
-                                    </div> -->
-                                    <!-- <div class="form-group">
-                                        <label for="arrived_at">تاريخ الوصول</label>
-                                        <input type="datetime-local" class="form-control datetime-field" id="arrived_at" name="arrived_at">
-                                    </div> ---=>
+                                    <div class="form-group">
+                                        <label for="status_id">الحالة</label>
+                                        <select class="form-control" id="status_id" name="status_id">
+                                            <option value="0">اختر الحالة</option>
+                                            <option value="1" class="d-none">تم التحرك</option>
+                                            <option value="2" class="d-none">تم الالغاء</option>
+                                            <option value="3" class="d-none">تم الوصول</option>
+                                            <option value="4">تم الإدخال</option>
+                                            <option value="5">تم التحميل</option>
+                                            <option value="6">تم المغادرة</option>
+                                        </select>
+                                    </div>
                                     <div class="form-group">
                                         <label for="entered_at">تاريخ الإدخال</label>
                                         <input type="datetime-local" class="form-control datetime-field" id="entered_at" name="entered_at">
@@ -116,37 +118,7 @@
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
                                     <button type="submit" class="btn btn-primary">حفظ التعديلات</button>
                                 </div>
-                            </form> -->
-
-                            <form id="editOrderForm">
-    <div class="modal-body">
-        <div class="form-group">
-            <label for="status_id">الحالة</label>
-            <select class="form-control" id="status_id" name="status_id">
-                <option value="0">اختر الحالة</option>
-                <option value="4">تم الإدخال</option>
-                <option value="5">تم التحميل</option>
-                <option value="6">تم المغادرة</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="entered_at">تاريخ الإدخال</label>
-            <input type="datetime-local" class="form-control datetime-field" id="entered_at" name="entered_at">
-        </div>
-        <div class="form-group">
-            <label for="unloaded_at">تاريخ التفريغ</label>
-            <input type="datetime-local" class="form-control datetime-field" id="unloaded_at" name="unloaded_at">
-        </div>
-        <div class="form-group">
-            <label for="left_at">تاريخ المغادرة</label>
-            <input type="datetime-local" class="form-control datetime-field" id="left_at" name="left_at">
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
-        <button type="submit" class="btn btn-primary">حفظ التعديلات</button>
-    </div>
-</form>
+                            </form>
 
                         </div>
                     </div>
@@ -185,6 +157,7 @@
 
                         </form>
 
+                        <!-- index table  -->
                         <table class="table table-bordered data-table">
                             <thead>
                                 <tr>
@@ -304,6 +277,9 @@
             table.draw();
         });
 
+
+        // =================================== show  ============================
+
         // Event listener for viewing order details
         $(document).on('click', '.view-order', function() {
             var orderId = $(this).data('id');
@@ -315,10 +291,83 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(data) {
+                    console.log('show');
                     console.log(data);
+                    console.log('show');
                     var formatDate = function(date) {
                         return date ? moment(date).format('YYYY-MM-DD HH:mm:ss') : 'N/A';
                     };
+
+
+                    var arrivalDate = 'N/A_2';
+                    var canceledAt = 'N/A_2';
+                    var arrivedAt = 'N/A_2';
+                    var enteredAt = 'N/A_2';
+                    var unloadedAt = 'N/A_2';
+                    var leftAt = 'N/A_2';
+                    var po_status = 'تم الانشاء';
+                    var po_status_class = 'text-secondary';
+
+                    switch (data.status_id) {
+                        case 1:
+                            po_status = 'تم الارسال';
+                            po_status_class = 'text-primary';
+
+                            break;
+                        case 2:
+                            po_status = 'تم الالغاء';
+                            po_status_class = 'text-danger';
+
+                            break;
+                        case 3:
+                            po_status = 'تم الوصول';
+                            po_status_class = 'text-success';
+
+                            break;
+                        case 4:
+                            po_status = 'تم الدخول';
+                            po_status_class = 'text-warning';
+
+                            break;
+                        case 5:
+                            po_status = 'تم التحميل';
+                            po_status_class = 'text-info';
+
+                            break;
+                        case 6:
+                            po_status = 'تم المغادره';
+                            po_status_class = 'text-dark';
+
+                            break;
+                    }
+
+
+
+                    data.purchase_order_update.forEach(function(update) {
+                        switch (update.status_id) {
+                            case 1:
+                                arrivalDate = formatDate(update.created_at);
+                                break;
+                            case 2:
+                                canceledAt = formatDate(update.created_at);
+                                break;
+                            case 3:
+                                arrivedAt = formatDate(update.created_at);
+                                break;
+                            case 4:
+                                enteredAt = formatDate(update.created_at);
+                                break;
+                            case 5:
+                                unloadedAt = formatDate(update.created_at);
+                                break;
+                            case 6:
+                                leftAt = formatDate(update.created_at);
+                                break;
+                        }
+                    });
+
+
+
                     var details = `
                 <table class="table table-bordered">
                     <tr>
@@ -328,36 +377,41 @@
                         <td>${data.invoice_number}</td>
                         <td><strong>اسم السائق</strong></td>
                         <td>${data.driver_name}</td>
-                        <td><strong>اسم المندوب</strong></td>
-                        <td>${data.rep_name}</td>
+                       
                     </tr>
                     <tr>
+                    <td><strong>اسم المندوب</strong></td>
+                        <td>${data.rep_name}</td>
                         <td><strong>هاتف السائق</strong></td>
                         <td>${data.driver_phone}</td>
                         <td><strong>هاتف المندوب</strong></td>
                         <td>${data.rep_phone}</td>
-                        <td><strong>تاريخ الوصول</strong></td>
-                        <td>${formatDate(data.arrival_date)}</td>
-                        <td><strong>تاريخ الإلغاء</strong></td>
-                        <td>${formatDate(data.canceled_at)}</td>
-                    </tr>
+
+                        </tr>
                     <tr>
-                        <td><strong>تاريخ الوصول</strong></td>
-                        <td>${formatDate(data.arrived_at)}</td>
-                        <td><strong>تاريخ الإدخال</strong></td>
-                        <td>${formatDate(data.entered_at)}</td>
-                        <td><strong>تاريخ التفريغ</strong></td>
-                        <td>${formatDate(data.unloaded_at)}</td>
-                        <td><strong>تاريخ المغادرة</strong></td>
-                        <td>${formatDate(data.left_at)}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>تاريخ الإنشاء</strong></td>
+                        <td><strong>وقت الإنشاء</strong></td>
                         <td>${formatDate(data.created_at)}</td>
-                        <td><strong>تاريخ التحديث</strong></td>
+                        <td><strong>وقت اخر تحديث</strong></td>
                         <td>${formatDate(data.updated_at)}</td>
+                        <td><strong>وقت توقع الوصول</strong></td>
+                        <td>${data.arrival_date}</td>
+                     </tr>
+                        
+                    <tr>
                         <td><strong>حالة الطلب</strong></td>
-                        <td>${data.status_id}</td>
+                        <td class="${po_status_class}">${po_status}</td>
+                        <td><strong>تاريخ الإلغاء</strong></td>
+                        <td>${canceledAt}</td>
+                        <td><strong>تاريخ الوصول</strong></td>
+                        <td>${arrivedAt}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>تاريخ الإدخال</strong></td>
+                        <td>${enteredAt}</td>
+                        <td><strong>تاريخ التفريغ</strong></td>
+                        <td>${unloadedAt}</td>
+                        <td><strong>تاريخ المغادرة</strong></td>
+                        <td>${leftAt}</td>
                     </tr>
                 </table>
             `;
@@ -370,13 +424,12 @@
             });
         });
 
+        // =================================== show  ============================
 
-        
+        // =================================== edit  ============================
         // Event listener for editing order status
         $(document).on('click', '.edit-order', function() {
             var orderId = $(this).data('id');
-
-            // جلب تفاصيل الطلب
             $.ajax({
                 url: '/orders/' + orderId + '/edit',
                 method: 'GET',
@@ -385,15 +438,22 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(data) {
-                    console.log(data);
-
-                    // إعداد الحقول في النموذج بالقيم المسترجعة من قاعدة البيانات
-                    // $('#arrival_date').val(data.arrival_date ? moment(data.arrival_date).format('YYYY-MM-DDTHH:mm') : '');
-                    // $('#canceled_at').val(data.canceled_at ? moment(data.canceled_at).format('YYYY-MM-DDTHH:mm') : '');
-                    // $('#arrived_at').val(data.arrived_at ? moment(data.arrived_at).format('YYYY-MM-DDTHH:mm') : '');
-                    $('#entered_at').val(data.entered_at ? moment(data.entered_at).format('YYYY-MM-DDTHH:mm') : '');
-                    $('#unloaded_at').val(data.unloaded_at ? moment(data.unloaded_at).format('YYYY-MM-DDTHH:mm') : '');
-                    $('#left_at').val(data.left_at ? moment(data.left_at).format('YYYY-MM-DDTHH:mm') : ''); 
+                    // console.log(data.purchase_order_update);
+                    $('#status_id').val(data.status_id);
+                    // Filters for purchase_order_updates by status_id
+                    let entered_at_update = data.purchase_order_update.find(update => update.status_id == 4);
+                    let unloaded_at_update = data.purchase_order_update.find(update => update.status_id == 5);
+                    let left_at_update = data.purchase_order_update.find(update => update.status_id == 6);
+                    // Set the values based on the filtered results
+                    if (entered_at_update) {
+                        $('#entered_at').val(moment(entered_at_update.created_at).format('YYYY-MM-DDTHH:mm'));
+                    }
+                    if (unloaded_at_update) {
+                        $('#unloaded_at').val(moment(unloaded_at_update.created_at).format('YYYY-MM-DDTHH:mm'));
+                    }
+                    if (left_at_update) {
+                        $('#left_at').val(moment(left_at_update.created_at).format('YYYY-MM-DDTHH:mm'));
+                    }
                     $('#editOrderForm').data('id', orderId);
                     $('#editOrderModal').modal('show');
                 },
@@ -402,7 +462,9 @@
                 }
             });
         });
+        // =================================== edit  ============================
 
+        // =================================== update  ============================
         // إرسال النموذج لتحديث الطلب
         $('#editOrderForm').on('submit', function(event) {
             event.preventDefault();
@@ -411,7 +473,7 @@
             $.ajax({
                 url: '/orders/edit/' + orderId,
                 method: 'POST',
-                data:formData,
+                data: formData,
                 async: false,
                 cache: false,
                 contentType: false,
@@ -421,8 +483,8 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(response) {
-                    console.log(response);
-                    alert(response.message);
+
+                    // alert(response.message);
                     $('#editOrderModal').modal('hide');
                     table.draw();
                 },
@@ -431,61 +493,57 @@
                 }
             });
         });
+        // =================================== update  ============================
 
     });
 </script>
-
 <script>
     $(function() {
         $('[data-toggle="tooltip"]').tooltip();
     });
 </script>
-
-
 <script>
-  document.getElementById('status_id').addEventListener('change', function() {
-    const status = parseInt(this.value);
-    const enteredAtField = document.getElementById('entered_at');
-    const unloadedAtField = document.getElementById('unloaded_at');
-    const leftAtField = document.getElementById('left_at');
+    document.getElementById('status_id').addEventListener('change', function() {
+        const status = parseInt(this.value);
+        const enteredAtField = document.getElementById('entered_at');
+        const unloadedAtField = document.getElementById('unloaded_at');
+        const leftAtField = document.getElementById('left_at');
 
-    if (status === 4) {
-        enteredAtField.disabled = false;
-        unloadedAtField.disabled = true;
-        leftAtField.disabled = true;
-    } else if (status === 5) {
-        enteredAtField.disabled = false;
-        unloadedAtField.disabled = false;
-        leftAtField.disabled = true;
-    } else if (status === 6) {
-        enteredAtField.disabled = false;
-        unloadedAtField.disabled = false;
-        leftAtField.disabled = false;
-    } else {
-        enteredAtField.disabled = false;
-        unloadedAtField.disabled = false;
-        leftAtField.disabled = false;
-    }
-});
+        if (status === 4) {
+            enteredAtField.disabled = false;
+            unloadedAtField.disabled = true;
+            leftAtField.disabled = true;
+        } else if (status === 5) {
+            enteredAtField.disabled = false;
+            unloadedAtField.disabled = false;
+            leftAtField.disabled = true;
+        } else if (status === 6) {
+            enteredAtField.disabled = false;
+            unloadedAtField.disabled = false;
+            leftAtField.disabled = false;
+        } else {
+            enteredAtField.disabled = false;
+            unloadedAtField.disabled = false;
+            leftAtField.disabled = false;
+        }
+    });
 
-document.getElementById('editOrderForm').addEventListener('submit', function(event) {
-    const status = parseInt(document.getElementById('status_id').value);
-    const enteredAtValue = document.getElementById('entered_at').value;
-    const unloadedAtValue = document.getElementById('unloaded_at').value;
-    const leftAtValue = document.getElementById('left_at').value;
+    document.getElementById('editOrderForm').addEventListener('submit', function(event) {
+        const status = parseInt(document.getElementById('status_id').value);
+        const enteredAtValue = document.getElementById('entered_at').value;
+        const unloadedAtValue = document.getElementById('unloaded_at').value;
+        const leftAtValue = document.getElementById('left_at').value;
 
-    if (status === 4 && !enteredAtValue) {
-        alert('يرجى إدخال تاريخ الإدخال.');
-        event.preventDefault();
-    } else if (status === 5 && (!enteredAtValue || !unloadedAtValue)) {
-        alert('يرجى إدخال تاريخ الإدخال وتاريخ التفريغ.');
-        event.preventDefault();
-    } else if (status === 6 && (!enteredAtValue || !unloadedAtValue || !leftAtValue)) {
-        alert('يرجى إدخال جميع التواريخ (الإدخال، التفريغ، والمغادرة).');
-        event.preventDefault();
-    }
-});
-
-
+        if (status === 4 && !enteredAtValue) {
+            alert('يرجى إدخال تاريخ الإدخال.');
+            event.preventDefault();
+        } else if (status === 5 && (!enteredAtValue || !unloadedAtValue)) {
+            alert('يرجى إدخال تاريخ الإدخال وتاريخ التفريغ.');
+            event.preventDefault();
+        } else if (status === 6 && (!enteredAtValue || !unloadedAtValue || !leftAtValue)) {
+            alert('يرجى إدخال جميع التواريخ (الإدخال، التفريغ، والمغادرة).');
+            event.preventDefault();
+        }
+    });
 </script>
 @endsection
