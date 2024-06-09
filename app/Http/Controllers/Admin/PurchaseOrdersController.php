@@ -98,21 +98,16 @@ class PurchaseOrdersController extends Controller
 
     public function show($id)
     {
-        $order = PurchaseOrder::find($id);
+        $order = PurchaseOrder::query()->with(['PurchaseOrderUpdate'])->find($id);
         if (!$order) {
             return response()->json(['message' => 'الطلب غير موجود'], 404);
         }
-
         return response()->json($order);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($id)
     {
         $order = PurchaseOrder::query()->with(['PurchaseOrderUpdate'])->find($id);
-        // dd($order);
         if (!$order) {
             return response()->json(['message' => 'الطلب غير موجود'], 404);
         }
@@ -136,7 +131,6 @@ class PurchaseOrdersController extends Controller
         $order->last_update_user_id = Auth::id();
         $order->save();
 
-        // dd($statusId);
         if ($statusId == 4) {
             $order->PurchaseOrderUpdate()->create([
                 'purchase_order_id' => $order->id,
@@ -185,7 +179,7 @@ class PurchaseOrdersController extends Controller
         return response()->json(['message' => 'تم تحديث الطلبيه بنجاح', 'data' => $request->all()]);
     }
 
-    public function destroy($id): RedirectResponse
+    public function destroy($id)
     {
         PurchaseOrder::find($id)->delete();
         return redirect()->route('orders.index')
@@ -194,7 +188,8 @@ class PurchaseOrdersController extends Controller
 
     public function HistoryOfPurchaseOrdersC($id)
     {
-        $order = PurchaseOrder::find($id);
+        $order = PurchaseOrder::query()->with(['PurchaseOrderUpdate'])->find($id);
+
         $orders = PurchaseOrderUpdate::find($id)?->get();
         if (!$order) {
             return redirect()->back()->with('error', 'الطلبية غير موجودة');

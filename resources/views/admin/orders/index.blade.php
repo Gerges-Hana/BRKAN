@@ -157,6 +157,7 @@
 
                         </form>
 
+                        <!-- index table  -->
                         <table class="table table-bordered data-table">
                             <thead>
                                 <tr>
@@ -290,10 +291,83 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(data) {
+                    console.log('show');
                     console.log(data);
+                    console.log('show');
                     var formatDate = function(date) {
                         return date ? moment(date).format('YYYY-MM-DD HH:mm:ss') : 'N/A';
                     };
+
+
+                    var arrivalDate = 'N/A_2';
+                    var canceledAt = 'N/A_2';
+                    var arrivedAt = 'N/A_2';
+                    var enteredAt = 'N/A_2';
+                    var unloadedAt = 'N/A_2';
+                    var leftAt = 'N/A_2';
+                    var po_status = 'تم الانشاء';
+                    var po_status_class = 'text-secondary';
+
+                    switch (data.status_id) {
+                        case 1:
+                            po_status = 'تم الارسال';
+                            po_status_class = 'text-primary';
+
+                            break;
+                        case 2:
+                            po_status = 'تم الالغاء';
+                            po_status_class = 'text-danger';
+
+                            break;
+                        case 3:
+                            po_status = 'تم الوصول';
+                            po_status_class = 'text-success';
+
+                            break;
+                        case 4:
+                            po_status = 'تم الدخول';
+                            po_status_class = 'text-warning';
+
+                            break;
+                        case 5:
+                            po_status = 'تم التحميل';
+                            po_status_class = 'text-info';
+
+                            break;
+                        case 6:
+                            po_status = 'تم المغادره';
+                            po_status_class = 'text-dark';
+
+                            break;
+                    }
+
+
+
+                    data.purchase_order_update.forEach(function(update) {
+                        switch (update.status_id) {
+                            case 1:
+                                arrivalDate = formatDate(update.created_at);
+                                break;
+                            case 2:
+                                canceledAt = formatDate(update.created_at);
+                                break;
+                            case 3:
+                                arrivedAt = formatDate(update.created_at);
+                                break;
+                            case 4:
+                                enteredAt = formatDate(update.created_at);
+                                break;
+                            case 5:
+                                unloadedAt = formatDate(update.created_at);
+                                break;
+                            case 6:
+                                leftAt = formatDate(update.created_at);
+                                break;
+                        }
+                    });
+
+
+
                     var details = `
                 <table class="table table-bordered">
                     <tr>
@@ -303,36 +377,41 @@
                         <td>${data.invoice_number}</td>
                         <td><strong>اسم السائق</strong></td>
                         <td>${data.driver_name}</td>
-                        <td><strong>اسم المندوب</strong></td>
-                        <td>${data.rep_name}</td>
+                       
                     </tr>
                     <tr>
+                    <td><strong>اسم المندوب</strong></td>
+                        <td>${data.rep_name}</td>
                         <td><strong>هاتف السائق</strong></td>
                         <td>${data.driver_phone}</td>
                         <td><strong>هاتف المندوب</strong></td>
                         <td>${data.rep_phone}</td>
-                        <td><strong>تاريخ الوصول</strong></td>
-                        <td>${formatDate(data.arrival_date)}</td>
-                        <td><strong>تاريخ الإلغاء</strong></td>
-                        <td>${formatDate(data.canceled_at)}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>تاريخ الوصول</strong></td>
-                        <td>${formatDate(data.arrived_at)}</td>
-                        <td><strong>تاريخ الإدخال</strong></td>
-                        <td>${formatDate(data.entered_at)}</td>
-                        <td><strong>تاريخ التفريغ</strong></td>
-                        <td>${formatDate(data.unloaded_at)}</td>
-                        <td><strong>تاريخ المغادرة</strong></td>
-                        <td>${formatDate(data.left_at)}</td>
-                    </tr>
+
+                        </tr>
                     <tr>
                         <td><strong>تاريخ الإنشاء</strong></td>
                         <td>${formatDate(data.created_at)}</td>
                         <td><strong>تاريخ التحديث</strong></td>
-                        <td>${formatDate(data.showd_at)}</td>
+                        <td>${formatDate(data.updated_at)}</td>
+                        <td><strong>تاريخ توقع الوصول</strong></td>
+                        <td>${data.arrival_date}</td>
+                     </tr>
+                        
+                    <tr>
                         <td><strong>حالة الطلب</strong></td>
-                        <td>${data.status_id}</td>
+                        <td class="${po_status_class}">${po_status}</td>
+                        <td><strong>تاريخ الإلغاء</strong></td>
+                        <td>${canceledAt}</td>
+                        <td><strong>تاريخ الوصول</strong></td>
+                        <td>${arrivedAt}</td>
+                    </tr>
+                    <tr>
+                        <td><strong>تاريخ الإدخال</strong></td>
+                        <td>${enteredAt}</td>
+                        <td><strong>تاريخ التفريغ</strong></td>
+                        <td>${unloadedAt}</td>
+                        <td><strong>تاريخ المغادرة</strong></td>
+                        <td>${leftAt}</td>
                     </tr>
                 </table>
             `;
@@ -345,8 +424,7 @@
             });
         });
 
-        // =================================== update  ============================
-
+        // =================================== show  ============================
 
         // =================================== edit  ============================
         // Event listener for editing order status
@@ -360,15 +438,12 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function(data) {
-                    console.log(data.purchase_order_update);
+                    // console.log(data.purchase_order_update);
                     $('#status_id').val(data.status_id);
-
-
                     // Filters for purchase_order_updates by status_id
                     let entered_at_update = data.purchase_order_update.find(update => update.status_id == 4);
                     let unloaded_at_update = data.purchase_order_update.find(update => update.status_id == 5);
                     let left_at_update = data.purchase_order_update.find(update => update.status_id == 6);
-
                     // Set the values based on the filtered results
                     if (entered_at_update) {
                         $('#entered_at').val(moment(entered_at_update.created_at).format('YYYY-MM-DDTHH:mm'));
@@ -388,9 +463,7 @@
             });
         });
         // =================================== edit  ============================
-        
-        
-        
+
         // =================================== update  ============================
         // إرسال النموذج لتحديث الطلب
         $('#editOrderForm').on('submit', function(event) {
@@ -411,7 +484,7 @@
                 },
                 success: function(response) {
 
-                    alert(response.message);
+                    // alert(response.message);
                     $('#editOrderModal').modal('hide');
                     table.draw();
                 },
@@ -424,14 +497,11 @@
 
     });
 </script>
-
 <script>
     $(function() {
         $('[data-toggle="tooltip"]').tooltip();
     });
 </script>
-
-
 <script>
     document.getElementById('status_id').addEventListener('change', function() {
         const status = parseInt(this.value);
