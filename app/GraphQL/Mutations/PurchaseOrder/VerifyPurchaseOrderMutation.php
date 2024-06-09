@@ -40,7 +40,7 @@ class VerifyPurchaseOrderMutation extends Mutation
         if (!$purchaseOrder) {
             return [
                 'success' => false,
-                'message' => 'Purchase order not found',
+                'message' => 'لم يتم العثور على الطلبية',
                 'purchase_order' => $purchaseOrder,
             ];
         }
@@ -48,7 +48,7 @@ class VerifyPurchaseOrderMutation extends Mutation
         if ($purchaseOrder->status_id == 2) {
             return [
                 'success' => false,
-                'message' => 'This purchase order was canceled and cannot be verified',
+                'message' => 'هذه الطلبية تم الغاؤها ولا يمكن تأكيد وصولها',
                 'purchase_order' => $purchaseOrder,
             ];
         }
@@ -56,7 +56,7 @@ class VerifyPurchaseOrderMutation extends Mutation
         if ($purchaseOrder->status_id == 3) {
             return [
                 'success' => false,
-                'message' => 'This purchase order already verified before',
+                'message' => 'تم تأكيد وصول هذه الطلبية من قبل',
                 'purchase_order' => $purchaseOrder,
             ];
         }
@@ -77,13 +77,13 @@ class VerifyPurchaseOrderMutation extends Mutation
 
             return [
                 'success' => true,
-                'message' => 'Verified successfully',
+                'message' => 'تم تأكيد وصول الطلبية',
                 'purchase_order' => $purchaseOrder,
             ];
         } else {
             return [
                 'success' => false,
-                'message' => 'Failed to verify the purchase order',
+                'message' => 'فضل فى تأكيد وصول الطلبية, من فضل حاول مرة اخرى',
                 'purchase_order' => $purchaseOrder,
             ];
         }

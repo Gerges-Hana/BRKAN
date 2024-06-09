@@ -57,7 +57,7 @@ class PurchaseOrderStatusQuery extends Query
 
         return [
             'success' => true,
-            'message' => 'Purchase order status details',
+            'message' => 'تفاصيل حالة الطلبية',
             'purchase_order_status' => $query->first()
         ];
     }
