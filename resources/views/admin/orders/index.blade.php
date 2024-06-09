@@ -389,11 +389,11 @@
 
                         </tr>
                     <tr>
-                        <td><strong>تاريخ الإنشاء</strong></td>
+                        <td><strong>وقت الإنشاء</strong></td>
                         <td>${formatDate(data.created_at)}</td>
-                        <td><strong>تاريخ التحديث</strong></td>
+                        <td><strong>وقت اخر تحديث</strong></td>
                         <td>${formatDate(data.updated_at)}</td>
-                        <td><strong>تاريخ توقع الوصول</strong></td>
+                        <td><strong>وقت توقع الوصول</strong></td>
                         <td>${data.arrival_date}</td>
                      </tr>
                         

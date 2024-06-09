@@ -38,7 +38,7 @@
                         <ul class="list-inline mb-0">
                             <!-- <li><a data-action="collapse"><i class="ft-minus"></i></a></li> -->
                             <!-- <li><a data-action="reload"><i class="ft-rotate-cw"></i></a></li>-->
-                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li> 
+                            <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -74,6 +74,100 @@
 
                                     <div role="tabpanel" class="tab-pane active show" id="activeIcon22" aria-labelledby="activeIcon22-tab1" aria-expanded="true">
 
+                                        @php
+                                        $po_status = 'تم الانشاء';
+                                        $po_status_class = 'text-secondary'; // Default Bootstrap class
+
+                                        switch ($order->status_id) {
+                                        case 1:
+                                        $po_status = 'تم الارسال';
+                                        $po_status_class = 'text-primary';
+                                        break;
+                                        case 2:
+                                        $po_status = 'تم الالغاء';
+                                        $po_status_class = 'text-danger';
+                                        break;
+                                        case 3:
+                                        $po_status = 'تم الوصول';
+                                        $po_status_class = 'text-success';
+                                        break;
+                                        case 4:
+                                        $po_status = 'تم الدخول';
+                                        $po_status_class = 'text-warning';
+                                        break;
+                                        case 5:
+                                        $po_status = 'تم التحميل';
+                                        $po_status_class = 'text-info';
+                                        break;
+                                        case 6:
+                                        $po_status = 'تم المغادره';
+                                        $po_status_class = 'text-dark';
+                                        break;
+                                        }
+                                        @endphp
+
+                                        @php
+                                        $arrivalDate = '__/__';
+                                        $canceledAt = '__/__';
+                                        $arrivedAt = '__/__';
+                                        $enteredAt = '__/__';
+                                        $unloadedAt = '__/__';
+                                        $leftAt = '__/__';
+                                        if ($order->purchase_order_update) {
+                                        foreach ($order->purchase_order_update as $update) {
+                                        switch ($update->status_id) {
+                                        case 1:
+                                        $arrivalDate = \Carbon\Carbon::parse($update->created_at)->format('Y-m-d H:i:s');
+                                        break;
+                                        case 2:
+                                        $canceledAt = \Carbon\Carbon::parse($update->created_at)->format('Y-m-d H:i:s');
+                                        break;
+                                        case 3:
+                                        $arrivedAt = \Carbon\Carbon::parse($update->created_at)->format('Y-m-d H:i:s');
+                                        break;
+                                        case 4:
+                                        $enteredAt = \Carbon\Carbon::parse($update->created_at)->format('Y-m-d H:i:s');
+                                        break;
+                                        case 5:
+                                        $unloadedAt = \Carbon\Carbon::parse($update->created_at)->format('Y-m-d H:i:s');
+                                        break;
+                                        case 6:
+                                        $leftAt = \Carbon\Carbon::parse($update->created_at)->format('Y-m-d H:i:s');
+                                        break;
+                                        }
+                                        }}
+
+                                        $po_status = 'تم الانشاء';
+                                        $po_status_class = 'text-secondary'; // Default Bootstrap class
+
+                                        switch ($order->status_id) {
+                                        case 1:
+                                        $po_status = 'تم الارسال';
+                                        $po_status_class = 'text-primary';
+                                        break;
+                                        case 2:
+                                        $po_status = 'تم الالغاء';
+                                        $po_status_class = 'text-danger';
+                                        break;
+                                        case 3:
+                                        $po_status = 'تم الوصول';
+                                        $po_status_class = 'text-success';
+                                        break;
+                                        case 4:
+                                        $po_status = 'تم الدخول';
+                                        $po_status_class = 'text-warning';
+                                        break;
+                                        case 5:
+                                        $po_status = 'تم التحميل';
+                                        $po_status_class = 'text-info';
+                                        break;
+                                        case 6:
+                                        $po_status = 'تم المغادره';
+                                        $po_status_class = 'bg-success';
+                                        break;
+                                        }
+                                        @endphp
+
                                         <table class="table table-bordered">
                                             <tr>
                                                 <td><strong>رقم الطلبية</strong></td>
@@ -87,35 +181,36 @@
                                             <tr>
                                                 <td><strong>اسم المندوب</strong></td>
                                                 <td>{{ $order->rep_name }}</td>
-                                                <td><strong>حالة الطلب</strong></td>
-                                                <td>{{ $order->status_id }}</td>
                                                 <td><strong>هاتف السائق</strong></td>
                                                 <td>{{ $order->driver_phone }}</td>
+                                                <td><strong>حالة الطلب</strong></td>
+                                                <td class="{{ $po_status_class }}">{{ $po_status }}</td>
                                             </tr>
                                             <tr>
                                                 <td><strong>هاتف المندوب</strong></td>
                                                 <td>{{ $order->rep_phone }}</td>
-                                                <td><strong>تاريخ الوصول</strong></td>
+                                                <td><strong>تاريخ توقع الوصول</strong></td>
                                                 <td>{{ $order->arrival_date  }}</td>
-                                                <td><strong>تاريخ الإلغاء</strong></td>
-                                                <td>{{ $order->canceled_at }}</td>
-                                            </tr>
-                                            <tr>
-                                                <td><strong>تاريخ التحديث</strong></td>
-                                                <td>{{ $order->updated_at }}</td>
-                                                <td><strong>تاريخ الوصول</strong></td>
-                                                <td>{{ $order->arrived_at }}</td>
-                                                <td><strong>تاريخ الإدخال</strong></td>
-                                                <td>{{ $order->entered_at  }}</td>
-                                            </tr>
-                                            <tr>
 
-                                                <td><strong>تاريخ التفريغ</strong></td>
-                                                <td>{{ $order->unloaded_at  }}</td>
-                                                <td><strong>تاريخ المغادرة</strong></td>
-                                                <td>{{ $order->left_at }}</td>
                                                 <td><strong>تاريخ الإنشاء</strong></td>
                                                 <td>{{ $order->created_at }}</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td><strong>تاريخ توقع الوصول</strong></td>
+                                                <td>{{ $arrivalDate }}</td>
+                                                <td><strong>تاريخ الإلغاء</strong></td>
+                                                <td>{{ $canceledAt }}</td>
+                                                <td><strong>تاريخ الوصول</strong></td>
+                                                <td>{{ $arrivedAt }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>تاريخ الإدخال</strong></td>
+                                                <td>{{ $enteredAt }}</td>
+                                                <td><strong>تاريخ التفريغ</strong></td>
+                                                <td>{{ $unloadedAt }}</td>
+                                                <td><strong>تاريخ المغادرة</strong></td>
+                                                <td>{{ $leftAt }}</td>
                                             </tr>
 
                                         </table>
@@ -139,7 +234,7 @@
                                             </tr>
                                             <tr>
                                                 <?php $i = 0; ?>
-                                                @foreach ($orders as $order)
+                                                @foreach($order->PurchaseOrderUpdate as $order)
                                                 <?php
                                                 $status_name = 'غير معروف';
                                                 $status_color = 'black';

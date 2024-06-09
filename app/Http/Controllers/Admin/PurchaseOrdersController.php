@@ -73,7 +73,6 @@ class PurchaseOrdersController extends Controller
             $query->where('updated_at', 'like', '%' . $request->updated_at . '%');
         }
 
-        // $data = $query->latest()->get();
         $data = $query
             ->orderBy('created_at', 'desc')
             ->orderBy('updated_at', 'desc')
@@ -189,12 +188,10 @@ class PurchaseOrdersController extends Controller
     public function HistoryOfPurchaseOrdersC($id)
     {
         $order = PurchaseOrder::query()->with(['PurchaseOrderUpdate'])->find($id);
-
-        $orders = PurchaseOrderUpdate::find($id)?->get();
         if (!$order) {
             return redirect()->back()->with('error', 'الطلبية غير موجودة');
         }
 
-        return view('admin.orders.history', compact('order', 'orders'));
+        return view('admin.orders.history', compact('order'));
     }
 }
