@@ -43,13 +43,13 @@ class OracleOrderQuery extends Query
         if ($oracleOrder) {
             return [
                 'success' => true,
-                'message' => 'Oracle order details',
+                'message' => 'تفاصيل طلبية اوراكل',
                 'oracle_order' => $oracleOrder
             ];
         } else {
             return [
                 'success' => false,
-                'message' => 'Oracle order not found',
+                'message' => 'لم يتم العثور على طلبية اوراكل',
                 'oracle_order' => null
             ];
         }
