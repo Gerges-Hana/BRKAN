@@ -274,7 +274,7 @@
                                                 <td>{{ ++$i }}</td>
                                                 <td>{{ $order->purchaseOrder->purchase_order_number }}</td>
                                                 <td>{{ $order->purchaseOrder->invoice_number }}</td>
-                                                <td>{{ $order->user->name }}</td>
+                                                <td>{{ $order->user ? $order->user->name : '---' }}</td>
 
 
                                                 <td>
