@@ -1,18 +1,19 @@
 @extends('admin.layout.master')
 
 @section('tap-title')
-القواعد
+اضافه القواعد
 @endsection
 @section('page-style-files')
 
 @endsection
 @section('content-header')
 <div class="content-header-left col-md-6 col-12 mb-1">
-    <h3 class="content-header-title">القواعد</h3>
+    <h3 class="content-header-title">انشاء دور جديد</h3>
 </div>
 <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
     <div class="breadcrumb-wrapper col-12">
         <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">الرئيسية</a></li>
             <li class="breadcrumb-item"><a href="/roles">القواعد</a></li>
             <li class="breadcrumb-item active">اضافه</li>
         </ol>
@@ -28,11 +29,11 @@
                 <div class="row">
                     <div class="col-lg-12 margin-tb p-3">
                         <div class="pull-right">
-                            <h2>انشاء دور جديد</h2>
+                            <!-- <h2>انشاء دور جديد</h2> -->
                         </div>
-                        <div class="pull-left">
+                        <!-- <div class="pull-left">
                             <a class="btn btn-primary" href="{{ route('roles.index') }}"> الرجوع</a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 @if (count($errors) > 0)
@@ -75,9 +76,18 @@
 
                         </div>
                     </div>
+                    <!-- <div class="col-xs-12 col-sm-12 col-md-12 text-left">
+                        <button type="submit" class="btn btn-primary">انشاء</button>
+                        <div class="pull-left">
+                            <a class="btn btn-primary" href="{{ route('roles.index') }}"> الرجوع</a>
+                        </div> -->
+                    </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 text-left">
                         <button type="submit" class="btn btn-primary">انشاء</button>
+                            <a class="btn btn-primary" href="{{ route('roles.index') }}" style="margin-left: 10px;">الرجوع</a>
                     </div>
+
+                    
                 </div>
                 {!! Form::close() !!}
 

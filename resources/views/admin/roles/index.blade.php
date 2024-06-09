@@ -1,7 +1,7 @@
 @extends('admin.layout.master')
 
 @section('tap-title')
-التقارير
+قائمه القواعد
 @endsection
 
 @section('page-style-files')
@@ -10,12 +10,13 @@
 
 @section('content-header')
 <div class="content-header-left col-md-6 col-12 mb-1">
-    <h3 class="content-header-title">القواعد </h3>
+    <h3 class="content-header-title">قائمه القواعد  </h3>
 </div>
 <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
     <div class="breadcrumb-wrapper col-12">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/roles">قائمه القواعد</a></li>
+        <li class="breadcrumb-item"><a href="/">الرئيسية</a></li>
+            <li class="breadcrumb-item">قائمه القواعد</li>
         </ol>
     </div>
 </div>
@@ -27,13 +28,13 @@
             <div class="card">
                 <div class="row">
                     <div class="col-lg-12 margin-tb p-3">
-                        <div class="pull-left">
+                        <div class="pull-right">
                             @can('role-create')
-                            <a class="btn btn-success" href="{{ route('roles.create') }}"> انشاء دور </a>
+                            <a class="btn   btn-success" href="{{ route('roles.create') }}"data-toggle="tooltip" title="انشاء دور جديد"> +  </a>
                             @endcan
                         </div>
                         <div class="pull-right">
-                            <h2>اداره القواعد و الادوار </h2>
+                            <!-- <h2>اداره القواعد و الادوار </h2> -->
                         </div>
 
                     </div>
@@ -54,15 +55,20 @@
                         <td>{{ ++$i }}</td>
                         <td>{{ $role->name }}</td>
                         <td>
-                            <a class="btn btn-outline-primary " href="{{ route('roles.show',$role->id) }}">عرض</a>
+                            <a class="btn btn-sm btn-outline-primary " href="{{ route('roles.show',$role->id) }}"><i data-toggle="tooltip" title="عرض" class="la la-eye"></i></a>
+                           
                             @can('role-edit')
-                            <a class="btn btn-outline-warning " href="{{ route('roles.edit',$role->id) }}">تعديل</a>
+                            <a class="btn btn-sm btn-outline-warning " href="{{ route('roles.edit',$role->id) }}"><i data-toggle="tooltip" title="تعديل" class="la la-edit"></i></a>
                             @endcan
                             @can('role-delete')
-                            {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) !!}
+                            <!-- {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) !!}
                             {!! Form::submit('حذف', ['class' => 'btn btn-outline-danger']) !!}
-                            {!! Form::close() !!}
+                            {!! Form::close() !!} -->
+                            {!! Form::open(['method' => 'DELETE', 'route' => ['roles.destroy', $role->id], 'style' => 'display:inline']) !!}
+                                     <button type="submit" class="btn btn-sm btn-outline-danger" data-toggle="tooltip" title="حذف"><i class="la la-trash"></i> </button>
+                                     {!! Form::close() !!}
                             @endcan
+                            
                         </td>
 
                         
