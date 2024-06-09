@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\PurchaseOrdersController;
 use App\Http\Controllers\Admin\PurchaseOrderStatusesController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SearchController;
+use App\Http\Controllers\Admin\StatisticsController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\TemplateController;
 use Illuminate\Support\Facades\Route;
@@ -14,7 +15,7 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
 //    Route:: get('/{page}', [TemplateController::class, 'index']);
-    Route::get('/', [TemplateController::class, 'home']);
+    Route::get('/', [StatisticsController::class, 'index']);
     Route::get('/orders', [TemplateController::class, 'orders']);
     Route::get('/reports', [TemplateController::class, 'reports']);
 });

@@ -113,7 +113,7 @@
                     <div class="card-body">
                         <div class="media d-flex">
                             <div class="media-body text-left">
-                                <h3 class="primary">500</h3>
+                                <h3 class="primary">{{$allPurchaseOrder->count()}}</h3>
                                 <h5>كل الطلبيات </h5>
                             </div>
                             <div class="align-self-center">
@@ -131,8 +131,8 @@
                     <div class="card-body">
                         <div class="media d-flex">
                             <div class="media-body text-left">
-                                <h3 class="danger">278</h3>
-                                <h5>الطلبيات</h5>
+                                <h3 class="danger">{{$countStatus3_4_5}}</h3>
+                                <h5>الطلبيات غير مكتمله</h5>
                             </div>
                             <div class="align-self-center">
                                 <i class="fa fa-cubes danger font-large-3 float-right"></i>
@@ -148,7 +148,7 @@
                     <div class="card-body">
                         <div class="media d-flex">
                             <div class="media-body text-left">
-                                <h3 class="success">278</h3>
+                                <h3 class="success">{{$countStatus6}}</h3>
                                 <h5>الطلبيات المكتملة</h5>
                             </div>
                             <div class="align-self-center">
@@ -165,7 +165,7 @@
                     <div class="card-body">
                         <div class="media d-flex">
                             <div class="media-body text-left">
-                                <h3 class="success">5</h3>
+                                <h3 class="success">{{$countStatus2}}</h3>
                                 <h5>الطلبيات الملغاه</h5>
                             </div>
                             <div class="align-self-center">
@@ -183,8 +183,8 @@
                     <div class="card-body">
                         <div class="media d-flex">
                             <div class="media-body text-left">
-                                <h3 class="warning">278</h3>
-                                <h5 >الطلبيات القادمة</h5>
+                                <h3 class="warning">{{$countStatus1}}</h3>
+                                <h5 >الطلبيات المرسله</h5>
                             </div>
                             <div class="align-self-center">
                                 <i class="fa fa-truck warning font-large-3 float-right"></i>
@@ -280,7 +280,7 @@
                     <div class="card-body">
                         <div class="media d-flex">
                             <div class="media-body text-left">
-                                <h3 class="primary">250</h3>
+                                <h3 class="primary">{{$ordersToday}}</h3>
                                 <h5> طلبيات اليوم</h5>
                             </div>
                             <div class="align-self-center">
@@ -298,8 +298,8 @@
                     <div class="card-body">
                         <div class="media d-flex">
                             <div class="media-body text-left">
-                                <h3 class="danger">278</h3>
-                                <h5>الطلبيات</h5>
+                                <h3 class="danger">{{$ordersTodayStatus3_4_5}}</h3>
+                                <h5>غير مكتمله</h5>
                             </div>
                             <div class="align-self-center">
                                 <i class="fa fa-cubes danger font-large-3 float-right"></i>
@@ -315,8 +315,8 @@
                     <div class="card-body">
                         <div class="media d-flex">
                             <div class="media-body text-left">
-                                <h3 class="success">278</h3>
-                                <h5>الطلبيات المكتملة</h5>
+                                <h3 class="success">{{$ordersTodayStatus6}}</h3>
+                                <h5> المكتملة</h5>
                             </div>
                             <div class="align-self-center">
                                 <i class="fa fa-check success font-large-3 float-right"></i>
@@ -332,8 +332,8 @@
                     <div class="card-body">
                         <div class="media d-flex">
                             <div class="media-body text-left">
-                                <h3 class="success">5</h3>
-                                <h5>الطلبيات الملغاه</h5>
+                                <h3 class="success">{{$ordersTodayStatus2}}</h3>
+                                <h5> الملغاه</h5>
                             </div>
                             <div class="align-self-center">
                                 <!-- <i class="fa fa-check success font-large-3 float-right"></i> -->
@@ -351,7 +351,7 @@
                     <div class="card-body">
                         <div class="media d-flex">
                             <div class="media-body text-left">
-                                <h3 class="warning">278</h3>
+                                <h3 class="warning">{{$ordersTodayStatus1}}</h3>
                                 <h5>الطلبيات القادمة</h5>
                             </div>
                             <div class="align-self-center">
