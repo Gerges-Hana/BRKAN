@@ -100,7 +100,7 @@ class PurchaseOrdersQuery extends Query
 
         return [
             'success' => true,
-            'message' => 'Purchase orders list',
+            'message' => 'قائمة الطلبيات',
             'purchase_orders' => $query->get()
         ];
     }

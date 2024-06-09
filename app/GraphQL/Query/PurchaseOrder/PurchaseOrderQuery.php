@@ -60,7 +60,7 @@ class PurchaseOrderQuery extends Query
 
         return [
             'success' => true,
-            'message' => 'Purchase order details',
+            'message' => 'تفاصيل الطلبية',
             'purchase_order' => $query->first()
         ];
     }

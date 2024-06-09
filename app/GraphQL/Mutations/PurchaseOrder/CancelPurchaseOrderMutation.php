@@ -44,7 +44,7 @@ class CancelPurchaseOrderMutation extends Mutation
         if (!$purchaseOrder) {
             return [
                 'success' => false,
-                'message' => 'Purchase order not found',
+                'message' => 'لم يتم العثور على الطلبية',
                 'purchase_order' => $purchaseOrder,
             ];
         }
@@ -52,7 +52,7 @@ class CancelPurchaseOrderMutation extends Mutation
         if ($purchaseOrder->status_id == 2) {
             return [
                 'success' => false,
-                'message' => 'Purchased order already canceled',
+                'message' => 'تم الغاء الطلبية بالفعل',
                 'purchase_order' => $purchaseOrder,
             ];
         }
@@ -73,13 +73,13 @@ class CancelPurchaseOrderMutation extends Mutation
 
             return [
                 'success' => true,
-                'message' => 'Cancelled successfully',
+                'message' => 'تم الغاء الطلبية بنجاح',
                 'purchase_order' => $purchaseOrder,
             ];
         } else {
             return [
                 'success' => false,
-                'message' => 'Failed to cancel the purchase order',
+                'message' => 'فشل فى الغاء الطلبية من فضلك حاول مرة اخرى',
                 'purchase_order' => $purchaseOrder,
             ];
         }

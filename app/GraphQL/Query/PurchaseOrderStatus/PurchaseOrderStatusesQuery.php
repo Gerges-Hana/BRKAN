@@ -51,7 +51,7 @@ class PurchaseOrderStatusesQuery extends Query
 
         return [
             'success' => true,
-            'message' => 'Purchase order statuses list',
+            'message' => 'قائمة حالات الطلبية',
             'purchase_order_statuses' => $query->get()
         ];
     }

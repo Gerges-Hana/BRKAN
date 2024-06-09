@@ -30,7 +30,7 @@ class UsersTableSeeder extends Seeder
             ]
         );
         $admin->assignRole([$adminRole->id]);
-        User::factory()->count(50)->create()->each(function ($user) use ($adminRole, $editorRole, $viewerRole) {
+        User::factory()->count(10)->create()->each(function ($user) use ($adminRole, $editorRole, $viewerRole) {
             $roles = [$adminRole, $editorRole, $viewerRole];
             $randomRole = $roles[array_rand($roles)];
             $user->assignRole($randomRole);

@@ -60,13 +60,13 @@ class CreatePurchaseOrderMutation extends Mutation
             if ($currentNotCanceledPurchaseOrder->device_unique_key == $args['device_unique_key']) {
                 return [
                     'success' => false,
-                    'message' => 'Order already created before',
+                    'message' => 'تم اضافة الطلبية من قبل',
                     'purchase_order' => $currentNotCanceledPurchaseOrder,
                 ];
             } else {
                 return [
                     'success' => false,
-                    'message' => 'Order already created before by another driver',
+                    'message' => 'تم انشاء الطلبية بالفعل من قبل بواسطة سائق اخر',
                     'purchase_order' => null,
                 ];
             }
@@ -91,13 +91,13 @@ class CreatePurchaseOrderMutation extends Mutation
         if ($createdPurchaseOrder) {
             return [
                 'success' => true,
-                'message' => "Purchase order created successfully",
+                'message' => "تم انشاء الطلبية بنجاح",
                 'purchase_order' => $createdPurchaseOrder,
             ];
         } else {
             return [
                 'success' => false,
-                'message' => "Failed to create purchase order, Please try again later!",
+                'message' => "فشل فى انشاء الطلبية, برجاء المحاولة فى وقت لاحق!",
                 'purchase_order' => null,
             ];
         }

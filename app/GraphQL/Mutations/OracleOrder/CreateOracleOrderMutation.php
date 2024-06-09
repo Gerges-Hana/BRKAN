@@ -36,7 +36,7 @@ class CreateOracleOrderMutation extends Mutation
         if ($oracleOrder) {
             return [
                 'success' => false,
-                'message' => "Oracle order already created before",
+                'message' => "تم إنشاء الطلب من قبل",
                 'oracle_order' => $oracleOrder,
             ];
         }
@@ -49,13 +49,13 @@ class CreateOracleOrderMutation extends Mutation
         if ($createdOracleOrder) {
             return [
                 'success' => true,
-                'message' => "Oracle order created successfully",
+                'message' => "تم إنشاء الطلب بنجاح",
                 'oracle_order' => $createdOracleOrder,
             ];
         } else {
             return [
                 'success' => false,
-                'message' => "Failed to create oracle order, Please try again later!",
+                'message' => "فشل في إنشاء رقم الطلبية، يرجى المحاولة مرة أخرى في وقت لاحق!",
                 'oracle_order' => null,
             ];
         }
