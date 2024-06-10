@@ -29,7 +29,7 @@
                             <h2> عرض الحاله </h2>
                         </div> -->
                         <div class="pull-right">
-                            <a class="btn btn-secondary" href="{{ route('status.index') }}"data-toggle="tooltip" title="  رجوع"> ></a>
+                            <a class="btn btn-secondary" href="{{ route('status.index') }}"data-toggle="tooltip" title="  رجوع">رجوع ></a>
                         </div>
                     </div>
                 </div>

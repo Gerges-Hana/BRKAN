@@ -35,7 +35,7 @@
                         </div> -->
                         <div class="pull-right">
                             <!-- <a class="btn btn-success" href="{{ route('users.create') }}"> انشاء مستخدم جديد </a> -->
-                            <a class="btn btn-success" href="{{ route('roles.create') }}" data-toggle="tooltip" title="انشاء مستخدم جديد">+ </a>
+                            <a class="btn btn-success" href="{{ route('roles.create') }}" data-toggle="tooltip" title="انشاء مستخدم جديد">انشاء مستخدم جديد  + </a>
 
                         </div>
                     </div>

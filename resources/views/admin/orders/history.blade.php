@@ -1,7 +1,7 @@
 @extends('admin.layout.master')
 
 @section('tap-title')
-المستخدمين
+تفاصيل الطلبيه
 @endsection
 
 @section('page-style-files')
@@ -11,7 +11,7 @@
 
 @section('content-header')
 <div class="content-header-left col-md-6 col-12 mb-1">
-    <h3 class="content-header-title">تفاصيل الطلبيات</h3>
+    <h3 class="content-header-title">تفاصيل الطلبيه</h3>
 </div>
 <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
     <div class="breadcrumb-wrapper col-12">

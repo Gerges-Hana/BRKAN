@@ -25,7 +25,7 @@
                 <div class="row">
                     <div class="col-lg-12 margin-tb p-3">
                         <div class="pull-right">
-                            <a class="btn btn-success" href="{{ route('status.create') }}"data-toggle="tooltip" title="انشاء حاله جديده">  + </a>
+                            <a class="btn btn-success" href="{{ route('status.create') }}"data-toggle="tooltip" title="انشاء حاله جديده"> انشاء حاله جديده + </a>
                         </div>
                         <!-- <div class="pull-right">
                             <h2>اداره حاله التوصيل </h2>
