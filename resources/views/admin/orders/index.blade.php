@@ -6,10 +6,12 @@
 
 @section('page-style-files')
 <link rel="stylesheet" type="text/css" href="{{asset('/app-assets/vendors/css/tables/datatable/jquery.dataTables.min.css')}}">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
 <!-- START MODERN CSS-->
 <link rel="stylesheet" type="text/css" href="{{asset('/app-assets/css-rtl/app.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('/app-assets/css-rtl/custom-rtl.css')}}">
+
 <!-- END MODERN CSS-->
 
 @endsection
@@ -31,6 +33,15 @@
 @endsection
 
 @section('content-body')
+
+
+
+
+
+
+
+
+
 <section id="basic">
     <div class="row">
         <div class="col-12">
@@ -55,8 +66,8 @@
 
                 <!-- =========================== show modal ======================================  -->
                 <!-- Modal -->
-                <div class="modal fade text-left" id="xlarge" tabindex="-1" role="dialog" aria-labelledby="myModalLabel16" aria-hidden="true">
-                    <div class="modal-dialog modal-xl" role="document">
+                <div class="modal fade text-left" id="showOrderDetailsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel16" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h4 class="modal-title" id="myModalLabel16">تفاصيل الطلب</h4>
@@ -64,6 +75,52 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
+                            <div class="modal-body">
+
+
+
+
+
+                            <!-- ============================================================================ -->
+
+         <div class="container mt-5">
+                     <div class="row">
+                                                     <!-- Card for بيانات الطلبيه -->
+                        <div class="col-md-6">
+                         <div class="card mb-3"style=" border: 1px solid rgba(0, 0, 0, .125); border-radius: .25rem;">
+                    <div class="card-header">بيانات الطلبية</div>
+                    <div class="card-body">
+                        <p><strong>رقم الطلبية:</strong> Po97693</p>
+                        <p><strong>رقم الفاتورة:</strong> INV44719</p>
+                        <p><strong>اسم السائق:</strong> Prof. Thaddeus Gorczany</p>
+                        <p><strong>اسم المندوب:</strong> Gillian Luettgen IV</p>
+                        <p><strong>هاتف السائق:</strong> +1 (979) 291-0468</p>
+                        <p><strong>هاتف المندوب:</strong> +1-727-514-9664</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card for التحديثات -->
+            <div class="col-md-6">
+                <div class="card mb-3"style=" border: 1px solid rgba(0, 0, 0, .125);border-radius: .25rem;">
+                    <div class="card-header">التحديثات</div>
+                        <div class="card-body">
+                        <p><strong>وقت الانشاء:</strong> 14:48:25 2024-06-05</p>
+                        <p><strong>وقت اخر تحديث:</strong> 14:48:25 2024-06-05</p>
+                        <p><strong>وقت توقع الوصول:</strong> 2024-09-12</p>
+                        <p><strong>تاريخ الإلغاء:</strong> N/A_2</p>
+                        <p><strong>تاريخ الوصول:</strong> N/A_2</p>
+                        <p><strong>تاريخ الإدخال:</strong> N/A_2</p>
+                        <p><strong>تاريخ التفريغ:</strong> N/A_2</p>
+                        <p><strong>تاريخ المغادرة:</strong> N/A_2</p>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+                            <!-- ========================================================================================= -->
+                            </div> 
                             <div class="modal-body" id="modal-body-content">
                                 <!-- سيتم تحميل تفاصيل الطلب هنا بواسطة AJAX -->
                             </div>
@@ -197,6 +254,12 @@
 <script src="{{asset('/app-assets/js/core/app-menu.js')}}" type="text/javascript"></script>
 <script src="{{asset('/app-assets/js/core/app.js')}}" type="text/javascript"></script>
 <script src="{{asset('/app-assets/js/scripts/customizer.js')}}" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+
 <!-- END MODERN JS-->
 
 @endsection
@@ -420,7 +483,7 @@
                 </table>
             `;
                     $('#modal-body-content').html(details);
-                    $('#xlarge').modal('show');
+                    $('#showOrderDetailsModal').modal('show');
                 },
                 error: function() {
                     alert('خطأ في جلب تفاصيل الطلب');
