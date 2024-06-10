@@ -56,6 +56,7 @@ class CreatePurchaseOrderMutation extends Mutation
             ->where('purchase_order_number', '=', $args['purchase_order_number'])
             ->where('status_id', '!=', 2) // Not Canceled
             ->first();
+
         if ($currentNotCanceledPurchaseOrder) {
             if ($currentNotCanceledPurchaseOrder->device_unique_key == $args['device_unique_key']) {
                 return [
@@ -70,6 +71,18 @@ class CreatePurchaseOrderMutation extends Mutation
                     'purchase_order' => null,
                 ];
             }
+        }
+
+        $currentNotCanceledPurchaseOrderForCurrentDevice = PurchaseOrder::query()
+            ->where('device_unique_key', '=', $args['device_unique_key'])
+            ->where('status_id', '!=', 2) // Not Canceled
+            ->first();
+        if ($currentNotCanceledPurchaseOrderForCurrentDevice) {
+            return [
+                'success' => false,
+                'message' => 'يوجد لديك طلبية بالفعل, قم بإكمال الطلبية او الغائها اولا حتى تتمكن من انشاء طلبية اخرى',
+                'purchase_order' => $currentNotCanceledPurchaseOrderForCurrentDevice,
+            ];
         }
 
         //Create new purchase order
