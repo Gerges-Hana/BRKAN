@@ -1,7 +1,7 @@
 @extends('admin.layout.master')
 
 @section('tap-title')
-اضافه القواعد
+انشاء دور جديد
 @endsection
 @section('page-style-files')
 
@@ -15,7 +15,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">الرئيسية</a></li>
             <li class="breadcrumb-item"><a href="/roles">القواعد</a></li>
-            <li class="breadcrumb-item active">اضافه</li>
+            <li class="breadcrumb-item active">انشاء دور جديد</li>
         </ol>
     </div>
 </div>
@@ -83,8 +83,8 @@
                         </div> -->
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 text-left">
-                        <button type="submit" class="btn btn-primary">انشاء</button>
-                            <a class="btn btn-primary" href="{{ route('roles.index') }}" style="margin-left: 10px;">الرجوع</a>
+                        <button type="submit" class="btn btn-primary">انشاء +</button>
+                            <a class="btn btn-secondary" href="{{ route('roles.index') }}" style="margin-left: 10px;">الرجوع ></a>
                     </div>
 
                     

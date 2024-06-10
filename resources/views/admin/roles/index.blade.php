@@ -30,7 +30,7 @@
                     <div class="col-lg-12 margin-tb p-3">
                         <div class="pull-right">
                             @can('role-create')
-                            <a class="btn   btn-success" href="{{ route('roles.create') }}"data-toggle="tooltip" title="انشاء دور جديد"> +  </a>
+                            <a class="btn   btn-success" href="{{ route('roles.create') }}"data-toggle="tooltip" title="انشاء دور جديد">  انشاء دور جديد + </a>
                             @endcan
                         </div>
                         <div class="pull-right">
