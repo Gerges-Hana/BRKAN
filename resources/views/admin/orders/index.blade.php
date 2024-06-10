@@ -75,10 +75,10 @@
 
                             <!-- orders table -->
                             <div class="table-responsive">
-                                <table class="table table-bordered data-table">
+                                <table class="table table-bordered" id="purchaseOrdersTable">
                                     <thead>
                                     <tr>
-                                        <th>عدد</th>
+                                        <th>#</th>
                                         <th>رقم الطلبية</th>
                                         <th>رقم الفاتورة</th>
                                         <th>اسم السائق</th>
@@ -120,12 +120,13 @@
                                 <div class="card mb-3" style=" border: 1px solid rgba(0, 0, 0, .125); border-radius: .25rem;">
                                     <div class="modal-header">بيانات الطلبية</div>
                                     <div class="modal-body">
-                                        <p><strong>رقم الطلبية:</strong> Po97693</p>
-                                        <p><strong>رقم الفاتورة:</strong> INV44719</p>
-                                        <p><strong>اسم السائق:</strong> Prof. Thaddeus Gorczany</p>
-                                        <p><strong>اسم المندوب:</strong> Gillian Luettgen IV</p>
-                                        <p><strong>هاتف السائق:</strong> +1 (979) 291-0468</p>
-                                        <p><strong>هاتف المندوب:</strong> +1-727-514-9664</p>
+                                        <p><strong>رقم الطلبية: </strong><span id="modal_purchase_order_number"></span></p>
+                                        <p><strong>رقم الفاتورة: </strong><span id="modal_invoice_number"></span></p>
+                                        <p><strong>اسم السائق: </strong><span id="modal_driver_name"></span></p>
+                                        <p><strong>اسم المندوب: </strong><span id="modal_rep_name"></span></p>
+                                        <p><strong>هاتف السائق: </strong><span id="modal_driver_phone"></span></p>
+                                        <p><strong>هاتف المندوب: </strong><span id="modal_rep_phone"></span></p>
+                                        <p><strong>تاريخ الوصول المتوقع: </strong><span id="modal_arrival_date"></span></p>
                                     </div>
                                 </div>
                             </div>
@@ -134,22 +135,22 @@
                                 <div class="card mb-3" style=" border: 1px solid rgba(0, 0, 0, .125);border-radius: .25rem;">
                                     <div class="modal-header">التحديثات</div>
                                     <div class="modal-body">
-                                        <p><strong>وقت الانشاء:</strong> 14:48:25 2024-06-05</p>
-                                        <p><strong>وقت اخر تحديث:</strong> 14:48:25 2024-06-05</p>
-                                        <p><strong>وقت توقع الوصول:</strong> 2024-09-12</p>
-                                        <p><strong>تاريخ الإلغاء:</strong> ----</p>
-                                        <p><strong>تاريخ الوصول:</strong> ----</p>
-                                        <p><strong>تاريخ الإدخال:</strong> ----</p>
-                                        <p><strong>تاريخ التفريغ:</strong> ----</p>
-                                        <p><strong>تاريخ المغادرة:</strong> ----</p>
+                                        <p><strong>حالة الطلبية: </strong><span id="modal_status"></span></p>
+                                        <p><strong>وقت اخر تحديث: </strong><span id="modal_updated_at"></span></p>
+                                        <p><strong>وقت الانشاء: </strong><span id="modal_created_at"></span></p>
+                                        <p><strong>وقت الإلغاء: </strong><span id="modal_canceled_at"></span></p>
+                                        <p><strong>وقت الوصول: </strong><span id="modal_arrived_at"></span></p>
+                                        <p><strong>وقت الدخول: </strong><span id="modal_entered_at"></span></p>
+                                        <p><strong>وقت التفريغ: </strong><span id="modal_unloaded_at"></span></p>
+                                        <p><strong>وقت المغادرة: </strong><span id="modal_left_at"></span></p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                {{--                <div class="modal-body" id="modal-body-content">--}}
-                {{--                </div>--}}
+                <div class="modal-body" id="modal-body-content">
+                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">إغلاق</button>
                 </div>
@@ -213,17 +214,30 @@
     <script src="{{asset('/app-assets/js/core/app-menu.js')}}" type="text/javascript"></script>
     <script src="{{asset('/app-assets/js/core/app.js')}}" type="text/javascript"></script>
     <script src="{{asset('/app-assets/js/scripts/customizer.js')}}" type="text/javascript"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <!-- END MODERN JS-->
 @endsection
 
 @section('scripts')
     <script type="text/javascript">
         $(function () {
-            let table = $('.data-table').DataTable({
+            let table = $('#purchaseOrdersTable').DataTable({
+                bDestroy: true,
                 processing: true,
                 serverSide: true,
+                searching: false,
+                autoWidth: false,
+                order: [[0, 'desc']],
+                paging: true,
+                lengthMenu: [[10, 25, 50, 100], [10, 25, 50, 100]],
+                sPaginationType: "full_numbers",
+                bStateSave: true,
+                fnStateSave: function (oSettings, oData) {
+                    localStorage.setItem('purchaseOrdersDataTables', JSON.stringify(oData));
+                },
+                fnStateLoad: function (oSettings) {
+                    return JSON.parse(localStorage.getItem('purchaseOrdersDataTables'));
+                },
+                language: dataTablesArabicLocalization,
                 ajax: {
                     url: "{{ route('orders.data') }}",
                     method: 'POST',
@@ -240,56 +254,40 @@
                         d.rep_phone = $('#rep_phone').val();
                     }
                 },
-                dom: '<"top"i>rt<"bottom"lp><"clear">',
+                //dom: '<"top"i>rt<"bottom"lp><"clear">',
                 columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex'
-                },
-                    {
-                        data: 'purchase_order_number',
-                        name: 'purchase_order_number'
-                    },
-                    {
-                        data: 'invoice_number',
-                        name: 'invoice_number'
-                    },
-                    {
-                        data: 'driver_name',
-                        name: 'driver_name'
-                    },
-                    {
-                        data: 'rep_name',
-                        name: 'rep_name'
-                    },
-                    {
-                        data: 'driver_phone',
-                        name: 'driver_phone'
-                    },
-                    {
-                        data: 'rep_phone',
-                        name: 'rep_phone'
-                    },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: false,
-                        searchable: false,
-                        render: function (data, type, row) {
-                            let btn = '<div class="d-flex justify-content-between">';
-                            btn += '<button class="btn btn-sm btn-outline-primary d-flex justify-content-between align-items-center mx-1 view-order" data-id="' + row.id + '" data-toggle="tooltip" title="عرض"><i class="la la-eye"></i></button>';
-                            btn += '<a class="btn btn-sm  btn-outline-warning d-flex justify-content-between align-items-center mx-1 edit-order" href="#" data-id="' + row.id + '" data-toggle="tooltip" title="تعديل"><i class="la la-edit"></i></a>';
-                            // btn += '<a class="btn btn-outline-info d-flex justify-content-between align-items-center mx-1 " href="/orders-history/'+ row.id +'"  data-toggle="tooltip" title="تفاصيل"><i class="la ft-file-plus"></i></a>';
-                            btn += '<a class="btn btn-sm btn-outline-info d-flex justify-content-between align-items-center mx-1 " href="/orders-history/' + row.id + '"  data-toggle="tooltip" title="تفاصيل"><i class="la ft-file-plus"></i></a>';
+                    data: 'id', name: 'id'
+                }, {
+                    data: 'purchase_order_number', name: 'purchase_order_number'
+                }, {
+                    data: 'invoice_number', name: 'invoice_number'
+                }, {
+                    data: 'driver_name', name: 'driver_name'
+                }, {
+                    data: 'rep_name', name: 'rep_name'
+                }, {
+                    data: 'driver_phone', name: 'driver_phone'
+                }, {
+                    data: 'rep_phone', name: 'rep_phone'
+                }, {
+                    data: 'id', name: 'id',
+                    orderable: false,
+                    searchable: false,
+                    render: function (data, type, row) {
+                        let btn = '<div class="d-flex justify-content-between">';
+                        btn += '<button class="btn btn-sm btn-outline-primary d-flex justify-content-between align-items-center mx-1 view-order" data-id="' + row.id + '" data-toggle="tooltip" title="عرض"><i class="la la-eye"></i></button>';
+                        btn += '<a class="btn btn-sm  btn-outline-warning d-flex justify-content-between align-items-center mx-1 edit-order" href="#" data-id="' + row.id + '" data-toggle="tooltip" title="تعديل"><i class="la la-edit"></i></a>';
+                        btn += '<a class="btn btn-sm btn-outline-info d-flex justify-content-between align-items-center mx-1 " href="/orders-history/' + row.id + '"  data-toggle="tooltip" title="تفاصيل"><i class="la ft-file-plus"></i></a>';
 
-                            btn += '<form method="POST" action="/orders/' + row.id + '" style="display:inline" onsubmit="return confirm(\'هل أنت متأكد أنك تريد حذف هذا الطلب؟\');">';
-                            btn += '@csrf';
-                            btn += '@method("DELETE")';
-                            btn += '<button type="submit" class="btn btn-sm btn-outline-danger d-flex justify-content-between align-items-center mx-1" data-toggle="tooltip" title="حذف"><i class="la la-trash"></i></button>';
-                            btn += '</form>';
-                            btn += '</div>';
-                            return btn;
-                        }
+                        btn += '<form method="POST" action="/orders/' + row.id + '" style="display:inline" onsubmit="return confirm(\'هل أنت متأكد أنك تريد حذف هذا الطلب؟\');">';
+                        btn += '@csrf';
+                        btn += '@method("DELETE")';
+                        btn += '<button type="submit" class="btn btn-sm btn-outline-danger d-flex justify-content-between align-items-center mx-1" data-toggle="tooltip" title="حذف"><i class="la la-trash"></i></button>';
+                        btn += '</form>';
+                        btn += '</div>';
+                        return btn;
                     }
+                }
                 ]
             });
 
@@ -310,60 +308,41 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function (data) {
-                        console.log('show');
-                        console.log(data);
-                        console.log('show');
-                        let formatDate = function (date) {
-                            return date ? moment(date).format('YYYY-MM-DD HH:mm:ss') : 'N/A';
-                        };
-
-                        let arrivalDate = '----';
+                        let updatedAt = formatDate(data.updated_at);
+                        let arrivalDate = formatDate(data.arrival_date, 'YYYY-MM-DD');
+                        let createdAt = '----';
                         let canceledAt = '----';
                         let arrivedAt = '----';
                         let enteredAt = '----';
                         let unloadedAt = '----';
                         let leftAt = '----';
-                        let po_status = 'تم الانشاء';
                         let po_status_class = 'text-secondary';
 
                         switch (data.status_id) {
                             case 1:
-                                po_status = 'تم الارسال';
                                 po_status_class = 'text-primary';
-
                                 break;
                             case 2:
-                                po_status = 'تم الالغاء';
                                 po_status_class = 'text-danger';
-
                                 break;
                             case 3:
-                                po_status = 'تم الوصول';
-                                po_status_class = 'text-success';
-
+                                po_status_class = 'text-dark';
                                 break;
                             case 4:
-                                po_status = 'تم الدخول';
-                                po_status_class = 'text-warning';
-
+                                po_status_class = 'text-info';
                                 break;
                             case 5:
-                                po_status = 'تم التحميل';
-                                po_status_class = 'text-info';
-
+                                po_status_class = 'text-warning';
                                 break;
                             case 6:
-                                po_status = 'تم المغادره';
-                                po_status_class = 'text-dark';
-
+                                po_status_class = 'text-success';
                                 break;
                         }
-
 
                         data.purchase_order_update.forEach(function (update) {
                             switch (update.status_id) {
                                 case 1:
-                                    arrivalDate = formatDate(update.created_at);
+                                    createdAt = formatDate(update.created_at);
                                     break;
                                 case 2:
                                     canceledAt = formatDate(update.created_at);
@@ -383,55 +362,23 @@
                             }
                         });
 
+                        $('#modal_purchase_order_number').html(data.purchase_order_number);
+                        $('#modal_invoice_number').html(data.invoice_number);
+                        $('#modal_driver_name').html(data.driver_name);
+                        $('#modal_rep_name').html(data.rep_name);
+                        $('#modal_driver_phone').html(data.driver_phone);
+                        $('#modal_rep_phone').html(data.rep_phone);
+                        $('#modal_arrival_date').html(arrivalDate);
 
-                        let details = `
-                <table class="table table-bordered">
-                    <tr>
-                        <td><strong>رقم الطلبية</strong></td>
-                        <td>${data.purchase_order_number}</td>
-                        <td><strong>رقم الفاتورة</strong></td>
-                        <td>${data.invoice_number}</td>
-                        <td><strong>اسم السائق</strong></td>
-                        <td>${data.driver_name}</td>
+                        $('#modal_status').html(data.status.name).removeClass().addClass(po_status_class);
+                        $('#modal_updated_at').html(updatedAt);
+                        $('#modal_created_at').html(createdAt);
+                        $('#modal_canceled_at').html(canceledAt);
+                        $('#modal_arrived_at').html(arrivedAt);
+                        $('#modal_entered_at').html(enteredAt);
+                        $('#modal_unloaded_at').html(unloadedAt);
+                        $('#modal_left_at').html(leftAt);
 
-                    </tr>
-                    <tr>
-                    <td><strong>اسم المندوب</strong></td>
-                        <td>${data.rep_name}</td>
-                        <td><strong>هاتف السائق</strong></td>
-                        <td>${data.driver_phone}</td>
-                        <td><strong>هاتف المندوب</strong></td>
-                        <td>${data.rep_phone}</td>
-
-                        </tr>
-                    <tr>
-                        <td><strong>وقت الإنشاء</strong></td>
-                        <td>${formatDate(data.created_at)}</td>
-                        <td><strong>وقت اخر تحديث</strong></td>
-                        <td>${formatDate(data.updated_at)}</td>
-                        <td><strong>وقت توقع الوصول</strong></td>
-                        <td>${data.arrival_date}</td>
-                     </tr>
-
-                    <tr>
-                        <td><strong>حالة الطلب</strong></td>
-                        <td class="${po_status_class}">${po_status}</td>
-                        <td><strong>تاريخ الإلغاء</strong></td>
-                        <td>${canceledAt}</td>
-                        <td><strong>تاريخ الوصول</strong></td>
-                        <td>${arrivedAt}</td>
-                    </tr>
-                    <tr>
-                        <td><strong>تاريخ الإدخال</strong></td>
-                        <td>${enteredAt}</td>
-                        <td><strong>تاريخ التفريغ</strong></td>
-                        <td>${unloadedAt}</td>
-                        <td><strong>تاريخ المغادرة</strong></td>
-                        <td>${leftAt}</td>
-                    </tr>
-                </table>
-            `;
-                        $('#modal-body-content').html(details);
                         $('#showOrderDetailsModal').modal('show');
                     },
                     error: function () {
@@ -512,6 +459,10 @@
             // =================================== update  ============================
 
         });
+
+        function formatDate(date, format = 'YYYY-MM-DD HH:mm:ss') {
+            return date ? moment(date).format(format) : '----';
+        }
     </script>
     <script>
         $(function () {

@@ -75,8 +75,7 @@ class PurchaseOrdersController extends Controller
 
         $data = $query
             ->orderBy('created_at', 'desc')
-            ->orderBy('updated_at', 'desc')
-            ->get();
+            ->orderBy('updated_at', 'desc');
         return DataTables::of($data)
             ->addIndexColumn()
             ->rawColumns(['action'])
@@ -97,7 +96,7 @@ class PurchaseOrdersController extends Controller
 
     public function show($id)
     {
-        $order = PurchaseOrder::query()->with(['PurchaseOrderUpdate'])->find($id);
+        $order = PurchaseOrder::query()->with(['PurchaseOrderUpdate', 'status'])->find($id);
         if (!$order) {
             return response()->json(['message' => 'الطلب غير موجود'], 404);
         }
@@ -113,6 +112,7 @@ class PurchaseOrdersController extends Controller
 
         return response()->json($order);
     }
+
     public function update(Request $request, $id)
     {
 
@@ -141,7 +141,7 @@ class PurchaseOrdersController extends Controller
             $order->PurchaseOrderUpdate()->create([
                 'purchase_order_id' => $order->id,
                 'user_id' => Auth::id(),
-                'status_id' => $statusId-1,
+                'status_id' => $statusId - 1,
                 'created_at' => $request->entered_at,
             ]);
 
@@ -155,14 +155,14 @@ class PurchaseOrdersController extends Controller
             $order->PurchaseOrderUpdate()->create([
                 'purchase_order_id' => $order->id,
                 'user_id' => Auth::id(),
-                'status_id' => $statusId-2,
+                'status_id' => $statusId - 2,
                 'created_at' => $request->entered_at,
             ]);
 
             $order->PurchaseOrderUpdate()->create([
                 'purchase_order_id' => $order->id,
                 'user_id' => Auth::id(),
-                'status_id' => $statusId-1,
+                'status_id' => $statusId - 1,
                 'created_at' => $request->unloaded_at,
             ]);
 
