@@ -27,6 +27,10 @@ class PurchaseOrderQuery extends Query
                 'name' => 'id',
                 'type' => Type::int()
             ],
+            'device_unique_key' => [
+                'name' => 'device_unique_key',
+                'type' => Type::string(),
+            ],
             'purchase_order_number' => [
                 'name' => 'purchase_order_number',
                 'type' => Type::string(),
@@ -58,10 +62,19 @@ class PurchaseOrderQuery extends Query
             $query->where('invoice_number', '=', $args['invoice_number']);
         }
 
-        return [
-            'success' => true,
-            'message' => 'تفاصيل الطلبية',
-            'purchase_order' => $query->first()
-        ];
+        $purchase_order = $query->first();
+        if ($purchase_order) {
+            return [
+                'success' => true,
+                'message' => 'تفاصيل الطلبية',
+                'purchase_order' => $purchase_order
+            ];
+        } else {
+            return [
+                'success' => false,
+                'message' => 'لم يتم العثور على الطلبية',
+                'purchase_order' => null
+            ];
+        }
     }
 }
