@@ -47,7 +47,8 @@ class PurchaseOrderQuery extends Query
         $fields = $getSelectFields();
         $select = $fields->getSelect();
         $with = $fields->getRelations();
-        $query = PurchaseOrder::query()/*->select($select)*/ ->with($with);
+        $query = PurchaseOrder::query()/*->select($select)*/ ->with($with)
+            ->where('status_id', '!=', 2); // Not Canceled
 
         if (isset($args['id'])) {
             $query->find($args['id']);
