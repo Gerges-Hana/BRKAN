@@ -19,16 +19,17 @@ class StatisticsController extends Controller
         $countStatus2 = PurchaseOrder::where('status_id',2)->get()->count();
         $countStatus3_4_5 = PurchaseOrder::whereIn('status_id',[3,4,5])->count();
         $countStatus6 = PurchaseOrder::where('status_id',6)->get()->count();
-    // $countStatus2 = $allPurchaseOrder->filter(function ($order) {
-    //     return $order->purchaseOrderUpdate->contains('status_id', 2);
-    // })->count();
 
     $today = Carbon::today();
-    $ordersToday = PurchaseOrder::whereDate('created_at', $today)->get()->count();
-    $ordersTodayStatus1 = PurchaseOrder::whereDate('created_at', $today)->where('status_id',1)->get()->count();
-    $ordersTodayStatus2 = PurchaseOrder::whereDate('created_at', $today)->where('status_id',1)->get()->count();
-    $ordersTodayStatus3_4_5 = PurchaseOrder::whereDate('created_at', $today)->whereIn('status_id',[3,4,5])->count();
-    $ordersTodayStatus6 = PurchaseOrder::whereDate('created_at', $today)->where('status_id',6)->get()->count();
+    $ordersToday = PurchaseOrder::query()
+        ->whereDate('arrival_date', $today)
+        ->count();
+
+    $ordersTodayStatus1 = PurchaseOrder::whereDate('arrival_date', $today)->where('status_id',1)->count();
+
+    $ordersTodayStatus2 = PurchaseOrder::whereDate('arrival_date', $today)->where('status_id',2)->get()->count();
+    $ordersTodayStatus3_4_5 = PurchaseOrder::whereDate('arrival_date', $today)->whereIn('status_id',[3,4,5])->count();
+    $ordersTodayStatus6 = PurchaseOrder::whereDate('arrival_date', $today)->where('status_id',6)->get()->count();
 
     return view('admin.home.index', compact(
         'allPurchaseOrder',
