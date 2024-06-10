@@ -28,6 +28,9 @@
 {{--footer section--}}
 @include('admin.layout.footer')
 
+{{--modals section--}}
+@yield('modals')
+
 {{--scripts section--}}
 @include('admin.layout.script')
 
