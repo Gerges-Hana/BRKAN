@@ -24,7 +24,7 @@ $(window).on("load", function(){
 
     // Chart Data
     var chartData = {
-        labels: ["January", "February", "March", "April", "May"],
+        labels: ["ههههه", "February", "March", "April", "May"],
         datasets: [{
             label: "My First dataset",
             data: [65, 35, 24, 45, 85],
