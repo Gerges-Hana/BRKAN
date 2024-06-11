@@ -94,12 +94,18 @@
                             {!! Form::select('roles[]', $roles,[], array('class' => 'form-control col-8','multiple')) !!}
                         </div>
                     </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6 text-left">
+                    
+                    <!-- <div class="col-xs-6 col-sm-6 col-md-6 text-left">
                     
                         <button type="submit" class="btn btn-primary">تعديل +</button>
                         <a class="btn btn-secondary" href="{{ route('users.index') }}"data-toggle="tooltip" title="  رجوع">رجوع ></a>
-                    </div>
+                    </div> -->
                 </div>
+                <div class="pull-left">
+                <button type="submit" class="btn btn-primary">تعديل +</button>
+                          <a class="btn btn-secondary" href="{{ route('users.index') }}"  style="margin-left: 10px;" data-toggle="tooltip" title="  رجوع">رجوع > </a>
+                         
+                        </div>
 
                 {!! Form::close() !!}
 

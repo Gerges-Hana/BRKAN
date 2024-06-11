@@ -19,8 +19,12 @@
                 </li>
                 <li class="breadcrumb-item active">تفاصيل الطلبيه
                 </li>
+                
             </ol>
+            
         </div>
+        
+        
     </div>
 @endsection
 
@@ -287,12 +291,20 @@
 
                                                     </tr>
                                             </table>
+                                            
                                         </div>
+                                        <div class="pull-left">
+                          <a class="btn btn-secondary" href="{{ route('users.index') }}"  data-toggle="tooltip" title="  رجوع">رجوع > </a>
+                         
+                        </div>
+                                        
 
                                     </div>
                                 </div>
                             </div>
+                            
                         </div>
+                        
                     </div>
                     <!-- ================================================================================ -->
 

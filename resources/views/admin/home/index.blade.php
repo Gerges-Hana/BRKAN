@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('/app-assets/vendors/css/charts/chartist.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('/app-assets/vendors/css/charts/chartist-plugin-tooltip.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('/app-assets/css-rtl/pages/dashboard-ecommerce.css')}}">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 
 @endsection
 
@@ -293,6 +294,7 @@
 <script src="{{asset('/app-assets/vendors/js/charts/jvector/jquery-jvectormap-2.0.3.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('/app-assets/vendors/js/charts/jvector/jquery-jvectormap-world-mill.js')}}" type="text/javascript"></script>
 <script src="{{asset('/app-assets/data/jvector/visitor-data.js')}}" type="text/javascript"></script>
+ 
 @endsection
 
 @section('scripts')
@@ -305,6 +307,15 @@
             responsive: true,
             maintainAspectRatio: false,
             responsiveAnimationDuration: 500,
+            plugins: {
+                    legend: {
+                        labels: {
+                            font: {
+                                family: 'Cairo, Roboto, sans-serif !important' 
+                            }
+                        }
+                    }
+                }
         };
         console.log("geregs");
 

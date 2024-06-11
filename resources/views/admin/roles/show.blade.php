@@ -29,9 +29,7 @@
                         <div class="pull-right">
                             <!-- <h2> عرض الادوار </h2> -->
                         </div>
-                        <div class="pull-left">
-                            <a class="btn btn-secondary" href="{{ route('roles.index') }}"data-toggle="tooltip" title="  رجوع"> رجوع ></a>
-                        </div>
+                        
                     </div>
                 </div>
                 <div class="row">
@@ -60,6 +58,9 @@
                                     @endif
                                 </div>
                             </div>
+                        </div>
+                        <div class="pull-left">
+                            <a class="btn btn-secondary" href="{{ route('roles.index') }}"data-toggle="tooltip" title="  رجوع"> رجوع ></a>
                         </div>
                     </div>
                 </div>
