@@ -15,9 +15,9 @@ return new class extends Migration {
             $table->integer('purchase_order_id');
             $table->integer('user_id')->nullable();
             $table->integer('status_id')->nullable();
-            $table->foreign('purchase_order_id')->references('id')->on('purchase_orders')->onDelete('set null');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
-            $table->foreign('status_id')->references('id')->on('purchase_order_statuses')->onDelete('set null');
+            $table->foreign('purchase_order_id')->references('id')->on('purchase_orders')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('status_id')->references('id')->on('purchase_order_statuses')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
