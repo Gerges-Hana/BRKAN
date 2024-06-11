@@ -84,11 +84,13 @@
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-12 text-left">
                         
-                        <a class="btn btn-secondary" href="{{ route('roles.index') }}"style="margin-right: 10px;"data-toggle="tooltip" title="  رجوع" >رجوع > </a>
-                        <div class="pull-right">
+                        
+                        <div class="pull-left">
                         <button type="submit" class="btn btn-primary"  >تعديل +</button>
-                        </div>
+                        <a class="btn btn-secondary" href="{{ route('roles.index') }}"data-toggle="tooltip" title="  رجوع" >رجوع > </a>
                     </div>
+                        </div>
+                          </div>
                 </div>
                 {!! Form::close() !!}
             </div>

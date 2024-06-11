@@ -81,11 +81,11 @@
                                 <label class="badge badge-success">{{ $v }}</label>
                                 @endforeach
                                 @endif
-                                <a class="btn btn-secondary" href="{{ route('users.index') }}"  style="margin-right: 50px;" data-toggle="tooltip" title="  رجوع">رجوع > </a>
-                            </div>
-                            <!-- <div class="pull-right">
-                          
-                        </div> -->
+                                   </div>
+                            <div class="pull-left">
+                          <a class="btn btn-secondary" href="{{ route('users.index') }}"  style="margin-left: 10px;" data-toggle="tooltip" title="  رجوع">رجوع > </a>
+                         
+                        </div>
                        
                             
                         </div>
