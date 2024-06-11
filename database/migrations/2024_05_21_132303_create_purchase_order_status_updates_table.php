@@ -17,8 +17,8 @@ return new class extends Migration {
             $table->string('name');
             $table->boolean('is_active')->nullable();
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('status_id')->references('id')->on('purchase_order_statuses')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('status_id')->references('id')->on('purchase_order_statuses')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
