@@ -221,8 +221,6 @@
                                                 <td><strong>اسم المشرف </strong></td>
                                                 <td><strong> الوقت </strong></td>
                                                 <td><strong> الحاله </strong></td>
-
-
                                             </tr>
                                             <tr>
                                                 <?php $i = 0; ?>
