@@ -283,14 +283,7 @@
 @endsection
 
 
-
-
-
-
-
-
 @section('page-script-files')
-
 <script src="{{asset('/app-assets/vendors/js/charts/chart.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('/app-assets/vendors/js/charts/chartist.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('/app-assets/vendors/js/charts/chartist-plugin-tooltip.min.js')}}" type="text/javascript"></script>
@@ -300,21 +293,91 @@
 <script src="{{asset('/app-assets/vendors/js/charts/jvector/jquery-jvectormap-2.0.3.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('/app-assets/vendors/js/charts/jvector/jquery-jvectormap-world-mill.js')}}" type="text/javascript"></script>
 <script src="{{asset('/app-assets/data/jvector/visitor-data.js')}}" type="text/javascript"></script>
-
-
-<!-- <script src="{{asset('/app-assets/js/scripts/charts/chartjs/pie-doughnut/pie-simple.js')}}" type="text/javascript"></script> -->
-<!-- <script src="{{asset('/app-assets/js/scripts/charts/chartjs/pie-doughnut/doughnut-simple.js')}}" type="text/javascript"></script> -->
 @endsection
 
 @section('scripts')
+<!-- ==========================stare simple-pie-chart===================================== -->
+<script>
+    $(window).on("load", function() {
 
-<!-- ==========================staret ecommerce ChartView========================================= -->
+        var ctx = $("#simple-pie-chart");
+        var chartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            responsiveAnimationDuration: 500,
+        };
+        console.log("geregs");
+
+        var chartData = {
+            labels: ["تم الارسال", "تم الدخول", "تم الوصول", "تم الالغاء", "تم المغادره"],
+            datasets: [{
+                label: "حاله الطلبيات",
+                data: [
+                    '{{$countStatus1}}',
+                    '{{$countStatus2}}',
+                    '{{$countStatus3}}',
+                    '{{$countStatus4}}',
+                    '{{$countStatus5}}',
+                ],
+                backgroundColor: ['#00A5A8', '#626E82', '#FF7D4D', '#FF4558', '#28D094'],
+            }]
+        };
+        var config = {
+            type: 'pie',
+            options: chartOptions,
+            data: chartData
+        };
+        var pieSimpleChart = new Chart(ctx, config);
+    });
+</script>
+<!-- ==========================end simple-pie-chart========================================== -->
+
+<!-- ==========================start simple-doughnut-chart=================================== -->
+<script>
+    $(window).on("load", function() {
+        var ctx = $("#simple-doughnut-chart");
+        var chartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            responsiveAnimationDuration: 500,
+        };
+        var chartData = {
+            labels: [
+                "الطلبيات القادمه اليوم",
+                "الطلبيات الملغاه اليوم",
+                "الطلبيات الواصله",
+                "الطلبات المدخله اليوم",
+                "الطلبات المكتمله اليوم"
+            ],
+            datasets: [{
+                label: "طلبيه اليوم",
+                data: [
+                    '{{$ordersTodayStatus1}}',
+                    '{{$ordersTodayStatus2}}',
+                    '{{$ordersTodayStatus3}}',
+                    '{{$ordersTodayStatus4}}',
+                    '{{$ordersTodayStatus5}}'
+                ],
+                backgroundColor: ['#00A5A8', '#626E82', '#FF7D4D', '#FF4558', '#28D094'],
+            }]
+        };
+        var config = {
+            type: 'doughnut',
+            options: chartOptions,
+            data: chartData
+        };
+        var doughnutSimpleChart = new Chart(ctx, config);
+    });
+</script>
+
+<!-- ==========================end simple-doughnut-chart===================================== -->
+
+<!-- ==========================staret ecommerce ChartView==================================== -->
 <script>
     $(window).on("load", function() {
         $('#recent-buyers, #new-orders').perfectScrollbar({
             wheelPropagation: true
         });
-
         /********************************************
          *               Monthly Sales               *
          ********************************************/
@@ -322,66 +385,7 @@
             var color;
             return "0-#fff-#f00:20-#000";
         };
-
-        Morris.Bar({
-            element: 'monthly-sales',
-            data: [{
-                month: 'Jan',
-                sales: 1835
-            }, {
-                month: 'Feb',
-                sales: 2356
-            }, {
-                month: 'Mar',
-                sales: 1459
-            }, {
-                month: 'Apr',
-                sales: 1289
-            }, {
-                month: 'May',
-                sales: 1647
-            }, {
-                month: 'Jun',
-                sales: 2156
-            }, {
-                month: 'Jul',
-                sales: 1835
-            }, {
-                month: 'Aug',
-                sales: 2356
-            }, {
-                month: 'Sep',
-                sales: 1459
-            }, {
-                month: 'Oct',
-                sales: 1289
-            }, {
-                month: 'Nov',
-                sales: 1647
-            }, {
-                month: 'Dec',
-                sales: 2156
-            }],
-            xkey: 'month',
-            ykeys: ['sales'],
-            labels: ['Sales'],
-            barGap: 4,
-            barSizeRatio: 0.3,
-            gridTextColor: '#bfbfbf',
-            gridLineColor: '#E4E7ED',
-            numLines: 5,
-            gridtextSize: 14,
-            resize: true,
-            barColors: ['#FF394F'],
-            hideHover: 'auto',
-        });
-
     });
-
-
-
-
-
     (function(window, document, $) {
         'use strict';
         /*************************************************
@@ -493,24 +497,24 @@
 
             var DayLabelList = ["اليوم", "الامس", "من 3 ايام", "من 4 ايام", "من 5 ايام", "من 6 ايام", "من 7 ايام", "من 8 ايام"];
 
-var DaySeries1List = {
-    name: "series-1",
-    data: [{{$day_1}}, {{$day_2}}, {{$day_3}}, {{$day_4}}, {{$day_5}}, {{$day_6}}, {{$day_7}}, {{$day_8}}]
-};
+            var DaySeries1List = {
+                name: "series-1",
+                data: ['{{$day_1}}', '{{$day_2}}', '{{$day_3}}', '{{$day_4}}', '{{$day_5}}', '{{$day_6}}', '{{$day_7}}', '{{$day_8}}']
+            };
 
-var WeekLabelList = ["الاسبوع الاول ", "الاسبوع الثاني", "الاسبوع الثالث", "الاسبوع الرابع ", "الاسبوع الخامس", "الاسبوع السادس", "الاسبوع السابع", "الاسبوع الثامن"];
+            var WeekLabelList = ["الاسبوع الاول ", "الاسبوع الثاني", "الاسبوع الثالث", "الاسبوع الرابع ", "الاسبوع الخامس", "الاسبوع السادس", "الاسبوع السابع", "الاسبوع الثامن"];
 
-var WeekSeries1List = {
-    name: "series-1",
-    data: [{{$week_1}},{{$week_2}},{{$week_3}},{{$week_4}},{{$week_5}},{{$week_6}},{{$week_7}},{{$week_8}}]
-};
+            var WeekSeries1List = {
+                name: "series-1",
+                data: ['{{$week_1}}', '{{$week_2}}', '{{$week_3}}', '{{$week_4}}', '{{$week_5}}', '{{$week_6}}', '{{$week_7}}', '{{$week_8}}']
+            };
 
-var MonthLabelList = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"];
+            var MonthLabelList = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"];
 
-var MonthSeries1List = {
-    name: "series-1",
-    data: [{{$month_1}}, {{$month_2}}, {{$month_3}}, {{$month_4}}, {{$month_5}}, {{$month_6}}, {{$month_7}}, {{$month_8}}, {{$month_9}}, {{$month_10}}, {{$month_11}}, {{$month_12}}]
-};
+            var MonthSeries1List = {
+                name: "series-1",
+                data: ['{{$month_1}}', '{{$month_2}}', '{{$month_3}}', '{{$month_4}}', '{{$month_5}}', '{{$month_6}}', '{{$month_7}}', '{{$month_8}}', '{{$month_9}}', '{{$month_10}}', '{{$month_11}}', '{{$month_12}}']
+            };
 
 
             var createChart = function createChart(button) {
@@ -628,59 +632,5 @@ var MonthSeries1List = {
         });
     })(window, document, jQuery);
 </script>
-<!-- ==========================end ecommerce ChartView============================================= -->
-
-<!-- ==========================stare simple-pie-chart===================================== -->
-<script>
-        $(window).on("load", function() {
-            var ctx = $("#simple-pie-chart");
-            var chartOptions = {
-                responsive: true,
-                maintainAspectRatio: false,
-                responsiveAnimationDuration: 500,
-            };
-            var chartData = {
-                labels: ["تم الارسال", "تم الدخول", "تم الوصول", "تم الالغاء", "تم المغادره"],
-                datasets: [{
-                    label: "حاله الطلبيات",
-                    data: [{{ $countStatus1 }}, {{ $countStatus2 }}, {{ $countStatus3 }}, {{ $countStatus4 }}, {{ $countStatus5 }}],
-                    backgroundColor: ['#00A5A8', '#626E82', '#FF7D4D', '#FF4558', '#28D094'],
-                }]
-            };
-            var config = {
-                type: 'pie',
-                options: chartOptions,
-                data: chartData
-            };
-            var pieSimpleChart = new Chart(ctx, config);
-        });
-    </script>
-<!-- ==========================end simple-pie-chart===================================== -->
-<script>
-        $(window).on("load", function() {
-            var ctx = $("#simple-doughnut-chart");
-            var chartOptions = {
-                responsive: true,
-                maintainAspectRatio: false,
-                responsiveAnimationDuration: 500,
-            };
-            var chartData = {
-                labels: ["الطلبيات القادمه اليوم", "الطلبيات الملغاه اليوم", "الطلبيات الواصله", "الطلبات المدخله اليوم", "الطلبات المكتمله اليوم"],
-                datasets: [{
-                    label: "طلبيه اليوم",
-                    data: [{{ $ordersTodayStatus1 }}, {{ $ordersTodayStatus2 }}, {{ $ordersTodayStatus3 }}, {{ $ordersTodayStatus4 }}, {{ $ordersTodayStatus6 }}],
-                    backgroundColor: ['#00A5A8', '#626E82', '#FF7D4D', '#FF4558', '#28D094'],
-                }]
-            };
-            var config = {
-                type: 'doughnut',
-                options: chartOptions,
-                data: chartData
-            };
-
-            var doughnutSimpleChart = new Chart(ctx, config);
-        });
-    </script>
-<!-- ==========================end simple-doughnut-chart===================================== -->
-
+<!-- ==========================end ecommerce ChartView======================================= -->
 @endsection
