@@ -518,22 +518,24 @@
                 name: "series-1",
                 data: ['{{$week_1}}', '{{$week_2}}', '{{$week_3}}', '{{$week_4}}', '{{$week_5}}', '{{$week_6}}', '{{$week_7}}', '{{$week_8}}']
             };
-
-            // var MonthLabelList = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"];
-
-            // var MonthSeries1List = {
-            //     name: "series-1",
-            //     data: ['{{$month_1}}', '{{$month_2}}', '{{$month_3}}', '{{$month_4}}', '{{$month_5}}', '{{$month_6}}', '{{$month_7}}', '{{$month_8}}', '{{$month_9}}', '{{$month_10}}', '{{$month_11}}', '{{$month_12}}']
-            // };
-
-            var MonthLabelList = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"].reverse();
-
+            var MonthLabelList = [
+                "يناير",
+                "فبراير",
+                "مارس",
+                "أبريل",
+                "مايو",
+                "يونيو",
+                "يوليو",
+                "أغسطس",
+                "سبتمبر",
+                "أكتوبر",
+                "نوفمبر",
+                "ديسمبر"
+            ];
             var MonthSeries1List = {
                 name: "series-1",
-                data: ['{{$month_12}}', '{{$month_11}}', '{{$month_10}}', '{{$month_9}}', '{{$month_8}}', '{{$month_7}}', '{{$month_6}}', '{{$month_5}}', '{{$month_4}}', '{{$month_3}}', '{{$month_2}}', '{{$month_1}}'].reverse()
+                data: ['{{$month_1}}', '{{$month_2}}', '{{$month_3}}', '{{$month_4}}', '{{$month_5}}', '{{$month_6}}', '{{$month_7}}', '{{$month_8}}', '{{$month_9}}', '{{$month_10}}', '{{$month_11}}', '{{$month_12}}']
             };
-
-
             var createChart = function createChart(button) {
                 var btn = button || $("#ecommerceChartView .chart-action").find(".active");
 
@@ -550,7 +552,6 @@
                         break;
                 }
             };
-
             createChart();
             $(".chart-action li a").on("click", function() {
                 createChart($(this));
