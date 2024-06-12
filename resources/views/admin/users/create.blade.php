@@ -92,6 +92,7 @@
                         <button type="submit" class="btn btn-primary">موافق</button>
                         <a class="btn btn-primary" href="{{ route('users.index') }}"style="margin-left: 10px;"> الرجوع</a>
                     </div>
+                    
                    
                 </div>
                 {!! Form::close() !!}

@@ -57,11 +57,9 @@
                             {!! Form::select('is_active', ['1' => 'مفعله', '0' => 'غير مفعله'], null, ['class' => 'form-control col-8']) !!}
                         </div>
                     </div>
-
-                    <div class="col-xs-12 col-sm-12 col-md-12 text-left">
-                        
-                        <button type="submit" class="btn btn-primary"> انشاء +</button>
-                        <a class="btn btn-secondary" href="{{ route('status.index') }}"> رجوع > </a>
+                    <div class="col-xs-12 col-sm-12 col-md-12 text-right">
+                        <button type="submit" class="btn btn-primary">انشاء +</button>
+                            <a class="btn btn-secondary" href="{{ route('status.index') }}" style="margin-left: 10px;">الرجوع ></a>
                     </div>
                 </div>
                 {!! Form::close() !!}
