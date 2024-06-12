@@ -82,10 +82,13 @@
                             <a class="btn btn-primary" href="{{ route('roles.index') }}"> الرجوع</a>
                         </div> -->
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12 text-left">
+                    <div class="col-xs-12 col-sm-12 col-md-12 text-right">
                         <button type="submit" class="btn btn-primary">انشاء +</button>
-                            <a class="btn btn-secondary" href="{{ route('roles.index') }}" style="margin-left: 10px;">الرجوع ></a>
+                        <a class="btn btn-outline-secondary" href="{{ route('roles.index') }}"  style="width: 80px">
+                            الرجوع <i class="fa fa-chevron-left"></i>
+                        </a>
                     </div>
+                   
 
                     
                 </div>
