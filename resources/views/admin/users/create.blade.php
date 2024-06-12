@@ -90,9 +90,9 @@
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6 text-left">
                         <button type="submit" class="btn btn-primary">موافق</button>
-                        <a class="btn btn-primary" href="{{ route('users.index') }}"style="margin-left: 10px;"> الرجوع</a>
+                        <a class="btn btn-primary" href="{{ route('users.index') }}"style="margin-left: 10px;"> <i class='fa fa-chevron-left'></i>الرجوع</a>
+                        
                     </div>
-                   
                 </div>
                 {!! Form::close() !!}
             </div>
