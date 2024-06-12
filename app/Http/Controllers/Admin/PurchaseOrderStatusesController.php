@@ -69,11 +69,11 @@ class PurchaseOrderStatusesController extends Controller
     }
     public function destroy($id)
     {
-        $success = $this->service->deleteStatus($id);
-        if ($success) {
-            return redirect()->route('status.index')->with('success', 'تم حذف الحالة بنجاح');
+        $response = $this->service->deleteStatus($id);
+        if ($response['success']) {
+            return redirect()->route('status.index')->with('success', $response['message']);
         } else {
-            return redirect()->back()->with('error', 'فشل في حذف حالة  ');
+            return redirect()->route('status.index')->with('error', $response['message']);
         }
     }
 }
