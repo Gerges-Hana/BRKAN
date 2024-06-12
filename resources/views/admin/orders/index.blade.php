@@ -286,20 +286,6 @@
             name: 'id',
             orderable: false,
             searchable: false,
-            // render: function (data, type, row) {
-            //     let btn = '<div class="d-flex justify-content-between">';
-            //     btn += '<button class="btn btn-sm btn-outline-primary d-flex justify-content-between align-items-center mx-1 view-order" data-id="' + row.id + '" data-toggle="tooltip" title="عرض"><i class="la la-eye"></i></button>';
-            //     btn += '<a class="btn btn-sm  btn-outline-warning d-flex justify-content-between align-items-center mx-1 edit-order" href="#" data-id="' + row.id + '" data-toggle="tooltip" title="تعديل"><i class="la la-edit"></i></a>';
-            //     btn += '<a class="btn btn-sm btn-outline-info d-flex justify-content-between align-items-center mx-1 " href="/orders-history/' + row.id + '"  data-toggle="tooltip" title="تفاصيل"><i class="la ft-file-plus"></i></a>';
-
-            //     btn += '<form method="POST" action="/orders/' + row.id + '" style="display:inline" onsubmit="return confirm(\'هل أنت متأكد أنك تريد حذف هذا الطلب؟\');">';
-            //     btn += '@csrf';
-            //     btn += '@method("DELETE")';
-            //     btn += '<button type="submit" class="btn btn-sm btn-outline-danger d-flex justify-content-between align-items-center mx-1" data-toggle="tooltip" title="حذف"><i class="la la-trash"></i></button>';
-            //     btn += '</form>';
-            //     btn += '</div>';
-            //     return btn;
-            // }
 
             render: function(data, type, row) {
                 let btn = '<div class="d-flex justify-content-between">';
@@ -495,8 +481,8 @@
                 },
                 success: function(response) {
                     if (response.success) {
-                        alert(response.success);
                         table.draw();
+                        // alert(response.success);
                     } else {
                         alert('حدث خطأ: ' + response.error);
                     }

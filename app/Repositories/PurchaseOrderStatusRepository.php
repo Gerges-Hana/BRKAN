@@ -17,7 +17,6 @@ class PurchaseOrderStatusRepository
     {
         return PurchaseOrderStatus::create($data);
     }
-
     public function update($id, array $data)
     {
         $status = $this->find($id);
@@ -27,7 +26,6 @@ class PurchaseOrderStatusRepository
         }
         return null;
     }
-
     public function delete($id)
     {
         $status = $this->find($id);

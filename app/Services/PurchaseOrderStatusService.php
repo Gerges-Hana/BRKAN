@@ -25,7 +25,9 @@ class PurchaseOrderStatusService
 
     public function createStatus(array $data)
     {
-        return PurchaseOrderStatus::create($data);
+        return $this->repository->create( $data);
+
+        // return PurchaseOrderStatus::create($data);
     }
 
     public function updateStatus($id, array $data)
