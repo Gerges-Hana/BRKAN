@@ -31,9 +31,14 @@
                             <h2>اداره حاله التوصيل </h2>
                         </div> -->
                     </div>
-                </div>
+                </div>          
                 @if ($message = Session::get('success'))
                 <div class="alert alert-success">
+                    <p>{{ $message }}</p>
+                </div>
+                @endif
+                @if ($message = Session::get('error'))
+                <div class="alert alert-danger">
                     <p>{{ $message }}</p>
                 </div>
                 @endif
@@ -57,14 +62,9 @@
                         <td>
                             <a class="btn btn-sm btn-outline-primary " href="{{ route('status.show',$status->id) }}"><i data-toggle="tooltip" title="عرض" class="la la-eye"></i></a>
                             <a class="btn  btn-sm btn-outline-warning mx-1" href="{{ route('status.edit',$status->id) }}"><i data-toggle="tooltip" title="تعديل" class="la la-edit"></i></a>
-                            <!-- {!! Form::open(['method' => 'DELETE','route' => ['status.destroy', $status->id],'style'=>'display:inline']) !!}
-                            {!! Form::submit('حذف', ['class' => 'btn btn-outline-danger']) !!}
-                            {!! Form::close() !!} -->
-
                             {!! Form::open(['method' => 'DELETE', 'route' => ['status.destroy', $status->id], 'style' => 'display:inline']) !!}
                             <button type="submit" class="btn btn-sm btn-outline-danger" data-toggle="tooltip" title="حذف"><i class="la la-trash"></i></button>
                             {!! Form::close() !!}
-
                         </td>
                     </tr>
                     @endforeach

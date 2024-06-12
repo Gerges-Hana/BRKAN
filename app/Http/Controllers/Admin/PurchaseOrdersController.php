@@ -178,12 +178,25 @@ class PurchaseOrdersController extends Controller
         return response()->json(['message' => 'تم تحديث الطلبيه بنجاح', 'data' => $request->all()]);
     }
 
+    // public function destroy($id)
+    // {
+    //     PurchaseOrder::find($id)->delete();
+    //     return redirect()->route('orders.index')
+    //         ->with('success', 'تم حذف الطلبيه بنجاح ');
+    // }
+
+
     public function destroy($id)
-    {
-        PurchaseOrder::find($id)->delete();
-        return redirect()->route('orders.index')
-            ->with('success', 'تم حذف الطلبيه بنجاح ');
+{
+    $order = PurchaseOrder::query()->with(['PurchaseOrderUpdate'])->find($id);
+    if ($order) {
+        $order->PurchaseOrderUpdate()->delete();
+        $order->delete();
+        return response()->json(['success' => 'تم حذف الطلبيه بنجاح']);
+    } else {
+        return response()->json(['error' => 'لم يتم العثور على الطلبيه'], 404);
     }
+}
 
     public function HistoryOfPurchaseOrdersC($id)
     {

@@ -17,7 +17,6 @@ class PurchaseOrderStatusRepository
     {
         return PurchaseOrderStatus::create($data);
     }
-
     public function update($id, array $data)
     {
         $status = $this->find($id);
@@ -27,14 +26,18 @@ class PurchaseOrderStatusRepository
         }
         return null;
     }
-
     public function delete($id)
     {
         $status = $this->find($id);
         if ($status) {
-            $status->delete();
-            return true;
+            if ($status->purchaseOrders()->count() > 0) {
+                return ['success' => false, 'message' => 'الحالة لا يمكن حذفها لأنها مرتبطة بطلبات.'];
+            } else {
+                $status->delete();
+                return ['success' => true, 'message' => 'تم حذف الحالة بنجاح.'];
+            }
         }
-        return false;
+        return ['success' => false, 'message' => 'لم يتم العثور على الحالة.'];
+    
     }
 }

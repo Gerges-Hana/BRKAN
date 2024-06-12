@@ -90,6 +90,37 @@ class StatisticsController extends Controller
         $month_11 = $monthlyOrders[10] ?? 0;
         $month_12 = $monthlyOrders[11] ?? 0;
 
+        // dd( [
+        //                'day_1'=>$day_1,
+        //                'day_2'=>$day_2,
+        //                'day_3'=>$day_3,
+        //                'day_4'=>$day_4,
+        //                'day_5'=>$day_5,
+        //                'day_6'=>$day_6,
+        //                'day_7'=>$day_7,
+        //                'day_8'=>$day_8,
+        //                'week_1'=>$week_1,
+        //                'week_2'=>$week_2,
+        //                'week_3'=>$week_3,
+        //                'week_4'=>$week_4,
+        //                'week_5'=>$week_5,
+        //                'week_6'=>$week_6,
+        //                'week_7'=>$week_7,
+        //                'week_8'=>$week_8,
+        //                'month_1'=>$month_1,
+        //                'month_2'=>$month_2,
+        //                'month_3'=>$month_3,
+        //                'month_4'=>$month_4,
+        //                'month_5'=>$month_5,
+        //                'month_6'=>$month_6,
+        //                'month_7'=>$month_7,
+        //                'month_8'=>$month_8,
+        //                'month_9'=>$month_9,
+        //                'month_10'=>$month_10,
+        //                'month_11'=>$month_11,
+        //                'month_12'=>$month_12,
+        // ]);
+
         return view('admin.home.index', compact(
             'allPurchaseOrder',
             'countStatus1',

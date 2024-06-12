@@ -294,7 +294,7 @@
 <script src="{{asset('/app-assets/vendors/js/charts/jvector/jquery-jvectormap-2.0.3.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('/app-assets/vendors/js/charts/jvector/jquery-jvectormap-world-mill.js')}}" type="text/javascript"></script>
 <script src="{{asset('/app-assets/data/jvector/visitor-data.js')}}" type="text/javascript"></script>
- 
+
 @endsection
 
 @section('scripts')
@@ -308,14 +308,14 @@
             maintainAspectRatio: false,
             responsiveAnimationDuration: 500,
             plugins: {
-                    legend: {
-                        labels: {
-                            font: {
-                                family: 'Cairo, Roboto, sans-serif !important' 
-                            }
+                legend: {
+                    labels: {
+                        font: {
+                            family: 'Cairo, Roboto, sans-serif !important'
                         }
                     }
                 }
+            }
         };
         console.log("geregs");
 
@@ -380,7 +380,6 @@
         var doughnutSimpleChart = new Chart(ctx, config);
     });
 </script>
-
 <!-- ==========================end simple-doughnut-chart===================================== -->
 
 <!-- ==========================staret ecommerce ChartView==================================== -->
@@ -519,15 +518,24 @@
                 name: "series-1",
                 data: ['{{$week_1}}', '{{$week_2}}', '{{$week_3}}', '{{$week_4}}', '{{$week_5}}', '{{$week_6}}', '{{$week_7}}', '{{$week_8}}']
             };
-
-            var MonthLabelList = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"];
-
+            var MonthLabelList = [
+                "يناير",
+                "فبراير",
+                "مارس",
+                "أبريل",
+                "مايو",
+                "يونيو",
+                "يوليو",
+                "أغسطس",
+                "سبتمبر",
+                "أكتوبر",
+                "نوفمبر",
+                "ديسمبر"
+            ];
             var MonthSeries1List = {
                 name: "series-1",
                 data: ['{{$month_1}}', '{{$month_2}}', '{{$month_3}}', '{{$month_4}}', '{{$month_5}}', '{{$month_6}}', '{{$month_7}}', '{{$month_8}}', '{{$month_9}}', '{{$month_10}}', '{{$month_11}}', '{{$month_12}}']
             };
-
-
             var createChart = function createChart(button) {
                 var btn = button || $("#ecommerceChartView .chart-action").find(".active");
 
@@ -544,7 +552,6 @@
                         break;
                 }
             };
-
             createChart();
             $(".chart-action li a").on("click", function() {
                 createChart($(this));

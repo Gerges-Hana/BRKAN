@@ -57,17 +57,17 @@
                         <td>
                             <a class="btn btn-sm btn-outline-primary " href="{{ route('roles.show',$role->id) }}"><i data-toggle="tooltip" title="عرض" class="la la-eye"></i></a>
                            
-                            @can('role-edit')
+                            <!-- @can('role-edit') -->
                             <a class="btn btn-sm btn-outline-warning " href="{{ route('roles.edit',$role->id) }}"><i data-toggle="tooltip" title="تعديل" class="la la-edit"></i></a>
-                            @endcan
-                            @can('role-delete')
+                            <!-- @endcan -->
+                            <!-- @can('role-delete') -->
                             <!-- {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) !!}
                             {!! Form::submit('حذف', ['class' => 'btn btn-outline-danger']) !!}
                             {!! Form::close() !!} -->
                             {!! Form::open(['method' => 'DELETE', 'route' => ['roles.destroy', $role->id], 'style' => 'display:inline']) !!}
                                      <button type="submit" class="btn btn-sm btn-outline-danger" data-toggle="tooltip" title="حذف"><i class="la la-trash"></i> </button>
                                      {!! Form::close() !!}
-                            @endcan
+                            <!-- @endcan -->
                             
                         </td>
 

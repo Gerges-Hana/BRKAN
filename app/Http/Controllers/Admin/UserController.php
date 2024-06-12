@@ -149,10 +149,15 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id): RedirectResponse
-    {
-        User::find($id)->delete();
-        return redirect()->route('users.index')
-            ->with('success', 'تم حذف المستخدم بنجاح ');
-    }
+  
+     public function destroy($id)
+     {
+         $User = User::find($id);
+         if ($User) {
+             $User->delete();
+             return response()->json(['success' => 'تم حذف المستخدم بنجاح']);
+         } else {
+             return response()->json(['error' => 'لم يتم العثور على المستخدم'], 404);
+         }
+     }
 }

@@ -23,8 +23,8 @@ return new class extends Migration {
             $table->timestamps();
             $table->unsignedBigInteger('status_id')->nullable();
             $table->unsignedBigInteger('last_update_user_id')->nullable();
-            $table->foreign('status_id')->references('id')->on('purchase_order_statuses')->onDelete('set null');
-            $table->foreign('last_update_user_id')->references('id')->on('users')->onDelete('set null');
+            $table->foreign('status_id')->references('id')->on('purchase_order_statuses')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('last_update_user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
