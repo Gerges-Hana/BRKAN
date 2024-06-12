@@ -10,7 +10,7 @@ class PurchaseOrder extends Model
     use HasFactory;
 
     protected $table = 'purchase_orders';
-    protected $guarded = ['id'];
+    protected $guarded = [];
 
     public function status()
     {
