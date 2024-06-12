@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('purchase_order_statuses', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');            
             $table->string('name');
             $table->boolean('is_active')->default(true);
             $table->timestamps();

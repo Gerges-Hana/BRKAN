@@ -30,9 +30,11 @@
             <div class="card p-2 ">
                 <div class="row py-2">
                     <div class="col-lg-12 margin-tb">
-                        <div class="pull-right">
-                            <a class="btn btn-success" href="{{ route('users.create') }}" data-toggle="tooltip" title="انشاء مستخدم جديد">انشاء مستخدم جديد + </a>
-                        </div>
+                    @can('انشاء مستخدم')
+                    <div class="pull-right">
+                        <a class="btn btn-success" href="{{ route('users.create') }}" data-toggle="tooltip" title="انشاء مستخدم جديد">انشاء مستخدم جديد + </a>
+                    </div>
+                    @endcan
                     </div>
                 </div>
                 @if ($message = Session::get('success'))
@@ -140,9 +142,10 @@
                     searchable: false,
                     render: function(data, type, row) {
                         var btn = '<td class="d-flex justify-content-between">';
-                        btn += '<a class="btn btn-sm btn-outline-primary mx-1" href="/users/' + row.id + '"><i data-toggle="tooltip" title="عرض" class="la la-eye"></i></a>';
-                        btn += '<a class="btn btn-sm btn-outline-warning mx-1" href="/users/' + row.id + '/edit"><i data-toggle="tooltip" title="تعديل" class="la la-edit"></i></a>';
-                        btn += '<button class="btn btn-sm btn-outline-danger  mx-1 delete-user" data-id="' + row.id + '" data-toggle="tooltip" title="حذف"><i class="la la-trash"></i></button>';
+
+                        btn += '@can("عرض المستخدم")<a class="btn btn-sm btn-outline-primary mx-1" href="/users/'+ row.id +'"><i data-toggle="tooltip" title="عرض" class="la la-eye"></i></a>@endcan';
+                        btn += '@can("تعديل المستخدم")<a class="btn btn-sm btn-outline-warning mx-1" href="/users/' + row.id + '/edit"><i data-toggle="tooltip" title="تعديل" class="la la-edit"></i></a>@endcan';
+                        btn += '@can("حذف المستخدم")<button class="btn btn-sm btn-outline-danger  mx-1 delete-user" data-id="' + row.id + '" data-toggle="tooltip" title="حذف"><i class="la la-trash"></i></button>@endcan';
                         btn += '</td>';
                         return btn;
                     }

@@ -15,7 +15,14 @@ class PurchaseOrderStatusRepository
     }
     public function create(array $data)
     {
-        return PurchaseOrderStatus::create($data);
+        // return PurchaseOrderStatus::create($data);
+        // dd( ["rr"=>$data]);
+
+        $purchaseOrderStatus = new PurchaseOrderStatus();
+        $purchaseOrderStatus->name = $data['name'];
+        $purchaseOrderStatus->is_active = $data['is_active'] ?? true; 
+        $purchaseOrderStatus->save();
+        return $purchaseOrderStatus;
     }
     public function update($id, array $data)
     {
