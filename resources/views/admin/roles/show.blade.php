@@ -29,7 +29,7 @@
                         <div class="pull-right">
                             <!-- <h2> عرض الادوار </h2> -->
                         </div>
-                        
+
                     </div>
                 </div>
                 <div class="row">
@@ -43,24 +43,24 @@
                         <div class="form-group d-flex">
                             <strong class="col-2">المسؤوليات:</strong>
                             <div class="container col-8">
-                                <div class="row py-2">
-                                    @if(!empty($rolePermissions))
-                                    @foreach($rolePermissions as $index => $v)
-                                    <div class="col-md-3">
-                                        <span>{{ $index + 1 }}-</span>
-                                        <span class="badge badge-success"> {{ $v->name }}</span>
-                                    </div>
-                                    @if(($index + 1) % 4 == 0)
-                                </div>
                                 <div class="row">
-                                    @endif
-                                    @endforeach
-                                    @endif
+                                    <div class="row py-2">
+                                        @if(!empty($rolePermissions))
+                                        @foreach($rolePermissions as $index => $v)
+                                        <div class="col-md-3 py-1">
+                                            <span>{{ $index + 1 }}-</span>
+                                            <span class="badge badge-success"> {{ $v->name }}</span>
+                                        </div>
+                                        @if(($index + 1) % 4 == 0)
+                                        @endif
+                                        @endforeach
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="pull-left">
-                            <a class="btn btn-secondary" href="{{ route('roles.index') }}"data-toggle="tooltip" title="  رجوع"> رجوع ></a>
+                            <a class="btn btn-secondary" href="{{ route('roles.index') }}" data-toggle="tooltip" title="  رجوع"> رجوع ></a>
                         </div>
                     </div>
                 </div>

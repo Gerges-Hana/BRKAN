@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="{{asset('/app-assets/vendors/css/tables/datatable/jquery.dataTables.min.css')}}">
 @endsection
 
+
 @section('content-header')
 <div class="content-header-left col-md-6 col-12 mb-1">
     <h3 class="content-header-title">قائمة الطلبيات</h3>
@@ -103,7 +104,7 @@
 
 @section('modals')
 <!-- Order details modal -->
-<div class="modal" id="showOrderDetailsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel16" aria-hidden="true">
+<div class="modal" id="showOrderDetailsModal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel16" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -220,283 +221,291 @@
 @section('scripts')
 <script type="text/javascript">
     $(function() {
-    var table = $('#purchaseOrdersTable').DataTable({
-        bDestroy: true,
-        processing: true,
-        serverSide: true,
-        searching: false,
-        autoWidth: false,
-        order: [
-            [0, 'desc']
-        ],
-        paging: true,
-        lengthMenu: [
-            [10, 25, 50, 100],
-            [10, 25, 50, 100]
-        ],
-        sPaginationType: "full_numbers",
-        bStateSave: true,
-        fnStateSave: function(oSettings, oData) {
-            localStorage.setItem('purchaseOrdersDataTables', JSON.stringify(oData));
-        },
-        fnStateLoad: function(oSettings) {
-            return JSON.parse(localStorage.getItem('purchaseOrdersDataTables'));
-        },
-        language: dataTablesArabicLocalization,
-        ajax: {
-            url: "{{ route('orders.data') }}",
-            method: 'POST',
-            dataType: "JSON",
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        var table = $('#purchaseOrdersTable').DataTable({
+            bDestroy: true,
+            processing: true,
+            serverSide: true,
+            searching: false,
+            autoWidth: false,
+            order: [
+                [0, 'desc']
+            ],
+            paging: true,
+            lengthMenu: [
+                [10, 25, 50, 100],
+                [10, 25, 50, 100]
+            ],
+            sPaginationType: "full_numbers",
+            bStateSave: true,
+            fnStateSave: function(oSettings, oData) {
+                localStorage.setItem('purchaseOrdersDataTables', JSON.stringify(oData));
             },
-            data: function(d) {
-                d.purchase_order_number = $('#purchase_order_number').val();
-                d.invoice_number = $('#invoice_number').val();
-                d.driver_name = $('#driver_name').val();
-                d.rep_name = $('#rep_name').val();
-                d.driver_phone = $('#driver_phone').val();
-                d.rep_phone = $('#rep_phone').val();
-            }
-        },
-        //dom: '<"top"i>rt<"bottom"lp><"clear">',
-        columns: [{
-            data: 'id',
-            name: 'id'
-        }, {
-            data: 'purchase_order_number',
-            name: 'purchase_order_number'
-        }, {
-            data: 'invoice_number',
-            name: 'invoice_number'
-        }, {
-            data: 'driver_name',
-            name: 'driver_name'
-        }, {
-            data: 'rep_name',
-            name: 'rep_name'
-        }, {
-            data: 'driver_phone',
-            name: 'driver_phone'
-        }, {
-            data: 'rep_phone',
-            name: 'rep_phone'
-        }, {
-            data: 'id',
-            name: 'id',
-            orderable: false,
-            searchable: false,
-
-            render: function(data, type, row) {
-                let btn = '<div class="d-flex justify-content-between">';
-                btn += '<button class="btn btn-sm btn-outline-primary d-flex justify-content-between align-items-center mx-1 view-order" data-id="' + row.id + '" data-toggle="tooltip" title="عرض"><i class="la la-eye"></i></button>';
-                btn += '<a class="btn btn-sm  btn-outline-warning d-flex justify-content-between align-items-center mx-1 edit-order" href="#" data-id="' + row.id + '" data-toggle="tooltip" title="تعديل"><i class="la la-edit"></i></a>';
-                btn += '<a class="btn btn-sm btn-outline-info d-flex justify-content-between align-items-center mx-1 " href="/orders-history/' + row.id + '"  data-toggle="tooltip" title="تفاصيل"><i class="la ft-file-plus"></i></a>';
-                btn += '<button class="btn btn-sm btn-outline-danger d-flex justify-content-between align-items-center mx-1 delete-order" data-id="' + row.id + '" data-toggle="tooltip" title="حذف"><i class="la la-trash"></i></button>';
-                btn += '</div>';
-                return btn;
-            }
-        }]
-    });
-
-    $('#searchForm').submit(function(e) {
-        e.preventDefault();
-        table.draw();
-    });
-
-    // =================================== show  ============================
-    // Event listener for viewing order details
-    $(document).on('click', '.view-order', function() {
-        let orderId = $(this).data('id');
-        $.ajax({
-            url: '/orders/' + orderId,
-            method: 'GET',
-            dataType: "JSON",
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            fnStateLoad: function(oSettings) {
+                return JSON.parse(localStorage.getItem('purchaseOrdersDataTables'));
             },
-            success: function(data) {
-                let updatedAt = formatDate(data.updated_at);
-                let arrivalDate = formatDate(data.arrival_date, 'YYYY-MM-DD');
-                let createdAt = '----';
-                let canceledAt = '----';
-                let arrivedAt = '----';
-                let enteredAt = '----';
-                let unloadedAt = '----';
-                let leftAt = '----';
-                let po_status_class = 'text-secondary';
-
-                switch (data.status_id) {
-                    case 1:
-                        po_status_class = 'text-primary';
-                        break;
-                    case 2:
-                        po_status_class = 'text-danger';
-                        break;
-                    case 3:
-                        po_status_class = 'text-dark';
-                        break;
-                    case 4:
-                        po_status_class = 'text-info';
-                        break;
-                    case 5:
-                        po_status_class = 'text-warning';
-                        break;
-                    case 6:
-                        po_status_class = 'text-success';
-                        break;
+            language: dataTablesArabicLocalization,
+            ajax: {
+                url: "{{ route('orders.data') }}",
+                method: 'POST',
+                dataType: "JSON",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: function(d) {
+                    d.purchase_order_number = $('#purchase_order_number').val();
+                    d.invoice_number = $('#invoice_number').val();
+                    d.driver_name = $('#driver_name').val();
+                    d.rep_name = $('#rep_name').val();
+                    d.driver_phone = $('#driver_phone').val();
+                    d.rep_phone = $('#rep_phone').val();
                 }
-
-                data.purchase_order_update.forEach(function(update) {
-                    switch (update.status_id) {
-                        case 1:
-                            createdAt = formatDate(update.created_at);
-                            break;
-                        case 2:
-                            canceledAt = formatDate(update.created_at);
-                            break;
-                        case 3:
-                            arrivedAt = formatDate(update.created_at);
-                            break;
-                        case 4:
-                            enteredAt = formatDate(update.created_at);
-                            break;
-                        case 5:
-                            unloadedAt = formatDate(update.created_at);
-                            break;
-                        case 6:
-                            leftAt = formatDate(update.created_at);
-                            break;
-                    }
-                });
-
-                $('#modal_purchase_order_number').html(data.purchase_order_number);
-                $('#modal_invoice_number').html(data.invoice_number);
-                $('#modal_driver_name').html(data.driver_name);
-                $('#modal_rep_name').html(data.rep_name);
-                $('#modal_driver_phone').html(data.driver_phone);
-                $('#modal_rep_phone').html(data.rep_phone);
-                $('#modal_arrival_date').html(arrivalDate);
-
-                $('#modal_status').html(data.status.name).removeClass().addClass(po_status_class);
-                $('#modal_updated_at').html(updatedAt);
-                $('#modal_created_at').html(createdAt);
-                $('#modal_canceled_at').html(canceledAt);
-                $('#modal_arrived_at').html(arrivedAt);
-                $('#modal_entered_at').html(enteredAt);
-                $('#modal_unloaded_at').html(unloadedAt);
-                $('#modal_left_at').html(leftAt);
-
-                $('#showOrderDetailsModal').modal('show');
             },
-            error: function() {
-                alert('خطأ في جلب تفاصيل الطلب');
-            }
+            //dom: '<"top"i>rt<"bottom"lp><"clear">',
+            columns: [{
+                data: 'id',
+                name: 'id'
+            }, {
+                data: 'purchase_order_number',
+                name: 'purchase_order_number'
+            }, {
+                data: 'invoice_number',
+                name: 'invoice_number'
+            }, {
+                data: 'driver_name',
+                name: 'driver_name'
+            }, {
+                data: 'rep_name',
+                name: 'rep_name'
+            }, {
+                data: 'driver_phone',
+                name: 'driver_phone'
+            }, {
+                data: 'rep_phone',
+                name: 'rep_phone'
+            }, {
+                data: 'id',
+                name: 'id',
+                orderable: false,
+                searchable: false,
+
+                render: function(data, type, row) {
+                    let btn = '<div class="d-flex justify-content-between">';
+                    btn += '@can("عرض الطلبيه")<button class="btn btn-sm btn-outline-primary d-flex justify-content-between align-items-center mx-1 view-order" data-id="' + row.id + '" data-toggle="tooltip" title="عرض"><i class="la la-eye"></i></button>@endcan';
+                    btn += '@can("تعديل الطلبيه")<a class="btn btn-sm  btn-outline-warning d-flex justify-content-between align-items-center mx-1 edit-order" href="#" data-id="' + row.id + '" data-toggle="tooltip" title="تعديل"><i class="la la-edit"></i></a>@endcan';
+                    btn += '@can("تفاصيل الطلبيه")<a class="btn btn-sm btn-outline-info d-flex justify-content-between align-items-center mx-1 " href="/orders-history/' + row.id + '"  data-toggle="tooltip" title="تفاصيل"><i class="la ft-file-plus"></i></a>@endcan';
+                    btn += '@can("حذف الطلبيه")<button class="btn btn-sm btn-outline-danger d-flex justify-content-between align-items-center mx-1 delete-order" data-id="' + row.id + '" data-toggle="tooltip" title="حذف"><i class="la la-trash"></i></button>@endcan';
+                    btn += '</div>';
+                    return btn;
+                },
+                // "fnCreatedCell": function(nTd, sData, oData, iRow, iCol) {
+                //     $(nTd).html("");
+                //     @can("عرض الطلبيه")
+                //     $(nTd).append(
+                //         "<a href='{{url('orders/')}}/" + oData.id + "/edit' class='btn btn-xs btn-primary'><i class='glyphicon glyphicon-edit'></i> Edit</a> "
+                //     );
+                //     @endcan
+                // }
+            }]
         });
-    });
 
-    // =================================== show  ============================
-
-    // =================================== edit  ============================
-    // Event listener for editing order status
-    $(document).on('click', '.edit-order', function() {
-        let orderId = $(this).data('id');
-        $.ajax({
-            url: '/orders/' + orderId + '/edit',
-            method: 'GET',
-            dataType: "JSON",
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(data) {
-                // console.log(data.purchase_order_update);
-                $('#status_id').val(data.status_id);
-                // Filters for purchase_order_updates by status_id
-                let entered_at_update = data.purchase_order_update.find(update => update.status_id == 4);
-                let unloaded_at_update = data.purchase_order_update.find(update => update.status_id == 5);
-                let left_at_update = data.purchase_order_update.find(update => update.status_id == 6);
-                // Set the values based on the filtered results
-                if (entered_at_update) {
-                    $('#entered_at').val(moment(entered_at_update.created_at).format('YYYY-MM-DDTHH:mm'));
-                }
-                if (unloaded_at_update) {
-                    $('#unloaded_at').val(moment(unloaded_at_update.created_at).format('YYYY-MM-DDTHH:mm'));
-                }
-                if (left_at_update) {
-                    $('#left_at').val(moment(left_at_update.created_at).format('YYYY-MM-DDTHH:mm'));
-                }
-                $('#editOrderForm').data('id', orderId);
-                $('#editOrderModal').modal('show');
-            },
-            error: function() {
-                alert('خطأ في جلب تفاصيل الطلب');
-            }
+        $('#searchForm').submit(function(e) {
+            e.preventDefault();
+            table.draw();
         });
-    });
-    // =================================== edit  ============================
 
-    // =================================== update  ============================
-    // إرسال النموذج لتحديث الطلب
-    $('#editOrderForm').on('submit', function(event) {
-        event.preventDefault();
-        let orderId = $(this).data('id');
-        let formData = new FormData(this);
-        $.ajax({
-            url: '/orders/edit/' + orderId,
-            method: 'POST',
-            data: formData,
-            async: false,
-            cache: false,
-            contentType: false,
-            enctype: 'multipart/form-data',
-            processData: false,
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(response) {
-
-                // alert(response.message);
-                $('#editOrderModal').modal('hide');
-                table.draw();
-            },
-            error: function(response) {
-                alert('خطأ في تحديث الطلب');
-            }
-        });
-    });
-    // =================================== update  ============================
-
-    // <!-- ==============================Delete=========================================== -->
-    $(document).on('click', '.delete-order', function(e) {
-        e.preventDefault();
-        let orderId = $(this).data('id');
-        let token = $('meta[name="csrf-token"]').attr('content');
-
-        if (confirm('هل أنت متأكد أنك تريد حذف هذا الطلب؟')) {
+        // =================================== show  ============================
+        // Event listener for viewing order details
+        $(document).on('click', '.view-order', function() {
+            let orderId = $(this).data('id');
             $.ajax({
                 url: '/orders/' + orderId,
-                method: 'DELETE',
-                data: {
-                    "_token": token,
+                method: 'GET',
+                dataType: "JSON",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                success: function(response) {
-                    if (response.success) {
-                        table.draw();
-                        // alert(response.success);
-                    } else {
-                        alert('حدث خطأ: ' + response.error);
+                success: function(data) {
+                    let updatedAt = formatDate(data.updated_at);
+                    let arrivalDate = formatDate(data.arrival_date, 'YYYY-MM-DD');
+                    let createdAt = '----';
+                    let canceledAt = '----';
+                    let arrivedAt = '----';
+                    let enteredAt = '----';
+                    let unloadedAt = '----';
+                    let leftAt = '----';
+                    let po_status_class = 'text-secondary';
+
+                    switch (data.status_id) {
+                        case 1:
+                            po_status_class = 'text-primary';
+                            break;
+                        case 2:
+                            po_status_class = 'text-danger';
+                            break;
+                        case 3:
+                            po_status_class = 'text-dark';
+                            break;
+                        case 4:
+                            po_status_class = 'text-info';
+                            break;
+                        case 5:
+                            po_status_class = 'text-warning';
+                            break;
+                        case 6:
+                            po_status_class = 'text-success';
+                            break;
                     }
+
+                    data.purchase_order_update.forEach(function(update) {
+                        switch (update.status_id) {
+                            case 1:
+                                createdAt = formatDate(update.created_at);
+                                break;
+                            case 2:
+                                canceledAt = formatDate(update.created_at);
+                                break;
+                            case 3:
+                                arrivedAt = formatDate(update.created_at);
+                                break;
+                            case 4:
+                                enteredAt = formatDate(update.created_at);
+                                break;
+                            case 5:
+                                unloadedAt = formatDate(update.created_at);
+                                break;
+                            case 6:
+                                leftAt = formatDate(update.created_at);
+                                break;
+                        }
+                    });
+
+                    $('#modal_purchase_order_number').html(data.purchase_order_number);
+                    $('#modal_invoice_number').html(data.invoice_number);
+                    $('#modal_driver_name').html(data.driver_name);
+                    $('#modal_rep_name').html(data.rep_name);
+                    $('#modal_driver_phone').html(data.driver_phone);
+                    $('#modal_rep_phone').html(data.rep_phone);
+                    $('#modal_arrival_date').html(arrivalDate);
+
+                    $('#modal_status').html(data.status.name).removeClass().addClass(po_status_class);
+                    $('#modal_updated_at').html(updatedAt);
+                    $('#modal_created_at').html(createdAt);
+                    $('#modal_canceled_at').html(canceledAt);
+                    $('#modal_arrived_at').html(arrivedAt);
+                    $('#modal_entered_at').html(enteredAt);
+                    $('#modal_unloaded_at').html(unloadedAt);
+                    $('#modal_left_at').html(leftAt);
+
+                    $('#showOrderDetailsModal').modal('show');
                 },
-                error: function(response) {
-                    alert('حدث خطأ أثناء محاولة حذف الطلبيه');
+                error: function() {
+                    alert('خطأ في جلب تفاصيل الطلب');
                 }
             });
-        }
-    
+        });
+
+        // =================================== show  ============================
+
+        // =================================== edit  ============================
+        // Event listener for editing order status
+        $(document).on('click', '.edit-order', function() {
+            let orderId = $(this).data('id');
+            $.ajax({
+                url: '/orders/' + orderId + '/edit',
+                method: 'GET',
+                dataType: "JSON",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data) {
+                    // console.log(data.purchase_order_update);
+                    $('#status_id').val(data.status_id);
+                    // Filters for purchase_order_updates by status_id
+                    let entered_at_update = data.purchase_order_update.find(update => update.status_id == 4);
+                    let unloaded_at_update = data.purchase_order_update.find(update => update.status_id == 5);
+                    let left_at_update = data.purchase_order_update.find(update => update.status_id == 6);
+                    // Set the values based on the filtered results
+                    if (entered_at_update) {
+                        $('#entered_at').val(moment(entered_at_update.created_at).format('YYYY-MM-DDTHH:mm'));
+                    }
+                    if (unloaded_at_update) {
+                        $('#unloaded_at').val(moment(unloaded_at_update.created_at).format('YYYY-MM-DDTHH:mm'));
+                    }
+                    if (left_at_update) {
+                        $('#left_at').val(moment(left_at_update.created_at).format('YYYY-MM-DDTHH:mm'));
+                    }
+                    $('#editOrderForm').data('id', orderId);
+                    $('#editOrderModal').modal('show');
+                },
+                error: function() {
+                    alert('خطأ في جلب تفاصيل الطلب');
+                }
+            });
+        });
+        // =================================== edit  ============================
+
+        // =================================== update  ============================
+        // إرسال النموذج لتحديث الطلب
+        $('#editOrderForm').on('submit', function(event) {
+            event.preventDefault();
+            let orderId = $(this).data('id');
+            let formData = new FormData(this);
+            $.ajax({
+                url: '/orders/edit/' + orderId,
+                method: 'POST',
+                data: formData,
+                async: false,
+                cache: false,
+                contentType: false,
+                enctype: 'multipart/form-data',
+                processData: false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+
+                    // alert(response.message);
+                    $('#editOrderModal').modal('hide');
+                    table.draw();
+                },
+                error: function(response) {
+                    alert('خطأ في تحديث الطلب');
+                }
+            });
+        });
+        // =================================== update  ============================
+
+        // <!-- ==============================Delete=========================================== -->
+        $(document).on('click', '.delete-order', function(e) {
+            e.preventDefault();
+            let orderId = $(this).data('id');
+            let token = $('meta[name="csrf-token"]').attr('content');
+
+            if (confirm('هل أنت متأكد أنك تريد حذف هذا الطلب؟')) {
+                $.ajax({
+                    url: '/orders/' + orderId,
+                    method: 'DELETE',
+                    data: {
+                        "_token": token,
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            table.draw();
+                            // alert(response.success);
+                        } else {
+                            alert('حدث خطأ: ' + response.error);
+                        }
+                    },
+                    error: function(response) {
+                        alert('حدث خطأ أثناء محاولة حذف الطلبيه');
+                    }
+                });
+            }
+
+        });
+        // <!-- ==============================Delete=========================================== -->
+
     });
-    // <!-- ==============================Delete=========================================== -->
-    
-});
 
     function formatDate(date, format = 'YYYY-MM-DD HH:mm:ss') {
         return date ? moment(date).format(format) : '----';

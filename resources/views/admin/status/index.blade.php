@@ -11,7 +11,7 @@
 <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
     <div class="breadcrumb-wrapper col-12">
         <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">الرئيسية</a>
+            <li class="breadcrumb-item"><a href="/">الرئيسية</a>
             <li class="breadcrumb-item">قائمه حاله التوصيل</li>
         </ol>
     </div>
@@ -24,14 +24,13 @@
             <div class="card">
                 <div class="row">
                     <div class="col-lg-12 margin-tb p-3">
+                        @can('انشاء حاله')
                         <div class="pull-right">
-                            <a class="btn btn-success" href="{{ route('status.create') }}"data-toggle="tooltip" title="انشاء حاله جديده"> انشاء حاله جديده + </a>
+                            <a class="btn btn-success" href="{{ route('status.create') }}" data-toggle="tooltip" title="انشاء حاله جديده"> انشاء حاله جديده + </a>
                         </div>
-                        <!-- <div class="pull-right">
-                            <h2>اداره حاله التوصيل </h2>
-                        </div> -->
+                        @endcan
                     </div>
-                </div>          
+                </div>
                 @if ($message = Session::get('success'))
                 <div class="alert alert-success">
                     <p>{{ $message }}</p>
@@ -60,11 +59,17 @@
                             {{ $status->is_active ? 'مفعله' : 'غير مفعله' }}
                         </td>
                         <td>
-                            <a class="btn btn-sm btn-outline-primary " href="{{ route('status.show',$status->id) }}"><i data-toggle="tooltip" title="عرض" class="la la-eye"></i></a>
-                            <a class="btn  btn-sm btn-outline-warning mx-1" href="{{ route('status.edit',$status->id) }}"><i data-toggle="tooltip" title="تعديل" class="la la-edit"></i></a>
-                            {!! Form::open(['method' => 'DELETE', 'route' => ['status.destroy', $status->id], 'style' => 'display:inline']) !!}
-                            <button type="submit" class="btn btn-sm btn-outline-danger" data-toggle="tooltip" title="حذف"><i class="la la-trash"></i></button>
-                            {!! Form::close() !!}
+                            @can('عرض الحاله')
+                                 <a class="btn btn-sm btn-outline-primary " href="{{ route('status.show',$status->id) }}"><i data-toggle="tooltip" title="عرض" class="la la-eye"></i></a>
+                            @endcan
+                            @can('تعديل الحاله')
+                                 <a class="btn  btn-sm btn-outline-warning mx-1" href="{{ route('status.edit',$status->id) }}"><i data-toggle="tooltip" title="تعديل" class="la la-edit"></i></a>
+                            @endcan
+                            @can('حذف الحاله')
+                                    {!! Form::open(['method' => 'DELETE', 'route' => ['status.destroy', $status->id], 'style' => 'display:inline']) !!}
+                                    <button type="submit" class="btn btn-sm btn-outline-danger" data-toggle="tooltip" title="حذف"><i class="la la-trash"></i></button>
+                                    {!! Form::close() !!}
+                            @endcan
                         </td>
                     </tr>
                     @endforeach

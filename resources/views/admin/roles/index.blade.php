@@ -3,11 +3,8 @@
 @section('tap-title')
 قائمه القواعد
 @endsection
-
 @section('page-style-files')
-
 @endsection
-
 @section('content-header')
 <div class="content-header-left col-md-6 col-12 mb-1">
     <h3 class="content-header-title">قائمه القواعد  </h3>
@@ -29,14 +26,13 @@
                 <div class="row">
                     <div class="col-lg-12 margin-tb p-3">
                         <div class="pull-right">
-                            @can('role-create')
+                            @can('انشاء قاعده')
                             <a class="btn   btn-success" href="{{ route('roles.create') }}"data-toggle="tooltip" title="انشاء دور جديد">  انشاء دور جديد + </a>
                             @endcan
                         </div>
                         <div class="pull-right">
                             <!-- <h2>اداره القواعد و الادوار </h2> -->
                         </div>
-
                     </div>
                 </div>
                 @if ($message = Session::get('success'))
@@ -55,23 +51,18 @@
                         <td>{{ ++$i }}</td>
                         <td>{{ $role->name }}</td>
                         <td>
+                            @can('عرض القاعده')
                             <a class="btn btn-sm btn-outline-primary " href="{{ route('roles.show',$role->id) }}"><i data-toggle="tooltip" title="عرض" class="la la-eye"></i></a>
-                           
-                            <!-- @can('role-edit') -->
+                            @endcan
+                            @can('تعديل القاعده')
                             <a class="btn btn-sm btn-outline-warning " href="{{ route('roles.edit',$role->id) }}"><i data-toggle="tooltip" title="تعديل" class="la la-edit"></i></a>
-                            <!-- @endcan -->
-                            <!-- @can('role-delete') -->
-                            <!-- {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) !!}
-                            {!! Form::submit('حذف', ['class' => 'btn btn-outline-danger']) !!}
-                            {!! Form::close() !!} -->
+                            @endcan
+                            @can('حذف القاعده')
                             {!! Form::open(['method' => 'DELETE', 'route' => ['roles.destroy', $role->id], 'style' => 'display:inline']) !!}
                                      <button type="submit" class="btn btn-sm btn-outline-danger" data-toggle="tooltip" title="حذف"><i class="la la-trash"></i> </button>
                                      {!! Form::close() !!}
-                            <!-- @endcan -->
-                            
+                            @endcan
                         </td>
-
-                        
                     </tr>
                     @endforeach
                 </table>

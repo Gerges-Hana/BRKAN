@@ -122,15 +122,16 @@ class RoleController extends Controller
         $role = Role::find($id);
         $role->name = $request->input('name');
         $role->save();
-    
+        $role->refresh();
+
         // $role->syncPermissions($request->input('permission'));
     
         $permissionsIds = $request->input('permission');
 
-        $permissions = Permission::find($permissionsIds);
+        $permissions = Permission::findMany($permissionsIds);
 
         $role->givePermissionTo($permissions);
-
+// dd($role);
         return redirect()->route('roles.index')
                         ->with('success','تم تحديث الدور بنجاح ');
     }
