@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="col">
-            <div class="card">
+            <div class="card" style=" width: 215.53px;height: 100.51px;">
                 <div class="card-content">
                     <div class="card-body">
                         <div class="media d-flex">
@@ -264,9 +264,12 @@
                         </div> -->
                     </div>
                     <ul class="nav nav-pills nav-pills-rounded chart-action float-right btn-group" role="group">
-                        <li class="nav-item"><a class="active nav-link" data-toggle="tab" href="#scoreLineToDay">اليوم</a></li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#scoreLineToWeek">الاسبوع</a></li>
-                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#scoreLineToMonth">الشهر</a></li>
+                        <li class="nav-item"><a class="active nav-link" data-toggle="tab"
+                                href="#scoreLineToDay">اليوم</a></li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#scoreLineToWeek">الاسبوع</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#scoreLineToMonth">الشهر</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="widget-content tab-content bg-white p-20">
@@ -291,15 +294,17 @@
 <script src="{{asset('/app-assets/vendors/js/timeline/horizontal-timeline.js')}}" type="text/javascript"></script>
 <script src="{{asset('/app-assets/vendors/js/charts/raphael-min.js')}}" type="text/javascript"></script>
 <script src="{{asset('/app-assets/vendors/js/charts/morris.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('/app-assets/vendors/js/charts/jvector/jquery-jvectormap-2.0.3.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('/app-assets/vendors/js/charts/jvector/jquery-jvectormap-world-mill.js')}}" type="text/javascript"></script>
+<script src="{{asset('/app-assets/vendors/js/charts/jvector/jquery-jvectormap-2.0.3.min.js')}}"
+    type="text/javascript"></script>
+<script src="{{asset('/app-assets/vendors/js/charts/jvector/jquery-jvectormap-world-mill.js')}}"
+    type="text/javascript"></script>
 <script src="{{asset('/app-assets/data/jvector/visitor-data.js')}}" type="text/javascript"></script>
 
 @endsection
 
 @section('scripts')
 <!-- ==========================stare simple-pie-chart===================================== -->
-<script>
+<!-- <script>
     $(window).on("load", function() {
 
         var ctx = $("#simple-pie-chart");
@@ -307,17 +312,53 @@
             responsive: true,
             maintainAspectRatio: false,
             responsiveAnimationDuration: 500,
-            plugins: {
-                legend: {
-                    labels: {
-                        font: {
-                            family: 'Cairo, Roboto, sans-serif !important'
-                        }
-                    }
-                }
-            }
+            };
+            console.log("geregs");
+
+        var chartData = {
+            labels: ["تم الارسال", "تم الدخول", "تم الوصول", "تم الالغاء", "تم المغادره"],
+            datasets: [{
+                label: "حاله الطلبيات",
+                data: [
+                    '{{$countStatus1}}',
+                    '{{$countStatus2}}',
+                    '{{$countStatus3}}',
+                    '{{$countStatus4}}',
+                    '{{$countStatus5}}',
+                ],
+                backgroundColor: ['#00A5A8', '#626E82', '#FF7D4D', '#FF4558', '#28D094'],
+    
+        
+            }]
         };
-        console.log("geregs");
+    var config = {
+            type: 'pie',
+            options: chartOptions,
+            data: chartData
+        };
+        var pieSimpleChart = new Chart(ctx, config);
+        
+    });
+</script> -->
+<script>
+    $(window).on("load", function () {
+        var ctx = $("#simple-pie-chart");
+        var chartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            responsiveAnimationDuration: 500,
+            legend: {
+                labels: {
+                    fontFamily: 'Cairo',  // هنا تحدد الخط المستخدم في التسميات
+                    fontSize: 12
+                }
+            },
+            tooltips: {
+                bodyFontFamily: 'Cairo',  // هنا تحدد الخط المستخدم في تلميحات الأدوات
+                bodyFontSize: 12
+            }
+
+        };
 
         var chartData = {
             labels: ["تم الارسال", "تم الدخول", "تم الوصول", "تم الالغاء", "تم المغادره"],
@@ -333,6 +374,7 @@
                 backgroundColor: ['#00A5A8', '#626E82', '#FF7D4D', '#FF4558', '#28D094'],
             }]
         };
+
         var config = {
             type: 'pie',
             options: chartOptions,
@@ -345,12 +387,22 @@
 
 <!-- ==========================start simple-doughnut-chart=================================== -->
 <script>
-    $(window).on("load", function() {
+    $(window).on("load", function () {
         var ctx = $("#simple-doughnut-chart");
         var chartOptions = {
             responsive: true,
             maintainAspectRatio: false,
             responsiveAnimationDuration: 500,
+            legend: {
+                labels: {
+                    fontFamily: 'Cairo',  // هنا تحدد الخط المستخدم في التسميات
+                    fontSize: 12
+                }
+            },
+            tooltips: {
+                bodyFontFamily: 'Cairo',  // هنا تحدد الخط المستخدم في تلميحات الأدوات
+                bodyFontSize: 12
+            }
         };
         var chartData = {
             labels: [
@@ -370,6 +422,7 @@
                     '{{$ordersTodayStatus5}}'
                 ],
                 backgroundColor: ['#00A5A8', '#626E82', '#FF7D4D', '#FF4558', '#28D094'],
+
             }]
         };
         var config = {
@@ -380,28 +433,30 @@
         var doughnutSimpleChart = new Chart(ctx, config);
     });
 </script>
+
+
 <!-- ==========================end simple-doughnut-chart===================================== -->
 
 <!-- ==========================staret ecommerce ChartView==================================== -->
 <script>
-    $(window).on("load", function() {
+    $(window).on("load", function () {
         $('#recent-buyers, #new-orders').perfectScrollbar({
             wheelPropagation: true
         });
         /********************************************
          *               Monthly Sales               *
          ********************************************/
-        Morris.Bar.prototype.fillForSeries = function(i) {
+        Morris.Bar.prototype.fillForSeries = function (i) {
             var color;
             return "0-#fff-#f00:20-#000";
         };
     });
-    (function(window, document, $) {
+    (function (window, document, $) {
         'use strict';
         /*************************************************
          *               Score Chart                      *
          *************************************************/
-        (function() {
+        (function () {
             var scoreChart = function scoreChart(id, labelList, series1List) {
                 var scoreChart = new Chartist.Line('#' + id, {
                     labels: labelList,
@@ -434,7 +489,7 @@
                     height: 300
                 });
 
-                scoreChart.on('created', function(data) {
+                scoreChart.on('created', function (data) {
                     var defs = data.svg.querySelector('defs') || data.svg.elem('defs');
                     var width = data.svg.width();
                     var height = data.svg.height();
@@ -475,7 +530,7 @@
                     });
 
                     return defs;
-                }).on('draw', function(data) {
+                }).on('draw', function (data) {
                     if (data.type === 'line') {
                         data.element.attr({
                             filter: 'url(#shadow' + id + ')'
@@ -553,7 +608,7 @@
                 }
             };
             createChart();
-            $(".chart-action li a").on("click", function() {
+            $(".chart-action li a").on("click", function () {
                 createChart($(this));
             });
         })();
@@ -565,45 +620,45 @@
             labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
             series: [
                 [{
-                        meta: 'Revenue',
-                        value: 5
-                    },
-                    {
-                        meta: 'Revenue',
-                        value: 3
-                    },
-                    {
-                        meta: 'Revenue',
-                        value: 6
-                    },
-                    {
-                        meta: 'Revenue',
-                        value: 3
-                    },
-                    {
-                        meta: 'Revenue',
-                        value: 8
-                    },
-                    {
-                        meta: 'Revenue',
-                        value: 5
-                    },
-                    {
-                        meta: 'Revenue',
-                        value: 8
-                    },
-                    {
-                        meta: 'Revenue',
-                        value: 12
-                    },
-                    {
-                        meta: 'Revenue',
-                        value: 7
-                    },
-                    {
-                        meta: 'Revenue',
-                        value: 14
-                    },
+                    meta: 'Revenue',
+                    value: 5
+                },
+                {
+                    meta: 'Revenue',
+                    value: 3
+                },
+                {
+                    meta: 'Revenue',
+                    value: 6
+                },
+                {
+                    meta: 'Revenue',
+                    value: 3
+                },
+                {
+                    meta: 'Revenue',
+                    value: 8
+                },
+                {
+                    meta: 'Revenue',
+                    value: 5
+                },
+                {
+                    meta: 'Revenue',
+                    value: 8
+                },
+                {
+                    meta: 'Revenue',
+                    value: 12
+                },
+                {
+                    meta: 'Revenue',
+                    value: 7
+                },
+                {
+                    meta: 'Revenue',
+                    value: 14
+                },
 
                 ]
             ]
@@ -628,7 +683,7 @@
             plugins: [
                 Chartist.plugins.tooltip()
             ]
-        }).on('draw', function(data) {
+        }).on('draw', function (data) {
             if (data.type === 'area') {
                 data.element.attr({
                     'style': 'fill: #28D094; fill-opacity: 0.2'

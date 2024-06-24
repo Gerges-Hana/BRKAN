@@ -103,8 +103,10 @@
                 </div>
                 <div class="pull-left">
                 <button type="submit" class="btn btn-primary">تعديل +</button>
-                          <a class="btn btn-secondary" href="{{ route('users.index') }}"  style="margin-left: 10px;" data-toggle="tooltip" title="  رجوع">رجوع > </a>
-                         
+                          <!-- <a class="btn btn-secondary" href="{{ route('users.index') }}"  style="margin-left: 10px;" data-toggle="tooltip" title="  رجوع">رجوع > </a> -->
+                          <a class="btn btn-outline-secondary" href="{{ route('users.index') }}"  style="width: 80px">
+                            الرجوع <i class="fa fa-chevron-left"></i>
+                        </a>
                         </div>
 
                 {!! Form::close() !!}

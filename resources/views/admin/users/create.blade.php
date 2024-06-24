@@ -88,10 +88,11 @@
                             {!! Form::select('roles[]', $roles,[], array('class' => 'form-control col-8','multiple')) !!}
                         </div>
                     </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6 text-left">
-                        <button type="submit" class="btn btn-primary">موافق</button>
-                        <a class="btn btn-primary" href="{{ route('users.index') }}"style="margin-left: 10px;"> <i class='fa fa-chevron-left'></i>الرجوع</a>
-                        
+                    <div class="col-xs-12 col-sm-12 col-md-12 text-right">
+                        <button type="submit" class="btn btn-primary">انشاء +</button>
+                        <a class="btn btn-outline-secondary" href="{{ route('users.index') }}"  style="width: 80px">
+                            الرجوع <i class="fa fa-chevron-left"></i>
+                        </a>
                     </div>
                 </div>
                 {!! Form::close() !!}

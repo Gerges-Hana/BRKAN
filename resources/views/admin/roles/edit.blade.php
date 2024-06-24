@@ -87,7 +87,10 @@
                         
                         <div class="pull-left">
                         <button type="submit" class="btn btn-primary"  >تعديل +</button>
-                        <a class="btn btn-secondary" href="{{ route('roles.index') }}"data-toggle="tooltip" title="  رجوع" >رجوع > </a>
+                        <!-- <a class="btn btn-secondary" href="{{ route('roles.index') }}"data-toggle="tooltip" title="  رجوع" >رجوع > </a> -->
+                        <a class="btn btn-outline-secondary" href="{{ route('roles.index') }}"  style="width: 80px">
+                            الرجوع <i class="fa fa-chevron-left"></i>
+                        </a>
                     </div>
                         </div>
                           </div>
