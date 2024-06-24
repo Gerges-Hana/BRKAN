@@ -23,9 +23,9 @@ class StatisticsController extends Controller
 
         $today = Carbon::today();
         $ordersToday = PurchaseOrder::query()->whereDate('arrival_date', $today)->count();
-        $ordersTodayStatus1 = PurchaseOrder::query()->whereDate('arrival_date', $today)->where('status_id', 1)->count();
+        $ordersTodayStatus1 = PurchaseOrder::query()->whereDate('arrival_date', $today)->where('status_id', 1)->get()->count();
         $ordersTodayStatus2 = PurchaseOrder::query()->whereDate('arrival_date', $today)->where('status_id', 2)->get()->count();
-        $ordersTodayStatus3_4_5 = PurchaseOrder::query()->whereDate('arrival_date', $today)->whereIn('status_id', [3, 4, 5])->count();
+        $ordersTodayStatus3_4_5 = PurchaseOrder::query()->whereDate('arrival_date', $today)->whereIn('status_id', [3, 4, 5])->get()->count();
         $ordersTodayStatus3 = PurchaseOrder::query()->whereDate('arrival_date', $today)->where('status_id', 3)->get()->count();
         $ordersTodayStatus4 = PurchaseOrder::query()->whereDate('arrival_date', $today)->where('status_id', 4)->get()->count();
         $ordersTodayStatus5 = PurchaseOrder::query()->whereDate('arrival_date', $today)->where('status_id', 5)->get()->count();
