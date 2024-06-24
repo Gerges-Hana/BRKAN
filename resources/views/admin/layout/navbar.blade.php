@@ -1,28 +1,30 @@
-<nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-dark navbar-shadow">
+<nav
+    class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-dark navbar-shadow">
     <div class="navbar-wrapper">
-        {{--Main header--}}
+        {{-- Main header --}}
         <div class="navbar-header">
             <ul class="nav navbar-nav flex-row">
-                {{--Mobile sidebar button--}}
+                {{-- Mobile sidebar button --}}
                 <li class="nav-item mobile-menu d-md-none mr-auto">
                     <a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#">
                         <i class="ft-menu font-large-1"></i>
                     </a>
                 </li>
-                {{--Logo & Company name--}}
+                {{-- Logo & Company name --}}
                 <li class="nav-item mr-auto">
-                    <a class="navbar-brand" href="{{url('/')}}">
-                        <img class="brand-logo" alt="modern admin logo" src="{{asset('/app-assets/images/logo/logo.png')}}">
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        <img class="brand-logo" alt="modern admin logo"
+                            src="{{ asset('/app-assets/images/logo/logo.png') }}">
                         <h3 class="brand-text">لوحة التحكم</h3>
                     </a>
                 </li>
-                {{--Toggle sidebar button--}}
+                {{-- Toggle sidebar button --}}
                 <li class="nav-item d-none d-md-block float-right">
                     <a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse">
                         <i class="toggle-icon ft-toggle-right font-medium-3 white" data-ticon="ft-toggle-right"></i>
                     </a>
                 </li>
-                {{--Mobile navebar button--}}
+                {{-- Mobile navebar button --}}
                 <li class="nav-item d-md-none">
                     <a class="nav-link open-navbar-container" data-toggle="collapse" data-target="#navbar-mobile">
                         <i class="la la-ellipsis-v"></i>
@@ -30,18 +32,18 @@
                 </li>
             </ul>
         </div>
-        {{--Navbar Content--}}
+        {{-- Navbar Content --}}
         <div class="navbar-container content">
             <div class="collapse navbar-collapse" id="navbar-mobile">
-                {{--Left Navbar--}}
+                {{-- Left Navbar --}}
                 <ul class="nav navbar-nav mr-auto float-left">
-                    {{--Maximize screen--}}
+                    {{-- Maximize screen --}}
                     <!-- <li class="nav-item d-none d-md-block">
                         <a class="nav-link nav-link-expand" href="#">
                             <i class="ficon ft-maximize"></i>
                         </a>
                     </li> -->
-                    {{--Search--}}
+                    {{-- Search --}}
                     <!-- <li class="nav-item nav-search">
                         <a class="nav-link nav-link-search" href="#">
                             <i class="ficon ft-search"></i>
@@ -51,26 +53,29 @@
                         </div>
                     </li> -->
                 </ul>
-                {{--Right Navbar--}}
+                {{-- Right Navbar --}}
                 <ul class="nav navbar-nav float-right">
-                    {{--Admin--}}
+                    {{-- Admin --}}
                     <li class="dropdown dropdown-user nav-item">
-                        {{--Hello Admin--}}
+                        {{-- Hello Admin --}}
                         <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                             <span class="mr-1">مرحبا,
-                                <span class="user-name text-bold-700">{{auth()->user()?->name}}</span>
+                                <span class="user-name text-bold-700">{{ auth()->user()?->name }}</span>
                             </span>
                             <span class="avatar avatar-online">
-                                <img src="{{asset('/app-assets/images/portrait/small/avatar-s-19.png')}}" alt="avatar">
+                                <img src="{{ asset('/app-assets/images/portrait/small/avatar-s-19.png') }}"
+                                    alt="avatar">
                                 <i></i>
                             </span>
                         </a>
-                        {{--Admin Profile--}}
+
+
+                        {{-- Admin Profile --}}
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="#"><i class="ft-user"></i> صفحتى الشخصية</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
+                                onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                 <i class="ft-power"></i> تسجيل الخروج
                             </a>
@@ -79,10 +84,14 @@
                             </form>
                         </div>
                     </li>
-                    {{--Notifications--}}
+
+
+                    {{-- Notifications --}}
                     <li class="dropdown dropdown-notification nav-item">
-                        <a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon ft-bell"></i>
-                            <span class="badge badge-pill badge-default badge-danger badge-default badge-up badge-glow">5</span>
+                        <a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i
+                                class="ficon ft-bell"></i>
+                            <span id="orderCount"
+                                class="badge badge-pill badge-default badge-danger badge-default badge-up badge-glow">0</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
                             <li class="dropdown-menu-header">
@@ -90,50 +99,26 @@
                                     <span class="grey darken-2">الاشعارات</span>
                                 </h6>
                                 <span class="notification-tag badge badge-default badge-danger float-right m-0">
-                                    5 جديدة
+                                    <span id="orderCount"></span> جديدة
                                 </span>
                             </li>
                             <li class="scrollable-container media-list w-100">
-                                <a href="javascript:void(0)">
-                                    <div class="media">
-                                        <div class="media-left align-self-center"><i
-                                                class="ft-plus-square icon-bg-circle bg-cyan"></i></div>
-                                        <div class="media-body">
-                                            <h6 class="media-heading">You have new order!</h6>
-                                            <p class="notification-text font-small-3 text-muted">Lorem ipsum dolor sit
-                                                amet, consectetuer elit.</p>
-                                            <small>
-                                                <time class="media-meta text-muted"
-                                                      datetime="2015-06-11T18:29:20+08:00">30 minutes ago
-                                                </time>
-                                            </small>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="javascript:void(0)">
-                                    <div class="media">
-                                        <div class="media-left align-self-center"><i
-                                                class="ft-download-cloud icon-bg-circle bg-red bg-darken-1"></i></div>
-                                        <div class="media-body">
-                                            <h6 class="media-heading red darken-1">99% Server load</h6>
-                                            <p class="notification-text font-small-3 text-muted">Aliquam tincidunt
-                                                mauris eu risus.</p>
-                                            <small>
-                                                <time class="media-meta text-muted"
-                                                      datetime="2015-06-11T18:29:20+08:00">Five hour ago
-                                                </time>
-                                            </small>
-                                        </div>
-                                    </div>
-                                </a>
+        
+                                <div id="notificationList" class="list-group">
+                                </div>
+                                
                             </li>
                             <li class="dropdown-menu-footer">
-                                <a class="dropdown-item text-muted text-center" href="javascript:void(0)">
-                                    عرض كل الاشعارات
+                                <a class="dropdown-item text-muted text-center" href="{{url('/orders')}}">
+                                    عرض كل الطلبيات
                                 </a>
                             </li>
                         </ul>
                     </li>
+
+
+
+
                 </ul>
             </div>
         </div>
