@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('notifications', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('status_id')->nullable();
+            $table->string('device_unique_key')->nullable();
+            $table->string('purchase_order_number')->nullable();
+            $table->string('invoice_number')->nullable();
+            $table->string('driver_name')->nullable();
+            $table->string('rep_name')->nullable();
+            $table->string('driver_phone')->nullable();
             $table->timestamps();
         });
     }

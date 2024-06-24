@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\PurchaseOrdersController;
 use App\Http\Controllers\Admin\PurchaseOrderStatusesController;
+use App\Http\Controllers\Admin\reportsController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SearchController;
 use App\Http\Controllers\Admin\StatisticsController;
@@ -17,7 +18,7 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [StatisticsController::class, 'index']);
     Route::get('/orders', [TemplateController::class, 'orders']);
-    Route::get('/reports', [TemplateController::class, 'reports']);
+    Route::get('/reports', [reportsController::class, 'index'])->name('reports.data');
 
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
