@@ -280,7 +280,7 @@
                                             </table>
                                         </div>
                                         <div class="pull-left">
-                                          <a class="btn btn-secondary" href="{{ route('users.index') }}"  data-toggle="tooltip" title="  رجوع">رجوع > </a>
+                                          <a class="btn btn-secondary" href="{{ route('orders.index') }}"  data-toggle="tooltip" title="  رجوع">رجوع > </a>
                                         </div>
                                     </div>
                                 </div>

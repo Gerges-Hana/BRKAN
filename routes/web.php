@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\PurchaseOrdersController;
 use App\Http\Controllers\Admin\PurchaseOrderStatusesController;
 use App\Http\Controllers\Admin\RoleController;
@@ -32,4 +33,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('autocomplete', 'autocomplete')->name('autocomplete');
         Route::post('/search-result', 'searchResult')->name('search.result');
     });
+
+    Route::get('/fetch-notifications', [NotificationController::class, 'fetchNotifications'])->name('fetch.notifications');
+
 });

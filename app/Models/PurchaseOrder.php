@@ -14,7 +14,7 @@ class PurchaseOrder extends Model
 
     public function status()
     {
-        return $this->belongsTo(PurchaseOrderStatus::class, 'status_id');
+        return $this->belongsTo(PurchaseOrderStatus::class, 'status_id','id');
     }
     public function PurchaseOrderUpdate()
     {

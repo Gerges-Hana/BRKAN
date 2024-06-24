@@ -38,19 +38,22 @@ class PurchaseOrderStatusesController extends Controller
 
     public function store(Request $request)
     {
+       
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'is_active' => 'nullable|boolean',
         ]);
-
-        $status = $this->service->createStatus($validatedData);
-        if ($status) {
+        try {
+            $purchaseOrderStatus = new PurchaseOrderStatus();
+            $purchaseOrderStatus->name = $validatedData['name'];
+            $purchaseOrderStatus->is_active = $validatedData['is_active'] ?? true;
+            $purchaseOrderStatus->save();
             return redirect()->route('status.index')->with('success', 'تم إنشاء الحالة بنجاح');
-        } else {
-            return redirect()->back()->with('error', 'فشل في إنشاء حالة طلب الشراء');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'فشل في إنشاء حالة طلب الشراء: ' . $e->getMessage());
         }
     }
-    
+
     public function edit($id)
     {
         $status = PurchaseOrderStatus::findOrFail($id);

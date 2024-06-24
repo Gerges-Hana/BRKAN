@@ -11,7 +11,6 @@
 <link rel="stylesheet" type="text/css" href="{{asset('/app-assets/vendors/css/charts/chartist-plugin-tooltip.css')}}">
 <link rel="stylesheet" type="text/css" href="{{asset('/app-assets/css-rtl/pages/dashboard-ecommerce.css')}}">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-
 @endsection
 
 @section('content-body')
@@ -299,47 +298,10 @@
 <script src="{{asset('/app-assets/vendors/js/charts/jvector/jquery-jvectormap-world-mill.js')}}"
     type="text/javascript"></script>
 <script src="{{asset('/app-assets/data/jvector/visitor-data.js')}}" type="text/javascript"></script>
-
 @endsection
 
 @section('scripts')
 <!-- ==========================stare simple-pie-chart===================================== -->
-<!-- <script>
-    $(window).on("load", function() {
-
-        var ctx = $("#simple-pie-chart");
-        var chartOptions = {
-            responsive: true,
-            maintainAspectRatio: false,
-            responsiveAnimationDuration: 500,
-            };
-            console.log("geregs");
-
-        var chartData = {
-            labels: ["تم الارسال", "تم الدخول", "تم الوصول", "تم الالغاء", "تم المغادره"],
-            datasets: [{
-                label: "حاله الطلبيات",
-                data: [
-                    '{{$countStatus1}}',
-                    '{{$countStatus2}}',
-                    '{{$countStatus3}}',
-                    '{{$countStatus4}}',
-                    '{{$countStatus5}}',
-                ],
-                backgroundColor: ['#00A5A8', '#626E82', '#FF7D4D', '#FF4558', '#28D094'],
-    
-        
-            }]
-        };
-    var config = {
-            type: 'pie',
-            options: chartOptions,
-            data: chartData
-        };
-        var pieSimpleChart = new Chart(ctx, config);
-        
-    });
-</script> -->
 <script>
     $(window).on("load", function () {
         var ctx = $("#simple-pie-chart");
@@ -349,12 +311,12 @@
             responsiveAnimationDuration: 500,
             legend: {
                 labels: {
-                    fontFamily: 'Cairo',  // هنا تحدد الخط المستخدم في التسميات
+                    fontFamily: 'Cairo',
                     fontSize: 12
                 }
             },
             tooltips: {
-                bodyFontFamily: 'Cairo',  // هنا تحدد الخط المستخدم في تلميحات الأدوات
+                bodyFontFamily: 'Cairo',
                 bodyFontSize: 12
             }
 
@@ -433,8 +395,6 @@
         var doughnutSimpleChart = new Chart(ctx, config);
     });
 </script>
-
-
 <!-- ==========================end simple-doughnut-chart===================================== -->
 
 <!-- ==========================staret ecommerce ChartView==================================== -->
