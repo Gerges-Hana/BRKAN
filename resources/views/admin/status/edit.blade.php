@@ -61,7 +61,10 @@
 
                     <div class="col-xs-12 col-sm-12 col-md-12 text-right">
                         <button type="submit" class="btn btn-primary" data-toggle="tooltip" title="  تعديل">تعديل +</button>
-                        <a class="btn btn-secondary" href="{{ route('status.index') }}" data-toggle="tooltip" title="  رجوع">رجوع ></a>
+                        <!-- <a class="btn btn-secondary" href="{{ route('status.index') }}" data-toggle="tooltip" title="  رجوع">رجوع ></a> -->
+                        <a class="btn btn-outline-secondary" href="{{ route('status.index') }}"  style="width: 80px">
+                            الرجوع <i class="fa fa-chevron-left"></i>
+                        </a>
                     </div>
                     
                 </div>

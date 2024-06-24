@@ -74,8 +74,7 @@
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="#"><i class="ft-user"></i> صفحتى الشخصية</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                 <i class="ft-power"></i> تسجيل الخروج
                             </a>
@@ -88,8 +87,7 @@
 
                     {{-- Notifications --}}
                     <li class="dropdown dropdown-notification nav-item">
-                        <a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i
-                                class="ficon ft-bell"></i>
+                        <a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon ft-bell"></i>
                             <span id="orderCount"
                                 class="badge badge-pill badge-default badge-danger badge-default badge-up badge-glow">0</span>
                         </a>
@@ -103,10 +101,10 @@
                                 </span>
                             </li>
                             <li class="scrollable-container media-list w-100">
-        
+
                                 <div id="notificationList" class="list-group">
                                 </div>
-                                
+
                             </li>
                             <li class="dropdown-menu-footer">
                                 <a class="dropdown-item text-muted text-center" href="{{url('/orders')}}">
