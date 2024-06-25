@@ -14,13 +14,17 @@ class PurchaseOrder extends Notification
     /**
      * Create a new notification instance.
      */
-  
-     private $details;
 
-     public function __construct($details)
-     {
-         $this->details = $details;
-     }
+    private $PurchaseOrder_status_id;
+    private $PurchaseOrder_id;
+    private $PurchaseOrder;
+
+    public function __construct($PurchaseOrder)
+    {
+        // $this->PurchaseOrder_status_id = $PurchaseOrder_status_id;
+        // $this->PurchaseOrder_id = $PurchaseOrder_id;
+        $this->$PurchaseOrder = $PurchaseOrder;
+    }
 
     /**
      * Get the notification's delivery channels.
@@ -38,9 +42,9 @@ class PurchaseOrder extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->line('The introduction to the notification.')
+            ->action('Notification Action', url('/'))
+            ->line('Thank you for using our application!');
     }
 
     /**
@@ -55,10 +59,13 @@ class PurchaseOrder extends Notification
         ];
     }
 
-    public function toDatabase ($notifiable)
+    public function toDatabase($notifiable)
     {
         return [
-            'data'=>$this->details['body']
+            // 'data' => $this->details['body']
+            'id' => $this->PurchaseOrder->id,
+            'title' =>'تم اضافه فتوره بواستط :',
+            'user'=>$this->PurchaseOrder->driver_name,
         ];
     }
 }
