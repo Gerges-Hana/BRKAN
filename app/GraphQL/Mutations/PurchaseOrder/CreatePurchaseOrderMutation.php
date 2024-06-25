@@ -76,6 +76,7 @@ class CreatePurchaseOrderMutation extends Mutation
         $currentNotCanceledPurchaseOrderForCurrentDevice = PurchaseOrder::query()
             ->where('device_unique_key', '=', $args['device_unique_key'])
             ->where('status_id', '!=', 2) // Not Canceled
+            ->where('status_id', '!=', 6) // Not Left
             ->first();
         if ($currentNotCanceledPurchaseOrderForCurrentDevice) {
             return [
