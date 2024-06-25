@@ -94,6 +94,9 @@ class CreatePurchaseOrderMutation extends Mutation
         $purchaseOrder->arrival_date = Carbon::createFromTimestampMs($arrival_date)->format('Y-m-d');
         $purchaseOrder->status_id = 1;
         $purchaseOrder->created_at = $datetime;
+
+
+        
         $purchaseOrder->save();
         $createdPurchaseOrder = $purchaseOrder->refresh();
 

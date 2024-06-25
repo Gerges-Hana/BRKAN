@@ -76,7 +76,7 @@
 
                         <!-- orders table -->
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="purchaseOrdersTable">
+                            <table class="table table-bordered dataex-html5-export table-striped" id="purchaseOrdersTable">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -209,6 +209,7 @@
 @endsection
 
 @section('page-script-files')
+
 <!-- START MODERN JS-->
 <script src="{{asset('/app-assets/vendors/js/tables/jquery.dataTables.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('/app-assets/vendors/js/extensions/moment.min.js')}}" type="text/javascript"></script>
