@@ -11,7 +11,7 @@
 
 @section('content-header')
     <div class="content-header-left col-md-6 col-12 mb-1">
-        <h3 class="content-header-title">التقارير  </h3>
+        <h3 class="content-header-title">التقارير </h3>
     </div>
     <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
         <div class="breadcrumb-wrapper col-12">
@@ -40,7 +40,7 @@
                             </ul>
                         </div>
                     </div>
-                    
+
                     <div class="card-content collapse show">
                         <div class="card-body card-dashboard">
                             <table id="OrdersTable" class="table table-striped table-bordered dataex-html5-export">
@@ -67,8 +67,6 @@
                                     <td>11:40</td>
                                     <td>11:40</td>
                                 </tr>
-                               
-
 
 
                                 </tbody>
