@@ -14,7 +14,7 @@
                 <li class="nav-item mr-auto">
                     <a class="navbar-brand" href="{{ url('/') }}">
                         <img class="brand-logo" alt="modern admin logo"
-                            src="{{ asset('/app-assets/images/logo/logo.png') }}">
+                             src="{{ asset('/app-assets/images/logo/logo.png') }}">
                         <h3 class="brand-text">لوحة التحكم</h3>
                     </a>
                 </li>
@@ -64,7 +64,7 @@
                             </span>
                             <span class="avatar avatar-online">
                                 <img src="{{ asset('/app-assets/images/portrait/small/avatar-s-19.png') }}"
-                                    alt="avatar">
+                                     alt="avatar">
                                 <i></i>
                             </span>
                         </a>
@@ -89,7 +89,7 @@
                     <li class="dropdown dropdown-notification nav-item">
                         <a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon ft-bell"></i>
                             <span id="orderCount"
-                                class="badge badge-pill badge-default badge-danger badge-default badge-up badge-glow">0</span>
+                                  class="badge badge-pill badge-default badge-danger badge-default badge-up badge-glow">0</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
                             <li class="dropdown-menu-header">
@@ -113,8 +113,6 @@
                             </li>
                         </ul>
                     </li>
-
-
 
 
                 </ul>
