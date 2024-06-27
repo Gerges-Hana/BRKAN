@@ -12,7 +12,7 @@ class StatisticsController extends Controller
 
     public function index()
     {
-        $allPurchaseOrder = PurchaseOrder::with(['purchaseOrderUpdate'])->get()->count();
+        $allPurchaseOrder = PurchaseOrder::with(['purchaseOrderUpdates'])->get()->count();
         $countStatus1 = PurchaseOrder::where('status_id', 1)->get()->count();
         $countStatus2 = PurchaseOrder::where('status_id', 2)->get()->count();
         $countStatus3_4_5 = PurchaseOrder::whereIn('status_id', [3, 4, 5])->count();

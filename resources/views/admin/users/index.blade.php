@@ -37,11 +37,7 @@
                             @endcan
                         </div>
                     </div>
-                    @if ($message = Session::get('success'))
-                        <div class="alert alert-success">
-                            <p>{{ $message }}</p>
-                        </div>
-                    @endif
+
                     <form id="searchForm" class="d-flex mb-2 col-12 justify-content-between">
                         <div class="form-group col-3">
                             <label for="name">اسم المستخدم:</label>

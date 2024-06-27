@@ -38,8 +38,11 @@
     <link rel="stylesheet" type="text/css" href="{{asset('/app-assets/css-rtl/core/colors/palette-gradient.css')}}">
     <!-- END MODERN CSS -->
 
-    <link rel="stylesheet" type="text/css" href="{{asset('/app-assets/vendors/css/tables/jsgrid/jsgrid-theme.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{asset('/app-assets/vendors/css/tables/jsgrid/jsgrid.min.css')}}">
+    <!-- BEGIN OTHER CSS -->
+    <link rel="stylesheet" type="text/css" href='{{asset("/assets/css/sweetalert.css")}}'>
+    <link rel="stylesheet" type="text/css" href='{{asset("/app-assets/vendors/css/extensions/toastr.css")}}'>
+    <link rel="stylesheet" type="text/css" href='{{asset("/app-assets/css/plugins/extensions/toastr.css")}}'>
+    <!-- END OTHER CSS -->
 
     <!-- BEGIN Custom CSS -->
     <link rel="stylesheet" href="{{asset('/assets/css/style.css')}}">

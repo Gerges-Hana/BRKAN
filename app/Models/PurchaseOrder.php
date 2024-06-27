@@ -16,7 +16,7 @@ class PurchaseOrder extends Model
     {
         return $this->belongsTo(PurchaseOrderStatus::class, 'status_id','id');
     }
-    public function PurchaseOrderUpdate()
+    public function purchaseOrderUpdates()
     {
         return $this->hasMany(PurchaseOrderUpdate::class, 'purchase_order_id');
     }
