@@ -338,13 +338,13 @@
                     let left_at_update = data.purchase_order_updates.find(update => update.status_id === 6);
                     // Set the values based on the filtered results
                     if (entered_at_update) {
-                        $('#entered_at').val(moment(entered_at_update.created_at).format('YYYY-MM-DDTHH:mm'));
+                        $('#entered_at').val(moment(entered_at_update.created_at).format('YYYY-MM-DD HH:mm'));
                     }
                     if (unloaded_at_update) {
-                        $('#unloaded_at').val(moment(unloaded_at_update.created_at).format('YYYY-MM-DDTHH:mm'));
+                        $('#unloaded_at').val(moment(unloaded_at_update.created_at).format('YYYY-MM-DD HH:mm'));
                     }
                     if (left_at_update) {
-                        $('#left_at').val(moment(left_at_update.created_at).format('YYYY-MM-DDTHH:mm'));
+                        $('#left_at').val(moment(left_at_update.created_at).format('YYYY-MM-DD HH:mm'));
                     }
                     $('#editOrderForm').data('id', orderId);
                     $('#editOrderModal').modal('show');
@@ -372,14 +372,17 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                success: function (response) {
-
-                    // alert(response.message);
-                    $('#editOrderModal').modal('hide');
-                    table.draw();
+                success: function (res) {
+                    if (res.success === true) {
+                        previewToastrForAjaxRequest(res.success_message);
+                        $('#editOrderModal').modal('hide');
+                        purchaseOrdersDataTable();
+                    } else {
+                        previewToastrForAjaxRequest('', res.error_message);
+                    }
                 },
-                error: function (response) {
-                    alert('خطأ في تحديث الطلب');
+                error: function (res) {
+                    previewToastrForAjaxRequest('', 'خطأ في تحديث الطلب');
                 }
             });
         });
@@ -399,7 +402,7 @@
                     },
                     success: function (response) {
                         if (response.success) {
-                            table.draw();
+                            purchaseOrdersDataTable();
                             // alert(response.success);
                         } else {
                             alert('حدث خطأ: ' + response.error);
