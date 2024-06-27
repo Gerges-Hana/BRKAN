@@ -39,17 +39,6 @@
                         </div>
                     </div>
 
-                    @if ($message = Session::get('success'))
-                        <div class="alert alert-success">
-                            <p>{{ $message }}</p>
-                        </div>
-                    @endif
-                    @if ($message = Session::get('error'))
-                        <div class="alert alert-danger">
-                            <p>{{ $message }}</p>
-                        </div>
-                    @endif
-
                     <!-- ================================================================================ -->
                     <div class="row">
 
@@ -111,8 +100,8 @@
                                                 $enteredAt = '__/__';
                                                 $unloadedAt = '__/__';
                                                 $leftAt = '__/__';
-                                                if ($order->purchase_order_update) {
-                                                foreach ($order->purchase_order_update as $update) {
+                                                if ($order->purchaseOrderUpdates) {
+                                                foreach ($order->purchaseOrderUpdates as $update) {
                                                 switch ($update->status_id) {
                                                 case 1:
                                                 $arrivalDate = \Carbon\Carbon::parse($update->created_at)->format('Y-m-d H:i:s');
@@ -225,7 +214,7 @@
                                                 </tr>
                                                 <tr>
                                                 <?php $i = 0; ?>
-                                                @foreach($order->PurchaseOrderUpdate as $order)
+                                                @foreach($order->purchaseOrderUpdates as $order)
                                                         <?php
                                                         $status_name = 'غير معروف';
                                                         $status_color = 'black';
