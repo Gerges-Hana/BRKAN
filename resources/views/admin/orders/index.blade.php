@@ -272,7 +272,7 @@
                             break;
                     }
 
-                    data.purchaseOrderUpdates.forEach(function (update) {
+                    data.purchase_order_updates.forEach(function (update) {
                         switch (update.status_id) {
                             case 1:
                                 createdAt = formatDate(update.created_at);
@@ -332,10 +332,10 @@
                 },
                 success: function (data) {
                     $('#status_id').val(data.status_id);
-                    // Filters for purchaseOrderUpdates by status_id
-                    let entered_at_update = data.purchaseOrderUpdates.find(update => update.status_id == 4);
-                    let unloaded_at_update = data.purchaseOrderUpdates.find(update => update.status_id == 5);
-                    let left_at_update = data.purchaseOrderUpdates.find(update => update.status_id == 6);
+                    // Filters for purchase_order_updates by status_id
+                    let entered_at_update = data.purchase_order_updates.find(update => update.status_id === 4);
+                    let unloaded_at_update = data.purchase_order_updates.find(update => update.status_id === 5);
+                    let left_at_update = data.purchase_order_updates.find(update => update.status_id === 6);
                     // Set the values based on the filtered results
                     if (entered_at_update) {
                         $('#entered_at').val(moment(entered_at_update.created_at).format('YYYY-MM-DDTHH:mm'));
