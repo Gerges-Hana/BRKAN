@@ -39,7 +39,7 @@ Route::middleware(['auth'])->group(function () {
     // Users
     Route::resource('users', UserController::class);
     Route::group(['prefix' => 'users'], function () {
-        Route::post('/users/data', [UserController::class, 'getUserData'])->name('users.data');
+        Route::post('/users/data', [UserController::class, 'getUsersData'])->name('users.data');
         Route::post('/checkHasRelations/{id}', [UserController::class, 'checkHasRelations'])->name('users.checkHasRelations');
         Route::post('/delete/{id}', [UserController::class, 'destroy'])->name('users.destroy');
     });

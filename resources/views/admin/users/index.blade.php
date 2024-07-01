@@ -5,7 +5,6 @@
 @endsection
 
 @section('page-style-files')
-    <link rel="stylesheet" href="{{asset('/assets/css/select2.min.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('/app-assets/vendors/css/tables/datatable/jquery.dataTables.min.css')}}">
 @endsection
 
@@ -27,65 +26,130 @@
     <section id="html5">
         <div class="row">
             <div class="col-12">
-                <div class="card p-2 ">
-                    <div class="row py-2">
-                        <div class="col-lg-12 margin-tb">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                        <div class="heading-elements">
+                            <ul class="list-inline mb-0">
+                                <li><a data-action="reload" id="reload_data_btn"><i class="ft-rotate-cw"></i></a></li>
+                                <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="pull-right">
                             @can('انشاء مستخدم')
-                                <div class="pull-right">
-                                    <a class="btn btn-success" href="{{ route('users.create') }}" data-toggle="tooltip" title="انشاء مستخدم جديد">انشاء مستخدم جديد + </a>
-                                </div>
+                                <a class="btn btn-sm btn-success" href="{{ route('users.create') }}">إضافة مستخدم <i class="fa fa-plus"></i></a>
                             @endcan
                         </div>
                     </div>
 
-                    <form id="searchForm" class="d-flex mb-2 col-12 justify-content-between">
-                        <div class="form-group col-3">
-                            <label for="name">اسم المستخدم:</label>
-                            <input type="text" class="form-control" id="name" name="name">
+                    <div class="card-content collapse show">
+                        <div class="card-body card-dashboard pt-1">
+                            {{-- Search --}}
+                            <form id="searchForm" class="row">
+                                <div class="form-group col-2">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="الاسم">
+                                </div>
+                                <div class="form-group col-2">
+                                    <input type="text" class="form-control" id="username" name="username" placeholder="اسم المستخدم">
+                                </div>
+                                <div class="form-group col-2">
+                                    <select class="form-control" id="is_active" name="is_active">
+                                        <option value="">الكل</option>
+                                        <option value="true">مفعل</option>
+                                        <option value="false">غير مفعل</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-2 p-0">
+                                    <button type="submit" class="btn btn-sm btn-primary align-self-end mt-1" style="width: auto;">بحث <i class="fa fa-search"></i></button>
+                                    <button type="button" class="btn btn-sm btn-warning align-self-end mt-1 clear-btn" style="width: auto;">تفريغ <i class="fa fa-eraser"></i></button>
+                                </div>
+                            </form>
+                            {{-- Data --}}
+                            <table style="width: 99%" class="table table-bordered table-striped" id="usersTable">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>الاسم</th>
+                                    <th>اسم المستخدم</th>
+                                    <th>الحاله</th>
+                                    <th>الادوار</th>
+                                    <th width="280px" class="text-center">العمليات</th>
+                                </tr>
+                                </thead>
+                            </table>
                         </div>
-                        <div class="form-group col-3">
-                            <label for="username">اسم المستخدم:</label>
-                            <input type="text" class="form-control" id="username" name="username">
-                        </div>
-                        <div class="form-group col-3">
-                            <label for="is_active">حالة التفعيل:</label>
-                            <select class="form-control" id="is_active" name="is_active">
-                                <option value="">الكل</option>
-                                <option value="1">مفعل</option>
-                                <option value="0">غير مفعل</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary align-self-end mb-2" style="width: auto;">ابحث</button>
-                    </form>
-                    <table class="table table-bordered data-table">
-                        <thead>
-                        <tr>
-                            <th>عدد</th>
-                            <th>الاسم</th>
-                            <th>اسم المستخدم</th>
-                            <th>الحاله</th>
-                            <th>الادوار</th>
-                            <th width="280px" class="text-center">العمليات</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 @endsection
+
 @section('page-script-files')
     <script src="{{asset('/app-assets/vendors/js/tables/jquery.dataTables.min.js')}}" type="text/javascript"></script>
 @endsection
+
 @section('scripts')
-    <script type="text/javascript">
+    <script>
+        const reload_data_btn = $('#reload_data_btn');
+        const name_field = $('#name');
+        const username_field = $('#username');
+        const is_active_field = $('#is_active');
+        const clear_btn = $('.clear-btn');
+
         $(function () {
-            var table = $('.data-table').DataTable({
-                "bDestroy": true,
+            usersDatatable();
+            check_inputs();
+        });
+
+        $('#searchForm').submit(function (e) {
+            e.preventDefault();
+            usersDatatable();
+        });
+        reload_data_btn.click(usersDatatable);
+
+        // Draw table after Clear
+        clear_btn.on('click', function (e) {
+            name_field.val("");
+            username_field.val("");
+            is_active_field.val("");
+            is_active_field.prop('selectedIndex', 0);
+            $('#searchForm').submit();
+            check_inputs();
+        });
+        name_field.add(username_field).add(is_active_field).bind("keyup change", check_inputs);
+
+        function check_inputs() {
+            if (name_field.val().length > 0 || username_field.val().length > 0 || is_active_field.children("option:selected").val() !== "")
+                clear_btn.attr('hidden', false);
+            else
+                clear_btn.attr('hidden', true);
+        }
+
+        function usersDatatable() {
+            $('#usersTable').DataTable({
+                bDestroy: true,
                 processing: true,
                 serverSide: true,
+                searching: false,
+                autoWidth: false,
+                order: [
+                    [0, 'desc']
+                ],
+                paging: true,
+                lengthMenu: [
+                    [10, 25, 50, 100],
+                    [10, 25, 50, 100]
+                ],
+                sPaginationType: "full_numbers",
+                bStateSave: true,
+                fnStateSave: function (oSettings, oData) {
+                    localStorage.setItem('usersDataTable', JSON.stringify(oData));
+                },
+                fnStateLoad: function (oSettings) {
+                    return JSON.parse(localStorage.getItem('usersDataTable'));
+                },
+                language: dataTablesArabicLocalization,
                 ajax: {
                     url: "{{ route('users.data') }}",
                     method: 'POST',
@@ -94,94 +158,118 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     data: function (d) {
-                        d.name = $('#name').val();
-                        d.username = $('#username').val();
-                        d.is_active = $('#is_active').val();
+                        d.name = name_field.val();
+                        d.username = username_field.val();
+                        d.is_active = is_active_field.val();
                     }
                 },
-                dom: '<"top"i>rt<"bottom"lp><"clear">',
-                columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex'
-                },
+                columns: [
+                    {data: 'id', name: 'id'},
+                    {data: 'name', name: 'name'},
+                    {data: 'username', name: 'username'},
                     {
-                        data: 'name',
-                        name: 'name'
-                    },
-                    {
-                        data: 'username',
-                        name: 'username'
-                    },
-                    {
-                        data: 'is_active',
-                        name: 'is_active',
+                        data: 'is_active', name: 'is_active',
                         render: function (data, type, row) {
-                            var statusClass = data === 'مفعل' ? 'text-success' : 'text-danger';
-                            return '<span class="' + statusClass + '">' + data + '</span>';
+                            let statusName = 'غير مفعل'
+                            let statusClass = 'text-danger'
+                            if (row.is_active == 1) {
+                                statusName = 'مفعل'
+                                statusClass = 'text-success'
+                            }
+                            return `<span class="${statusClass}">${statusName}</span>`;
                         }
                     },
                     {
-                        data: 'roles',
-                        name: 'roles',
+                        data: 'id', name: 'id',
                         render: function (data, type, row) {
-                            var roleLabels = '';
-                            data.forEach(function (role) {
-                                roleLabels += '<label class="badge badge-success">' + role + '</label> ';
-                            });
+                            let roleLabels = '';
+                            if (row.roles) {
+                                row.roles.forEach(function (role) {
+                                    roleLabels += '<label class="badge badge-success">' + role.name + '</label> ';
+                                });
+                            }
                             return roleLabels;
                         }
                     },
                     {
-                        data: 'action',
-                        name: 'action',
+                        data: 'id', name: 'id',
                         orderable: false,
                         searchable: false,
                         render: function (data, type, row) {
-                            var btn = '<td class="d-flex justify-content-between">';
-
-                            btn += '@can("عرض المستخدم")<a class="btn btn-sm btn-outline-primary mx-1" href="/users/' + row.id + '"><i data-toggle="tooltip" title="عرض" class="la la-eye"></i></a>@endcan';
-                            btn += '@can("تعديل المستخدم")<a class="btn btn-sm btn-outline-warning mx-1" href="/users/' + row.id + '/edit"><i data-toggle="tooltip" title="تعديل" class="la la-edit"></i></a>@endcan';
-                            btn += '@can("حذف المستخدم")<button class="btn btn-sm btn-outline-danger  mx-1 delete-user" data-id="' + row.id + '" data-toggle="tooltip" title="حذف"><i class="la la-trash"></i></button>@endcan';
-                            btn += '</td>';
-                            return btn;
+                            return `<div>
+                            @can("عرض المستخدم")
+                            <a class="btn btn-sm btn-outline-primary" href="/users/${row.id}"><i data-toggle="tooltip" title="عرض" class="la la-eye"></i></a>
+                            @endcan
+                            @can("تعديل المستخدم")
+                            <a class="btn btn-sm btn-outline-warning" href="/users/${row.id}/edit"><i data-toggle="tooltip" title="تعديل" class="la la-edit"></i></a>
+                            @endcan
+                            @can("حذف المستخدم")
+                            <a class="btn btn-sm btn-outline-danger" href="javascript:" data-id="${row.id}"
+                                url="{{url('/users/destroy')}}/${row.id}" onclick="checkHasRelations(${row.id})" id="delete_${row.id}"
+                                data-toggle="tooltip" title="حذف"><i class="la la-trash"></i>
+                            </a>
+                            @endcan
+                            </div>`;
                         }
                     },
                 ]
             });
-            $('#searchForm').submit(function (e) {
-                e.preventDefault();
-                table.draw();
-            });
-            // <!-- ==============================Delete=========================================== -->
-            $(document).on('click', '.delete-user', function (e) {
-                e.preventDefault();
-                let orderId = $(this).data('id');
-                let token = $('meta[name="csrf-token"]').attr('content');
+        }
 
-                if (confirm('هل أنت متأكد أنك تريد حذف هذا المستخدم؟')) {
-                    $.ajax({
-                        url: '/users/' + orderId,
-                        method: 'DELETE',
-                        data: {
-                            "_token": token,
-                        },
-                        success: function (response) {
-                            if (response.success) {
-                                table.draw();
-                                // alert(response.success);
-                            } else {
-                                alert('حدث خطأ: ' + response.error);
-                            }
-                        },
-                        error: function (response) {
-                            alert('حدث خطأ أثناء محاولة حذف المستخدم');
+        function checkHasRelations(id) {
+            swal({
+                title: "هل انت متأكد؟",
+                text: "أنت على وشك حذف هذا العنصر!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "نعم حذف!",
+                closeOnConfirm: false
+            }, function () {
+                swal.close();
+                $.ajax({
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    type: 'POST',
+                    url: '{{url("/users/checkHasRelations")}}/' + id,
+                    data: {},
+                    success: function (res) {
+                        if (res.has_relations === true) {
+                            swal({
+                                title: "فشل الحذف",
+                                text: "هذا العنصر مرتبط بعناصر أخرى ولا يمكن حذفه!",
+                                type: "error",
+                            })
+                        } else {
+                            destroy(id);
                         }
-                    });
-                }
-
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(error)
+                        //checkAjaxRequestStatus(xhr) //TODO
+                    }
+                });
             });
-            // <!-- ==============================Delete=========================================== -->
+        }
 
-        });
+        function destroy(id) {
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                type: 'POST',
+                url: '{{url("/users/delete")}}/' + id,
+                success: function (res) {
+                    if (res.success === true) {
+                        usersDatatable();
+                        previewToastrForAjaxRequest(res.success_message);
+                    } else {
+                        previewToastrForAjaxRequest('', res.error_message);
+                        console.log('response:', res);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.log(error)
+                    //checkAjaxRequestStatus(xhr) //TODO
+                }
+            });
+        }
     </script>
 @endsection
