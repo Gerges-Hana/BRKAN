@@ -41,7 +41,7 @@
                             @endcan
                         </div>
                     </div>
-                    <hr>
+
                     <div class="card-content collapse show">
                         <div class="card-body card-dashboard pt-1">
                             {{-- Search --}}
@@ -162,7 +162,8 @@
                             @endcan
                             </div>`;
                         },
-                    }]
+                    },
+                ],
             });
         }
 

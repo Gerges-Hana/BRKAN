@@ -2,58 +2,51 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Exception;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
-use DB;
 use Hash;
 use Illuminate\Support\Arr;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\DB as FacadesDB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash as FacadesHash;
-use Spatie\Permission\Models\Permission;
 use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
 
-
-
-    public function index(Request $request)
+    public function index(Request $request): Factory|Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-       
         return view('admin.users.index');
     }
-    
-    public function getUserData(Request $request)
-{
-    $query = User::query();
 
-    if ($request->filled('name')) {
-        $query->where('name', 'like', '%' . $request->name . '%');
+    /**
+     * @throws Exception
+     */
+    public function getUsersData(Request $request): JsonResponse
+    {
+        $name = strtolower($request->input('name'));
+        $username = strtolower($request->input('username'));
+        $is_active = filter_var($request->input('is_active'), FILTER_VALIDATE_BOOLEAN);
+
+        $users = User::query();
+        if ($request->filled('name')) {
+            $users->whereRaw('LOWER(name) like ?', ['%' . $name . '%']);
+        }
+        if ($request->filled('username')) {
+            $users->whereRaw('LOWER(username) like ?', ['%' . $username . '%']);
+        }
+        if ($request->filled('is_active')) {
+            $users->where('is_active', $is_active);
+        }
+
+        return DataTables::of($users->with('roles'))->toJson();
     }
-
-    if ($request->filled('username')) {
-        $query->where('username', 'like', '%' . $request->username . '%');
-    }
-
-    if ($request->filled('is_active')) {
-        $query->where('is_active', $request->is_active);
-    }
-
-    $data = $query->latest()->get();
-
-    return DataTables::of($data)
-        ->addIndexColumn()
-        ->addColumn('is_active', function ($row) {
-            return $row->is_active ? 'مفعل' : 'غير مفعل';
-        })
-        ->addColumn('roles', function ($row) {
-            return $row->getRoleNames()->toArray();
-        })
-        ->make(true);
-}
 
 
     public function create(): View
@@ -85,7 +78,7 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id): View
@@ -97,7 +90,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id): View
@@ -112,8 +105,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id): RedirectResponse
@@ -144,20 +137,32 @@ class UserController extends Controller
     }
 
     /**
+     * Check if the user has relations before deleting it
+     *
+     * @param $id
+     * @return JsonResponse
+     */
+    public function checkHasRelations($id): JsonResponse
+    {
+        $role_relations_1 = DB::table("purchase_order_updates")->where("user_id", $id)->count();
+        $role_relations_2 = DB::table("purchase_order_status_updates")->where("user_id", $id)->count();
+
+        return response()->json(['has_relations' => $role_relations_1 > 0 || $role_relations_2 > 0]);
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return JsonResponse
      */
-  
-     public function destroy($id)
-     {
-         $User = User::find($id);
-         if ($User) {
-             $User->delete();
-             return response()->json(['success' => 'تم حذف المستخدم بنجاح']);
-         } else {
-             return response()->json(['error' => 'لم يتم العثور على المستخدم'], 404);
-         }
-     }
+    public function destroy(int $id): JsonResponse
+    {
+        $deleted = DB::table("users")->where('id', $id)->delete();
+        if ($deleted) {
+            return response()->json(['success' => true, 'success_message' => 'تم حذف المستخدم بنجاح!']);
+        } else {
+            return response()->json(['success' => false, 'error_message' => 'فشل الحذف حاول مرة اخرى!']);
+        }
+    }
 }

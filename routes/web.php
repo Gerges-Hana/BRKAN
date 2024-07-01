@@ -39,13 +39,18 @@ Route::middleware(['auth'])->group(function () {
     // Users
     Route::resource('users', UserController::class);
     Route::group(['prefix' => 'users'], function () {
-        Route::post('/users/data', [UserController::class, 'getUserData'])->name('users.data');
+        Route::post('/data', [UserController::class, 'getUsersData'])->name('users.data');
         Route::post('/checkHasRelations/{id}', [UserController::class, 'checkHasRelations'])->name('users.checkHasRelations');
         Route::post('/delete/{id}', [UserController::class, 'destroy'])->name('users.destroy');
     });
 
     // Purchase Order Statuses
     Route::resource('status', PurchaseOrderStatusesController::class);
+    Route::group(['prefix' => 'status'], function () {
+        Route::post('/data', [PurchaseOrderStatusesController::class, 'getStatusData'])->name('status.data');
+        Route::post('/checkHasRelations/{id}', [PurchaseOrderStatusesController::class, 'checkHasRelations'])->name('status.checkHasRelations');
+        Route::post('/delete/{id}', [PurchaseOrderStatusesController::class, 'destroy'])->name('status.destroy');
+    });
 
     // Notifications
     Route::get('/fetch-notifications', [NotificationController::class, 'fetchNotifications'])->name('fetch.notifications');
