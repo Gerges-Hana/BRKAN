@@ -11,15 +11,21 @@
                 </li>
             @endcan
 
-
             {{--Orders--}}
             @can(' الطلبيات')
-                <li class="nav-item {{ (request()->is('orders')) ? 'active' : '' }}">
-                    <a href="/orders">
-                        <i class="la la-car"></i>
-                        <span class="menu-title" data-i18n="">الطلبيات </span>
-                    </a>
-                </li>
+            <li class=" nav-item "><a href="/orders"><i class="la la-car"></i><span class="menu-title" data-i18n="nav.dash.main">الطلبيات</span><span class="badge badge badge-info badge-pill float-right mr-2">3</span></a>
+                <ul class="menu-content">
+                  <li><a class="menu-item {{ (request()->is('orders')) ? 'active' : '' }}" href="/orders" data-i18n="nav.dash.ecommerce">جميع الطلبيات</a>
+                  </li>
+                  
+                  <li><a class="menu-item" href="/orders/OldPurchaseOrders" data-i18n="nav.dash.sales">طلبيات السابقه</a>
+                  </li>
+                  <li><a class="menu-item" href="/orders/todayPurchaseOrders" data-i18n="nav.dash.crypto">طلبيات اليوم </a>
+                  </li>
+                  <li><a class="menu-item" href="/orders/commingPurchaseOrders" data-i18n="nav.dash.sales">طلبيات القادمه</a>
+                  </li>
+                </ul>
+              </li>
             @endcan
 
             {{--Reports--}}

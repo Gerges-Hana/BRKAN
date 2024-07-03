@@ -79,18 +79,6 @@ class PurchaseOrdersController extends Controller
         return DataTables::of($purchase_orders)->toJson();
     }
 
-
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-
     public function show($id)
     {
         $order = PurchaseOrder::query()->with(['purchaseOrderUpdates', 'status'])->find($id);
@@ -219,4 +207,200 @@ class PurchaseOrdersController extends Controller
             return response()->json(['success' => false, 'error_message' => 'لم يتم العثور على الطلبيه'], 404);
         }
     }
+
+
+    public function oldPurchaseOrders(){
+        return view('admin.orders.oldOrders');
+    }
+    public function oldPurchaseOrdersData(Request $request){
+        $purchase_orders = PurchaseOrder::query();
+
+        if ($request->filled('purchase_order_number')) {
+            $purchase_orders->where('purchase_order_number', 'like', '%' . $request->purchase_order_number . '%');
+        }
+
+        if ($request->filled('invoice_number')) {
+            $purchase_orders->where('invoice_number', 'like', '%' . $request->invoice_number . '%');
+        }
+
+        if ($request->filled('driver_name')) {
+            $purchase_orders->where('driver_name', 'like', '%' . $request->driver_name . '%');
+        }
+
+        if ($request->filled('rep_name')) {
+            $purchase_orders->where('rep_name', 'like', '%' . $request->rep_name . '%');
+        }
+
+        if ($request->filled('driver_phone')) {
+            $purchase_orders->where('driver_phone', 'like', '%' . $request->driver_phone . '%');
+        }
+
+        if ($request->filled('rep_phone')) {
+            $purchase_orders->where('rep_phone', 'like', '%' . $request->rep_phone . '%');
+        }
+
+        if ($request->filled('arrival_date')) {
+            $purchase_orders->where('arrival_date', 'like', '%' . $request->arrival_date . '%');
+        }
+
+        if ($request->filled('arrived_at')) {
+            $purchase_orders->where('arrived_at', 'like', '%' . $request->arrived_at . '%');
+        }
+
+        if ($request->filled('entered_at')) {
+            $purchase_orders->where('entered_at', 'like', '%' . $request->entered_at . '%');
+        }
+
+        if ($request->filled('unloaded_at')) {
+            $purchase_orders->where('unloaded_at', 'like', '%' . $request->unloaded_at . '%');
+        }
+
+        if ($request->filled('left_at')) {
+            $purchase_orders->where('left_at', 'like', '%' . $request->left_at . '%');
+        }
+
+        if ($request->filled('created_at')) {
+            $purchase_orders->where('created_at', 'like', '%' . $request->created_at . '%');
+        }
+
+        if ($request->filled('updated_at')) {
+            $purchase_orders->where('updated_at', 'like', '%' . $request->updated_at . '%');
+        }
+
+        $today = Carbon::now()->format('Y-m-d');
+        $purchase_orders = PurchaseOrder::query()->with(['purchaseOrderUpdates', 'status'])->where('status_id',6);
+        return DataTables::of($purchase_orders)->toJson();
+    }
+    public function todayPurchaseOrders(){
+        return view('admin.orders.todayOrders');
+    }
+    public function todayPurchaseOrdersData(Request $request){
+
+        $purchase_orders = PurchaseOrder::query();
+
+        if ($request->filled('purchase_order_number')) {
+            $purchase_orders->where('purchase_order_number', 'like', '%' . $request->purchase_order_number . '%');
+        }
+
+        if ($request->filled('invoice_number')) {
+            $purchase_orders->where('invoice_number', 'like', '%' . $request->invoice_number . '%');
+        }
+
+        if ($request->filled('driver_name')) {
+            $purchase_orders->where('driver_name', 'like', '%' . $request->driver_name . '%');
+        }
+
+        if ($request->filled('rep_name')) {
+            $purchase_orders->where('rep_name', 'like', '%' . $request->rep_name . '%');
+        }
+
+        if ($request->filled('driver_phone')) {
+            $purchase_orders->where('driver_phone', 'like', '%' . $request->driver_phone . '%');
+        }
+
+        if ($request->filled('rep_phone')) {
+            $purchase_orders->where('rep_phone', 'like', '%' . $request->rep_phone . '%');
+        }
+
+        if ($request->filled('arrival_date')) {
+            $purchase_orders->where('arrival_date', 'like', '%' . $request->arrival_date . '%');
+        }
+
+        if ($request->filled('arrived_at')) {
+            $purchase_orders->where('arrived_at', 'like', '%' . $request->arrived_at . '%');
+        }
+
+        if ($request->filled('entered_at')) {
+            $purchase_orders->where('entered_at', 'like', '%' . $request->entered_at . '%');
+        }
+
+        if ($request->filled('unloaded_at')) {
+            $purchase_orders->where('unloaded_at', 'like', '%' . $request->unloaded_at . '%');
+        }
+
+        if ($request->filled('left_at')) {
+            $purchase_orders->where('left_at', 'like', '%' . $request->left_at . '%');
+        }
+
+        if ($request->filled('created_at')) {
+            $purchase_orders->where('created_at', 'like', '%' . $request->created_at . '%');
+        }
+
+        if ($request->filled('updated_at')) {
+            $purchase_orders->where('updated_at', 'like', '%' . $request->updated_at . '%');
+        }
+
+        $today = Carbon::now()->format('Y-m-d');
+        $purchase_orders = PurchaseOrder::query()->with(['purchaseOrderUpdates', 'status'])
+        ->whereIn('status_id',[1,2,3])
+        ->whereDate('arrival_date',$today);
+        return DataTables::of($purchase_orders)->toJson();
+    }
+
+    public function incommingPurchaseOrders(){
+        return view('admin.orders.commingOrders');
+    }
+    public function incommingPurchaseOrdersData(Request $request){
+        
+        $purchase_orders = PurchaseOrder::query();
+
+        if ($request->filled('purchase_order_number')) {
+            $purchase_orders->where('purchase_order_number', 'like', '%' . $request->purchase_order_number . '%');
+        }
+
+        if ($request->filled('invoice_number')) {
+            $purchase_orders->where('invoice_number', 'like', '%' . $request->invoice_number . '%');
+        }
+
+        if ($request->filled('driver_name')) {
+            $purchase_orders->where('driver_name', 'like', '%' . $request->driver_name . '%');
+        }
+
+        if ($request->filled('rep_name')) {
+            $purchase_orders->where('rep_name', 'like', '%' . $request->rep_name . '%');
+        }
+
+        if ($request->filled('driver_phone')) {
+            $purchase_orders->where('driver_phone', 'like', '%' . $request->driver_phone . '%');
+        }
+
+        if ($request->filled('rep_phone')) {
+            $purchase_orders->where('rep_phone', 'like', '%' . $request->rep_phone . '%');
+        }
+
+        if ($request->filled('arrival_date')) {
+            $purchase_orders->where('arrival_date', 'like', '%' . $request->arrival_date . '%');
+        }
+
+        if ($request->filled('arrived_at')) {
+            $purchase_orders->where('arrived_at', 'like', '%' . $request->arrived_at . '%');
+        }
+
+        if ($request->filled('entered_at')) {
+            $purchase_orders->where('entered_at', 'like', '%' . $request->entered_at . '%');
+        }
+
+        if ($request->filled('unloaded_at')) {
+            $purchase_orders->where('unloaded_at', 'like', '%' . $request->unloaded_at . '%');
+        }
+
+        if ($request->filled('left_at')) {
+            $purchase_orders->where('left_at', 'like', '%' . $request->left_at . '%');
+        }
+
+        if ($request->filled('created_at')) {
+            $purchase_orders->where('created_at', 'like', '%' . $request->created_at . '%');
+        }
+
+        if ($request->filled('updated_at')) {
+            $purchase_orders->where('updated_at', 'like', '%' . $request->updated_at . '%');
+        }
+        $today = Carbon::now()->format('Y-m-d');
+        $order = PurchaseOrder::query()->with(['purchaseOrderUpdates', 'status'])
+        ->whereIn('status_id',[1,2,3])
+        ->whereDate('arrival_date', '!=', $today);
+        return DataTables::of($purchase_orders)->toJson();
+
+    }
+
 }
