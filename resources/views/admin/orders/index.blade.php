@@ -5,7 +5,8 @@
 @endsection
 
 @section('page-style-files')
-    <link rel="stylesheet" type="text/css" href="{{asset('/app-assets/vendors/css/tables/datatable/jquery.dataTables.min.css')}}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('/app-assets/vendors/css/tables/datatable/jquery.dataTables.min.css') }}">
 @endsection
 
 @section('content-header')
@@ -42,39 +43,47 @@
                             {{-- Search --}}
                             <form id="searchForm" class="row">
                                 <div class="form-group col-2">
-                                    <input type="text" class="form-control" id="purchase_order_number" name="purchase_order_number" placeholder="رقم الطلبيه">
+                                    <input type="text" class="form-control" id="purchase_order_number"
+                                        name="purchase_order_number" placeholder="رقم الطلبيه">
                                 </div>
                                 <div class="form-group col-2">
-                                    <input type="text" class="form-control" id="invoice_number" name="invoice_number" placeholder="رقم الفاتورة">
+                                    <input type="text" class="form-control" id="invoice_number" name="invoice_number"
+                                        placeholder="رقم الفاتورة">
                                 </div>
                                 <div class="form-group col-2">
-                                    <input type="text" class="form-control" id="driver_name" name="driver_name" placeholder="اسم السائق">
+                                    <input type="text" class="form-control" id="driver_name" name="driver_name"
+                                        placeholder="اسم السائق">
                                 </div>
                                 <div class="form-group col-2">
-                                    <input type="text" class="form-control" id="rep_name" name="rep_name" placeholder="اسم المندوب">
+                                    <input type="text" class="form-control" id="rep_name" name="rep_name"
+                                        placeholder="اسم المندوب">
                                 </div>
                                 <div class="form-group col-2">
-                                    <input type="text" class="form-control" id="driver_phone" name="driver_phone" placeholder="هاتف السائق">
+                                    <input type="text" class="form-control" id="driver_phone" name="driver_phone"
+                                        placeholder="هاتف السائق">
                                 </div>
                                 <div class="form-group col-2 p-0">
-                                    <button type="submit" class="btn btn-sm btn-primary align-self-end mt-1" style="width: auto;">بحث <i class="fa fa-search"></i></button>
-                                    <button type="button" class="btn btn-sm btn-warning align-self-end mt-1 clear-btn" style="width: auto;">تفريغ <i class="fa fa-eraser"></i></button>
+                                    <button type="submit" class="btn btn-sm btn-primary align-self-end mt-1"
+                                        style="width: auto;">بحث <i class="fa fa-search"></i></button>
+                                    <button type="button" class="btn btn-sm btn-warning align-self-end mt-1 clear-btn"
+                                        style="width: auto;">تفريغ <i class="fa fa-eraser"></i></button>
                                 </div>
                             </form>
                             {{-- Data --}}
                             <div class="table-responsive">
-                                <table style="width: 99%" class="table table-bordered table-striped" id="purchaseOrdersTable">
+                                <table style="width: 99%" class="table table-bordered table-striped"
+                                    id="purchaseOrdersTable">
                                     <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>رقم الطلبية</th>
-                                        <th>رقم الفاتورة</th>
-                                        <th>اسم السائق</th>
-                                        <th>اسم المندوب</th>
-                                        <th>هاتف السائق</th>
-                                        <th>هاتف المندوب</th>
-                                        <th class="text-center">العمليات</th>
-                                    </tr>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>رقم الطلبية</th>
+                                            <th>رقم الفاتورة</th>
+                                            <th>اسم السائق</th>
+                                            <th>اسم المندوب</th>
+                                            <th>هاتف السائق</th>
+                                            <th>هاتف المندوب</th>
+                                            <th class="text-center">العمليات</th>
+                                        </tr>
                                     </thead>
                                 </table>
                             </div>
@@ -88,7 +97,8 @@
 
 @section('modals')
     <!-- Order details modal -->
-    <div class="modal" id="showOrderDetailsModal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="myModalLabel16" aria-hidden="true">
+    <div class="modal" id="showOrderDetailsModal" tabindex="-1" role="dialog" data-keyboard="false"
+        data-backdrop="static" aria-labelledby="myModalLabel16" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -102,7 +112,8 @@
                         <div class="row">
                             <!-- Card for بيانات الطلبيه -->
                             <div class="col-md-6">
-                                <div class="card mb-3" style=" border: 1px solid rgba(0, 0, 0, .125); border-radius: .25rem;">
+                                <div class="card mb-3"
+                                    style=" border: 1px solid rgba(0, 0, 0, .125); border-radius: .25rem;">
                                     <div class="modal-header">بيانات الطلبية</div>
                                     <div class="modal-body">
                                         <p><strong>رقم الطلبية: </strong><span id="modal_purchase_order_number"></span></p>
@@ -111,13 +122,14 @@
                                         <p><strong>اسم المندوب: </strong><span id="modal_rep_name"></span></p>
                                         <p><strong>هاتف السائق: </strong><span id="modal_driver_phone"></span></p>
                                         <p><strong>هاتف المندوب: </strong><span id="modal_rep_phone"></span></p>
-                                        <p><strong>تاريخ الوصول المتوقع: </strong><span id="modal_arrival_date"></span></p>
+                                        <p><strong>وقت الوصول المتوقع: </strong><span id="modal_arrival_date"></span></p>
                                     </div>
                                 </div>
                             </div>
                             <!-- Card for التحديثات -->
                             <div class="col-md-6">
-                                <div class="card mb-3" style=" border: 1px solid rgba(0, 0, 0, .125);border-radius: .25rem;">
+                                <div class="card mb-3"
+                                    style=" border: 1px solid rgba(0, 0, 0, .125);border-radius: .25rem;">
                                     <div class="modal-header">التحديثات</div>
                                     <div class="modal-body">
                                         <p><strong>حالة الطلبية: </strong><span id="modal_status"></span></p>
@@ -144,7 +156,8 @@
     </div>
 
     <!-- Edit order modal -->
-    <div class="modal fade" id="editOrderModal" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static" aria-labelledby="editOrderModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editOrderModal" tabindex="-1" role="dialog" data-keyboard="false"
+        data-backdrop="static" aria-labelledby="editOrderModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -156,35 +169,36 @@
 
 
                 <form id="editOrderForm">
+                    <input type="hidden" id="orderId">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="status_id">الحالة</label>
                             <select class="form-control" id="status_id" name="status_id">
-                                <option value="0">اختر الحالة</option>
-                                <option value="1" class="d-none">تم التحرك</option>
-                                <option value="2" class="d-none">تم الالغاء</option>
-                                <option value="3" class="d-none">تم الوصول</option>
-                                <option value="4">تم الإدخال</option>
+                                <option value="" selected>اختر الحالة</option>
+                                <option value="4">تم الدخول</option>
                                 <option value="5">تم التحميل</option>
                                 <option value="6">تم المغادرة</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="entered_at">تاريخ الإدخال</label>
-                            <input type="datetime-local" class="form-control datetime-field" id="entered_at" name="entered_at">
+                            <label for="entered_at">وقت الإدخال</label>
+                            <input type="datetime-local" class="form-control datetime-field" id="entered_at"
+                                name="entered_at" disabled>
                         </div>
                         <div class="form-group">
-                            <label for="unloaded_at">تاريخ التفريغ</label>
-                            <input type="datetime-local" class="form-control datetime-field" id="unloaded_at" name="unloaded_at">
+                            <label for="unloaded_at">وقت التفريغ</label>
+                            <input type="datetime-local" class="form-control datetime-field" id="unloaded_at"
+                                name="unloaded_at" disabled>
                         </div>
                         <div class="form-group">
-                            <label for="left_at">تاريخ المغادرة</label>
-                            <input type="datetime-local" class="form-control datetime-field" id="left_at" name="left_at">
+                            <label for="left_at">وقت المغادرة</label>
+                            <input type="datetime-local" class="form-control datetime-field" id="left_at"
+                                name="left_at" disabled>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">إغلاق</button>
-                        <button type="submit" class="btn btn-primary">حفظ التعديلات</button>
+                        <button type="button" class="btn btn-primary" id="editOrderBtn">حفظ التعديلات</button>
                     </div>
                 </form>
             </div>
@@ -193,8 +207,10 @@
 @endsection
 
 @section('page-script-files')
-    <script src="{{asset('/app-assets/vendors/js/tables/jquery.dataTables.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('/app-assets/vendors/js/extensions/moment.min.js')}}" type="text/javascript"></script>
+    <script src="{{ asset('/app-assets/vendors/js/tables/jquery.dataTables.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/app-assets/vendors/js/extensions/moment.min.js') }}" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/additional-methods.min.js"></script>
 @endsection
 
 @section('scripts')
@@ -207,19 +223,19 @@
         const driver_phone_field = $('#driver_phone');
         const clear_btn = $('.clear-btn');
 
-        $(function () {
+        $(function() {
             purchaseOrdersDataTable();
             check_inputs();
         });
 
-        $('#searchForm').submit(function (e) {
+        $('#searchForm').submit(function(e) {
             e.preventDefault();
             purchaseOrdersDataTable();
         });
         reload_data_btn.click(purchaseOrdersDataTable);
 
         // Draw table after Clear
-        clear_btn.on('click', function (e) {
+        clear_btn.on('click', function(e) {
             purchase_order_number_field.val("");
             invoice_number_field.val("");
             driver_name_field.val("");
@@ -228,10 +244,11 @@
             $('#searchForm').submit();
             check_inputs();
         });
-        purchase_order_number_field.add(invoice_number_field).add(driver_name_field).add(rep_name_field).add(driver_phone_field).bind("keyup change", check_inputs);
+        purchase_order_number_field.add(invoice_number_field).add(driver_name_field).add(rep_name_field).add(
+            driver_phone_field).bind("keyup change", check_inputs);
 
         // Show PO Modal
-        $(document).on('click', '.view-order', function () {
+        $(document).on('click', '.view-order', function() {
             let orderId = $(this).data('id');
             $.ajax({
                 url: '/orders/' + orderId,
@@ -240,7 +257,7 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                success: function (data) {
+                success: function(data) {
                     let updatedAt = formatDate(data.updated_at);
                     let arrivalDate = formatDate(data.arrival_date, 'YYYY-MM-DD');
                     let createdAt = '----';
@@ -272,7 +289,7 @@
                             break;
                     }
 
-                    data.purchase_order_updates.forEach(function (update) {
+                    data.purchase_order_updates.forEach(function(update) {
                         switch (update.status_id) {
                             case 1:
                                 createdAt = formatDate(update.created_at);
@@ -314,81 +331,130 @@
 
                     $('#showOrderDetailsModal').modal('show');
                 },
-                error: function () {
+                error: function() {
                     alert('خطأ في جلب تفاصيل الطلب');
                 }
             });
         });
 
         // Edit PO Modal
-        $(document).on('click', '.edit-order', function () {
+        $(document).on('click', '.edit-order', function() {
             let orderId = $(this).data('id');
+            $('#orderId').val(orderId)
             $.ajax({
                 url: '/orders/' + orderId + '/edit',
                 method: 'GET',
                 dataType: "JSON",
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function (data) {
-                    $('#status_id').val(data.status_id);
+                success: function(data) {
+                    console.log(data);
+                    $('#status_id').val(data.order.status_id);
+                    checkSelectedOrderStatus(data.order.status_id);
                     // Filters for purchase_order_updates by status_id
-                    let entered_at_update = data.purchase_order_updates.find(update => update.status_id === 4);
-                    let unloaded_at_update = data.purchase_order_updates.find(update => update.status_id === 5);
-                    let left_at_update = data.purchase_order_updates.find(update => update.status_id === 6);
-                    // Set the values based on the filtered results
+                    let entered_at_update = data.order.purchase_order_updates.find(update => update
+                        .status_id === 4);
+                    let unloaded_at_update = data.order.purchase_order_updates.find(update => update
+                        .status_id === 5);
+                    let left_at_update = data.order.purchase_order_updates.find(update => update
+                        .status_id === 6);
                     if (entered_at_update) {
-                        $('#entered_at').val(moment(entered_at_update.created_at).format('YYYY-MM-DD HH:mm'));
+                        $('#entered_at').val(entered_at_update.formatted_created_at);
+                    } else {
+                        $('#entered_at').val('');
                     }
                     if (unloaded_at_update) {
-                        $('#unloaded_at').val(moment(unloaded_at_update.created_at).format('YYYY-MM-DD HH:mm'));
+                        $('#unloaded_at').val(unloaded_at_update.formatted_created_at);
+                    } else {
+                        $('#unloaded_at').val('');
                     }
                     if (left_at_update) {
-                        $('#left_at').val(moment(left_at_update.created_at).format('YYYY-MM-DD HH:mm'));
+                        $('#left_at').val(left_at_update.formatted_created_at);
+                    } else {
+                        $('#left_at').val('');
                     }
+
                     $('#editOrderForm').data('id', orderId);
                     $('#editOrderModal').modal('show');
                 },
-                error: function () {
+                error: function() {
                     alert('خطأ في جلب تفاصيل الطلب');
                 }
             });
         });
 
-        // Submit PO Update
-        $('#editOrderForm').on('submit', function (event) {
-            event.preventDefault();
-            let orderId = $(this).data('id');
-            let formData = new FormData(this);
-            $.ajax({
-                url: '/orders/edit/' + orderId,
-                method: 'POST',
-                data: formData,
-                async: false,
-                cache: false,
-                contentType: false,
-                enctype: 'multipart/form-data',
-                processData: false,
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                success: function (res) {
-                    if (res.success === true) {
-                        previewToastrForAjaxRequest(res.success_message);
-                        $('#editOrderModal').modal('hide');
-                        purchaseOrdersDataTable();
-                    } else {
-                        previewToastrForAjaxRequest('', res.error_message);
+        // Update And validation of po
+        $(document).ready(function() {
+            // Initialize form validation on the editOrderForm
+            $("#editOrderForm").validate({
+                rules: {
+                    status_id: {
+                        required: true
+                    },
+                    entered_at: {
+                        required: true,
+                    },
+                    unloaded_at: {
+                        required: true,
+                    },
+                    left_at: {
+                        required: true,
                     }
                 },
-                error: function (res) {
-                    previewToastrForAjaxRequest('', 'خطأ في تحديث الطلب');
+                messages: {
+                    status_id: {
+                        required: "برجاء اختيار الحالة"
+                    },
+                    entered_at: {
+                        required: "برجاء ادخال وقت الإدخال",
+                    },
+                    unloaded_at: {
+                        required: "برجاء ادخال وقت التفريغ",
+                    },
+                    left_at: {
+                        required: "برجاء ادخال وقت المغادرة",
+                    }
+                },
+                errorClass: 'text-danger', // Added to make the validation messages red
+
+                errorPlacement: function(error, element) {
+                    error.insertAfter(element); // Default placement
+                },
+                submitHandler: function(form) {
+                    // Submit the form via AJAX
+                    let orderId = $('#orderId').val();
+                    $.ajax({
+                        url: `{{ url('/orders/edit') }}/${orderId}`,
+                        method: 'POST',
+                        dataType: "JSON",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: $(form).serialize(), // Serialize form data
+                        success: function(res) {
+                            if (res.success == true) {
+                                $('#editOrderModal').modal('hide');
+                                $('#editOrderForm')[0].reset();
+                                purchaseOrdersDataTable();
+                                previewToastrForAjaxRequest(res.success_message);
+                            } else {
+                                previewToastrForAjaxRequest('', res.error_message);
+                            }
+                        },
+                        error: function() {
+                            alert('خطأ في تحديث الطلب');
+                        }
+                    });
+                    return false; // Prevent default form submission
                 }
+            });
+
+            // Event listener for #editOrderBtn (if it's dynamically added)
+            $(document).on('click', '#editOrderBtn', function(event) {
+                $("#editOrderForm").submit();
             });
         });
 
         // Delete PO
-        $(document).on('click', '.delete-order', function (e) {
+        $(document).on('click', '.delete-order', function(e) {
             e.preventDefault();
             let orderId = $(this).data('id');
             let token = $('meta[name="csrf-token"]').attr('content');
@@ -400,7 +466,7 @@
                     data: {
                         "_token": token,
                     },
-                    success: function (response) {
+                    success: function(response) {
                         if (response.success) {
                             purchaseOrdersDataTable();
                             // alert(response.success);
@@ -408,7 +474,7 @@
                             alert('حدث خطأ: ' + response.error);
                         }
                     },
-                    error: function (response) {
+                    error: function(response) {
                         alert('حدث خطأ أثناء محاولة حذف الطلبيه');
                     }
                 });
@@ -433,10 +499,10 @@
                 ],
                 sPaginationType: "full_numbers",
                 bStateSave: true,
-                fnStateSave: function (oSettings, oData) {
+                fnStateSave: function(oSettings, oData) {
                     localStorage.setItem('purchaseOrdersDataTables', JSON.stringify(oData));
                 },
-                fnStateLoad: function (oSettings) {
+                fnStateLoad: function(oSettings) {
                     return JSON.parse(localStorage.getItem('purchaseOrdersDataTables'));
                 },
                 language: dataTablesArabicLocalization,
@@ -447,7 +513,7 @@
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                    data: function (d) {
+                    data: function(d) {
                         d.purchase_order_number = $('#purchase_order_number').val();
                         d.invoice_number = $('#invoice_number').val();
                         d.driver_name = $('#driver_name').val();
@@ -456,50 +522,72 @@
                         d.rep_phone = $('#rep_phone').val();
                     }
                 },
-                columns: [
-                    {data: 'id', name: 'id'},
-                    {data: 'purchase_order_number', name: 'purchase_order_number'},
-                    {data: 'invoice_number', name: 'invoice_number'},
-                    {data: 'driver_name', name: 'driver_name'},
-                    {data: 'rep_name', name: 'rep_name'},
-                    {data: 'driver_phone', name: 'driver_phone'},
-                    {data: 'rep_phone', name: 'rep_phone'},
+                columns: [{
+                        data: 'id',
+                        name: 'id'
+                    },
+                    {
+                        data: 'purchase_order_number',
+                        name: 'purchase_order_number'
+                    },
+                    {
+                        data: 'invoice_number',
+                        name: 'invoice_number'
+                    },
+                    {
+                        data: 'driver_name',
+                        name: 'driver_name'
+                    },
+                    {
+                        data: 'rep_name',
+                        name: 'rep_name'
+                    },
+                    {
+                        data: 'driver_phone',
+                        name: 'driver_phone'
+                    },
+                    {
+                        data: 'rep_phone',
+                        name: 'rep_phone'
+                    },
                     {
                         data: 'id',
                         name: 'id',
                         orderable: false,
                         searchable: false,
-                        render: function (data, type, row) {
+                        render: function(data, type, row) {
                             return `<div>
-                            @can("عرض الطلبيه")
+                            @can('عرض الطلبيه')
                             <button class="btn btn-sm btn-outline-primary view-order" data-id="${row.id}"
                                 data-toggle="tooltip" title="عرض الطلبية"><i class="la la-eye"></i>
                             </button>
                             @endcan
-                            @can("تعديل الطلبيه")
+                            @can('تعديل الطلبيه')
                             <a class="btn btn-sm btn-outline-warning edit-order" href="#" data-id="${row.id}"
                                 data-toggle="tooltip" title="تعديل الطلبية"><i class="la la-edit"></i>
                             </a>
                             @endcan
-                            @can("تفاصيل الطلبيه")
-                            <a class="btn btn-sm btn-outline-info " href="{{url('/orders/history/')}}/${row.id}"
+                            @can('تفاصيل الطلبيه')
+                            <a class="btn btn-sm btn-outline-info " href="{{ url('/orders/history/') }}/${row.id}"
                                 data-toggle="tooltip" target="_blank" title="تفاصيل الطلبية"><i class="la ft-file-plus"></i>
                             </a>
                             @endcan
-{{--                            @can("حذف الطلبيه")--}}
-{{--                            <a class="btn btn-sm btn-outline-danger" href="javascript:" data-id="${row.id}"--}}
-{{--                                url="{{url('/orders/destroy')}}/${row.id}" onclick="checkHasRelations(${row.id})" id="delete_${row.id}"--}}
-{{--                                data-toggle="tooltip" title="حذف الطلبية"><i class="la la-trash"></i>--}}
-{{--                            </a>--}}
-{{--                            @endcan--}}
+{{--                            @can('حذف الطلبيه') --}}
+{{--                            <a class="btn btn-sm btn-outline-danger" href="javascript:" data-id="${row.id}" --}}
+{{--                                url="{{url('/orders/destroy')}}/${row.id}" onclick="checkHasRelations(${row.id})" id="delete_${row.id}" --}}
+{{--                                data-toggle="tooltip" title="حذف الطلبية"><i class="la la-trash"></i> --}}
+{{--                            </a> --}}
+{{--                            @endcan --}}
                             </div>`;
                         },
-                    }]
+                    }
+                ]
             });
         }
 
         function check_inputs() {
-            if (purchase_order_number_field.val().length > 0 || invoice_number_field.val().length > 0 || driver_name_field.val().length > 0 || rep_name_field.val().length > 0 || driver_phone_field.val().length > 0)
+            if (purchase_order_number_field.val().length > 0 || invoice_number_field.val().length > 0 || driver_name_field
+                .val().length > 0 || rep_name_field.val().length > 0 || driver_phone_field.val().length > 0)
                 clear_btn.attr('hidden', false);
             else
                 clear_btn.attr('hidden', true);
@@ -518,14 +606,16 @@
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "نعم حذف!",
                 closeOnConfirm: false
-            }, function () {
+            }, function() {
                 swal.close();
                 $.ajax({
-                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
                     type: 'POST',
-                    url: '{{url("/orders/checkHasRelations")}}/' + id,
+                    url: '{{ url('/orders/checkHasRelations') }}/' + id,
                     data: {},
-                    success: function (res) {
+                    success: function(res) {
                         if (res.has_relations === true) {
                             swal({
                                 title: "فشل الحذف",
@@ -536,7 +626,7 @@
                             destroy(id);
                         }
                     },
-                    error: function (xhr, status, error) {
+                    error: function(xhr, status, error) {
                         console.log(error)
                         //checkAjaxRequestStatus(xhr) //TODO
                     }
@@ -546,10 +636,12 @@
 
         function destroy(id) {
             $.ajax({
-                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
                 type: 'POST',
-                url: '{{url("/orders/delete")}}/' + id,
-                success: function (res) {
+                url: '{{ url('/orders/delete') }}/' + id,
+                success: function(res) {
                     if (res.success === true) {
                         rolesDataTable();
                         previewToastrForAjaxRequest(res.success_message);
@@ -558,7 +650,7 @@
                         console.log('response:', res);
                     }
                 },
-                error: function (xhr, status, error) {
+                error: function(xhr, status, error) {
                     console.log(error)
                     //checkAjaxRequestStatus(xhr) //TODO
                 }
@@ -567,14 +659,18 @@
     </script>
 
     <script>
-        $(function () {
+        $(function() {
             $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
 
     <script>
-        document.getElementById('status_id').addEventListener('change', function () {
-            const status = parseInt(this.value);
+        document.getElementById('status_id').addEventListener('change', function() {
+            checkSelectedOrderStatus(this.value)
+        });
+
+        function checkSelectedOrderStatus(status) {
+            status = parseInt(status);
             const enteredAtField = document.getElementById('entered_at');
             const unloadedAtField = document.getElementById('unloaded_at');
             const leftAtField = document.getElementById('left_at');
@@ -592,26 +688,26 @@
                 unloadedAtField.disabled = false;
                 leftAtField.disabled = false;
             } else {
-                enteredAtField.disabled = false;
-                unloadedAtField.disabled = false;
-                leftAtField.disabled = false;
+                enteredAtField.disabled = true;
+                unloadedAtField.disabled = true;
+                leftAtField.disabled = true;
             }
-        });
+        }
 
-        document.getElementById('editOrderForm').addEventListener('submit', function (event) {
+        document.getElementById('editOrderForm').addEventListener('submit', function(event) {
             const status = parseInt(document.getElementById('status_id').value);
             const enteredAtValue = document.getElementById('entered_at').value;
             const unloadedAtValue = document.getElementById('unloaded_at').value;
             const leftAtValue = document.getElementById('left_at').value;
 
             if (status === 4 && !enteredAtValue) {
-                alert('يرجى إدخال تاريخ الإدخال.');
+                console.log('يرجى إدخال وقت الإدخال.');
                 event.preventDefault();
             } else if (status === 5 && (!enteredAtValue || !unloadedAtValue)) {
-                alert('يرجى إدخال تاريخ الإدخال وتاريخ التفريغ.');
+                console.log('يرجى إدخال وقت الإدخال ووقت التفريغ.');
                 event.preventDefault();
             } else if (status === 6 && (!enteredAtValue || !unloadedAtValue || !leftAtValue)) {
-                alert('يرجى إدخال جميع التواريخ (الإدخال، التفريغ، والمغادرة).');
+                console.log('يرجى إدخال جميع التواريخ (الإدخال، التفريغ، والمغادرة).');
                 event.preventDefault();
             }
         });
