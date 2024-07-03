@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\NotificationController;
+use App\Http\Controllers\Admin\PurchaseOrderUpdatesController;
 use App\Http\Controllers\Admin\PurchaseOrdersController;
 use App\Http\Controllers\Admin\PurchaseOrderStatusesController;
 use App\Http\Controllers\Admin\ReportsController;
@@ -34,6 +34,15 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/edit/{id}', [PurchaseOrdersController::class, 'update'])->name('orders.update');
         Route::post('/checkHasRelations/{id}', [PurchaseOrdersController::class, 'checkHasRelations'])->name('orders.checkHasRelations');
         Route::post('/delete/{id}', [PurchaseOrdersController::class, 'destroy'])->name('orders.destroy');
+
+        // orderUpdates
+        Route::group(['prefix' => 'updates'], function () {
+            Route::get('/list', [PurchaseOrderUpdatesController::class, 'index'])->name('orderUpdates.index');
+            Route::post('/data', [PurchaseOrderUpdatesController::class, 'getUpdatesData'])->name('orderUpdates.data');
+            Route::get('/notifications/unread', [PurchaseOrderUpdatesController::class, 'unReadList'])->name('orderUpdates.notificationsUnread');
+            Route::post('/notifications/read', [PurchaseOrderUpdatesController::class, 'readAll'])->name('orderUpdates.notificationsReadAll');
+            Route::post('/notifications/read/{id}', [PurchaseOrderUpdatesController::class, 'readOne'])->name('orderUpdates.notificationsReadOne');
+        });
     });
 
     // Users
@@ -51,8 +60,5 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/checkHasRelations/{id}', [PurchaseOrderStatusesController::class, 'checkHasRelations'])->name('status.checkHasRelations');
         Route::post('/delete/{id}', [PurchaseOrderStatusesController::class, 'destroy'])->name('status.destroy');
     });
-
-    // Notifications
-    Route::get('/fetch-notifications', [NotificationController::class, 'fetchNotifications'])->name('fetch.notifications');
 
 });

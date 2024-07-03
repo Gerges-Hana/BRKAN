@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->foreign('purchase_order_id')->references('id')->on('purchase_orders')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('status_id')->references('id')->on('purchase_order_statuses')->onDelete('cascade')->onUpdate('cascade');
+            $table->timestamp('notification_read_at')->nullable();
             $table->timestamps();
         });
     }
