@@ -88,27 +88,22 @@
                     {{-- Notifications --}}
                     <li class="dropdown dropdown-notification nav-item">
                         <a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon ft-bell"></i>
-                            <span id="orderCount"
+                            <span id="notificationsCount"
                                   class="badge badge-pill badge-default badge-danger badge-default badge-up badge-glow">0</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
                             <li class="dropdown-menu-header">
                                 <h6 class="dropdown-header m-0">
-                                    <span class="grey darken-2">الاشعارات</span>
+                                    <span class="grey darken-2">التحديثات</span>
                                 </h6>
-                                <span class="notification-tag badge badge-default badge-danger float-right m-0">
-                                    <span id="orderCount"></span> جديدة
-                                </span>
                             </li>
                             <li class="scrollable-container media-list w-100">
-
                                 <div id="notificationList" class="list-group">
                                 </div>
-
                             </li>
                             <li class="dropdown-menu-footer">
-                                <a class="dropdown-item text-muted text-center" href="{{url('/orders')}}">
-                                    عرض كل الطلبيات
+                                <a class="dropdown-item text-muted text-center" href="{{route('orderUpdates.index')}}">
+                                    عرض كل التحديثات
                                 </a>
                             </li>
                         </ul>

@@ -35,12 +35,12 @@
         @if (Session::has('success_message'))
         toastr.success('', '{{Session::get('success_message')}}', toastr_config)
         {{ Session::forget('success_message') }}
-        @endif
+            @endif
         // Preview Toastr Warning Message
         @if (Session::has('warning_message'))
         toastr.warning('', '{{Session::get('warning_message')}}', toastr_config)
         {{ Session::forget('warning_message') }}
-        @endif
+            @endif
         // Preview Toastr Error Message
         @if (Session::has('error_message'))
         toastr.error('', '{{Session::get('error_message')}}', toastr_config)
@@ -59,16 +59,12 @@
 
     function fetchNotifications() {
         $.ajax({
-            url: '{{ route('fetch.notifications') }}',
+            url: '{{ route('orderUpdates.notificationsUnread') }}',
             method: 'GET',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function (response) {
-                if (response && response.length > 0) {
-                    updateOrderCount(response.length);
-                    $('#newOrderCount').text(response.newCount + ' جديدة');
-                    displayNotifications(response);
+            success: function (res) {
+                if (res.notifications && res.notifications.length > 0) {
+                    $('#notificationsCount').html(res.notifications.length);
+                    displayNotifications(res.notifications);
                 }
             },
             error: function (xhr, status, error) {
@@ -77,18 +73,14 @@
         });
     }
 
-    function updateOrderCount(count) {
-        $('#orderCount').text(count);
-    }
-
-    function displayNotifications(response) {
+    function displayNotifications(notifications) {
         $('#notificationList').empty();
-        response.forEach(function (notification) {
-            var statusMessage = '';
-            var iconClass = '';
+        notifications.forEach(function (notification) {
+            let statusMessage = '';
+            let iconClass = '';
             switch (notification.status_id) {
                 case 1:
-                    statusMessage = 'تم انشاء طالبيه جديده';
+                    statusMessage = 'تم انشاء طلبية جديده';
                     iconClass = 'ft-plus-square bg-cyan';
                     break;
                 case 2:
@@ -103,15 +95,15 @@
                     statusMessage = 'حالة غير معروفة';
                     iconClass = 'ft-info-square bg-grey';
             }
-            var notificationHtml = '<a href="{{ url('/orders-history/') }}/' + notification.id + '" class="media">';
-            notificationHtml += '<div class="media-left align-self-center"><i class="' + iconClass +
-                ' icon-bg-circle"></i></div>';
-            notificationHtml += '<div class="media-body">';
-            notificationHtml += '<h6 class="media-heading">' + statusMessage + '</h6>';
-            notificationHtml += '<p class="notification-text font-small-3 text-muted">رقم الطالبيه: ' +
-                notification.purchase_order_number + ' بواسطة ' + notification.driver_name + '</p>';
-            notificationHtml += '</div></a>';
-
+            let notificationHtml = `
+            <a href="{{ url('/orders/updates/read') }}/${notification.id}" class="media">
+                <div class="media-left align-self-center"><i class="${iconClass} icon-bg-circle"></i></div>
+                    <div class="media-body">
+                        <h6 class="media-heading">${statusMessage}</h6>
+                        <p class="notification-text font-small-3 text-muted">رقم الطالبيه: ' ${notification.purchase_order.purchase_order_number} ' بواسطة ' ${notification.purchase_order.driver_name} '</p>
+                    </div>
+                </div>
+            </a>`;
 
             $('#notificationList').append(notificationHtml);
         });
