@@ -43,18 +43,18 @@ class PurchaseOrderUpdatesController extends Controller
 
     public function list(): JsonResponse
     {
-        $notifications = PurchaseOrderUpdate::query()
+        $updates = PurchaseOrderUpdate::query()
             ->whereIn('status_id', [1, 2, 3])
             ->orderBy('created_at', 'DESC')
             ->with('purchaseOrder')
             ->get();
-        return response()->json(['notifications' => $notifications]);
+        return response()->json(['updates' => $updates]);
     }
 
     public function unReadList(): JsonResponse
     {
         $notifications = PurchaseOrderUpdate::query()
-            ->whereNull('notification_read_at')
+            ->whereNull('read_at')
             ->whereIn('status_id', [1, 2, 3])
             ->orderBy('created_at', 'DESC')
             ->with('purchaseOrder')
@@ -64,7 +64,7 @@ class PurchaseOrderUpdatesController extends Controller
 
     public function readAll(): JsonResponse
     {
-        $updated = PurchaseOrderUpdate::query()->whereNull('notification_read_at')->update(['notification_read_at' => Carbon::now()]);
+        $updated = PurchaseOrderUpdate::query()->whereNull('read_at')->update(['read_at' => Carbon::now()]);
         if ($updated) {
             return response()->json(['success' => true]);
         } else {
@@ -72,11 +72,11 @@ class PurchaseOrderUpdatesController extends Controller
         }
     }
 
-    public function readOne($id): JsonResponse
+    public function readOne(Request $request): JsonResponse
     {
-        $purchaseOrderUpdate = PurchaseOrderUpdate::query()->findOrFail($id);
+        $purchaseOrderUpdate = PurchaseOrderUpdate::query()->findOrFail($request->input('id'));
         if ($purchaseOrderUpdate) {
-            $purchaseOrderUpdate->update(['notification_read_at' => Carbon::now()]);
+            $purchaseOrderUpdate->update(['read_at' => Carbon::now()]);
             return response()->json(['success' => true]);
         } else {
             return response()->json(['success' => false, 'error_message' => 'لم تيم العثور على التحديث']);
