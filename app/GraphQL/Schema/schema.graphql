@@ -1,3 +1,9 @@
+# Define the Error type
+type Error {
+    field: String
+    message: String
+}
+
 # Define the OracleOrder type
 type OracleOrder {
     id: Int!
@@ -10,6 +16,7 @@ type OracleOrder {
 type OracleOrderResponse {
     success: Boolean!
     message: String!
+    errors: [Error]
     oracle_order: OracleOrder
     oracle_orders: [OracleOrder]
 }
@@ -27,6 +34,7 @@ type PurchaseOrderStatus {
 type PurchaseOrderStatusResponse {
     success: Boolean!
     message: String!
+    errors: [Error]
     purchase_order_status: PurchaseOrderStatus
     purchase_order_statuses: [PurchaseOrderStatus]
 }
@@ -51,6 +59,7 @@ type PurchaseOrder {
 type PurchaseOrderResponse {
     success: Boolean!
     message: String!
+    errors: [Error]
     purchase_order: PurchaseOrder
     purchase_orders: [PurchaseOrder]
 }

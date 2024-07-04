@@ -2,6 +2,7 @@
 
 namespace App\GraphQL\Mutations\OracleOrder;
 
+use App\Helpers\ValidationHelper;
 use App\Models\OracleOrder;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Mutation;
@@ -29,6 +30,24 @@ class CreateOracleOrderMutation extends Mutation
 
     public function resolve($root, $args): array
     {
+        $rules = [
+            'purchase_order_number' => 'required|min:6|max:255',
+        ];
+        $messages = [
+            'purchase_order_number.required' => 'رقم الطلبية مطلوب',
+            'purchase_order_number.min' => 'يجب الا يقل رقم الطلبية عن 6 ارقام او حروف',
+            'purchase_order_number.max' => 'يجب الا يزيد رقم الطلبية عن 255 رقم او حرف',
+        ];
+        $errors = ValidationHelper::validate($args, $rules, $messages);
+        if ($errors) {
+            return [
+                'success' => false,
+                'message' => 'يوجد أخطاء فى المدخلات',
+                'errors' => $errors,
+                'oracle_order' => null,
+            ];
+        }
+
         $oracleOrder = OracleOrder::query()
             ->where('purchase_order_number', '=', $args['purchase_order_number'])
             ->first();

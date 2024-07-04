@@ -24,6 +24,10 @@ class OracleOrderResponseType extends GraphQLType
                 'type' => Type::nonNull(Type::string()),
                 'description' => 'A message about the operation',
             ],
+            'errors' => [
+                'type' => Type::listOf(GraphQL::type('Error')),
+                'description' => 'A list of errors that occurred during the operation',
+            ],
             'oracle_order' => [
                 'type' => GraphQL::type('OracleOrder'),
                 'description' => 'The oracle order response'

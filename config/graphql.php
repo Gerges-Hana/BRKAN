@@ -93,6 +93,7 @@ return [
             // The types only available in this schema
             'types' => [
                 // ExampleType::class,
+                'Error' => \App\GraphQL\Types\ErrorType::class,
                 'OracleOrderResponse' => \App\GraphQL\Types\OracleOrderResponseType::class,
                 'PurchaseOrderResponse' => \App\GraphQL\Types\PurchaseOrderResponseType::class,
                 'PurchaseOrderStatusResponse' => \App\GraphQL\Types\PurchaseOrderStatusResponseType::class,
