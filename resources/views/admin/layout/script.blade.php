@@ -59,13 +59,11 @@
 
     function fetchNotifications() {
         $.ajax({
-            url: '{{ route('orderUpdates.notificationsUnread') }}',
+            url: '{{ route('orderUpdates.unread') }}',
             method: 'GET',
             success: function (res) {
-                if (res.notifications && res.notifications.length > 0) {
-                    $('#notificationsCount').html(res.notifications.length);
-                    displayNotifications(res.notifications);
-                }
+                $('#notificationsCount').html(res.notifications.length);
+                displayNotifications(res.notifications);
             },
             error: function (xhr, status, error) {
                 console.error('Failed to fetch order notifications:', error);
@@ -74,7 +72,7 @@
     }
 
     function displayNotifications(notifications) {
-        $('#notificationList').empty();
+        $('#notificationList').html('');
         notifications.forEach(function (notification) {
             let statusMessage = '';
             let iconClass = '';
@@ -96,7 +94,7 @@
                     iconClass = 'ft-info-square bg-grey';
             }
             let notificationHtml = `
-            <a href="{{ url('/orders/updates/read') }}/${notification.id}" class="media">
+            <a data-id="${notification.id}" class="media notification-item">
                 <div class="media-left align-self-center"><i class="${iconClass} icon-bg-circle"></i></div>
                     <div class="media-body">
                         <h6 class="media-heading">${statusMessage}</h6>
@@ -107,8 +105,33 @@
 
             $('#notificationList').append(notificationHtml);
         });
+        if (notifications.length === 0)
+            $('#notificationList').html(`<p class="mt-1 text-center font-size-small">لا يوجد تحديثات جديدة</p>`);
     }
 
+    $(document).on('click', '.notification-item', function (e) {
+        e.preventDefault();
+        const id = $(this).attr('data-id');
+        $.ajax({
+            url: `{{ route('orderUpdates.readOne') }}`,
+            method: 'POST',
+            dataType: "JSON",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {id},
+            success: function (res) {
+                if (res.success == true) {
+                    fetchNotifications();
+                    previewToastrForAjaxRequest(res.success_message);
+                } else {
+                    previewToastrForAjaxRequest('', res.error_message);
+                }
+            },
+            error: function () {
+            }
+        });
+    })
     setInterval(fetchNotifications, 5000);
 </script>
 @yield('scripts')

@@ -39,9 +39,9 @@ Route::middleware(['auth'])->group(function () {
         Route::group(['prefix' => 'updates'], function () {
             Route::get('/list', [PurchaseOrderUpdatesController::class, 'index'])->name('orderUpdates.index');
             Route::post('/data', [PurchaseOrderUpdatesController::class, 'getUpdatesData'])->name('orderUpdates.data');
-            Route::get('/notifications/unread', [PurchaseOrderUpdatesController::class, 'unReadList'])->name('orderUpdates.notificationsUnread');
-            Route::post('/notifications/read', [PurchaseOrderUpdatesController::class, 'readAll'])->name('orderUpdates.notificationsReadAll');
-            Route::post('/notifications/read/{id}', [PurchaseOrderUpdatesController::class, 'readOne'])->name('orderUpdates.notificationsReadOne');
+            Route::get('/updates/unread', [PurchaseOrderUpdatesController::class, 'unReadList'])->name('orderUpdates.unread');
+            Route::post('/updates/read-all', [PurchaseOrderUpdatesController::class, 'readAll'])->name('orderUpdates.readAll');
+            Route::post('/updates/read-one', [PurchaseOrderUpdatesController::class, 'readOne'])->name('orderUpdates.readOne');
         });
     });
 
