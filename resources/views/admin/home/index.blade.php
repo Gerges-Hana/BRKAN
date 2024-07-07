@@ -14,6 +14,15 @@
 @endsection
 
 @section('content-body')
+<div id="loader">
+        <div class="spinner"></div>
+        <p>جار التحميل...</p>
+    </div>
+    <!-- <div id="content" style="display: none;"> -->
+        <!-- هنا ضع محتوى صفحتك -->
+        <!-- <h1>مرحبا بك في الصفحة!</h1>
+        <p>هذا هو المحتوى الخاص بك.</p>
+    </div> -->
 
     <h2 style="font-size: 20px;">كل الطلبات</h2>
     <section id="minimal-statistics">
@@ -301,7 +310,7 @@
 @endsection
 
 @section('scripts')
-    <!-- ==========================stare simple-pie-chart===================================== -->
+  <!-- ==========================stare simple-pie-chart===================================== -->
     <script>
         $(window).on("load", function () {
             var ctx = $("#simple-pie-chart");
