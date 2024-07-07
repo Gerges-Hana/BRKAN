@@ -82,7 +82,6 @@
                                             <th>اسم المندوب</th>
                                             <th>هاتف السائق</th>
                                             <th>هاتف المندوب</th>
-                                            <th> حاله الطلبية</th>
                                             <th class="text-center">العمليات</th>
                                         </tr>
                                     </thead>
@@ -521,8 +520,6 @@
                         d.rep_name = $('#rep_name').val();
                         d.driver_phone = $('#driver_phone').val();
                         d.rep_phone = $('#rep_phone').val();
-                        console.log(d);
-
                     }
                 },
                 columns: [{
@@ -554,10 +551,6 @@
                         name: 'rep_phone'
                     },
                     {
-                        data: 'status_name',
-                        name: 'status_name'
-                    },
-                    {
                         data: 'id',
                         name: 'id',
                         orderable: false,
@@ -579,7 +572,12 @@
                                 data-toggle="tooltip" target="_blank" title="تفاصيل الطلبية"><i class="la ft-file-plus"></i>
                             </a>
                             @endcan
-
+{{--                            @can('حذف الطلبيه') --}}
+{{--                            <a class="btn btn-sm btn-outline-danger" href="javascript:" data-id="${row.id}" --}}
+{{--                                url="{{url('/orders/destroy')}}/${row.id}" onclick="checkHasRelations(${row.id})" id="delete_${row.id}" --}}
+{{--                                data-toggle="tooltip" title="حذف الطلبية"><i class="la la-trash"></i> --}}
+{{--                            </a> --}}
+{{--                            @endcan --}}
                             </div>`;
                         },
                     }

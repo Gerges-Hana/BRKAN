@@ -27,21 +27,13 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // Purchase Orders
+    Route::resource('orders', PurchaseOrdersController::class);
     Route::group(['prefix' => 'orders'], function () {
         Route::post('/data', [PurchaseOrdersController::class, 'getOrdersData'])->name('orders.data');
         Route::get('/history/{id}', [PurchaseOrdersController::class, 'HistoryOfPurchaseOrdersC'])->name('orders.history');
         Route::post('/edit/{id}', [PurchaseOrdersController::class, 'update'])->name('orders.update');
         Route::post('/checkHasRelations/{id}', [PurchaseOrdersController::class, 'checkHasRelations'])->name('orders.checkHasRelations');
         Route::post('/delete/{id}', [PurchaseOrdersController::class, 'destroy'])->name('orders.destroy');
-
-        Route::get('/OldPurchaseOrders', [PurchaseOrdersController::class, 'oldPurchaseOrders'])->name('orders.oldPurchaseOrders');
-        Route::post('/OldPurchaseOrders/data', [PurchaseOrdersController::class, 'oldPurchaseOrdersData'])->name('orders.oldPurchaseOrdersData');
-
-        Route::get('/todayPurchaseOrders', [PurchaseOrdersController::class, 'todayPurchaseOrders'])->name('orders.todayPurchaseOrders');
-        Route::post('/todayPurchaseOrders/data', [PurchaseOrdersController::class, 'todayPurchaseOrdersData'])->name('orders.todayPurchaseOrdersData');
-       
-        Route::get('/commingPurchaseOrders', [PurchaseOrdersController::class, 'incommingPurchaseOrders'])->name('orders.commingPurchaseOrders');
-        Route::post('/commingPurchaseOrders/data', [PurchaseOrdersController::class, 'incommingPurchaseOrdersData'])->name('orders.commingPurchaseOrdersData');
 
         // orderUpdates
         Route::group(['prefix' => 'updates'], function () {
@@ -52,7 +44,6 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/updates/read-one', [PurchaseOrderUpdatesController::class, 'readOne'])->name('orderUpdates.readOne');
         });
     });
-    Route::resource('orders', PurchaseOrdersController::class);
 
     // Users
     Route::resource('users', UserController::class);
