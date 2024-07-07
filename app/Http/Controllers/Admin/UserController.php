@@ -8,6 +8,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
 use Spatie\Permission\Models\Role;
 use Hash;
 use Illuminate\Support\Arr;
@@ -71,8 +72,8 @@ class UserController extends Controller
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('users.index')
-            ->with('success', 'تم انشاء المستخدم بنجاح');
+        Session::flash('success_message', 'تم انشاء المستخدم بنجاح');
+        return redirect()->route('users.index');
     }
 
     /**
@@ -128,12 +129,12 @@ class UserController extends Controller
 
         $user = User::find($id);
         $user->update($input);
-        FacadesDB::table('model_has_roles')->where('model_id', $id)->delete();
+        DB::table('model_has_roles')->where('model_id', $id)->delete();
 
         $user->assignRole($request->input('roles'));
 
-        return redirect()->route('users.index')
-            ->with('success', 'تم تحديث المستخدم بنجاح');
+        Session::flash('success_message', 'تم تحديث المستخدم بنجاح');
+        return redirect()->route('users.index');
     }
 
     /**
