@@ -82,6 +82,7 @@
                                             <th>اسم المندوب</th>
                                             <th>هاتف السائق</th>
                                             <th>هاتف المندوب</th>
+                                            <th> حاله الطلبية</th>
                                             <th class="text-center">العمليات</th>
                                         </tr>
                                     </thead>
@@ -549,6 +550,13 @@
                     {
                         data: 'rep_phone',
                         name: 'rep_phone'
+                    },
+                    {
+                        data: 'status_id',
+                        name: 'status_id',
+                        render: function(data, type, row) {
+                            return `<div>${row.status.name}</div>`;
+                        }
                     },
                     {
                         data: 'id',

@@ -55,12 +55,11 @@
                                         placeholder="اسم السائق">
                                 </div>
                                 <div class="form-group col-2">
-                                    <input type="text" class="form-control" id="rep_name" name="rep_name"
-                                        placeholder="اسم المندوب">
-                                </div>
-                                <div class="form-group col-2">
                                     <input type="text" class="form-control" id="driver_phone" name="driver_phone"
                                         placeholder="هاتف السائق">
+                                </div>
+                                <div class="form-group col-2">
+                                    <select name="" id=""></select>
                                 </div>
                                 <div class="form-group col-2 p-0">
                                     <button type="submit" class="btn btn-sm btn-primary align-self-end mt-1"
@@ -82,6 +81,7 @@
                                             <th>اسم المندوب</th>
                                             <th>هاتف السائق</th>
                                             <th>هاتف المندوب</th>
+                                            <th> حاله الطلبية</th>
                                             <th class="text-center">العمليات</th>
                                         </tr>
                                     </thead>
@@ -500,10 +500,10 @@
                 sPaginationType: "full_numbers",
                 bStateSave: true,
                 fnStateSave: function(oSettings, oData) {
-                    localStorage.setItem('purchaseOrdersDataTables', JSON.stringify(oData));
+                    localStorage.setItem('oldPurchaseOrdersDataTables', JSON.stringify(oData));
                 },
                 fnStateLoad: function(oSettings) {
-                    return JSON.parse(localStorage.getItem('purchaseOrdersDataTables'));
+                    return JSON.parse(localStorage.getItem('oldPurchaseOrdersDataTables'));
                 },
                 language: dataTablesArabicLocalization,
                 ajax: {
@@ -520,7 +520,9 @@
                         d.rep_name = $('#rep_name').val();
                         d.driver_phone = $('#driver_phone').val();
                         d.rep_phone = $('#rep_phone').val();
+                        console.log(d);
                     }
+
                 },
                 columns: [{
                         data: 'id',
@@ -549,6 +551,13 @@
                     {
                         data: 'rep_phone',
                         name: 'rep_phone'
+                    },
+                    {
+                        data: 'status_id',
+                        name: 'status_id',
+                        render: function(data, type, row) {
+                            return `<div>${row.status.name}</div>`;
+                        }
                     },
                     {
                         data: 'id',

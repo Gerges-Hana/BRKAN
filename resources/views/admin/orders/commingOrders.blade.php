@@ -82,6 +82,7 @@
                                             <th>اسم المندوب</th>
                                             <th>هاتف السائق</th>
                                             <th>هاتف المندوب</th>
+                                            <th> حاله الطلبية</th>
                                             <th class="text-center">العمليات</th>
                                         </tr>
                                     </thead>
@@ -224,7 +225,6 @@
         const clear_btn = $('.clear-btn');
 
         $(function() {
-
             purchaseOrdersDataTable();
             check_inputs();
         });
@@ -510,6 +510,7 @@
                 ajax: {
                     url: "{{ route('orders.commingPurchaseOrdersData') }}",
                     method: 'POST',
+                    dataType: "JSON",
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
@@ -520,12 +521,6 @@
                         d.rep_name = $('#rep_name').val();
                         d.driver_phone = $('#driver_phone').val();
                         d.rep_phone = $('#rep_phone').val();
-                    },
-                    success: function(data) {
-                        console.log(data);
-                    },
-                    error: function() {
-                        alert('خطأ في جلب تفاصيل الطلب');
                     }
                 },
                 columns: [{
@@ -557,6 +552,13 @@
                         name: 'rep_phone'
                     },
                     {
+                        data: 'status_id',
+                        name: 'status_id',
+                        render: function(data, type, row) {
+                            return `<div>${row.status.name}</div>`;
+                        }
+                    },
+                    {
                         data: 'id',
                         name: 'id',
                         orderable: false,
@@ -578,7 +580,12 @@
                                 data-toggle="tooltip" target="_blank" title="تفاصيل الطلبية"><i class="la ft-file-plus"></i>
                             </a>
                             @endcan
-
+{{--                            @can('حذف الطلبيه') --}}
+{{--                            <a class="btn btn-sm btn-outline-danger" href="javascript:" data-id="${row.id}" --}}
+{{--                                url="{{url('/orders/destroy')}}/${row.id}" onclick="checkHasRelations(${row.id})" id="delete_${row.id}" --}}
+{{--                                data-toggle="tooltip" title="حذف الطلبية"><i class="la la-trash"></i> --}}
+{{--                            </a> --}}
+{{--                            @endcan --}}
                             </div>`;
                         },
                     }
