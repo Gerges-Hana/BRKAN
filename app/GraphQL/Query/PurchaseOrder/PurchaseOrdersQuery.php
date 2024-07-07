@@ -4,8 +4,10 @@ namespace App\GraphQL\Query\PurchaseOrder;
 
 use Closure;
 use App\Models\PurchaseOrder;
+use Carbon\Carbon;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Definition\ResolveInfo;
+use Illuminate\Support\Facades\Log;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
 
@@ -68,8 +70,10 @@ class PurchaseOrdersQuery extends Query
         $fields = $getSelectFields();
         $select = $fields->getSelect();
         $with = $fields->getRelations();
-        $query = PurchaseOrder::query()/*->select($select)*/ ->with($with);
 
+        $today = Carbon::now()->format('Y-m-d');
+        $query = PurchaseOrder::query()->where('arrival_date', $today);
+   
         if (isset($args['device_unique_key'])) {
             $query->whereRaw('LOWER(device_unique_key) LIKE ?', ['%' . strtolower($args['device_unique_key']) . '%']);
         }
@@ -97,7 +101,7 @@ class PurchaseOrdersQuery extends Query
         if (isset($args['status_id'])) {
             $query->where('status_id', '=', $args['status_id']);
         }
-
+        $query = $query->with($with);
         return [
             'success' => true,
             'message' => 'قائمة الطلبيات',

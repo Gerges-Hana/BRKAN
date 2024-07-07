@@ -65,7 +65,7 @@
                                 <div class="form-group col-2 p-0">
                                     <button type="submit" class="btn btn-sm btn-primary align-self-end mt-1"
                                         style="width: auto;">بحث <i class="fa fa-search"></i></button>
-                                    <button type="button" class="btn btn-sm btn-warning align-self-end mt-1 clear-btn" hidden="true"
+                                    <button type="button" class="btn btn-sm btn-warning align-self-end mt-1 clear-btn"
                                         style="width: auto;">تفريغ <i class="fa fa-eraser"></i></button>
                                 </div>
                             </form>
@@ -491,7 +491,7 @@
                 searching: false,
                 autoWidth: false,
                 order: [
-                    [0, 'asc']
+                    [0, 'desc']
                 ],
                 paging: true,
                 lengthMenu: [
@@ -508,7 +508,7 @@
                 },
                 language: dataTablesArabicLocalization,
                 ajax: {
-                    url: "{{ route('orders.data') }}",
+                    url: "{{ route('orders.commingPurchaseOrdersData') }}",
                     method: 'POST',
                     dataType: "JSON",
                     headers: {

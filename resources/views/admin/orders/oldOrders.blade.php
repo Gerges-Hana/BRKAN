@@ -55,17 +55,16 @@
                                         placeholder="اسم السائق">
                                 </div>
                                 <div class="form-group col-2">
-                                    <input type="text" class="form-control" id="rep_name" name="rep_name"
-                                        placeholder="اسم المندوب">
-                                </div>
-                                <div class="form-group col-2">
                                     <input type="text" class="form-control" id="driver_phone" name="driver_phone"
                                         placeholder="هاتف السائق">
+                                </div>
+                                <div class="form-group col-2">
+                                    <select name="" id=""></select>
                                 </div>
                                 <div class="form-group col-2 p-0">
                                     <button type="submit" class="btn btn-sm btn-primary align-self-end mt-1"
                                         style="width: auto;">بحث <i class="fa fa-search"></i></button>
-                                    <button type="button" class="btn btn-sm btn-warning align-self-end mt-1 clear-btn" hidden="true"
+                                    <button type="button" class="btn btn-sm btn-warning align-self-end mt-1 clear-btn"
                                         style="width: auto;">تفريغ <i class="fa fa-eraser"></i></button>
                                 </div>
                             </form>
@@ -220,7 +219,6 @@
         const purchase_order_number_field = $('#purchase_order_number');
         const invoice_number_field = $('#invoice_number');
         const driver_name_field = $('#driver_name');
-        const rep_name_field = $('#rep_name');
         const driver_phone_field = $('#driver_phone');
         const clear_btn = $('.clear-btn');
 
@@ -240,12 +238,11 @@
             purchase_order_number_field.val("");
             invoice_number_field.val("");
             driver_name_field.val("");
-            rep_name_field.val("");
             driver_phone_field.val("");
             $('#searchForm').submit();
             check_inputs();
         });
-        purchase_order_number_field.add(invoice_number_field).add(driver_name_field).add(rep_name_field).add(
+        purchase_order_number_field.add(invoice_number_field).add(driver_name_field).add(
             driver_phone_field).bind("keyup change", check_inputs);
 
         // Show PO Modal
@@ -491,7 +488,7 @@
                 searching: false,
                 autoWidth: false,
                 order: [
-                    [0, 'asc']
+                    [0, 'desc']
                 ],
                 paging: true,
                 lengthMenu: [
@@ -501,14 +498,14 @@
                 sPaginationType: "full_numbers",
                 bStateSave: true,
                 fnStateSave: function(oSettings, oData) {
-                    localStorage.setItem('purchaseOrdersDataTables', JSON.stringify(oData));
+                    localStorage.setItem('oldPurchaseOrdersDataTables', JSON.stringify(oData));
                 },
                 fnStateLoad: function(oSettings) {
-                    return JSON.parse(localStorage.getItem('purchaseOrdersDataTables'));
+                    return JSON.parse(localStorage.getItem('oldPurchaseOrdersDataTables'));
                 },
                 language: dataTablesArabicLocalization,
                 ajax: {
-                    url: "{{ route('orders.data') }}",
+                    url: "{{ route('orders.oldPurchaseOrdersData') }}",
                     method: 'POST',
                     dataType: "JSON",
                     headers: {
@@ -518,10 +515,11 @@
                         d.purchase_order_number = $('#purchase_order_number').val();
                         d.invoice_number = $('#invoice_number').val();
                         d.driver_name = $('#driver_name').val();
-                        d.rep_name = $('#rep_name').val();
                         d.driver_phone = $('#driver_phone').val();
                         d.rep_phone = $('#rep_phone').val();
+                        console.log(d);
                     }
+
                 },
                 columns: [{
                         data: 'id',
@@ -595,7 +593,7 @@
 
         function check_inputs() {
             if (purchase_order_number_field.val().length > 0 || invoice_number_field.val().length > 0 || driver_name_field
-                .val().length > 0 || rep_name_field.val().length > 0 || driver_phone_field.val().length > 0)
+                .val().length > 0 || driver_phone_field.val().length > 0)
                 clear_btn.attr('hidden', false);
             else
                 clear_btn.attr('hidden', true);
