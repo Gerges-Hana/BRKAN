@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\NotificationController;
+use App\Http\Controllers\Admin\PurchaseOrderUpdatesController;
 use App\Http\Controllers\Admin\PurchaseOrdersController;
 use App\Http\Controllers\Admin\PurchaseOrderStatusesController;
 use App\Http\Controllers\Admin\ReportsController;
@@ -33,7 +33,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/edit/{id}', [PurchaseOrdersController::class, 'update'])->name('orders.update');
         Route::post('/checkHasRelations/{id}', [PurchaseOrdersController::class, 'checkHasRelations'])->name('orders.checkHasRelations');
         Route::post('/delete/{id}', [PurchaseOrdersController::class, 'destroy'])->name('orders.destroy');
-        
+
         Route::get('/OldPurchaseOrders', [PurchaseOrdersController::class, 'oldPurchaseOrders'])->name('orders.oldPurchaseOrders');
         Route::post('/OldPurchaseOrders/data', [PurchaseOrdersController::class, 'oldPurchaseOrdersData'])->name('orders.oldPurchaseOrdersData');
 
@@ -42,6 +42,15 @@ Route::middleware(['auth'])->group(function () {
        
         Route::get('/commingPurchaseOrders', [PurchaseOrdersController::class, 'incommingPurchaseOrders'])->name('orders.commingPurchaseOrders');
         Route::post('/commingPurchaseOrders/data', [PurchaseOrdersController::class, 'incommingPurchaseOrdersData'])->name('orders.commingPurchaseOrdersData');
+
+        // orderUpdates
+        Route::group(['prefix' => 'updates'], function () {
+            Route::get('/list', [PurchaseOrderUpdatesController::class, 'index'])->name('orderUpdates.index');
+            Route::post('/data', [PurchaseOrderUpdatesController::class, 'getUpdatesData'])->name('orderUpdates.data');
+            Route::get('/updates/unread', [PurchaseOrderUpdatesController::class, 'unReadList'])->name('orderUpdates.unread');
+            Route::post('/updates/read-all', [PurchaseOrderUpdatesController::class, 'readAll'])->name('orderUpdates.readAll');
+            Route::post('/updates/read-one', [PurchaseOrderUpdatesController::class, 'readOne'])->name('orderUpdates.readOne');
+        });
     });
     Route::resource('orders', PurchaseOrdersController::class);
 
@@ -60,8 +69,5 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/checkHasRelations/{id}', [PurchaseOrderStatusesController::class, 'checkHasRelations'])->name('status.checkHasRelations');
         Route::post('/delete/{id}', [PurchaseOrderStatusesController::class, 'destroy'])->name('status.destroy');
     });
-
-    // Notifications
-    Route::get('/fetch-notifications', [NotificationController::class, 'fetchNotifications'])->name('fetch.notifications');
 
 });

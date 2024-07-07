@@ -149,7 +149,7 @@ class RoleController extends Controller
         $permissions = Permission::query()->findMany($permissionsIds);
         $role->givePermissionTo($permissions);
 
-        session()->flash('success_message', 'تم إضافة الدور بنجاح!');
+        Session::flash('success_message', 'تم تحديث الدور بنجاح!');
         return redirect()->route('roles.index');
     }
 

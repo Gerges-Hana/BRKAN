@@ -35,12 +35,12 @@
         @if (Session::has('success_message'))
         toastr.success('', '{{Session::get('success_message')}}', toastr_config)
         {{ Session::forget('success_message') }}
-        @endif
+            @endif
         // Preview Toastr Warning Message
         @if (Session::has('warning_message'))
         toastr.warning('', '{{Session::get('warning_message')}}', toastr_config)
         {{ Session::forget('warning_message') }}
-        @endif
+            @endif
         // Preview Toastr Error Message
         @if (Session::has('error_message'))
         toastr.error('', '{{Session::get('error_message')}}', toastr_config)
@@ -59,17 +59,11 @@
 
     function fetchNotifications() {
         $.ajax({
-            url: '{{ route('fetch.notifications') }}',
+            url: '{{ route('orderUpdates.unread') }}',
             method: 'GET',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function (response) {
-                if (response && response.length > 0) {
-                    updateOrderCount(response.length);
-                    $('#newOrderCount').text(response.newCount + ' جديدة');
-                    displayNotifications(response);
-                }
+            success: function (res) {
+                $('#notificationsCount').html(res.notifications.length);
+                displayNotifications(res.notifications);
             },
             error: function (xhr, status, error) {
                 console.error('Failed to fetch order notifications:', error);
@@ -77,18 +71,14 @@
         });
     }
 
-    function updateOrderCount(count) {
-        $('#orderCount').text(count);
-    }
-
-    function displayNotifications(response) {
-        $('#notificationList').empty();
-        response.forEach(function (notification) {
-            var statusMessage = '';
-            var iconClass = '';
+    function displayNotifications(notifications) {
+        $('#notificationList').html('');
+        notifications.forEach(function (notification) {
+            let statusMessage = '';
+            let iconClass = '';
             switch (notification.status_id) {
                 case 1:
-                    statusMessage = 'تم انشاء طالبيه جديده';
+                    statusMessage = 'تم انشاء طلبية جديده';
                     iconClass = 'ft-plus-square bg-cyan';
                     break;
                 case 2:
@@ -103,20 +93,45 @@
                     statusMessage = 'حالة غير معروفة';
                     iconClass = 'ft-info-square bg-grey';
             }
-            var notificationHtml = '<a href="{{ url('/orders-history/') }}/' + notification.id + '" class="media">';
-            notificationHtml += '<div class="media-left align-self-center"><i class="' + iconClass +
-                ' icon-bg-circle"></i></div>';
-            notificationHtml += '<div class="media-body">';
-            notificationHtml += '<h6 class="media-heading">' + statusMessage + '</h6>';
-            notificationHtml += '<p class="notification-text font-small-3 text-muted">رقم الطالبيه: ' +
-                notification.purchase_order_number + ' بواسطة ' + notification.driver_name + '</p>';
-            notificationHtml += '</div></a>';
-
+            let notificationHtml = `
+            <a data-id="${notification.id}" class="media notification-item">
+                <div class="media-left align-self-center"><i class="${iconClass} icon-bg-circle"></i></div>
+                    <div class="media-body">
+                        <h6 class="media-heading">${statusMessage}</h6>
+                        <p class="notification-text font-small-3 text-muted">رقم الطالبيه: ' ${notification.purchase_order.purchase_order_number} ' بواسطة ' ${notification.purchase_order.driver_name} '</p>
+                    </div>
+                </div>
+            </a>`;
 
             $('#notificationList').append(notificationHtml);
         });
+        if (notifications.length === 0)
+            $('#notificationList').html(`<p class="mt-1 text-center font-size-small">لا يوجد تحديثات جديدة</p>`);
     }
 
+    $(document).on('click', '.notification-item', function (e) {
+        e.preventDefault();
+        const id = $(this).attr('data-id');
+        $.ajax({
+            url: `{{ route('orderUpdates.readOne') }}`,
+            method: 'POST',
+            dataType: "JSON",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {id},
+            success: function (res) {
+                if (res.success == true) {
+                    fetchNotifications();
+                    previewToastrForAjaxRequest(res.success_message);
+                } else {
+                    previewToastrForAjaxRequest('', res.error_message);
+                }
+            },
+            error: function () {
+            }
+        });
+    })
     setInterval(fetchNotifications, 5000);
 </script>
 @yield('scripts')
