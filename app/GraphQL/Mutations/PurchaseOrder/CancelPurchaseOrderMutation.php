@@ -2,6 +2,7 @@
 
 namespace App\GraphQL\Mutations\PurchaseOrder;
 
+use App\Helpers\ValidationHelper;
 use App\Models\PurchaseOrder;
 use App\Models\PurchaseOrderUpdate;
 use Carbon\Carbon;
@@ -32,6 +33,24 @@ class CancelPurchaseOrderMutation extends Mutation
 
     public function resolve($root, $args): array
     {
+        $rules = [
+            'device_unique_key' => 'required|min:6|max:255',
+        ];
+        $messages = [
+            'device_unique_key.required' => 'رقم الجهاز مطلوب',
+            'device_unique_key.min' => 'يجب الا يقل رقم الجهاز عن 6 ارقام او حروف',
+            'device_unique_key.max' => 'يجب الا يزيد رقم الجهاز عن 255 رقم او حرف',
+        ];
+        $errors = ValidationHelper::validate($args, $rules, $messages);
+        if ($errors) {
+            return [
+                'success' => false,
+                'message' => 'يوجد أخطاء فى المدخلات',
+                'errors' => $errors,
+                'oracle_order' => null,
+            ];
+        }
+
 //        $purchaseOrder = PurchaseOrder::query()
 //            ->where('device_unique_key', '=', $args['device_unique_key'])
 //            ->first();

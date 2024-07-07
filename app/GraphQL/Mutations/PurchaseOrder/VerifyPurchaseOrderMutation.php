@@ -2,6 +2,7 @@
 
 namespace App\GraphQL\Mutations\PurchaseOrder;
 
+use App\Helpers\ValidationHelper;
 use App\Models\PurchaseOrder;
 use App\Models\PurchaseOrderUpdate;
 use Carbon\Carbon;
@@ -32,6 +33,24 @@ class VerifyPurchaseOrderMutation extends Mutation
 
     public function resolve($root, $args): array
     {
+        $rules = [
+            'purchase_order_number' => 'required|min:6|max:255',
+        ];
+        $messages = [
+            'purchase_order_number.required' => 'رقم الطلبية مطلوب',
+            'purchase_order_number.min' => 'يجب الا يقل رقم الطلبية عن 6 ارقام او حروف',
+            'purchase_order_number.max' => 'يجب الا يزيد رقم الطلبية عن 255 رقم او حرف',
+        ];
+        $errors = ValidationHelper::validate($args, $rules, $messages);
+        if ($errors) {
+            return [
+                'success' => false,
+                'message' => 'يوجد أخطاء فى المدخلات',
+                'errors' => $errors,
+                'oracle_order' => null,
+            ];
+        }
+
         $purchaseOrder = PurchaseOrder::query()
             ->where('purchase_order_number', '=', $args['purchase_order_number'])
             ->where('status_id', '=', 1)

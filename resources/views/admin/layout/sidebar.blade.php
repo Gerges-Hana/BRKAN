@@ -65,6 +65,12 @@
                     </a>
                 </li>
             @endcan
+
+            <li class="nav-item {{ (request()->is('orders/updates/list')) ? 'active' : '' }}">
+                <a href="/orders/updates/list"><i class="ficon ft-bell"></i>
+                    <span class="menu-title" data-i18n="">التحديثات </span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

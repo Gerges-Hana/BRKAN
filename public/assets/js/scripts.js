@@ -21,3 +21,37 @@ let dataTablesArabicLocalization = {
         "sSortDescending": ": تفعيل لترتيب العمود تنازلياً"
     }
 };
+
+
+//////////////////////////////////////// without setTimeout ///////////////////////////////////////
+document.addEventListener("DOMContentLoaded", function() {
+    var loader = document.getElementById("loader");
+    var content = document.getElementById("content");
+
+    window.addEventListener("load", function() {
+        loader.style.display = "none";
+        content.style.display = "block";
+    });
+});
+
+////////////////////////////////////////  setTimeout ///////////////////////////////////////
+// document.addEventListener("DOMContentLoaded", function() {
+//     var loader = document.getElementById("loader");
+//     var content = document.getElementById("content");
+
+//     function hideLoader() {
+//         loader.style.display = "none";
+//         content.style.display = "block";
+//     }
+
+//     window.addEventListener("load", function() {
+//         setTimeout(hideLoader, 3000); 
+//     });
+
+   
+//     setTimeout(hideLoader, 3000);
+// });
+
+
+
+
