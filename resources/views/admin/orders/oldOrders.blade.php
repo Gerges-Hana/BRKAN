@@ -55,17 +55,16 @@
                                         placeholder="اسم السائق">
                                 </div>
                                 <div class="form-group col-2">
-                                    <input type="text" class="form-control" id="rep_name" name="rep_name"
-                                        placeholder="اسم المندوب">
-                                </div>
-                                <div class="form-group col-2">
                                     <input type="text" class="form-control" id="driver_phone" name="driver_phone"
                                         placeholder="هاتف السائق">
+                                </div>
+                                <div class="form-group col-2">
+                                    <select name="" id=""></select>
                                 </div>
                                 <div class="form-group col-2 p-0">
                                     <button type="submit" class="btn btn-sm btn-primary align-self-end mt-1"
                                         style="width: auto;">بحث <i class="fa fa-search"></i></button>
-                                    <button type="button" class="btn btn-sm btn-warning align-self-end mt-1 clear-btn" hidden="true"
+                                    <button type="button" class="btn btn-sm btn-warning align-self-end mt-1 clear-btn"
                                         style="width: auto;">تفريغ <i class="fa fa-eraser"></i></button>
                                 </div>
                             </form>
@@ -491,7 +490,7 @@
                 searching: false,
                 autoWidth: false,
                 order: [
-                    [0, 'asc']
+                    [0, 'desc']
                 ],
                 paging: true,
                 lengthMenu: [
@@ -501,14 +500,14 @@
                 sPaginationType: "full_numbers",
                 bStateSave: true,
                 fnStateSave: function(oSettings, oData) {
-                    localStorage.setItem('purchaseOrdersDataTables', JSON.stringify(oData));
+                    localStorage.setItem('oldPurchaseOrdersDataTables', JSON.stringify(oData));
                 },
                 fnStateLoad: function(oSettings) {
-                    return JSON.parse(localStorage.getItem('purchaseOrdersDataTables'));
+                    return JSON.parse(localStorage.getItem('oldPurchaseOrdersDataTables'));
                 },
                 language: dataTablesArabicLocalization,
                 ajax: {
-                    url: "{{ route('orders.data') }}",
+                    url: "{{ route('orders.oldPurchaseOrdersData') }}",
                     method: 'POST',
                     dataType: "JSON",
                     headers: {
@@ -522,8 +521,8 @@
                         d.driver_phone = $('#driver_phone').val();
                         d.rep_phone = $('#rep_phone').val();
                         console.log(d);
-
                     }
+
                 },
                 columns: [{
                         data: 'id',
@@ -554,8 +553,11 @@
                         name: 'rep_phone'
                     },
                     {
-                        data: 'status_name',
-                        name: 'status_name'
+                        data: 'status_id',
+                        name: 'status_id',
+                        render: function(data, type, row) {
+                            return `<div>${row.status.name}</div>`;
+                        }
                     },
                     {
                         data: 'id',
@@ -579,7 +581,12 @@
                                 data-toggle="tooltip" target="_blank" title="تفاصيل الطلبية"><i class="la ft-file-plus"></i>
                             </a>
                             @endcan
-
+{{--                            @can('حذف الطلبيه') --}}
+{{--                            <a class="btn btn-sm btn-outline-danger" href="javascript:" data-id="${row.id}" --}}
+{{--                                url="{{url('/orders/destroy')}}/${row.id}" onclick="checkHasRelations(${row.id})" id="delete_${row.id}" --}}
+{{--                                data-toggle="tooltip" title="حذف الطلبية"><i class="la la-trash"></i> --}}
+{{--                            </a> --}}
+{{--                            @endcan --}}
                             </div>`;
                         },
                     }
