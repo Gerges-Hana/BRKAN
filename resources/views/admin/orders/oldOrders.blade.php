@@ -219,7 +219,6 @@
         const purchase_order_number_field = $('#purchase_order_number');
         const invoice_number_field = $('#invoice_number');
         const driver_name_field = $('#driver_name');
-        const rep_name_field = $('#rep_name');
         const driver_phone_field = $('#driver_phone');
         const clear_btn = $('.clear-btn');
 
@@ -239,12 +238,11 @@
             purchase_order_number_field.val("");
             invoice_number_field.val("");
             driver_name_field.val("");
-            rep_name_field.val("");
             driver_phone_field.val("");
             $('#searchForm').submit();
             check_inputs();
         });
-        purchase_order_number_field.add(invoice_number_field).add(driver_name_field).add(rep_name_field).add(
+        purchase_order_number_field.add(invoice_number_field).add(driver_name_field).add(
             driver_phone_field).bind("keyup change", check_inputs);
 
         // Show PO Modal
@@ -517,7 +515,6 @@
                         d.purchase_order_number = $('#purchase_order_number').val();
                         d.invoice_number = $('#invoice_number').val();
                         d.driver_name = $('#driver_name').val();
-                        d.rep_name = $('#rep_name').val();
                         d.driver_phone = $('#driver_phone').val();
                         d.rep_phone = $('#rep_phone').val();
                         console.log(d);
@@ -596,7 +593,7 @@
 
         function check_inputs() {
             if (purchase_order_number_field.val().length > 0 || invoice_number_field.val().length > 0 || driver_name_field
-                .val().length > 0 || rep_name_field.val().length > 0 || driver_phone_field.val().length > 0)
+                .val().length > 0 || driver_phone_field.val().length > 0)
                 clear_btn.attr('hidden', false);
             else
                 clear_btn.attr('hidden', true);

@@ -3,14 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\PurchaseOrder;
-use App\Models\PurchaseOrderUpdate;
-use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
 class PurchaseOrdersController extends Controller
@@ -22,7 +18,7 @@ class PurchaseOrdersController extends Controller
 
     public function getOrdersData(Request $request)
     {
-        $purchase_orders = PurchaseOrder::query()->with(['purchaseOrderUpdates', 'status']);
+        $purchase_orders = PurchaseOrder::query();
 
         if ($request->filled('purchase_order_number')) {
             $purchase_orders->where('purchase_order_number', 'like', '%' . $request->purchase_order_number . '%');
@@ -76,11 +72,9 @@ class PurchaseOrdersController extends Controller
             $purchase_orders->where('updated_at', 'like', '%' . $request->updated_at . '%');
         }
 
-        return DataTables::of($purchase_orders)
-            ->addColumn('status_name', function (PurchaseOrder $order) {
-                return $order->status ? $order->status->name : 'N/A';
-            })
-            ->toJson();
+        $purchase_orders = $purchase_orders->with(['purchaseOrderUpdates', 'status']);
+
+        return DataTables::of($purchase_orders)->toJson();
     }
 
     public function show($id)
@@ -218,6 +212,7 @@ class PurchaseOrdersController extends Controller
 
         return view('admin.orders.oldOrders');
     }
+    
     public function oldPurchaseOrdersData(Request $request)
     {
         $purchase_orders = PurchaseOrder::query()->where('status_id', 6);

@@ -22,6 +22,7 @@ class PurchaseOrdersQuery extends Query
 //        return Type::listOf(GraphQL::type('PurchaseOrder'));
         return GraphQL::type('PurchaseOrderResponse');
     }
+
     public function args(): array
     {
         return [
