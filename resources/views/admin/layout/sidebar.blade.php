@@ -13,24 +13,31 @@
 
             {{--Orders--}}
             @can(' الطلبيات')
-            <li class=" nav-item "><a href="/orders"><i class="la la-car"></i><span class="menu-title" data-i18n="nav.dash.main">الطلبيات</span><span class="badge badge badge-info badge-pill float-right mr-2">3</span></a>
-                <ul class="menu-content">
-                  <li><a class="menu-item {{ (request()->is('orders')) ? 'active' : '' }}" href="/orders" data-i18n="nav.dash.ecommerce">جميع الطلبيات</a>
-                  </li>
-                  
-                  <li><a class="menu-item" href="/orders/OldPurchaseOrders" data-i18n="nav.dash.sales">طلبيات السابقه</a>
-                  </li>
-                  <li><a class="menu-item" href="/orders/todayPurchaseOrders" data-i18n="nav.dash.crypto">طلبيات اليوم </a>
-                  </li>
-                  <li><a class="menu-item" href="/orders/commingPurchaseOrders" data-i18n="nav.dash.sales">طلبيات القادمه</a>
-                  </li>
-                </ul>
-              </li>
+                <li class=" nav-item {{ (request()->is('orders') || request()->is('orders/OldPurchaseOrders') || request()->is('orders/todayPurchaseOrders') || request()->is('orders/commingPurchaseOrders')) ? 'open' : '' }}">
+                    <a href="#">
+                        <i class="la la-car"></i>
+                        <span class="menu-title" data-i18n="nav.dash.main">الطلبيات</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li class="nav-item {{ (request()->is('orders')) ? 'active' : '' }}">
+                            <a class="" href="/orders" data-i18n="nav.dash.ecommerce">جميع الطلبيات</a>
+                        </li>
+                        <li class="nav-item {{ (request()->is('orders/OldPurchaseOrders')) ? 'active' : '' }}">
+                            <a href="/orders/OldPurchaseOrders" data-i18n="nav.dash.sales">الطلبيات السابقه</a>
+                        </li>
+                        <li class="nav-item {{ (request()->is('orders/todayPurchaseOrders')) ? 'active' : '' }}">
+                            <a href="/orders/todayPurchaseOrders" data-i18n="nav.dash.crypto">طلبيات اليوم </a>
+                        </li>
+                        <li class="nav-item {{ (request()->is('orders/commingPurchaseOrders')) ? 'active' : '' }}">
+                            <a href="/orders/commingPurchaseOrders" data-i18n="nav.dash.sales">الطلبيات القادمه</a>
+                        </li>
+                    </ul>
+                </li>
             @endcan
 
             {{--Reports--}}
             @can(' التقارير')
-                <li class="nav-item {{ (request()->is('reports')) ? 'active' : '' }}">
+                <li class="nav-item {{ (request()->is('reports*')) ? 'active' : '' }}">
                     <a href="/reports"><i class="la  icon-layers"></i>
                         <span class="menu-title" data-i18n="">التقارير </span>
                     </a>
@@ -39,7 +46,7 @@
 
             {{--Roles--}}
             @can(' القواعد')
-                <li class="nav-item {{ (request()->is('roles')) ? 'active' : '' }}">
+                <li class="nav-item {{ (request()->is('roles*')) ? 'active' : '' }}">
                     <a href="/roles">
                         <i class="la  ft-unlock"></i>
                         <!-- <i class="la  icon-permission"></i> -->
@@ -50,7 +57,7 @@
 
             {{--Users--}}
             @can(' المستخدمين')
-                <li class="nav-item {{ (request()->is('users')) ? 'active' : '' }}">
+                <li class="nav-item {{ (request()->is('users*')) ? 'active' : '' }}">
                     <a href="/users"><i class="la  icon-users"></i>
                         <span class="menu-title" data-i18n="">المستخدمين </span>
                     </a>
@@ -59,7 +66,7 @@
 
 
             @can(' حالات التوصيل')
-                <li class="nav-item {{ (request()->is('status')) ? 'active' : '' }}">
+                <li class="nav-item {{ (request()->is('status*')) ? 'active' : '' }}">
                     <a href="/status"><i class="la icon-settings"></i>
                         <span class="menu-title" data-i18n="">حالات التوصيل </span>
                     </a>

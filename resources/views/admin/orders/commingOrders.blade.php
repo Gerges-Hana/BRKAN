@@ -1,7 +1,7 @@
 @extends('admin.layout.master')
 
 @section('tap-title')
-    قائمة الطلبيات
+     الطلبيات القادمة
 @endsection
 
 @section('page-style-files')
@@ -11,13 +11,13 @@
 
 @section('content-header')
     <div class="content-header-left col-md-6 col-12 mb-1">
-        <h3 class="content-header-title">الطلبيات</h3>
+        <h3 class="content-header-title">الطلبيات القادمة</h3>
     </div>
     <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
         <div class="breadcrumb-wrapper col-12">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">الرئيسية</a></li>
-                <li class="breadcrumb-item active">الطلبيات</li>
+                <li class="breadcrumb-item active">الطلبيات القادمة</li>
             </ol>
         </div>
     </div>
