@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\PurchaseOrder;
+use App\Models\PurchaseOrderStatus;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -13,13 +14,16 @@ class PurchaseOrdersController extends Controller
 {
     public function index(Request $request)
     {
-        return view('admin.orders.index');
+        $status=PurchaseOrderStatus::all();
+        return view('admin.orders.index',compact('status'));
     }
 
     public function getOrdersData(Request $request)
     {
         $purchase_orders = PurchaseOrder::query();
-
+        if ($request->filled('status_name')) {
+            $purchase_orders->where('status_id',$request->status_name);
+        }
         if ($request->filled('purchase_order_number')) {
             $purchase_orders->where('purchase_order_number', 'like', '%' . $request->purchase_order_number . '%');
         }
@@ -209,14 +213,17 @@ class PurchaseOrdersController extends Controller
 
     public function oldPurchaseOrders()
     {
-
-        return view('admin.orders.oldOrders');
+        $status=PurchaseOrderStatus::all();
+        return view('admin.orders.oldOrders',compact('status'));
     }
     
     public function oldPurchaseOrdersData(Request $request)
     {
         $purchase_orders = PurchaseOrder::query()->where('status_id', 6);
 
+        if ($request->filled('status_name')) {
+            $purchase_orders->where('status_id',$request->status_name);
+        }
         if ($request->filled('purchase_order_number')) {
             $purchase_orders->where('purchase_order_number', 'like', '%' . $request->purchase_order_number . '%');
         }
@@ -273,14 +280,17 @@ class PurchaseOrdersController extends Controller
         return DataTables::of($purchase_orders)->toJson();
     }
     public function todayPurchaseOrders()
-    {
-        return view('admin.orders.todayOrders');
+    {        $status=PurchaseOrderStatus::all();
+
+        return view('admin.orders.todayOrders',compact('status'));
     }
     public function todayPurchaseOrdersData(Request $request)
     {
 
         $purchase_orders = PurchaseOrder::query();
-
+        if ($request->filled('status_name')) {
+            $purchase_orders->where('status_id',$request->status_name);
+        }
         if ($request->filled('purchase_order_number')) {
             $purchase_orders->where('purchase_order_number', 'like', '%' . $request->purchase_order_number . '%');
         }
@@ -342,13 +352,16 @@ class PurchaseOrdersController extends Controller
 
     public function incommingPurchaseOrders()
     {
-        return view('admin.orders.commingOrders');
+        $status=PurchaseOrderStatus::all();
+        return view('admin.orders.commingOrders',compact('status'));
     }
     public function incommingPurchaseOrdersData(Request $request)
     {
 
         $purchase_orders = PurchaseOrder::query();
-
+        if ($request->filled('status_name')) {
+            $purchase_orders->where('status_id',$request->status_name);
+        }
         if ($request->filled('purchase_order_number')) {
             $purchase_orders->where('purchase_order_number', 'like', '%' . $request->purchase_order_number . '%');
         }
