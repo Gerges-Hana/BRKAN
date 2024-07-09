@@ -73,6 +73,16 @@
                                         style="width: auto;">تفريغ <i class="fa fa-eraser"></i></button>
                                 </div>
                             </form>
+
+                            {{-- Export  --}}
+                            <div class="d-flex justify-content-between mb-3">
+                                <h1>Purchase Orders</h1>
+                                <div>
+                                    <a href="{{ url('/export-purchase-orders-pdf') }}" class="btn btn-danger">Export PDF</a>
+                                    <a href="{{ url('/export-purchase-orders-excel') }}" class="btn btn-success">Export Excel</a>
+                                </div>
+                            </div>
+                            
                             {{-- Data --}}
                             <div class="table-responsive">
                                 <table style="width: 99%" class="table table-bordered table-striped"

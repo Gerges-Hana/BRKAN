@@ -11,12 +11,17 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+
+
 Route::middleware(['auth'])->group(function () {
     //Home
     Route::get('/', [StatisticsController::class, 'index']);
 
     // Reports
     Route::get('/reports', [ReportsController::class, 'index'])->name('reports.data');
+
+Route::get('/export-purchase-orders-pdf', [PurchaseOrdersController::class, 'exportPdf']);
+Route::get('/export-purchase-orders-excel', [PurchaseOrdersController::class, 'exportExcel']);
 
     // Roles
     Route::resource('roles', RoleController::class);

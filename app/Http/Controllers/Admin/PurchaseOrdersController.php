@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exports\PurchaseOrderExport;
 use App\Models\PurchaseOrder;
 use App\Models\PurchaseOrderStatus;
+use PDF;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
+use App\Exports\PurchaseOrdersExport;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 
 class PurchaseOrdersController extends Controller
 {
@@ -425,4 +430,29 @@ class PurchaseOrdersController extends Controller
         //     })
         //     ->toJson();
     }
+
+
+    public function exportPdf(Request $request)
+    {
+        $purchaseOrders = PurchaseOrder::with(['status', 'user'])->get();        
+        $pdf = PDF::loadView('pdf.purchase_orders', compact('purchaseOrders'));
+        return $pdf->download('purchase_orders.pdf');
+    }
+
+    public function exportExcel(Request $request)
+    {
+        $purchaseOrders = PurchaseOrder::with(['status', 'user'])->get();
+        return Excel::download(new PurchaseOrderExport($purchaseOrders), 'purchase_orders.xlsx');
+    }
+
+
+    private function getFilteredPurchaseOrders(Request $request)
+    {
+        $query = PurchaseOrder::query();
+
+        // قم بتضمين شروط التصفية حسب الحاجة
+
+        return $query->get();
+    }
+
 }

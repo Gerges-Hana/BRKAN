@@ -16,6 +16,10 @@ class PurchaseOrder extends Model
     {
         return $this->belongsTo(PurchaseOrderStatus::class, 'status_id','id');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'last_update_user_id','id');
+    }
     public function purchaseOrderUpdates()
     {
         return $this->hasMany(PurchaseOrderUpdate::class, 'purchase_order_id');
