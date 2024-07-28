@@ -1,30 +1,23 @@
-<nav
-    class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-dark navbar-shadow">
+<nav class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-semi-dark navbar-shadow">
     <div class="navbar-wrapper">
-        {{-- Main header --}}
         <div class="navbar-header">
             <ul class="nav navbar-nav flex-row">
-                {{-- Mobile sidebar button --}}
                 <li class="nav-item mobile-menu d-md-none mr-auto">
                     <a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#">
                         <i class="ft-menu font-large-1"></i>
                     </a>
                 </li>
-                {{-- Logo & Company name --}}
                 <li class="nav-item mr-auto">
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        <img class="brand-logo" alt="modern admin logo"
-                             src="{{ asset('/app-assets/images/logo/logo.png') }}">
+                        <img class="brand-logo" alt="modern admin logo" src="{{ asset('/app-assets/images/logo/logo.png') }}">
                         <h3 class="brand-text">لوحة التحكم</h3>
                     </a>
                 </li>
-                {{-- Toggle sidebar button --}}
                 <li class="nav-item d-none d-md-block float-right">
                     <a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse">
                         <i class="toggle-icon ft-toggle-right font-medium-3 white" data-ticon="ft-toggle-right"></i>
                     </a>
                 </li>
-                {{-- Mobile navebar button --}}
                 <li class="nav-item d-md-none">
                     <a class="nav-link open-navbar-container" data-toggle="collapse" data-target="#navbar-mobile">
                         <i class="la la-ellipsis-v"></i>
@@ -32,50 +25,24 @@
                 </li>
             </ul>
         </div>
-        {{-- Navbar Content --}}
         <div class="navbar-container content">
             <div class="collapse navbar-collapse" id="navbar-mobile">
-                {{-- Left Navbar --}}
                 <ul class="nav navbar-nav mr-auto float-left">
-                    {{-- Maximize screen --}}
-                    <!-- <li class="nav-item d-none d-md-block">
-                        <a class="nav-link nav-link-expand" href="#">
-                            <i class="ficon ft-maximize"></i>
-                        </a>
-                    </li> -->
-                    {{-- Search --}}
-                    <!-- <li class="nav-item nav-search">
-                        <a class="nav-link nav-link-search" href="#">
-                            <i class="ficon ft-search"></i>
-                        </a>
-                        <div class="search-input">
-                            <input class="input" type="text" placeholder="Explore Modern...">
-                        </div>
-                    </li> -->
                 </ul>
-                {{-- Right Navbar --}}
                 <ul class="nav navbar-nav float-right">
-                    {{-- Admin --}}
                     <li class="dropdown dropdown-user nav-item">
-                        {{-- Hello Admin --}}
                         <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                             <span class="mr-1">مرحبا,
                                 <span class="user-name text-bold-700">{{ auth()->user()?->name }}</span>
                             </span>
                             <span class="avatar avatar-online">
-                                <img src="{{ asset('/app-assets/images/portrait/small/avatar-s-19.png') }}"
-                                     alt="avatar">
+                                <img src="{{ asset('/app-assets/images/portrait/small/avatar-s-19.png') }}" alt="avatar">
                                 <i></i>
                             </span>
                         </a>
-
-
-                        {{-- Admin Profile --}}
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="#"><i class="ft-user"></i> صفحتى الشخصية</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <i class="ft-power"></i> تسجيل الخروج
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -83,13 +50,9 @@
                             </form>
                         </div>
                     </li>
-
-
-                    {{-- Notifications --}}
                     <li class="dropdown dropdown-notification nav-item">
                         <a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon ft-bell"></i>
-                            <span id="notificationsCount"
-                                  class="badge badge-pill badge-default badge-danger badge-default badge-up badge-glow">0</span>
+                            <span id="notificationsCount" class="badge badge-pill badge-default badge-danger badge-default badge-up badge-glow">0</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
                             <li class="dropdown-menu-header">
@@ -102,16 +65,18 @@
                                 </div>
                             </li>
                             <li class="dropdown-menu-footer">
-                                <a class="dropdown-item text-muted text-center" href="{{route('orderUpdates.index')}}">
+                                <a class="dropdown-item text-muted text-center" href="#">
                                     عرض كل التحديثات
                                 </a>
                             </li>
                         </ul>
                     </li>
-
-
                 </ul>
             </div>
         </div>
     </div>
 </nav>
+
+<!-- Include these scripts if not already included -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>

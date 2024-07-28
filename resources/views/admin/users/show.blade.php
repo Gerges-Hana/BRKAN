@@ -1,8 +1,8 @@
 @extends('admin.layout.master')
 
 @section('tap-title')
-    عرض المستخدمين
 @endsection
+عرض الشركات  
 
 @section('page-style-files')
 
@@ -11,13 +11,13 @@
 @section('content-header')
 
     <div class="content-header-left col-md-6 col-12 mb-1">
-        <h3 class="content-header-title">عرض المستخدمين</h3>
+        <h3 class="content-header-title">عرض الشركات</h3>
     </div>
     <div class="content-header-right breadcrumbs-right breadcrumbs-top col-md-6 col-12">
         <div class="breadcrumb-wrapper col-12">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">الرئيسية</a>
-                <li class="breadcrumb-item"><a href="/users">المستخدمين</a></li>
+                <li class="breadcrumb-item"><a href="/users">الشركات</a></li>
                 <li class="breadcrumb-item active">عرض</li>
             </ol>
         </div>
@@ -34,7 +34,7 @@
                     <div class="row py-2">
                         <div class="col-lg-12 margin-tb">
                             <!-- <div class="pull-left">
-                            <h2>عرض تفاصيل المستخدم : {{$user->name}}</h2>
+                            <h2>عرض تفاصيل الالشركه : {{$user->name}}</h2>
                         </div> -->
 
                         </div>
@@ -47,14 +47,14 @@
 
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group col-12">
-                                    <strong class="col-4">الاسم:</strong>
+                                    <strong class="col-4">لقب الشركه </strong>
                                     <strong class="col-8">{{ $user->name }}</strong>
 
                                 </div>
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group col-12">
-                                    <strong class="col-4">اسم المستخدم:</strong>
+                                    <strong class="col-4">اسم الشركه:</strong>
                                     <strong class="col-8">{{ $user->username }}</strong>
 
                                 </div>
@@ -70,7 +70,6 @@
 
                                 </div>
                             </div>
-
 
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group col-12">

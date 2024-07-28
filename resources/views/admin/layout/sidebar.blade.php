@@ -11,7 +11,7 @@
                 </li>
             @endcan
 
-            {{--Orders--}}
+            {{-- Orders
             @can(' الطلبيات')
                 <li class=" nav-item {{ (request()->is('orders') || request()->is('orders/OldPurchaseOrders') || request()->is('orders/todayPurchaseOrders') || request()->is('orders/commingPurchaseOrders')) ? 'open' : '' }}">
                     <a href="#">
@@ -33,16 +33,16 @@
                         </li>
                     </ul>
                 </li>
-            @endcan
+            @endcan --}}
 
             {{--Reports--}}
-            @can(' التقارير')
+            {{-- @can(' التقارير')
                 <li class="nav-item {{ (request()->is('reports*')) ? 'active' : '' }}">
                     <a href="/reports"><i class="la  icon-layers"></i>
                         <span class="menu-title" data-i18n="">التقارير </span>
                     </a>
                 </li>
-            @endcan
+            @endcan --}}
 
             {{--Roles--}}
             @can(' القواعد')
@@ -50,34 +50,51 @@
                     <a href="/roles">
                         <i class="la  ft-unlock"></i>
                         <!-- <i class="la  icon-permission"></i> -->
-                        <span class="menu-title" data-i18n="">القواعد </span>
+                        <span class="menu-title" data-i18n="">الصالحيات </span>
                     </a>
                 </li>
             @endcan
 
             {{--Users--}}
-            @can(' المستخدمين')
+            @can('الشركات')
+                <li class="nav-item {{ (request()->is('users*')) ? 'active' : '' }}">
+                    <a href="/users"><i class="la  icon-users"></i>
+                        <span class="menu-title" data-i18n="">الشركات </span>
+                    </a>
+                </li>
+            @endcan
+            
+            {{-- @can('طلبات المنشئه') --}}
+                <li class="nav-item {{ (request()->is('users*')) ? 'active' : '' }}">
+                    <a href="/users"><i class="la  icon-users"></i>
+                        <span class="menu-title" data-i18n="">طلبات المنشئه </span>
+                    </a>
+                </li>
+            {{-- @endcan --}}
+
+
+            {{-- @can('المستخدمين') --}}
                 <li class="nav-item {{ (request()->is('users*')) ? 'active' : '' }}">
                     <a href="/users"><i class="la  icon-users"></i>
                         <span class="menu-title" data-i18n="">المستخدمين </span>
                     </a>
                 </li>
-            @endcan
+            {{-- @endcan --}}
 
 
-            @can(' حالات التوصيل')
+            {{-- @can(' حالات التوصيل')
                 <li class="nav-item {{ (request()->is('status*')) ? 'active' : '' }}">
                     <a href="/status"><i class="la icon-settings"></i>
                         <span class="menu-title" data-i18n="">حالات التوصيل </span>
                     </a>
                 </li>
-            @endcan
+            @endcan --}}
 
-            <li class="nav-item {{ (request()->is('orders/updates/list')) ? 'active' : '' }}">
+            {{-- <li class="nav-item {{ (request()->is('orders/updates/list')) ? 'active' : '' }}">
                 <a href="/orders/updates/list"><i class="ficon ft-bell"></i>
                     <span class="menu-title" data-i18n="">التحديثات </span>
                 </a>
-            </li>
+            </li> --}}
         </ul>
     </div>
 </div>

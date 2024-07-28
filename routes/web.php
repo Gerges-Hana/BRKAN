@@ -1,11 +1,7 @@
 <?php
 
-use App\Http\Controllers\Admin\PurchaseOrderUpdatesController;
-use App\Http\Controllers\Admin\PurchaseOrdersController;
-use App\Http\Controllers\Admin\PurchaseOrderStatusesController;
-use App\Http\Controllers\Admin\ReportsController;
+use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\StatisticsController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,13 +11,8 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
     //Home
-    Route::get('/', [StatisticsController::class, 'index']);
+    Route::get('/', [HomeController::class, 'index']);
 
-    // Reports
-    Route::get('/reports', [ReportsController::class, 'index'])->name('reports.data');
-
-Route::get('/export-purchase-orders-pdf', [PurchaseOrdersController::class, 'exportPdf']);
-Route::get('/export-purchase-orders-excel', [PurchaseOrdersController::class, 'exportExcel']);
 
     // Roles
     Route::resource('roles', RoleController::class);
@@ -31,33 +22,6 @@ Route::get('/export-purchase-orders-excel', [PurchaseOrdersController::class, 'e
         Route::post('/delete/{id}', [RoleController::class, 'destroy'])->name('roles.destroy');
     });
 
-    // Purchase Orders
-    Route::group(['prefix' => 'orders'], function () {
-        Route::post('/data', [PurchaseOrdersController::class, 'getOrdersData'])->name('orders.data');
-        Route::get('/history/{id}', [PurchaseOrdersController::class, 'HistoryOfPurchaseOrdersC'])->name('orders.history');
-        Route::post('/edit/{id}', [PurchaseOrdersController::class, 'update'])->name('orders.update');
-        Route::post('/checkHasRelations/{id}', [PurchaseOrdersController::class, 'checkHasRelations'])->name('orders.checkHasRelations');
-        Route::post('/delete/{id}', [PurchaseOrdersController::class, 'destroy'])->name('orders.destroy');
-        
-        Route::get('/OldPurchaseOrders', [PurchaseOrdersController::class, 'oldPurchaseOrders'])->name('orders.oldPurchaseOrders');
-        Route::post('/OldPurchaseOrders/data', [PurchaseOrdersController::class, 'oldPurchaseOrdersData'])->name('orders.oldPurchaseOrdersData');
-
-        Route::get('/todayPurchaseOrders', [PurchaseOrdersController::class, 'todayPurchaseOrders'])->name('orders.todayPurchaseOrders');
-        Route::post('/todayPurchaseOrders/data', [PurchaseOrdersController::class, 'todayPurchaseOrdersData'])->name('orders.todayPurchaseOrdersData');
-       
-        Route::get('/commingPurchaseOrders', [PurchaseOrdersController::class, 'incommingPurchaseOrders'])->name('orders.commingPurchaseOrders');
-        Route::post('/commingPurchaseOrders/data', [PurchaseOrdersController::class, 'incommingPurchaseOrdersData'])->name('orders.commingPurchaseOrdersData');
-
-        // orderUpdates
-        Route::group(['prefix' => 'updates'], function () {
-            Route::get('/list', [PurchaseOrderUpdatesController::class, 'index'])->name('orderUpdates.index');
-            Route::post('/data', [PurchaseOrderUpdatesController::class, 'getUpdatesData'])->name('orderUpdates.data');
-            Route::get('/updates/unread', [PurchaseOrderUpdatesController::class, 'unReadList'])->name('orderUpdates.unread');
-            Route::post('/updates/read-all', [PurchaseOrderUpdatesController::class, 'readAll'])->name('orderUpdates.readAll');
-            Route::post('/updates/read-one', [PurchaseOrderUpdatesController::class, 'readOne'])->name('orderUpdates.readOne');
-        });
-    });
-    Route::resource('orders', PurchaseOrdersController::class);
 
     // Users
     Route::resource('users', UserController::class);
@@ -66,13 +30,4 @@ Route::get('/export-purchase-orders-excel', [PurchaseOrdersController::class, 'e
         Route::post('/checkHasRelations/{id}', [UserController::class, 'checkHasRelations'])->name('users.checkHasRelations');
         Route::post('/delete/{id}', [UserController::class, 'destroy'])->name('users.destroy');
     });
-
-    // Purchase Order Statuses
-    Route::resource('status', PurchaseOrderStatusesController::class);
-    Route::group(['prefix' => 'status'], function () {
-        Route::post('/data', [PurchaseOrderStatusesController::class, 'getStatusData'])->name('status.data');
-        Route::post('/checkHasRelations/{id}', [PurchaseOrderStatusesController::class, 'checkHasRelations'])->name('status.checkHasRelations');
-        Route::post('/delete/{id}', [PurchaseOrderStatusesController::class, 'destroy'])->name('status.destroy');
-    });
-
 });

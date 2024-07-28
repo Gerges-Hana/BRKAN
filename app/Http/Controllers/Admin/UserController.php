@@ -72,7 +72,7 @@ class UserController extends Controller
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
 
-        Session::flash('success_message', 'تم انشاء المستخدم بنجاح');
+        Session::flash('success_message', 'تم انشاء الشركه بنجاح');
         return redirect()->route('users.index');
     }
 
@@ -133,7 +133,7 @@ class UserController extends Controller
 
         $user->assignRole($request->input('roles'));
 
-        Session::flash('success_message', 'تم تحديث المستخدم بنجاح');
+        Session::flash('success_message', 'تم تحديث الشركه بنجاح');
         return redirect()->route('users.index');
     }
 
@@ -145,8 +145,10 @@ class UserController extends Controller
      */
     public function checkHasRelations($id): JsonResponse
     {
-        $role_relations_1 = DB::table("purchase_order_updates")->where("user_id", $id)->count();
-        $role_relations_2 = DB::table("purchase_order_status_updates")->where("user_id", $id)->count();
+        // $role_relations_1 = DB::table("purchase_order_updates")->where("user_id", $id)->count();
+        // $role_relations_2 = DB::table("purchase_order_status_updates")->where("user_id", $id)->count();
+        $role_relations_1 = 0;
+        $role_relations_2 = 0;
 
         return response()->json(['has_relations' => $role_relations_1 > 0 || $role_relations_2 > 0]);
     }
@@ -161,7 +163,7 @@ class UserController extends Controller
     {
         $deleted = DB::table("users")->where('id', $id)->delete();
         if ($deleted) {
-            return response()->json(['success' => true, 'success_message' => 'تم حذف المستخدم بنجاح!']);
+            return response()->json(['success' => true, 'success_message' => 'تم حذف الشركه بنجاح!']);
         } else {
             return response()->json(['success' => false, 'error_message' => 'فشل الحذف حاول مرة اخرى!']);
         }

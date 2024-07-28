@@ -23,8 +23,10 @@ class UserFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
+            'email' =>  $this->faker->unique()->safeEmail,
+            'user_type' => $this->faker->randomElement(['company', 'user']),
             'username' => $this->faker->unique()->userName,
-            'is_active' => $this->faker->boolean,
+            // 'is_active' => $this->faker->boolean,
             'password' => Hash::make('123456789'), // يمكنك استخدام كلمة مرور ثابتة أو عشوائية
             'created_at' => now(),
             'updated_at' => now(),

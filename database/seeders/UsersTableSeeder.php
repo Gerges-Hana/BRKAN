@@ -15,8 +15,8 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $adminRole = Role::firstOrCreate(['name' => 'Admin']);
-        $editorRole = Role::firstOrCreate(['name' => 'Editor']);
-        $viewerRole = Role::firstOrCreate(['name' => 'Viewer']);
+        $editorRole = Role::firstOrCreate(['name' => 'User']);
+        $viewerRole = Role::firstOrCreate(['name' => 'Company']);
         $permissions = Permission::pluck('id', 'id')->all();
         $adminRole->syncPermissions($permissions);
         $admin = User::firstOrCreate(
@@ -24,6 +24,8 @@ class UsersTableSeeder extends Seeder
             [
                 'name' => 'Admin',
                 'is_active' => true,
+                'user_type' => 'user',
+                'email' => 'admin@gmail.com',
                 'password' => Hash::make('123456789'),
                 'created_at' => now(),
                 'updated_at' => now(),

@@ -21,6 +21,7 @@
 
 <!-- Custom JS-->
 <script src="{{asset('/assets/js/scripts.js')}}" type="text/javascript"></script>
+
 <script>
     const toastr_config = {
         positionClass: 'toast-top-center',
@@ -59,7 +60,7 @@
 
     function fetchNotifications() {
         $.ajax({
-            url: '{{ route('orderUpdates.unread') }}',
+            
             method: 'GET',
             success: function (res) {
                 $('#notificationsCount').html(res.notifications.length);
@@ -113,7 +114,6 @@
         e.preventDefault();
         const id = $(this).attr('data-id');
         $.ajax({
-            url: `{{ route('orderUpdates.readOne') }}`,
             method: 'POST',
             dataType: "JSON",
             headers: {
@@ -133,5 +133,6 @@
         });
     })
     setInterval(fetchNotifications, 5000);
-</script>
+</script> 
+
 @yield('scripts')
