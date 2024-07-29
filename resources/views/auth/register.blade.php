@@ -103,12 +103,12 @@
                       </fieldset>
 
                       <div class="row">
-                        <div class="col-12 col-sm-6 col-md-6">
+                        <div class="col-12 ">
                           <button type="submit" class="btn btn-info btn-lg btn-block"><i class="ft-user"></i> تسجيل </button>
                         </div>
-                        <div class="col-12 col-sm-6 col-md-6">
+                        {{-- <div class="col-12 col-sm-6 col-md-6">
                           <a href="{{route('login')}}" class="btn btn-danger btn-lg btn-block"><i class="ft-unlock"></i> دخول</a>
-                        </div>
+                        </div> --}}
                       </div>
                     </form>
                   </div>

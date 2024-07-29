@@ -38,7 +38,7 @@
                         </div>
                         <div class="pull-right">
                             @can('انشاء الشركه')
-                                <a class="btn btn-sm btn-success" href="{{ route('users.create') }}">إضافة الشركه <i
+                                <a class="btn btn-sm btn-success" href="{{ route('company.create') }}">إضافة الشركه <i
                                         class="fa fa-plus"></i></a>
                             @endcan
                         </div>
@@ -158,7 +158,7 @@ function usersDatatable() {
         },
         language: dataTablesArabicLocalization,
         ajax: {
-            url: "{{ route('users.data') }}",
+            url: "{{ route('company.data') }}",
             method: 'POST',
             dataType: "JSON",
             headers: {
@@ -215,10 +215,10 @@ function usersDatatable() {
                 searchable: false,
                 render: function(data, type, row) {
                     return `<div>
-                        <a class="btn btn-sm btn-outline-primary" href="/users/${row.id}"><i data-toggle="tooltip" title="عرض" class="la la-eye"></i></a>
-                        <a class="btn btn-sm btn-outline-warning" href="/users/${row.id}/edit"><i data-toggle="tooltip" title="تعديل" class="la la-edit"></i></a>
+                        <a class="btn btn-sm btn-outline-primary" href="/company/${row.id}"><i data-toggle="tooltip" title="عرض" class="la la-eye"></i></a>
+                        <a class="btn btn-sm btn-outline-warning" href="/company/${row.id}/edit"><i data-toggle="tooltip" title="تعديل" class="la la-edit"></i></a>
                         <a class="btn btn-sm btn-outline-danger" href="javascript:" data-id="${row.id}"
-                            url="{{ url('/users/destroy') }}/${row.id}" onclick="checkHasRelations(${row.id})" id="delete_${row.id}"
+                            url="{{ url('/company/destroy') }}/${row.id}" onclick="checkHasRelations(${row.id})" id="delete_${row.id}"
                             data-toggle="tooltip" title="حذف"><i class="la la-trash"></i>
                         </a>
                     </div>`;
@@ -245,7 +245,7 @@ function usersDatatable() {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     type: 'POST',
-                    url: '{{ url('/users/checkHasRelations') }}/' + id,
+                    url: '{{ url('/company/checkHasRelations') }}/' + id,
                     data: {},
                     success: function(res) {
                         if (res.has_relations === true) {
@@ -272,7 +272,7 @@ function usersDatatable() {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 type: 'POST',
-                url: '{{ url('/users/delete') }}/' + id,
+                url: '{{ url('/company/delete') }}/' + id,
                 success: function(res) {
                     if (res.success === true) {
                         previewToastrForAjaxRequest(res.success_message);

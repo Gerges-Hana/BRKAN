@@ -2,14 +2,14 @@
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             {{--Home--}}
-            @can('الرئسيه')
+            {{-- @can('الرئسيه') --}}
                 <li class="nav-item {{ (request()->is('/')) || (request()->is('dashboard')) ? 'active' : '' }}">
                     <a href="/">
                         <i class="la la-home"></i>
                         <span class="menu-title" data-i18n="">الرئسيه </span>
                     </a>
                 </li>
-            @endcan
+            {{-- @endcan --}}
 
             {{-- Orders
             @can(' الطلبيات')
@@ -45,7 +45,7 @@
             @endcan --}}
 
             {{--Roles--}}
-            @can(' القواعد')
+            {{-- @can(' القواعد') --}}
                 <li class="nav-item {{ (request()->is('roles*')) ? 'active' : '' }}">
                     <a href="/roles">
                         <i class="la  ft-unlock"></i>
@@ -53,16 +53,16 @@
                         <span class="menu-title" data-i18n="">الصالحيات </span>
                     </a>
                 </li>
-            @endcan
+            {{-- @endcan --}}
 
             {{--Users--}}
-            @can('الشركات')
-                <li class="nav-item {{ (request()->is('users*')) ? 'active' : '' }}">
-                    <a href="/users"><i class="la  icon-users"></i>
+            {{-- @can('الشركات') --}}
+                <li class="nav-item {{ (request()->is('company*')) ? 'active' : '' }}">
+                    <a href="/company"><i class="la  icon-users"></i>
                         <span class="menu-title" data-i18n="">الشركات </span>
                     </a>
                 </li>
-            @endcan
+            {{-- @endcan --}}
             
             {{-- @can('طلبات المنشئه') --}}
                 <li class="nav-item {{ (request()->is('users*')) ? 'active' : '' }}">
@@ -77,6 +77,14 @@
                 <li class="nav-item {{ (request()->is('users*')) ? 'active' : '' }}">
                     <a href="/users"><i class="la  icon-users"></i>
                         <span class="menu-title" data-i18n="">المستخدمين </span>
+                    </a>
+                </li>
+            {{-- @endcan --}}
+
+            {{-- @can('المستخدمين') --}}
+                <li class="nav-item {{ (request()->is('users*')) ? 'active' : '' }}">
+                    <a href="{{ route('admin.activation_requests.index') }}"><i class="la la-check-circle"></i>
+                        <span class="menu-title" data-i18n="">طلبات التفعيل</span>
                     </a>
                 </li>
             {{-- @endcan --}}

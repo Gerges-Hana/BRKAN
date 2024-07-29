@@ -132,7 +132,8 @@
             }
         });
     })
-    setInterval(fetchNotifications, 5000);
+    // setInterval(fetchNotifications, 5000);
 </script> 
 
 @yield('scripts')
+

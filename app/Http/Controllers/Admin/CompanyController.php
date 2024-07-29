@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Hash as FacadesHash;
 use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Facades\DataTables;
 
-class UserController extends Controller
+class CompanyController extends Controller
 {
 
     public function index(Request $request): Factory|Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
@@ -50,7 +50,7 @@ class UserController extends Controller
 
     //     return DataTables::of($users->where('user_type','company')->with('roles'))->toJson();
     // }
-public function getUsersData(Request $request): JsonResponse
+public function getCompanyData(Request $request): JsonResponse
 {
     $name = $request->input('name');
     $username = $request->input('username');

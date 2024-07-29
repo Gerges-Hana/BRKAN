@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\ActivationRequestController;
+use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
@@ -12,6 +14,7 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
     //Home
     Route::get('/', [HomeController::class, 'index']);
+    Route::get('/home', [HomeController::class, 'home']);
 
 
     // Roles
@@ -30,4 +33,26 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/checkHasRelations/{id}', [UserController::class, 'checkHasRelations'])->name('users.checkHasRelations');
         Route::post('/delete/{id}', [UserController::class, 'destroy'])->name('users.destroy');
     });
+
+    // company
+    Route::resource('company', CompanyController::class);
+    Route::group(['prefix' => 'company'], function () {
+        Route::post('/data', [CompanyController::class, 'getCompanysData'])->name('company.data');
+        Route::post('/checkHasRelations/{id}', [CompanyController::class, 'checkHasRelations'])->name('company.checkHasRelations');
+        Route::post('/delete/{id}', [CompanyController::class, 'destroy'])->name('company.destroy');
+    });
+
+
+});
+
+
+
+Route::post('/request-activation', [HomeController::class, 'requestActivation'])->name('request.activation');
+Route::post('/admin/activate-account', [HomeController::class, 'activateAccount'])->name('activate.account');
+Route::get('/admin/activation-requests', [HomeController::class, 'showActivationRequests'])->name('admin.activation.requests');
+
+
+Route::prefix('admin')->middleware('auth')->group(function() {
+    Route::get('activation-requests', [ActivationRequestController::class, 'index'])->name('admin.activation_requests.index');
+    Route::post('activation-requests/{id}/approve', [ActivationRequestController::class, 'approve'])->name('admin.activation_requests.approve');
 });
