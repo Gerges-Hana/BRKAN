@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ActivationRequestController;
 use App\Http\Controllers\Admin\CompanyController;
+use App\Http\Controllers\Admin\CompanyReportController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
@@ -10,10 +11,13 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 
+Route::get('/companies/create/report', [CompanyReportController::class, 'create_company'])->name('companies.create.report');
+Route::post('/companies/report', [CompanyReportController::class, 'store'])->name('companies.store.report');
+
 
 Route::middleware(['auth'])->group(function () {
     //Home
-    Route::get('/', [HomeController::class, 'index']);
+    Route::get('/', [HomeController::class, 'index'])->name('/');
     Route::get('/home', [HomeController::class, 'home']);
 
 
@@ -34,6 +38,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/delete/{id}', [UserController::class, 'destroy'])->name('users.destroy');
     });
 
+
+
     // company
     Route::resource('company', CompanyController::class);
     Route::group(['prefix' => 'company'], function () {
@@ -49,6 +55,7 @@ Route::middleware(['auth'])->group(function () {
 
 Route::post('/request-activation', [HomeController::class, 'requestActivation'])->name('request.activation');
 Route::post('/admin/activate-account', [HomeController::class, 'activateAccount'])->name('activate.account');
+// Route::post('/admin/activate-company', [HomeController::class, 'activateCompany'])->name('activate.company');
 Route::get('/admin/activation-requests', [HomeController::class, 'showActivationRequests'])->name('admin.activation.requests');
 
 
@@ -56,3 +63,7 @@ Route::prefix('admin')->middleware('auth')->group(function() {
     Route::get('activation-requests', [ActivationRequestController::class, 'index'])->name('admin.activation_requests.index');
     Route::post('activation-requests/{id}/approve', [ActivationRequestController::class, 'approve'])->name('admin.activation_requests.approve');
 });
+
+
+
+

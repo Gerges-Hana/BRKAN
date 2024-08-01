@@ -59,7 +59,7 @@
             {{-- @can('الشركات') --}}
                 <li class="nav-item {{ (request()->is('company*')) ? 'active' : '' }}">
                     <a href="/company"><i class="la  icon-users"></i>
-                        <span class="menu-title" data-i18n="">الشركات </span>
+                        <span class="menu-title" data-i18n="">المنسأت </span>
                     </a>
                 </li>
             {{-- @endcan --}}
@@ -67,7 +67,7 @@
             {{-- @can('طلبات المنشئه') --}}
                 <li class="nav-item {{ (request()->is('users*')) ? 'active' : '' }}">
                     <a href="/users"><i class="la  icon-users"></i>
-                        <span class="menu-title" data-i18n="">طلبات المنشئه </span>
+                        <span class="menu-title" data-i18n="">طلبات المنشأه </span>
                     </a>
                 </li>
             {{-- @endcan --}}
@@ -76,7 +76,7 @@
             {{-- @can('المستخدمين') --}}
                 <li class="nav-item {{ (request()->is('users*')) ? 'active' : '' }}">
                     <a href="/users"><i class="la  icon-users"></i>
-                        <span class="menu-title" data-i18n="">المستخدمين </span>
+                        <span class="menu-title" data-i18n="">الموظفين </span>
                     </a>
                 </li>
             {{-- @endcan --}}

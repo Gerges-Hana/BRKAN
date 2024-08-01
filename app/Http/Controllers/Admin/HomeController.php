@@ -106,5 +106,10 @@ class HomeController extends Controller
         return redirect()->back()->with('error', 'حدث خطأ. يرجى المحاولة مرة أخرى.');
     }
     
+    public function activateCompany(Request $request)
+    {
+       return view('admin.company.request_active_company');
+    }
+    
     
 }

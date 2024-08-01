@@ -62,9 +62,9 @@
 
                       <fieldset class="form-group position-relative ">
                         <select name="user_type" id="user_type" class="form-control input-lg @error('user_type') is-invalid @enderror" required>
-                          <option value="" disabled selected>اختر نوع المستخدم</option>
-                          <option value="user">مستخدم عادي</option>
-                          <option value="company">شركة</option>
+                          <option value="" disabled selected>اختر نوع الحساب</option>
+                          <option value="user"> موظف</option>
+                          <option value="company">منشأة</option>
                         </select>
 
                         @error('user_type')

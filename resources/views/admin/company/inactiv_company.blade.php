@@ -68,6 +68,19 @@
                                         @endif
                                     </form>
 
+
+                                    {{-- <form action="{{ route('companies.create.report') }}" method="get" id="activationForm"> --}}
+                                        {{-- @csrf --}}
+                                        {{-- <input type="hidden" name="user_id" value="{{ $user->id }}"> --}}
+                                        @if (!session('success') && !session('error'))
+                                            <a href={{ route('companies.create.report') }} id="activateCompanyBtn" class="btn btn-primary text-light">طلب تفعيل
+                                                </a>
+                                        @endif
+                                    {{-- </form> --}}
+
+
+
+
                                     <!-- Message and script -->
                                     <p id="activationMessage" class="mt-3" style="display: none;">جارٍ تفعيل الحساب...</p>
 

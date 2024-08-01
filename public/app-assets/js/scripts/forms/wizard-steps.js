@@ -93,8 +93,12 @@ $(".steps-validation").steps({
     },
     onFinished: function (event, currentIndex)
     {
-        alert("Submitted!");
+        form.submit();
     }
+
+});
+$(document).on('click', '.actions a[href="#finish"]', function() {
+    $(this).attr('type', 'submit');
 });
 
 // Initialize validation
