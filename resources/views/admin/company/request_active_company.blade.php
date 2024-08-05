@@ -1,8 +1,8 @@
 @extends('admin.layout.master')
 
 @section('tap-title')
-@endsection
 طلب فحص منشأة
+@endsection
 @section('page-style-files')
     <!-- BEGIN Page Level CSS-->
     <link rel="stylesheet" type="text/css" href="../../../app-assets/css-rtl/core/menu/menu-types/vertical-menu-modern.css">
@@ -58,22 +58,15 @@
                                 </div>
                                 <div class="card-content collapse show">
                                     <div class="card-body">
-                                        <form action="{{route('companies.store.report')}}" method="POST" class="steps-validation wizard-circle"enctype="multipart/form-data">
+                                        <form action="{{ route('companies.store.report') }}" method="POST"
+                                            class="steps-validation wizard-circle"enctype="multipart/form-data">
                                             @csrf
-                                           
+
                                             <!-- Step 1 -->
                                             <h6>Step 1</h6>
                                             <fieldset>
                                                 <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label for="emailAddress5">
-                                                                البريد الالكتروني :                                                                <span class="danger">*</span>
-                                                            </label>
-                                                            <input type="text" class="form-control required"
-                                                                id="emailAddress5" name="email">
-                                                        </div>
-                                                    </div>
+
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="lastName3">
@@ -84,6 +77,18 @@
                                                                 id="lastName3" name="company_name">
                                                         </div>
                                                     </div>
+
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="commercial">
+                                                                  السجل التجاري : <span class="danger">*</span>
+                                                            </label>
+                                                            <input type="number" class="form-control required"
+                                                                id="commercial" name="commercial">
+                                                        </div>
+                                                    </div>
+                                                    
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6">
@@ -112,12 +117,21 @@
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
+                                                            <label for="emailAddress5">
+                                                                البريد الالكتروني : <span class="danger">*</span>
+                                                            </label>
+                                                            <input type="text" class="form-control required"
+                                                                id="emailAddress5" name="email">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
                                                             <label for="phoneNumber3">الجوال :</label>
                                                             <input type="tel" class="form-control" id="phoneNumber3"
                                                                 name="phone_number">
                                                         </div>
                                                     </div>
-                                                    
+
                                                 </div>
                                             </fieldset>
                                             <!-- Step 2 -->
@@ -133,14 +147,57 @@
                                                             </label>
                                                             <br>
                                                             <br>
-                                                            <a href="https://drive.google.com/file/d/18Jw_hOk3iyIHEZUWU5oG2uwXtbG0-FCh/view">الشاشات المطلوبة</a>
+                                                            <a
+                                                                href="https://drive.google.com/file/d/18Jw_hOk3iyIHEZUWU5oG2uwXtbG0-FCh/view">الشاشات
+                                                                المطلوبة</a>
                                                             {{-- <input type="text" class="form-control required"
                                                                 id="proposalTitle3" name="proposalTitle"> --}}
                                                         </div>
+                                                        {{-- <div class="form-group">
+                                                            <label for="emailAddress6">
+                                                                الرجاء ارفاق الشاشات المطلوبة
+
+                                                                <span class="danger">*</span>
+                                                            </label>
+                                                            <input type="file" class="form-control required"
+                                                                id="emailAddress6" name="required_screens">
+                                                        </div> --}}
+
+
+
+
+
+
+                                                    </div>
+
+
+                                                    <div class="col-md-6">
+                                                        {{-- <div class="form-group">
+                                                            <label for="videoUrl3">نموذج سرية المعلومات
+                                                                الرجاء تحميل النموذج وتعبئته والتوقيع والختم ثم ارفاقه
+                                                            </label>
+                                                            <br>
+                                                            <br>
+                                                            <a
+                                                                href="https://docs.google.com/document/d/1Km3d9qoJmTAHaON3qEBaSTXp6f7wURtq/edit">تحميل
+                                                                النموذج</a>
+                                                            {{-- <input type="file" class="form-control" id="videoUrl3"
+                                                                name="gg"> --م}}
+                                                        </div> --}}
+
+
+                                                        {{-- <div class="form-group">
+                                                            <label for="jobTitle5">
+                                                                ارفاق نموذج سرية المعلومات <span class="danger">*</span>
+                                                            </label>
+                                                            <input type="file" class="form-control required"
+                                                                id="jobTitle5" name="confidentiality_form">
+                                                        </div> --}}
+
                                                         <div class="form-group">
                                                             <label for="emailAddress6">
                                                                 الرجاء ارفاق الشاشات المطلوبة
-                                                                
+
                                                                 <span class="danger">*</span>
                                                             </label>
                                                             <input type="file" class="form-control required"
@@ -148,34 +205,27 @@
                                                         </div>
 
 
-
-                                                        
-
-
                                                     </div>
-                                                    <div class="col-md-6">
+
+
+                                                    {{-- <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="videoUrl3">نموذج سرية المعلومات
-                                                                الرجاء تحميل النموذج وتعبئته والتوقيع والختم ثم ارفاقه </label>
-                                                                <br>
-                                                                <br>
-                                                           <a href="https://docs.google.com/document/d/1Km3d9qoJmTAHaON3qEBaSTXp6f7wURtq/edit">تحميل النموذج</a>
-                                                                {{-- <input type="file" class="form-control" id="videoUrl3"
-                                                                name="gg"> --}}
+                                                            <a href="{{ route('companies.generatePdf.print') }}"
+                                                                class="btn btn-primary">
+                                                                تحميل اتفاقية عدم إفشاء الأسرار وعدم المنافسة
+                                                            </a>
+
                                                         </div>
 
 
                                                         <div class="form-group">
-                                                            <label for="jobTitle5">
-                                                                ارفاق نموذج سرية المعلومات                                                                <span class="danger">*</span>
-                                                            </label>
-                                                            <input type="file" class="form-control required"
-                                                                id="jobTitle5" name="confidentiality_form">
+                                                            <a href="{{ route('companies.generatePdf.show') }}"
+                                                                class="btn btn-info">
+                                                                عرض صفحه الاتفاقيه </a>
+
                                                         </div>
 
-
-                                                        
-                                                    </div>
+                                                    </div> --}}
 
 
 

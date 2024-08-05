@@ -15,10 +15,12 @@ class Company extends Model
         'job_title',
         'phone_number',
         'email',
+        'commercial',
         'ministry_info',
         'required_screens',
         'confidentiality_form',
         'user_id',
+        'description',
     ];
     public function user()
     {

@@ -13,6 +13,8 @@ Auth::routes();
 
 Route::get('/companies/create/report', [CompanyReportController::class, 'create_company'])->name('companies.create.report');
 Route::post('/companies/report', [CompanyReportController::class, 'store'])->name('companies.store.report');
+Route::get('/generate-pdf/print', [CompanyReportController::class, 'generatePdf'])->name('companies.generatePdf.print');
+Route::get('/generate-pdf/show/{company}', [CompanyReportController::class, 'ShowPdf'])->name('companies.generatePdf.show');
 
 
 Route::middleware(['auth'])->group(function () {

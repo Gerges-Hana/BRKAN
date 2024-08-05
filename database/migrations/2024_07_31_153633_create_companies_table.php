@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('representative_name');
             $table->string('job_title');
             $table->string('phone_number');
+            $table->integer('commercial')->nullable();
+            $table->string('description')->nullable();
             $table->string('email');
             $table->string('ministry_info')->nullable();
             $table->string('required_screens')->nullable();
