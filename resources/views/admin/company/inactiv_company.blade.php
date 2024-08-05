@@ -59,14 +59,14 @@
                                         </div>
                                     @endif
 
-                                    <form action="{{ route('activate.account') }}" method="POST" id="activationForm">
+                                    {{-- <form action="{{ route('activate.account') }}" method="POST" id="activationForm">
                                         @csrf
                                         <input type="hidden" name="user_id" value="{{ $user->id }}">
                                         @if (!session('success') && !session('error'))
                                             <button type="submit" id="activateAccountBtn" class="btn btn-primary">تفعيل
                                                 الحساب</button>
                                         @endif
-                                    </form>
+                                    </form> --}}
 
 
                                     {{-- <form action="{{ route('companies.create.report') }}" method="get" id="activationForm"> --}}

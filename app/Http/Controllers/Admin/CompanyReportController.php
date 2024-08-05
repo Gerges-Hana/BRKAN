@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 // use App\Http\Controllers\Controller;
 
+use App\Models\ActivationRequest;
 use App\Models\Company;
+use App\Models\User;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Illuminate\Http\Request;
@@ -26,8 +28,6 @@ class CompanyReportController extends Controller
 
     public function store(Request $request)
     {
-       
-
         // التحقق من صحة البيانات
         $validated = $request->validate([
             'company_name' => 'required|string|max:255',
@@ -59,12 +59,16 @@ class CompanyReportController extends Controller
             $validated['confidentiality_form'] = $filePath;
         }
 
-        // إضافة user_id إلى البيانات
         $validated['user_id'] = Auth::id();
-
-        // حفظ بيانات الشركة في قاعدة البيانات
         $company = Company::create($validated);
-
+        $user = User::find($request->input('user_id'));
+        $activationRequest = ActivationRequest::where('user_id', $user)->first();
+        $activationRequest = ActivationRequest::firstOrNew([
+            'user_id' => Auth::id(),
+        ]);
+       
+        $activationRequest->is_active = false;
+        $activationRequest->save();
         return redirect()->route('companies.generatePdf.show', ['company' => $company->id])
             ->with('success', 'تم طلب انشاء منشأه بنجاح.')
             ->with('company', $company);
@@ -182,9 +186,7 @@ class CompanyReportController extends Controller
 
     public function ShowPdf($companyId)
     {
-
         $company = Company::find($companyId);
-        // dd($company);
         return view('admin.company.pdf_template', compact('company'));
     }
 }
