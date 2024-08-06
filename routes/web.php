@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ActivationRequestController;
 use App\Http\Controllers\Admin\CompanyController;
 use App\Http\Controllers\Admin\CompanyReportController;
+use App\Http\Controllers\Admin\FacilityInspection;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
@@ -66,6 +67,7 @@ Route::prefix('admin')->middleware('auth')->group(function() {
     Route::post('activation-requests/{id}/approve', [ActivationRequestController::class, 'approve'])->name('admin.activation_requests.approve');
 });
 
+Route::get('/admin/Facility_inspection', [FacilityInspection::class, 'Facility_inspection'])->name('Facility_inspection');
 
 
 

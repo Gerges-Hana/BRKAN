@@ -89,6 +89,14 @@
                 </li>
             {{-- @endcan --}}
 
+            {{-- @can('المستخدمين') --}}
+                <li class="nav-item {{ (request()->is('users*')) ? 'active' : '' }}">
+                    <a href="{{ route('Facility_inspection') }}"><i class="la la-check-circle"></i>
+                        <span class="menu-title" data-i18n="">فحص منشأة كبرى </span>
+                    </a>
+                </li>
+            {{-- @endcan --}}
+
 
             {{-- @can(' حالات التوصيل')
                 <li class="nav-item {{ (request()->is('status*')) ? 'active' : '' }}">
